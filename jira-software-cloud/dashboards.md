@@ -10,6 +10,8 @@ description: >-
 
 {% tabs %}
 {% tab title="Get all dashboards" %}
+Returns a list of dashboards owned by or shared with the user. The list may be filtered to include only favorite or owned dashboards.
+
 {% hint style="info" %}
 Jira Cloud API endpoint documentation [here.](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-dashboards/#api-group-dashboards)
 {% endhint %}
@@ -38,7 +40,6 @@ func main() {
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
-
 
 	dashboards, response, err := atlassian.Dashboard.Gets(context.Background(), 0, 50, "my")
 
