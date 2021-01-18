@@ -5,6 +5,8 @@
 ## Jira Software Cloud
 
 * [🔬 Application Roles](jira-software-cloud/application-roles.md)
+* [🔎 Audit records](jira-software-cloud/audit-records.md)
+* [📈 Dashboards](jira-software-cloud/dashboards.md)
 
 ## Jira Agile Cloud
 
@@ -21,4 +23,8 @@
 ## Atlassian Admin Cloud
 
 * [Untitled](atlassian-admin-cloud/untitled.md)
+
+---
+
+* [TODO's](todos.md)
 

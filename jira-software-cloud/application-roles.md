@@ -9,7 +9,7 @@ description: >-
 {% page-ref page="application-roles.md" %}
 
 {% tabs %}
-{% tab title="Aplication Roles" %}
+{% tab title="Get Aplication Roles" %}
 This method returns all application roles created on your Jira Cloud instance. 
 
 ```go
@@ -68,10 +68,8 @@ func main() {
 ```
 {% endtab %}
 
-{% tab title="Application Role" %}
+{% tab title="Get Application Role" %}
 This method returns an existing application role using the **key** as a parameter.
-
-
 
 ```go
 package main
