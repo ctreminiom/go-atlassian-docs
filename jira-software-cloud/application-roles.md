@@ -1,7 +1,15 @@
-# Get Application Roles
+---
+description: >-
+  This resource represents application roles. Use it to get details of an
+  application role or all application roles.
+---
 
-### Overview
+# 🔬 Application Roles
 
+{% page-ref page="application-roles.md" %}
+
+{% tabs %}
+{% tab title="Aplication Roles" %}
 This method returns all application roles created on your Jira Cloud instance. 
 
 ```go
@@ -58,4 +66,50 @@ func main() {
 	}
 }
 ```
+{% endtab %}
+
+{% tab title="Application Role" %}
+This method returns an existing application role using the **key** as a parameter.
+
+
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main() {
+
+   var (
+      host  = os.Getenv("HOST")
+      mail  = os.Getenv("MAIL")
+      token = os.Getenv("TOKEN")
+   )
+
+   atlassian, err := jira.New(nil, host)
+   if err != nil {
+      log.Fatal(err)
+   }
+
+   atlassian.Auth.SetBasicAuth(mail, token)
+
+   role, response, err := atlassian.Role.Get(context.Background(), "jira-software")
+   if err != nil {
+      log.Fatal(err)
+   }
+
+   log.Println("Response HTTP Code", response.StatusCode)
+   log.Println("HTTP Endpoint Used", response.Endpoint)
+   log.Println(role.Key)
+}
+```
+{% endtab %}
+{% endtabs %}
+
+
 

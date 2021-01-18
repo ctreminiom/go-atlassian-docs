@@ -4,9 +4,7 @@
 
 ## Jira Software Cloud
 
-* [🔬 Application Roles](jira-software-cloud/application-roles/README.md)
-  * [Get Application Roles](jira-software-cloud/application-roles/get-application-roles.md)
-  * [Get Application Role](jira-software-cloud/application-roles/get-application-role.md)
+* [🔬 Application Roles](jira-software-cloud/application-roles.md)
 
 ## Jira Agile Cloud
 
