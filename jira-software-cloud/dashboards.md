@@ -16,7 +16,7 @@ Returns a list of dashboards owned by or shared with the user. The list may be f
 Jira Cloud API endpoint documentation [here.](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-dashboards/#api-group-dashboards)
 {% endhint %}
 
-```text
+```go
 package main
 
 import (

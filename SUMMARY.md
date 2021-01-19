@@ -1,6 +1,7 @@
 # Table of contents
 
-* [🎆 Welcome](README.md)
+* [🍃 Welcome](README.md)
+* [📚 Structure](structure.md)
 
 ## Jira Software Cloud
 

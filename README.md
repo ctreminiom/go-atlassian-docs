@@ -1,4 +1,4 @@
-# 🎆 Welcome
+# 🍃 Welcome
 
 ## Getting Super Powers
 
