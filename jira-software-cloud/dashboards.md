@@ -76,9 +76,5 @@ func main() {
 
 ```
 {% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
 {% endtabs %}
 
