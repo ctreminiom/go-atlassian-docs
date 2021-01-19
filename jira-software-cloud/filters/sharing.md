@@ -4,9 +4,9 @@ description: >-
   scopes as well as add and remove share scopes from filters.
 ---
 
-# 📐Filters Sharing
+# 📐Sharing
 
-{% page-ref page="filters-sharing.md" %}
+{% page-ref page="sharing.md" %}
 
 {% tabs %}
 {% tab title="First Tab" %}

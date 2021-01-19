@@ -8,7 +8,7 @@
 * [🔎 Audit records](jira-software-cloud/audit-records.md)
 * [📈 Dashboards](jira-software-cloud/dashboards.md)
 * [✂️ Filters](jira-software-cloud/filters/README.md)
-  * [📐Filters Sharing](jira-software-cloud/filters/filters-sharing.md)
+  * [📐Sharing](jira-software-cloud/filters/sharing.md)
 
 ## Jira Agile Cloud
 
