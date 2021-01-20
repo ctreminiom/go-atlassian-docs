@@ -186,7 +186,7 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 Jira Cloud API endpoint documentation [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filters/#api-rest-api-3-filter-search-get).
 {% endhint %}
 
-```text
+```go
 package main
 
 import (
