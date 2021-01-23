@@ -6,15 +6,15 @@ description: >-
 
 # 🔬 Application Roles
 
-{% page-ref page="application-roles.md" %}
+## Application Roles
 
-{% tabs %}
-{% tab title="Get Aplication Roles" %}
-This method returns all application roles created on your Jira Cloud instance. 
+This method returns all application roles stored on your Jira Cloud instance, the method returns the following information:
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here.](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-application-roles/#api-rest-api-3-applicationrole-get)
-{% endhint %}
+| variable | description |
+| :--- | :--- |
+| roles | A slice of the **ApplicationRoleScheme** struct |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
 
 ```go
 package main
@@ -69,16 +69,17 @@ func main() {
 
 	}
 }
-
 ```
-{% endtab %}
 
-{% tab title="Get Application Role" %}
-This method returns an existing application role using the **key** as a parameter.
+## Application Role
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here.](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-application-roles/#api-rest-api-3-applicationrole-key-get)
-{% endhint %}
+This method returns an existing application role using the **key** as a parameter, the method returns the following information:
+
+| variable | description |
+| :--- | :--- |
+| role | An **ApplicationRoleScheme** struct with the application role information parsed |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
 
 ```go
 package main
@@ -116,8 +117,23 @@ func main() {
 }
 
 ```
-{% endtab %}
-{% endtabs %}
 
+## **ApplicationRoleScheme** 
 
+```go
+type ApplicationRoleScheme struct {
+	Key                  string   `json:"key,omitempty"`
+	Groups               []string `json:"groups,omitempty"`
+	Name                 string   `json:"name,omitempty"`
+	DefaultGroups        []string `json:"defaultGroups,omitempty"`
+	SelectedByDefault    bool     `json:"selectedByDefault,omitempty"`
+	Defined              bool     `json:"defined,omitempty"`
+	NumberOfSeats        int      `json:"numberOfSeats,omitempty"`
+	RemainingSeats       int      `json:"remainingSeats,omitempty"`
+	UserCount            int      `json:"userCount,omitempty"`
+	UserCountDescription string   `json:"userCountDescription,omitempty"`
+	HasUnlimitedSeats    bool     `json:"hasUnlimitedSeats,omitempty"`
+	Platform             bool     `json:"platform,omitempty"`
+}
+```
 
