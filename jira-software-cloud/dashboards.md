@@ -6,15 +6,15 @@ description: >-
 
 # 📈 Dashboards
 
-{% page-ref page="dashboards.md" %}
+## Get dashboards
 
-{% tabs %}
-{% tab title="Get all dashboards" %}
-Returns a list of dashboards owned by or shared with the user. The list may be filtered to include only favorite or owned dashboards.
+This method returns a list of dashboards owned by or shared with the user. The list may be filtered to include only favorite or owned dashboards, the method returns the following information:
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here.](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-dashboards/#api-group-dashboards)
-{% endhint %}
+| variable | description |
+| :--- | :--- |
+| dashboards | A **DashboardsSchemeResult** struct |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
 
 ```go
 package main
@@ -75,6 +75,36 @@ func main() {
 }
 
 ```
-{% endtab %}
-{% endtabs %}
+
+## **DashboardsSchemeResult**
+
+```go
+type DashboardsSchemeResult struct {
+	StartAt    int               `json:"startAt,omitempty"`
+	MaxResults int               `json:"maxResults,omitempty"`
+	Total      int               `json:"total,omitempty"`
+	Dashboards []DashboardScheme `json:"dashboards,omitempty"`
+}
+
+type SharePermissionsScheme struct {
+	ID   int    `json:"id,omitempty"`
+	Type string `json:"type,omitempty"`
+}
+
+type DashboardScheme struct {
+	ID               string                   `json:"id,omitempty"`
+	IsFavourite      bool                     `json:"isFavourite,omitempty"`
+	Name             string                   `json:"name,omitempty"`
+	Popularity       int                      `json:"popularity,omitempty"`
+	Self             string                   `json:"self,omitempty"`
+	SharePermissions []SharePermissionsScheme `json:"sharePermissions,omitempty"`
+	View             string                   `json:"view,omitempty"`
+}
+```
+
+
+
+
+
+
 
