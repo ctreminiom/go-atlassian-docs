@@ -305,7 +305,7 @@ This method returns a filter using the ID as a parameter, the method returns the
 | response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
 | error | An error interface if something happens. |
 
-## Parameters
+### Parameters
 
 | name | description |
 | :--- | :--- |

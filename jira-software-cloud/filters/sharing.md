@@ -6,15 +6,23 @@ description: >-
 
 # 📐Sharing
 
-{% page-ref page="sharing.md" %}
+## Get default share scope
 
-{% tabs %}
-{% tab title="Get default share scope" %}
-Returns the default sharing settings for new filters and dashboards for a user.
+Returns the default sharing settings for new filters and dashboards for a user, the method returns the following information:
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filter-sharing/#api-rest-api-3-filter-defaultsharescope-get).
-{% endhint %}
+| variable | response |
+| :--- | :--- |
+| scope | the Jira Cloud default scope |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
+
+### Parameters
+
+| name | description |
+| :--- | :--- |
+| ctx | a context.Context instance |
+
+### Example
 
 ```go
 package main
@@ -55,14 +63,24 @@ func main() {
 }
 
 ```
-{% endtab %}
 
-{% tab title="Set default share scope" %}
-Sets the default sharing for new filters and dashboards for a user.
+## Set default share scope
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filter-sharing/#api-rest-api-3-filter-defaultsharescope-put).
-{% endhint %}
+Sets the default sharing for new filters and dashboards for a user, the method returns the following information:
+
+| variable | description |
+| :--- | :--- |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
+
+### Parameters
+
+| name | description |
+| :--- | :--- |
+| ctx | a context.Context instance |
+| scope | the new default scope \("GLOBAL", "AUTHENTICATED", "PRIVATE"\) |
+
+### Example
 
 ```go
 package main
@@ -101,14 +119,25 @@ func main() {
 }
 
 ```
-{% endtab %}
 
-{% tab title="Get share permissions" %}
-Returns the share permissions for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as global share permission.
+## Get share permissions
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filter-sharing/#api-rest-api-3-filter-id-permission-get).
-{% endhint %}
+Returns the share permissions for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as global share permission, the method returns the following information:
+
+| variable | description |
+| :--- | :--- |
+| result | A slice of the `ShareFilterPermissionScheme` struct |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
+
+### Parameters
+
+| name | description |
+| :--- | :--- |
+| ctx | a context.Context instance |
+| filterID | the filter ID |
+
+### Example
 
 ```go
 package main
@@ -135,7 +164,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	permissions, response, err := atlassian.Filter.Share.Gets(context.Background(), filterID)
+	permissions, response, err := atlassian.Filter.Share.Gets(context.Background(), "filterID")
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -152,14 +181,30 @@ func main() {
 }
 
 ```
-{% endtab %}
 
-{% tab title="Add share permission" %}
-Add a share permissions to a filter. If you add global share permission \(one for all logged-in users or the public\) it will overwrite all share permissions for the filter.
+### ShareFilterPermissionScheme
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here](%20https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filter-sharing/#api-rest-api-3-filter-id-permission-get).
-{% endhint %}
+TODO
+
+## Add share permission
+
+Add a share permissions to a filter. If you add global share permission \(one for all logged-in users or the public\) it will overwrite all share permissions for the filter, the method returns the following information:
+
+| variable | description |
+| :--- | :--- |
+| result | A slice of the `ShareFilterPermissionScheme` struct |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
+
+### Parameters
+
+| name | description |
+| :--- | :--- |
+| ctx | a context.Context instance |
+| filterID | The Filter ID |
+| payload | the payload represents the `PermissionFilterBodyScheme` struct needed to parse the new filter data |
+
+### Example
 
 ```go
 package main
@@ -187,31 +232,31 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	/*
-	We can add different share permissions, for example:
+		We can add different share permissions, for example:
 
-	---- Project ID only
-	payload := jira.PermissionFilterBodyScheme{
-			Type:      "project",
-			ProjectID: "10000",
-		}
+		---- Project ID only
+		payload := jira.PermissionFilterBodyScheme{
+				Type:      "project",
+				ProjectID: "10000",
+			}
 
-	---- Project ID and role ID
-	payload := jira.PermissionFilterBodyScheme{
-			Type:          "project",
-			ProjectID:     "10000",
-			ProjectRoleID: "222222",
-		}
+		---- Project ID and role ID
+		payload := jira.PermissionFilterBodyScheme{
+				Type:          "project",
+				ProjectID:     "10000",
+				ProjectRoleID: "222222",
+			}
 
-	==== Group Name
-	payload := jira.PermissionFilterBodyScheme{
-			Type:          "group",
-			GroupName: "jira-users",
-		}
+		==== Group Name
+		payload := jira.PermissionFilterBodyScheme{
+				Type:          "group",
+				GroupName: "jira-users",
+			}
 	*/
 
 	payload := jira.PermissionFilterBodyScheme{
-		Type:          "project",
-		ProjectID:     "10000",
+		Type:      "project",
+		ProjectID: "10000",
 	}
 
 	permissions, response, err := atlassian.Filter.Share.Add(context.Background(), filterID, &payload)
@@ -233,14 +278,37 @@ func main() {
 }
 
 ```
-{% endtab %}
 
-{% tab title="Get share permission" %}
-Returnsshare permission for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as global share permission.
+### PermissionFilterBodyScheme
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filter-sharing/#api-rest-api-3-filter-id-permission-permissionid-get).
-{% endhint %}
+```go
+type PermissionFilterBodyScheme struct {
+   Type          string `json:"type,omitempty"`
+   ProjectID     string `json:"projectId,omitempty"`
+   GroupName     string `json:"groupname,omitempty"`
+   ProjectRoleID string `json:"projectRoleId,omitempty"`
+}
+```
+
+## Get share permission
+
+Returns a share permission for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as a global share permission, the method returns the following information:
+
+| variable | description |
+| :--- | :--- |
+| result | A `ShareFilterPermissionScheme` struct |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
+
+### Parameters
+
+| name | description |
+| :--- | :--- |
+| ctx | a context.Context instance |
+| filterID | The filter ID |
+| permissionID | The shared permission ID |
+
+### Example
 
 ```go
 package main
@@ -265,7 +333,7 @@ func main() {
 		return
 	}
 
-	permission, response, err := atlassian.Filter.Share.Get(context.Background(), "$Filter_ID", permissionID)
+	permission, response, err := atlassian.Filter.Share.Get(context.Background(), "filterID", "permissionID")
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -279,14 +347,25 @@ func main() {
 }
 
 ```
-{% endtab %}
 
-{% tab title="Delete share permission" %}
-Deletes share permission from a filter.
+## Delete share permission
 
-{% hint style="info" %}
-Jira Cloud API endpoint documentation [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filter-sharing/#api-rest-api-3-filter-id-permission-permissionid-delete).
-{% endhint %}
+Deletes a share permission from a filter.
+
+| variable | description |
+| :--- | :--- |
+| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
+| error | An error interface if something happens. |
+
+### Parameters
+
+| name | description |
+| :--- | :--- |
+| ctx | a context.Context instance |
+| filterID | The filter ID |
+| permissionID | The permission ID |
+
+### Example
 
 ```go
 package main
@@ -311,7 +390,7 @@ func main() {
 		return
 	}
 
-	response, err := atlassian.Filter.Share.Delete(context.Background(), "filterID", permissionID)
+	response, err := atlassian.Filter.Share.Delete(context.Background(), "filterID", "permissionID")
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -324,6 +403,4 @@ func main() {
 }
 
 ```
-{% endtab %}
-{% endtabs %}
 
