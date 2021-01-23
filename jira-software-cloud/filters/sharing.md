@@ -234,5 +234,96 @@ func main() {
 
 ```
 {% endtab %}
+
+{% tab title="Get share permission" %}
+Returnsshare permission for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as global share permission.
+
+{% hint style="info" %}
+Jira Cloud API endpoint documentation [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filter-sharing/#api-rest-api-3-filter-id-permission-permissionid-get).
+{% endhint %}
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	permission, response, err := atlassian.Filter.Share.Get(context.Background(), "$Filter_ID", permissionID)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+		}
+		return
+	}
+
+	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(permission)
+}
+
+```
+{% endtab %}
+
+{% tab title="Delete share permission" %}
+Deletes share permission from a filter.
+
+{% hint style="info" %}
+Jira Cloud API endpoint documentation [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filter-sharing/#api-rest-api-3-filter-id-permission-permissionid-delete).
+{% endhint %}
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	response, err := atlassian.Filter.Share.Delete(context.Background(), "filterID", permissionID)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+		}
+		return
+	}
+
+	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+}
+
+```
+{% endtab %}
 {% endtabs %}
 

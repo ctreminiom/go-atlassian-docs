@@ -10,6 +10,7 @@
 * [📈 Dashboards](jira-software-cloud/dashboards.md)
 * [✂️ Filters](jira-software-cloud/filters/README.md)
   * [📐Sharing](jira-software-cloud/filters/sharing.md)
+* [👫 Groups](jira-software-cloud/groups.md)
 
 ## Jira Agile Cloud
 
