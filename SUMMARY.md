@@ -13,6 +13,7 @@
 * [👫 Groups](jira-software-cloud/groups.md)
 * [📝 Issues](jira-software-cloud/issues/README.md)
   * [📎 Attachments](jira-software-cloud/issues/attachments.md)
+  * [📬 Comments](jira-software-cloud/issues/comments.md)
 
 ## Jira Agile Cloud
 
