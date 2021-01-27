@@ -240,3 +240,43 @@ func main() {
 
 ```
 
+### FieldSearchOptionsScheme
+
+```go
+type FieldSearchOptionsScheme struct {
+	Types   []string
+	IDs     []string
+	Query   string
+	OrderBy string
+	Expand  []string
+}
+```
+
+### FieldSearchScheme
+
+```go
+type FieldSearchScheme struct {
+   MaxResults int  `json:"maxResults"`
+   StartAt    int  `json:"startAt"`
+   Total      int  `json:"total"`
+   IsLast     bool `json:"isLast"`
+   Values     []struct {
+      ID     string `json:"id"`
+      Name   string `json:"name"`
+      Schema struct {
+         Type   string `json:"type"`
+         Items  string `json:"items"`
+         System string `json:"system"`
+      } `json:"schema,omitempty"`
+      Description   string `json:"description"`
+      Key           string `json:"key"`
+      IsLocked      bool   `json:"isLocked"`
+      ScreensCount  int    `json:"screensCount"`
+      ContextsCount int    `json:"contextsCount"`
+      LastUsed      struct {
+         Type string `json:"type"`
+      } `json:"lastUsed"`
+   } `json:"values"`
+}
+```
+
