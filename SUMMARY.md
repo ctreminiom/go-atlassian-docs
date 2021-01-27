@@ -14,6 +14,7 @@
 * [📝 Issues](jira-software-cloud/issues/README.md)
   * [📎 Attachments](jira-software-cloud/issues/attachments.md)
   * [📬 Comments](jira-software-cloud/issues/comments.md)
+  * [💬 Fields](jira-software-cloud/issues/fields.md)
 
 ## Jira Agile Cloud
 

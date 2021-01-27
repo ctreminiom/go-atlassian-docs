@@ -12,7 +12,7 @@ This method returns a list of dashboards owned by or shared with the user. The l
 
 | variable | description |
 | :--- | :--- |
-| dashboards | A **DashboardsSchemeResult** struct |
+| dashboards | A `DashboardsSchemeResult` struct |
 | response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
 | error | An error interface if something happens. |
 
