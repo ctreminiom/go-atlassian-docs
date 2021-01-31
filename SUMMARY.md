@@ -12,14 +12,14 @@
   * [📐Sharing](jira-software-cloud/filters/sharing.md)
 * [👫 Groups](jira-software-cloud/groups.md)
 * [🐛 Issues](jira-software-cloud/issues/README.md)
-  * [🍀 Resolutions](jira-software-cloud/issues/resolutions.md)
-  * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
   * [📎 Attachments](jira-software-cloud/issues/attachments.md)
   * [📬 Comments](jira-software-cloud/issues/comments.md)
   * [💬 Fields](jira-software-cloud/issues/fields/README.md)
     * [👁️‍🗨️Configuration](jira-software-cloud/issues/fields/configuration.md)
     * [🍳 Context](jira-software-cloud/issues/fields/context/README.md)
       * [🕧 Option](jira-software-cloud/issues/fields/context/option.md)
+  * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
+  * [🍀 Resolutions](jira-software-cloud/issues/resolutions.md)
 
 ## Jira Agile Cloud
 
