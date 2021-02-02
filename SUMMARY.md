@@ -20,6 +20,7 @@
       * [🕧 Option](jira-software-cloud/issues/fields/context/option.md)
   * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
   * [🍀 Resolutions](jira-software-cloud/issues/resolutions.md)
+  * [🏷️ Labels](jira-software-cloud/issues/labels.md)
 
 ## Jira Agile Cloud
 
