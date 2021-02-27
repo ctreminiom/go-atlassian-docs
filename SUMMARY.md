@@ -5,7 +5,7 @@
 
 ## Jira Software Cloud
 
-* [🔬 Application Roles](jira-software-cloud/application-roles.md)
+* [🌐 Application Roles](jira-software-cloud/application-roles.md)
 * [🔎 Audit records](jira-software-cloud/audit-records.md)
 * [📈 Dashboards](jira-software-cloud/dashboards.md)
 * [✂️ Filters](jira-software-cloud/filters/README.md)
