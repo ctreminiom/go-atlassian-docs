@@ -10,21 +10,6 @@ description: >-
 
 Creates a group, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A `GroupScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| name | the group name to create |
-
-### Example
-
 ```go
 package main
 
@@ -63,45 +48,9 @@ func main() {
 
 ```
 
-### GroupScheme
-
-```go
-type GroupScheme struct {
-   Name  string `json:"name,omitempty"`
-   Self  string `json:"self,omitempty"`
-   Users struct {
-      Size  int `json:"size,omitempty"`
-      Items []struct {
-         Self        string `json:"self,omitempty"`
-         AccountID   string `json:"accountId,omitempty"`
-         DisplayName string `json:"displayName,omitempty"`
-         Active      bool   `json:"active,omitempty"`
-      } `json:"items,omitempty"`
-      MaxResults int `json:"max-results,omitempty"`
-      StartIndex int `json:"start-index,omitempty"`
-      EndIndex   int `json:"end-index,omitempty"`
-   } `json:"users,omitempty"`
-   Expand string `json:"expand,omitempty"`
-}
-```
-
 ## Remove group
 
 Deletes a group,  the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| name | the group name to remove |
-
-### Example
 
 ```go
 package main
@@ -143,23 +92,6 @@ func main() {
 ## Bulk Groups
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of groups, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A `BulkGroupScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| options | A `GroupBulkOptionsScheme` struct |
-| startAt | the pagination start index |
-| maxResults | the maximum values returned per pagination |
-
-### Example
 
 ```go
 package main
@@ -211,36 +143,9 @@ func main() {
 
 ```
 
-### GroupBulkOptionsScheme
-
-```go
-type GroupBulkOptionsScheme struct {
-   GroupIDs   []string
-   GroupNames []string
-}
-```
-
 ## Get users from groups
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all users in a group, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A `GroupUsersScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name  | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| group | the group name to extract the members |
-| inactive | select if you want to return the **inactive** users |
-| startAt | the pagination start index |
-| maxResults | the maximum values returned per pagination |
-
-### Example
 
 ```go
 package main
@@ -286,51 +191,9 @@ func main() {
 
 ```
 
-### GroupUsersScheme
-
-```go
-type GroupUsersScheme struct {
-   Self       string `json:"self,omitempty"`
-   NextPage   string `json:"nextPage,omitempty"`
-   MaxResults int    `json:"maxResults,omitempty"`
-   StartAt    int    `json:"startAt,omitempty"`
-   Total      int    `json:"total,omitempty"`
-   IsLast     bool   `json:"isLast,omitempty"`
-   Values     []struct {
-      Self         string `json:"self,omitempty"`
-      Name         string `json:"name,omitempty"`
-      Key          string `json:"key,omitempty"`
-      AccountID    string `json:"accountId,omitempty"`
-      EmailAddress string `json:"emailAddress,omitempty"`
-      AvatarUrls   struct {
-      } `json:"avatarUrls,omitempty"`
-      DisplayName string `json:"displayName,omitempty"`
-      Active      bool   `json:"active,omitempty"`
-      TimeZone    string `json:"timeZone,omitempty"`
-      AccountType string `json:"accountType,omitempty"`
-   } `json:"values,omitempty"`
-}
-```
-
 ## Add user to group
 
 Adds a user to a group, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A `GroupScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| group | the Jira Cloud group |
-| accountID | the Atlassian account ID |
-
-### Example
 
 ```go
 package main
@@ -374,21 +237,6 @@ func main() {
 ## Remove user from group
 
 Removes a user from a group, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| group | the Jira Cloud group |
-| accountID | the Atlassian account ID |
-
-### Example
 
 ```go
 package main
