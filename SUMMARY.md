@@ -11,7 +11,7 @@
 * [✂️ Filters](jira-software-cloud/filters/README.md)
   * [📐Sharing](jira-software-cloud/filters/sharing.md)
 * [👫 Groups](jira-software-cloud/groups.md)
-* [🐛 Issues](jira-software-cloud/issues/README.md)
+* [🐞 Issues](jira-software-cloud/issues/README.md)
   * [📎 Attachments](jira-software-cloud/issues/attachments.md)
   * [📬 Comments](jira-software-cloud/issues/comments.md)
   * [💬 Fields](jira-software-cloud/issues/fields/README.md)
