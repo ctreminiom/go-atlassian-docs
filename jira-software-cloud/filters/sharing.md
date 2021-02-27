@@ -10,20 +10,6 @@ description: >-
 
 Returns the default sharing settings for new filters and dashboards for a user, the method returns the following information:
 
-| variable | response |
-| :--- | :--- |
-| scope | the Jira Cloud default scope |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-
-### Example
-
 ```go
 package main
 
@@ -68,20 +54,6 @@ func main() {
 
 Sets the default sharing for new filters and dashboards for a user, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| scope | the new default scope \("GLOBAL", "AUTHENTICATED", "PRIVATE"\) |
-
-### Example
-
 ```go
 package main
 
@@ -123,21 +95,6 @@ func main() {
 ## Get share permissions
 
 Returns the share permissions for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as global share permission, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A slice of the `ShareFilterPermissionScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| filterID | the filter ID |
-
-### Example
 
 ```go
 package main
@@ -182,29 +139,9 @@ func main() {
 
 ```
 
-### ShareFilterPermissionScheme
-
-TODO
-
 ## Add share permission
 
 Add a share permissions to a filter. If you add global share permission \(one for all logged-in users or the public\) it will overwrite all share permissions for the filter, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A slice of the `ShareFilterPermissionScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| filterID | The Filter ID |
-| payload | the payload represents the `PermissionFilterBodyScheme` struct needed to parse the new filter data |
-
-### Example
 
 ```go
 package main
@@ -279,36 +216,9 @@ func main() {
 
 ```
 
-### PermissionFilterBodyScheme
-
-```go
-type PermissionFilterBodyScheme struct {
-   Type          string `json:"type,omitempty"`
-   ProjectID     string `json:"projectId,omitempty"`
-   GroupName     string `json:"groupname,omitempty"`
-   ProjectRoleID string `json:"projectRoleId,omitempty"`
-}
-```
-
 ## Get share permission
 
-Returns a share permission for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as a global share permission, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A `ShareFilterPermissionScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| filterID | The filter ID |
-| permissionID | The shared permission ID |
-
-### Example
+Returns share permission for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as global share permission, the method returns the following information:
 
 ```go
 package main
@@ -350,22 +260,7 @@ func main() {
 
 ## Delete share permission
 
-Deletes a share permission from a filter.
-
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| filterID | The filter ID |
-| permissionID | The permission ID |
-
-### Example
+Deletes share permission from a filter.
 
 ```go
 package main
