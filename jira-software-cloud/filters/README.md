@@ -11,21 +11,6 @@ description: >-
 
 This method creates a new filter. The filter is shared according to the [default share scope](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filters/#api-rest-api-3-filter-post). The filter is not selected as a favorite, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| filter | The new filter created with the ID attached. |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx  | a context.Context instance |
-| payload | the payload represents the **`FilterBodyScheme`** struct needed to parse the new filter data _\(name, description, JQL, etc\)_ |
-
-### Example
-
 ```go
 package main
 
@@ -75,34 +60,9 @@ func main() {
 
 ```
 
-### **FilterBodyScheme**
-
-```go
-type FilterBodyScheme struct {
-   Name        string `json:"name,omitempty"`
-   Description string `json:"description,omitempty"`
-   JQL         string `json:"jql,omitempty"`
-   Favorite    bool   `json:"favourite,omitempty"`
-}
-```
-
 ## Get Favorites
 
 This method returns the visible favorite filters of the user, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A slice of the `FilterScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-
-### Example
 
 ```go
 package main
@@ -152,21 +112,6 @@ func main() {
 ## Get My Filters
 
 Returns the filters owned by the user. If `includeFavourites` is `true`, the user's visible favorite filters are also returned, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A slice of the `FilterScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| favorites | select if you want to return the user's visible favorite filters |
-
-### Example
 
 ```go
 package main
@@ -221,25 +166,6 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 * specific filters, by defining `id` only.
 * filters that match all of the specified attributes. For example, all filters for a user with a particular word in their name. When multiple attributes are specified only filters matching all attributes are returned.
 
-The method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result  | A **`FilterSearchScheme`** struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| options | a `FilterSearchOptionScheme` struct with the options to available |
-| startAt | the current pagination start index |
-| maxResults | the maximum result permitted |
-
-### Example
-
 ```go
 package main
 
@@ -291,29 +217,9 @@ func main() {
 
 ```
 
-### **FilterSearchScheme** 
-
-**TODO**
-
 ## Get Filter
 
 This method returns a filter using the ID as a parameter, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A `FilterScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| filterID | The Filter ID  |
-| expands | the expand values available on the API [documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filters/#api-rest-api-3-filter-id-get). |
-
-### Example
 
 ```go
 package main
@@ -359,22 +265,6 @@ func main() {
 
 This method updates a filter. Use this operation to update a filter's name, description, JQL, or sharing, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A `FilterScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| filterID | The Filter ID  |
-| payload | the payload represents the **`FilterBodyScheme`** struct needed to update the filter |
-
-### Example
-
 ```go
 package main
 
@@ -415,22 +305,6 @@ func main() {
 ```
 
 ## Delete Filter
-
-This method deletes a filter, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| FilterID | The filter ID |
-
-### Example
 
 ```go
 package main
