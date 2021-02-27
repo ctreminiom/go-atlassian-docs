@@ -11,20 +11,6 @@ description: >-
 
 Returns the attachment settings, that is, whether attachments are enabled and the maximum attachment size allowed, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A `AttachmentSettingScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-
-### Example
-
 ```go
 package main
 
@@ -69,21 +55,6 @@ func main() {
 
 Returns the metadata for an attachment. Note that the attachment itself is not returned, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | An `AttachmentMetadataScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| attachmentID | the attachment ID |
-
-### Example
-
 ```go
 package main
 
@@ -125,53 +96,9 @@ func main() {
 
 ```
 
-### AttachmentMetadataScheme
-
-```go
-type AttachmentMetadataScheme struct {
-	ID       int    `json:"id"`
-	Self     string `json:"self"`
-	Filename string `json:"filename"`
-	Author   struct {
-		Self       string `json:"self"`
-		Key        string `json:"key"`
-		AccountID  string `json:"accountId"`
-		Name       string `json:"name"`
-		AvatarUrls struct {
-			Four8X48  string `json:"48x48"`
-			Two4X24   string `json:"24x24"`
-			One6X16   string `json:"16x16"`
-			Three2X32 string `json:"32x32"`
-		} `json:"avatarUrls"`
-		DisplayName string `json:"displayName"`
-		Active      bool   `json:"active"`
-	} `json:"author"`
-	Created   string `json:"created"`
-	Size      int    `json:"size"`
-	MimeType  string `json:"mimeType"`
-	Content   string `json:"content"`
-	Thumbnail string `json:"thumbnail"`
-}
-```
-
 ## Get all metadata for an expanded attachment
 
 Returns the metadata for the contents of an attachment, if it is an archive, and metadata for the attachment itself. For example, if the attachment is a ZIP archive, then information about the files in the archive is returned and metadata for the ZIP archive. Currently, only the ZIP archive format is supported, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A `AttachmentHumanMetadataScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| attachmentID | the attachment ID |
-
-### Example
 
 ```go
 package main
@@ -213,41 +140,9 @@ func main() {
 
 ```
 
-### AttachmentHumanMetadataScheme
-
-```go
-type AttachmentHumanMetadataScheme struct {
-   ID      int    `json:"id"`
-   Name    string `json:"name"`
-   Entries []struct {
-      Path      string `json:"path"`
-      Index     int    `json:"index"`
-      Size      string `json:"size"`
-      MediaType string `json:"mediaType"`
-      Label     string `json:"label"`
-   } `json:"entries"`
-   TotalEntryCount int    `json:"totalEntryCount"`
-   MediaType       string `json:"mediaType"`
-}
-```
-
 ## Delete attachment
 
 Deletes an attachment from an issue, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Params
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| attachmentID | the attachment ID |
-
-### Example
 
 ```go
 package main
@@ -298,23 +193,6 @@ func main() {
 {% hint style="warning" %}
 It only accepts one attachment at once
 {% endhint %}
-
-The method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A slice of the `AttachmentScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| issueKeyOrID | the issue key  |
-| path | the **absolute  path** for the file to upload. |
-
-### Example
 
 ```go
 package main
