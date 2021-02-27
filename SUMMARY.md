@@ -15,7 +15,7 @@
   * [📎 Attachments](jira-software-cloud/issues/attachments.md)
   * [📬 Comments](jira-software-cloud/issues/comments.md)
   * [💬 Fields](jira-software-cloud/issues/fields/README.md)
-    * [👁️‍🗨️Configuration](jira-software-cloud/issues/fields/configuration.md)
+    * [🎛️Configuration](jira-software-cloud/issues/fields/configuration.md)
     * [🍳 Context](jira-software-cloud/issues/fields/context/README.md)
       * [🕧 Option](jira-software-cloud/issues/fields/context/option.md)
   * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
