@@ -293,3 +293,5 @@ func main() {
 
 ```
 
+## Update permission scheme
+
