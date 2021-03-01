@@ -8,23 +8,7 @@ description: >-
 
 ## Get all labels
 
-Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of labels, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A slice of the `IssueLabelsScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| startAt | The index of the first item to return in a page of results \(page offset\). |
-| maxResults | The maximum number of items to return per page. |
-
-### Example
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of labels.
 
 ```go
 package main
@@ -38,6 +22,15 @@ import (
 
 func main() {
 
+	/*
+		----------- Set an environment variable in git bash -----------
+		export HOST="https://ctreminiom.atlassian.net/"
+		export MAIL="MAIL_ADDRESS"
+		export TOKEN="TOKEN_API"
+
+		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
+	*/
+
 	var (
 		host  = os.Getenv("HOST")
 		mail  = os.Getenv("MAIL")
@@ -46,7 +39,7 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
@@ -65,20 +58,7 @@ func main() {
 	for _, label := range labels.Values {
 		log.Println(label)
 	}
-
 }
 
-```
-
-### IssueLabelsScheme
-
-```go
-type IssueLabelsScheme struct {
-   MaxResults int      `json:"maxResults"`
-   StartAt    int      `json:"startAt"`
-   Total      int      `json:"total"`
-   IsLast     bool     `json:"isLast"`
-   Values     []string `json:"values"`
-}
 ```
 
