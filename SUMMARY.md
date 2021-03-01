@@ -19,11 +19,11 @@
     * [🍳 Context](jira-software-cloud/issues/fields/context/README.md)
       * [🕧 Option](jira-software-cloud/issues/fields/context/option.md)
   * [🏷️ Labels](jira-software-cloud/issues/labels.md)
+  * [🔗 Link](jira-software-cloud/issues/link/README.md)
+    * [🗞️ Types](jira-software-cloud/issues/link/types.md)
   * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
   * [🍀 Resolutions](jira-software-cloud/issues/resolutions/README.md)
     * [🏷️ Labels](jira-software-cloud/issues/resolutions/labels.md)
-  * [🔗 Link](jira-software-cloud/issues/link/README.md)
-    * [🗞️ Types](jira-software-cloud/issues/link/types.md)
 
 ## Jira Agile Cloud
 

@@ -15,26 +15,6 @@ description: >-
 If the link request duplicates a link, the response indicates that the issue link was created. If the request included a comment, the comment is added.
 {% endhint %}
 
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| linkType | The resource that defines and reports on the type of link between the issues. |
-| inWardIssue | The ID or key of a linked issue. |
-| outWardIssue | The ID or key of a linked issue. |
-
-{% hint style="danger" %}
-Comment param not supported, yet
-{% endhint %}
-
-### Example
-
 ```go
 package main
 
@@ -84,21 +64,6 @@ func main() {
 
 Return the issue links associated with a Jira Issue, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A `IssueLinksScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| issueKeyOrID | the issue ID or key to check |
-
-### Example
-
 ```go
 package main
 
@@ -146,21 +111,6 @@ func main() {
 
 Returns an issue link, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A `IssueLinkScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| linkID | The ID of the issue link. |
-
-### Example
-
 ```go
 package main
 
@@ -202,25 +152,9 @@ func main() {
 
 ```
 
-### IssueLinkScheme
-
 ## Delete issue link
 
 Deletes an issue link, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| linkID | The ID of the issue link. |
-
-### Example
 
 ```go
 package main
