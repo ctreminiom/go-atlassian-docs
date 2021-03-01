@@ -10,23 +10,6 @@ description: >-
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all custom field option for a context. Options are returned first then cascading options, in the order they display in Jira, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A `FieldContextOptionScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| opt | A `FieldOptionContextParams` struct |
-| startAt | The index of the first item to return in a page of results \(page offset\). |
-| maxResults | The maximum number of items to return per page. |
-
-### Example
-
 ```go
 package main
 
@@ -81,60 +64,14 @@ func main() {
 
 ```
 
-### FieldContextOptionScheme
-
-```go
-type FieldContextOptionScheme struct {
-	MaxResults int  `json:"maxResults,omitempty"`
-	StartAt    int  `json:"startAt,omitempty"`
-	Total      int  `json:"total,omitempty"`
-	IsLast     bool `json:"isLast,omitempty"`
-	Values     []FieldContextOptionValueScheme `json:"values,omitempty"`
-}
-
-type FieldContextOptionValueScheme struct {
-	ID       string `json:"id,omitempty"`
-	Value    string `json:"value,omitempty"`
-	Disabled bool   `json:"disabled,omitempty"`
-	OptionID string `json:"optionId,omitempty"`
-}
-```
-
-### FieldOptionContextParams
-
-```go
-type FieldOptionContextParams struct {
-   FieldID     string
-   ContextID   int
-   OptionID    int
-   OnlyOptions bool
-}
-```
-
 ## Create custom field options 
 
 Creates options and, where the custom select field is of the type Select List \(cascading\), cascading options for a custom select field. The options are added to a context of the field. 
 
 The maximum number of options that can be created per request is 1000 and each field can have a maximum of **10000** options, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A FieldContextOptionListScheme struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| fieldID | The ID of the custom field. |
-| contextID | The ID of the context. |
-| payload | A `CreateCustomFieldOptionPayloadScheme` struct |
-
-### Example 1: Single Choice
-
 ```go
+// EXAMPLE => SINGLE CHOICE
 package main
 
 import (
@@ -190,9 +127,8 @@ func main() {
 
 ```
 
-### Example 1: Cascading Choice
-
 ```go
+// EXAMPLE => CASCADING CHOICE
 package main
 
 import (
