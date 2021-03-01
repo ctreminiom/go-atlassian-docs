@@ -22,8 +22,7 @@
   * [🔗 Link](jira-software-cloud/issues/link/README.md)
     * [🗞️ Types](jira-software-cloud/issues/link/types.md)
   * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
-  * [🍀 Resolutions](jira-software-cloud/issues/resolutions/README.md)
-    * [🏷️ Labels](jira-software-cloud/issues/resolutions/labels.md)
+  * [🍀 Resolutions](jira-software-cloud/issues/resolutions.md)
 
 ## Jira Agile Cloud
 

@@ -10,20 +10,6 @@ description: >-
 
 Returns a list of all issue resolution values, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A slice of `IssueResolutionScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-
-### Example
-
 ```go
 package main
 
@@ -67,35 +53,9 @@ func main() {
 
 ```
 
-### IssueResolutionScheme
-
-```go
-type IssueResolutionScheme struct {
-   Self        string `json:"self"`
-   ID          string `json:"id"`
-   Description string `json:"description"`
-   Name        string `json:"name"`
-}
-```
-
 ## Get resolution
 
 Returns an issue resolution value, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A `IssueResolutionScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| resolutionID | The ID of the issue resolution value. |
-
-### Example
 
 ```go
 package main
