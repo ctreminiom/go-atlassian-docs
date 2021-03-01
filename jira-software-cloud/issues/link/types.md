@@ -10,20 +10,6 @@ description: >-
 
 Returns a list of all issue link types, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A `IssueLinkTypeSearchScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-
-### Example
-
 ```go
 package main
 
@@ -70,21 +56,6 @@ func main() {
 ## Create issue link type
 
 Creates an issue link type. Use this operation to create descriptions of the reasons why issues are linked. The issue link type consists of a name and descriptions for a link's inward and outward relationships, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A IssueLinkTypeScheme struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| payload | A `IssueLinkTypePayloadScheme` struct |
-
-### Example
 
 ```go
 package main
@@ -135,21 +106,6 @@ func main() {
 
 Returns an issue link type, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A `IssueLinkTypeScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| issueLinkTypeID | The ID of the issue link type. |
-
-### Example
-
 ```go
 package main
 
@@ -193,22 +149,6 @@ func main() {
 ## Update issue link type
 
 Updates an issue link type, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A `IssueLinkTypeScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| issueLinkTypeID | The ID of the issue link type. |
-| payload | A `IssueLinkTypePayloadScheme` struct |
-
-### Example
 
 ```go
 package main
@@ -259,20 +199,6 @@ func main() {
 ## Delete issue link type
 
 Deletes an issue link type, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| issueLinkTypeID | The ID of the issue link type. |
-
-### Example
 
 ```go
 package main
