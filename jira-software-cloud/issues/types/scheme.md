@@ -2,7 +2,7 @@
 description: This resource represents issue type schemes in classic projects
 ---
 
-# 🏬 Scheme
+# 🎴 Scheme
 
 ## Get all issue type schemes
 
