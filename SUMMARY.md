@@ -29,6 +29,7 @@
     * [🎴 Scheme](jira-software-cloud/issues/types/scheme.md)
   * [📠 Vote](jira-software-cloud/issues/vote.md)
   * [🎯 Watcher](jira-software-cloud/issues/watcher.md)
+* [🔓 Permissions](jira-software-cloud/permissions.md)
 
 ## Jira Agile Cloud
 
