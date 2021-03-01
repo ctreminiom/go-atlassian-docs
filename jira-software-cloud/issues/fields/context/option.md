@@ -191,3 +191,124 @@ func main() {
 
 ```
 
+## Update custom field options
+
+Updates the options of a custom field. If any of the options are not found, no options are updated. Options where the values in the request match the current values aren't updated and aren't reported in the response.
+
+{% hint style="warning" %}
+Note that this operation **only works for issue field select list options created in Jira or using operations from the** [**Issue custom field options**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-options/#api-group-issue-custom-field-options) **resource**, it cannot be used with issue field select list options created by Connect apps.
+{% endhint %}
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	var optionsToUpdate []jira.FieldContextOptionValueScheme
+
+	Option1 := jira.FieldContextOptionValueScheme{
+		ID:       "10058",
+		Value:    "Scranton 1",
+		Disabled: false,
+	}
+
+	Option2 := jira.FieldContextOptionValueScheme{
+		ID:       "10059",
+		Disabled: true,
+	}
+
+	optionsToUpdate = append(optionsToUpdate, Option1, Option2)
+
+	var payload = jira.CustomFieldOptionPayloadScheme{Options: optionsToUpdate}
+	var fieldID = "customfield_10047"
+	var contextID = 10175
+
+	contextOptions, response, err := atlassian.Issue.Field.Context.Option.Update(context.Background(), fieldID, contextID, &payload)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, option := range contextOptions.Options {
+		log.Println(option)
+	}
+}
+
+```
+
+## Delete custom field options
+
+Deletes a custom field option. Options with cascading options cannot be deleted without deleting the cascading options first.
+
+{% hint style="warning" %}
+ This operation works for custom field options created in Jira or the operations from this resource. **To work with issue field select list options created for Connect apps use the** [**Issue custom field options \(apps\)**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-options/#api-rest-api-3-field-fieldid-context-contextid-option-optionid-delete) **operations.**
+{% endhint %}
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	var fieldID = "customfield_10047"
+	var contextID = 10175
+	var optionID = 10061
+
+	response, err := atlassian.Issue.Field.Context.Option.Delete(context.Background(), fieldID, contextID, optionID)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+}
+
+```
+
