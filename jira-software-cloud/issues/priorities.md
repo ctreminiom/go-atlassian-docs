@@ -10,20 +10,6 @@ description: >-
 
 Returns the list of all issue priorities, the method returns the following information:
 
-| variable | description |
-| :--- | :--- |
-| result | A slice of the `PriorityScheme` struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-
-### Example
-
 ```go
 package main
 
@@ -67,37 +53,9 @@ func main() {
 
 ```
 
-### PriorityScheme
-
-```go
-type PriorityScheme struct {
-   Self        string `json:"self"`
-   StatusColor string `json:"statusColor"`
-   Description string `json:"description"`
-   IconURL     string `json:"iconUrl"`
-   Name        string `json:"name"`
-   ID          string `json:"id"`
-}
-```
-
 ## Get priority
 
 Returns an issue priority, the method returns the following information:
-
-| variable | description |
-| :--- | :--- |
-| result | A PriorityScheme struct |
-| response | The HTTP callback response parsed with the endpoint used, the response bytes, the status response code, and the response headers. |
-| error | An error interface if something happens. |
-
-### Parameters
-
-| name | description |
-| :--- | :--- |
-| ctx | a context.Context instance |
-| priorityID | The ID of the issue priority. |
-
-### Example
 
 ```go
 package main
