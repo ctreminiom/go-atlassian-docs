@@ -32,6 +32,7 @@
 * [🔓 Permissions](jira-software-cloud/permissions/README.md)
   * [🚪 Scheme](jira-software-cloud/permissions/scheme/README.md)
     * [🔑 Grant](jira-software-cloud/permissions/scheme/grant.md)
+* [📚 Projects](jira-software-cloud/projects.md)
 
 ## Jira Agile Cloud
 
