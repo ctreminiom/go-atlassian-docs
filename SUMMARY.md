@@ -27,6 +27,7 @@
   * [📦 Type](jira-software-cloud/issues/types/README.md)
     * [🛅 Screen Scheme](jira-software-cloud/issues/types/screen-scheme.md)
     * [🎴 Scheme](jira-software-cloud/issues/types/scheme.md)
+  * [📠 Vote](jira-software-cloud/issues/vote.md)
 
 ## Jira Agile Cloud
 
