@@ -122,3 +122,35 @@ func main() {
 
 ```
 
+## Get custom field contexts default values
+
+ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of defaults for a custom field. The results can be filtered by `contextId`, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
+
+## Set custom field contexts default values
+
+Sets default for contexts of a custom field
+
+## Update custom field context
+
+ Updates a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
+
+## Delete custom field context
+
+ Deletes a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
+
+## Add issue types to context
+
+Adds issue types to a custom field context, appending the issue types to the issue types list.
+
+## Remove issue types from context
+
+Removes issue types from a custom field context.
+
+## Assign custom field context to projects
+
+Assigns a custom field context to projects.
+
+## Remove custom field context from projects
+
+Removes a custom field context from projects.
+
