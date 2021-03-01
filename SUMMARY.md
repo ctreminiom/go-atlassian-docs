@@ -12,7 +12,6 @@
   * [📐Sharing](jira-software-cloud/filters/sharing.md)
 * [👫 Groups](jira-software-cloud/groups.md)
 * [🐞 Issues](jira-software-cloud/issues/README.md)
-  * [📦 Types](jira-software-cloud/issues/types.md)
   * [📎 Attachments](jira-software-cloud/issues/attachments.md)
   * [📬 Comments](jira-software-cloud/issues/comments.md)
   * [💬 Fields](jira-software-cloud/issues/fields/README.md)
@@ -24,7 +23,8 @@
     * [🗞️ Types](jira-software-cloud/issues/link/types.md)
   * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
   * [🍀 Resolutions](jira-software-cloud/issues/resolutions.md)
-  * [🕵️‍♀️ Search](jira-software-cloud/issues/search.md)
+  * [🧐 Search](jira-software-cloud/issues/search.md)
+  * [📦 Types](jira-software-cloud/issues/types.md)
 
 ## Jira Agile Cloud
 

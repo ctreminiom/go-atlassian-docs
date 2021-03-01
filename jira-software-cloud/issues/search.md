@@ -4,7 +4,7 @@ description: >-
   for issues with a JQL query and find issues to populate an issue picker.
 ---
 
-# 🕵️‍♀️ Search
+# 🧐 Search
 
 ## Search for issues using JQL \(GET\)
 
