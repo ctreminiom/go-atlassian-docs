@@ -23,11 +23,12 @@
     * [🗞️ Types](jira-software-cloud/issues/link/types.md)
   * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
   * [🍀 Resolutions](jira-software-cloud/issues/resolutions.md)
-  * [🧐 Search](jira-software-cloud/issues/search.md)
+  * [📌 Search](jira-software-cloud/issues/search.md)
   * [📦 Type](jira-software-cloud/issues/types/README.md)
     * [🛅 Screen Scheme](jira-software-cloud/issues/types/screen-scheme.md)
     * [🎴 Scheme](jira-software-cloud/issues/types/scheme.md)
   * [📠 Vote](jira-software-cloud/issues/vote.md)
+  * [🎯 Watcher](jira-software-cloud/issues/watcher.md)
 
 ## Jira Agile Cloud
 
