@@ -2,7 +2,7 @@
 description: This resource represents issues types
 ---
 
-# 📦 Types
+# 📦 Type
 
 ## Get all issue types for user
 
