@@ -39,6 +39,7 @@
   * [💼 Roles](jira-software-cloud/projects/roles/README.md)
     * [👩‍👧‍👧 Actors](jira-software-cloud/projects/roles/actors.md)
   * [🧵 Types](jira-software-cloud/projects/types.md)
+  * [🧱 Versions](jira-software-cloud/projects/versions.md)
 
 ## Jira Agile Cloud
 
