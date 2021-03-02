@@ -8,7 +8,8 @@ Next module to document:
 
 * [x] IssueTypeScreenScheme
 * [x] VoteService
-* [ ] WatcherService
+* [x] WatcherService
+* [ ] ProjectRoleService
 
 
 
