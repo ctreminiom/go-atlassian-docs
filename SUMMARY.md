@@ -40,6 +40,7 @@
     * [👩‍👧‍👧 Actors](jira-software-cloud/projects/roles/actors.md)
   * [🧵 Types](jira-software-cloud/projects/types.md)
   * [🧱 Versions](jira-software-cloud/projects/versions.md)
+  * [🪔 Validation](jira-software-cloud/projects/validation.md)
 
 ## Jira Agile Cloud
 
