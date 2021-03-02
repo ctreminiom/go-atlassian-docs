@@ -5,7 +5,7 @@ description: >-
   issues by component.
 ---
 
-# 🛸 Components
+# 🔮 Components
 
 ## Create component
 

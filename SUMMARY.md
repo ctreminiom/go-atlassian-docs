@@ -33,8 +33,9 @@
   * [🚪 Scheme](jira-software-cloud/permissions/scheme/README.md)
     * [🔑 Grant](jira-software-cloud/permissions/scheme/grant.md)
 * [📚 Projects](jira-software-cloud/projects/README.md)
-  * [💺 Categories](jira-software-cloud/projects/categories.md)
-  * [🛸 Components](jira-software-cloud/projects/components.md)
+  * [🧩 Categories](jira-software-cloud/projects/categories.md)
+  * [🔮 Components](jira-software-cloud/projects/components.md)
+  * [🚧 Permission Schemes](jira-software-cloud/projects/permission-schemes.md)
 
 ## Jira Agile Cloud
 
