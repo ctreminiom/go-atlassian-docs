@@ -36,7 +36,8 @@
   * [🧩 Categories](jira-software-cloud/projects/categories.md)
   * [🔮 Components](jira-software-cloud/projects/components.md)
   * [🚧 Permission Schemes](jira-software-cloud/projects/permission-schemes.md)
-  * [💼 Roles](jira-software-cloud/projects/roles.md)
+  * [💼 Roles](jira-software-cloud/projects/roles/README.md)
+    * [👩‍👧‍👧 Actors](jira-software-cloud/projects/roles/actors.md)
 
 ## Jira Agile Cloud
 
