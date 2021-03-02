@@ -5,7 +5,7 @@ description: >-
   and details of individual categories.
 ---
 
-# 🍂 Categories
+# 💺 Categories
 
 ## Get all project categories
 
