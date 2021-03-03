@@ -47,7 +47,7 @@
   * [🗃️ Schemes](jira-software-cloud/screens/schemes.md)
 * [⚙️ Server](jira-software-cloud/server.md)
 * [⚗️ Tasks](jira-software-cloud/tasks.md)
-* [👨‍👨‍👧‍👦 Users](jira-software-cloud/users.md)
+* [👨‍👧‍👧 Users](jira-software-cloud/users.md)
 
 ## Jira Agile Cloud
 
