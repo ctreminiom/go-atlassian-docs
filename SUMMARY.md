@@ -46,6 +46,7 @@
     * [🧰 Fields](jira-software-cloud/screens/tabs/fields.md)
   * [🗃️ Schemes](jira-software-cloud/screens/schemes.md)
 * [⚙️ Server](jira-software-cloud/server.md)
+* [⚗️ Tasks](jira-software-cloud/tasks.md)
 
 ## Jira Agile Cloud
 
