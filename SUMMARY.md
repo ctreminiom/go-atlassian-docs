@@ -42,7 +42,8 @@
   * [🧱 Versions](jira-software-cloud/projects/versions.md)
   * [🪔 Validation](jira-software-cloud/projects/validation.md)
 * [📓 Screens](jira-software-cloud/screens/README.md)
-  * [📂 Tabs](jira-software-cloud/screens/tabs.md)
+  * [📂 Tabs](jira-software-cloud/screens/tabs/README.md)
+    * [🧰 Fields](jira-software-cloud/screens/tabs/fields.md)
   * [🗃️ Schemes](jira-software-cloud/screens/schemes.md)
 
 ## Jira Agile Cloud
