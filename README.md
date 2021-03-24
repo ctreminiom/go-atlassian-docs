@@ -1,31 +1,48 @@
-# 🌾 Welcome
+# 🎎 Introduction
+
+![](.gitbook/assets/go-atlassian-logo.svg)
 
 [![](https://pkg.go.dev/badge/github.com/ctreminiom/go-atlassian?utm_source=godoc)](https://pkg.go.dev/github.com/ctreminiom/go-atlassian) [![](https://goreportcard.com/badge/ctreminiom/go-atlassian)](https://goreportcard.com/report/github.com/ctreminiom/go-atlassian) [![](https://codecov.io/gh/ctreminiom/go-atlassian/branch/main/graph/badge.svg?token=G0KPNMTIRV)](https://codecov.io/gh/ctreminiom/go-atlassian) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ctreminiom/go-atlassian/blob/master/LICENSE) [![](https://img.shields.io/github/workflow/status/ctreminiom/go-atlassian/Testing?label=%F0%9F%A7%AA%20tests&style=flat&color=75C46B)](https://github.com/ctreminiom/go-atlassian/actions?query=workflow%3ATesting) [![](https://img.shields.io/badge/%F0%9F%92%A1%20go-documentation-00ACD7.svg?style=flat)](https://docs.go-atlassian.io/)
 
-> `go-atlassian` is a [Atlassian Cloud](https://www.atlassian.com/cloud) client library written in Golang. It interacts with the following services:
+go-atlassian is a library written in Go programming language that enables the interaction with the Atlassian Cloud API's. It consists of the following services that Atlassian provide us:
 
-## 📘 [Documentation](https://docs.go-atlassian.io/)
+* Jira Software Cloud
+* Jira Service Management Cloud
+* Confluence Cloud
+* Atlassian Access
+* Opsgenie
+* Trello
+* Bitbucket Cloud
 
-| Application | Status |
-| :--- | :--- |
-| Jira Cloud | Available ✅ |
-| Jira Agile Cloud | In development 👷 |
-| Jira Service Management Cloud | In development 👷 |
-| Confluence Cloud | In development 👷 |
-| Atlassian Admin Cloud | In development 👷 |
+{% hint style="warning" %}
+Right now, the library supports the Jira Software Cloud and Jira Service Management Cloud services. This project's still in progress, and the remaining services will be mapped and documented.
+{% endhint %}
 
-## Features
+## Jira Software Cloud 📘
 
-* Create issue issues with custom fields
-* Manage the screens, screens schemes, issue type screen schemes and all endpoints that interactwith the customfields
-* 90% of the endpoints documented [here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/) were mapped and documented with examples.
+Plan, track, and release world-class software with the \#1 software development tool used by agile teams.
+
+### Features
+
+* Create/Edit/Delete/View issues
+* Support the Jira issue custom-fields interactions
+* Manage the project screen, screen screens, issue type scheme screens, etc.
+* Change the issue status, retrieve the issue changelogs, search issues based on the JQL query and more!!.
+
+## Jira Service Management Cloud 📘
+
+Collaborate at high-velocity, respond to business changes and deliver great customer and employee service experiences fast.
+
+### Features
+
+* Create/Edit/Delete/View Service Desk Organizations
+* Create Request Types, Customers.
+* Get the Service Desk Articles, Queues, Request Comments, Participants, etc
 
 ## Installation 📖
 
-Make sure you have a working Go 1.14+ workspace \([_instructions_](https://golang.org/doc/install)\), then:
-
 ```bash
-$ go get github.com/ctreminiom/go-atlassian/jira
+$ go get -u -v github.com/ctreminiom/go-atlassian/jira
 ```
 
 ## Usage ✒️
@@ -84,24 +101,4 @@ func main() {
 ```bash
 go test -v ./...
 ```
-
-## Author
-
-👤 **Carlos Treminio**
-
-* Website: [https://ctreminiom.gitbook.io/docs/](https://ctreminiom.gitbook.io/docs/)
-* Github: [@ctreminiom](https://github.com/ctreminiom)
-* LinkedIn: [@ctreminio](https://linkedin.com/in/ctreminio)
-
-## 🤝 Contributing
-
-Contributions, issues ,and feature requests are welcome! Feel free to check [issues page](https://github.com/ctreminiom/go-atlassian/issues).
-
-## Show your support
-
-Give an ⭐️ if this project helped you! [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ctreminiom)
-
-## 📝 License
-
-Copyright © 2021 [Carlos Treminio](https://github.com/ctreminiom). This project is [MIT](https://opensource.org/licenses/MIT) licensed.
 
