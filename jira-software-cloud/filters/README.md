@@ -246,7 +246,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	filter, response, err := atlassian.Filter.Get(context.Background(), "$FILTER_ID", []string{})
+	filter, response, err := atlassian.Filter.Get(context.Background(), 1, []string{})
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -282,6 +282,11 @@ func main() {
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
+	
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
@@ -289,7 +294,7 @@ func main() {
 		JQL: "issuetype = Story",
 	}
 
-	filter, response, err := atlassian.Filter.Update(context.Background(), "$FILTER_ID", &payload)
+	filter, response, err := atlassian.Filter.Update(context.Background(), 1, &payload)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -323,10 +328,15 @@ func main() {
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
+	
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Filter.Delete(context.Background(), "$FILTER_ID")
+	response, err := atlassian.Filter.Delete(context.Background(), 1)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
