@@ -138,7 +138,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	myFilters, response, err := atlassian.Filter.My(context.Background(), false)
+	myFilters, response, err := atlassian.Filter.My(context.Background(), false, []string{"sharedUsers", "subscriptions"})
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
