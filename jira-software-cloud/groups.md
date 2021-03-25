@@ -32,6 +32,8 @@ func main() {
 	if err != nil {
 		return
 	}
+	
+	atlassian.Auth.SetBasicAuth(mail, token)
 
 	group, response, err := atlassian.Group.Create(context.Background(), "jira-users")
 	if err != nil {
@@ -74,6 +76,8 @@ func main() {
 	if err != nil {
 		return
 	}
+	
+	atlassian.Auth.SetBasicAuth(mail, token)
 
 	response, err := atlassian.Group.Delete(context.Background(), "groupName")
 	if err != nil {
@@ -136,7 +140,6 @@ func main() {
 	log.Println(groups.IsLast)
 
 	for index, group := range groups.Values {
-		groupsNames = append(groupsNames, group.Name)
 		log.Printf("#%v, Group: %v", index, group.Name)
 	}
 }
