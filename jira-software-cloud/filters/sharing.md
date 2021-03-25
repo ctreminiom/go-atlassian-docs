@@ -121,7 +121,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	permissions, response, err := atlassian.Filter.Share.Gets(context.Background(), "filterID")
+	permissions, response, err := atlassian.Filter.Share.Gets(context.Background(), 1)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -196,7 +196,7 @@ func main() {
 		ProjectID: "10000",
 	}
 
-	permissions, response, err := atlassian.Filter.Share.Add(context.Background(), filterID, &payload)
+	permissions, response, err := atlassian.Filter.Share.Add(context.Background(), 10001, &payload)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -242,8 +242,10 @@ func main() {
 	if err != nil {
 		return
 	}
+	
+	atlassian.Auth.SetBasicAuth(mail, token)
 
-	permission, response, err := atlassian.Filter.Share.Get(context.Background(), "filterID", "permissionID")
+	permission, response, err := atlassian.Filter.Share.Get(context.Background(), 10001, 100024)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -285,7 +287,7 @@ func main() {
 		return
 	}
 
-	response, err := atlassian.Filter.Share.Delete(context.Background(), "filterID", "permissionID")
+	response, err := atlassian.Filter.Share.Delete(context.Background(), 11111, 11111)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
