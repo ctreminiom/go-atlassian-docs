@@ -56,7 +56,10 @@
 
 ## Jira Service Management Cloud
 
-* [Untitled](jira-service-management-cloud/untitled.md)
+* [🙎‍♂️ Customer](jira-service-management-cloud/untitled.md)
+* [🖥️ Info](jira-service-management-cloud/info.md)
+* [📚 Knowledgebase](jira-service-management-cloud/knowledgebase.md)
+* [🗳️ Organization](jira-service-management-cloud/organization.md)
 
 ## Confluence Cloud
 
