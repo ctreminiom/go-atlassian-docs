@@ -60,6 +60,13 @@
 * [🖥️ Info](jira-service-management-cloud/info.md)
 * [📚 Knowledgebase](jira-service-management-cloud/knowledgebase.md)
 * [🗳️ Organization](jira-service-management-cloud/organization.md)
+* [📙 Request](jira-service-management-cloud/request/README.md)
+  * [🚫 Approval](jira-service-management-cloud/request/approval.md)
+  * [🗃️ Attachment](jira-service-management-cloud/request/attachment.md)
+
+---
+
+* [📬 Comments](comments.md)
 
 ## Confluence Cloud
 
