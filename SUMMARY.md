@@ -62,11 +62,11 @@
 * [🗳️ Organization](jira-service-management-cloud/organization.md)
 * [📙 Request](jira-service-management-cloud/request/README.md)
   * [🚫 Approval](jira-service-management-cloud/request/approval.md)
-  * [🗃️ Attachment](jira-service-management-cloud/request/attachment.md)
-
----
-
-* [📬 Comments](comments.md)
+  * [📎 Attachments](jira-service-management-cloud/request/attachment.md)
+  * [📬 Comments](jira-service-management-cloud/request/comments.md)
+  * [☁️Feedback](jira-service-management-cloud/request/feedback.md)
+  * [👥 Participants](jira-service-management-cloud/request/participants.md)
+  * [⏰ SLA](jira-service-management-cloud/request/sla.md)
 
 ## Confluence Cloud
 

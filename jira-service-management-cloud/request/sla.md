@@ -1,58 +1,8 @@
-# 📎 Attachments
+# ⏰ SLA
 
-## Create attachment
+## Get SLA information
 
- This method adds one or more temporary files \(attached to the request's service desk using [servicedesk/{serviceDeskId}/attachTemporaryFile](https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/#api-rest-servicedeskapi-request-issueidorkey-attachment-post)\) as attachments to a customer request and set the attachment visibility using the `public` flag.
-
-```go
-package main
-
-import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
-)
-
-func main() {
-
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
-
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
-
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
-
-   var (
-      issueKeyOrID           = "IT-3"
-      temporaryAttachmentIDs = []string{"temp910441317820424274"}
-   )
-
-   attachments, response, err := atlassian.ServiceManagement.Request.Attachment.Create(context.Background(), issueKeyOrID, temporaryAttachmentIDs, true)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
-
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
-   log.Println(attachments)
-}
-```
-
-## Get attachments for request
-
-This method returns all the attachments for a customer requests.
+This method returns all the SLA records on a customer request. A customer request can have zero or more SLAs. Each SLA can have recordings for zero or more "completed cycles" and zero or 1 "ongoing cycle". Each cycle includes information on when it started and stopped, and whether it breached the SLA goal.
 
 ```go
 package main
@@ -81,12 +31,12 @@ func main() {
    atlassian.Auth.SetUserAgent("curl/7.54.0")
 
    var (
-      issueKeyOrID = "IT-3"
+      issueKeyOrID = "DESK-3"
       start        = 0
       limit        = 50
    )
 
-   attachments, response, err := atlassian.ServiceManagement.Request.Attachment.Gets(context.Background(), issueKeyOrID, start, limit)
+   slas, response, err := atlassian.ServiceManagement.Request.SLA.Gets(context.Background(), issueKeyOrID, start, limit)
    if err != nil {
       if response != nil {
          log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -98,9 +48,62 @@ func main() {
    log.Println("Response HTTP Code", response.StatusCode)
    log.Println("HTTP Endpoint Used", response.Endpoint)
 
-   for _, attachment := range attachments.Values {
-      log.Println(attachment)
+   for _, sla := range slas.Values {
+      log.Println(sla)
    }
+
+}
+```
+
+## Get SLA information by id
+
+This method returns the details for an SLA on a customer request.
+
+```go
+package main
+
+import (
+   "context"
+   "github.com/ctreminiom/go-atlassian/jira"
+   "log"
+   "os"
+)
+
+func main() {
+
+   var (
+      host  = os.Getenv("HOST")
+      mail  = os.Getenv("MAIL")
+      token = os.Getenv("TOKEN")
+   )
+
+   atlassian, err := jira.New(nil, host)
+   if err != nil {
+      return
+   }
+
+   atlassian.Auth.SetBasicAuth(mail, token)
+   atlassian.Auth.SetUserAgent("curl/7.54.0")
+
+   var (
+      issueKeyOrID = "DESK-3"
+      slaMetricID  = 1
+   )
+
+   sla, response, err := atlassian.ServiceManagement.Request.SLA.Get(context.Background(), issueKeyOrID, slaMetricID)
+   if err != nil {
+      if response != nil {
+         log.Println("Response HTTP Response", string(response.BodyAsBytes))
+         log.Println("HTTP Endpoint Used", response.Endpoint)
+      }
+      log.Fatal(err)
+   }
+
+   log.Println("Response HTTP Code", response.StatusCode)
+   log.Println("HTTP Endpoint Used", response.Endpoint)
+   log.Println("SLA ID", sla.ID)
+   log.Println("SLA Name", sla.Name)
+
 }
 ```
 

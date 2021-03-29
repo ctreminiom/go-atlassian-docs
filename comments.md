@@ -1,4 +1,0 @@
-# 📬 Comments
-
-## Get comment attachments
-
