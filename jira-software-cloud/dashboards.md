@@ -1,45 +1,16 @@
----
-description: >-
-  This resource represents dashboards. Use it to obtain the details of
-  dashboards as well as add and remove item properties from dashboards.
----
-
 # 📈 Dashboards
 
-## Share Permissions
+This resource represents dashboards. Use it to obtain the details of dashboards as well as add and remove item properties from dashboards.
 
-Details of share permissions used on the Jira Cloud Dashboards.
+![.gif created using the video https://www.youtube.com/watch?v=VswPTqLQzqA](../.gitbook/assets/atlassian-api-dashboard.gif)
 
-### type 
 
-The type of share permission:
 
-* `group` Shared with a group. If set in a request, then specify `sharePermission.group` as well.
-* `project` Shared with a project. If set in a request, then specify `sharePermission.project` as well.
-* `projectRole` Share with a project role in a project. This value is not returned in responses. It is used in requests, where it needs to be specified with `projectId` and `projectRoleId`.
-* `global` Shared globally. If set in a request, no other `sharePermission` properties need to be specified.
-* `loggedin` Shared with all logged-in users. Note: This value is set in a request by specifying `authenticated` as the `type`.
-* `project-unknown` Shared with a project that the user does not have access to. Cannot be set in a request.
+### Get all dashboards
 
-Valid values: `group`, `project`, `projectRole`, `global`, `loggedin`, `authenticated`, `project-unknown`
+Returns a list of dashboards owned by or shared with the user. The list may be filtered to include only favorite or owned dashboards.
 
-### project
-
- The project that the filter is shared with. This is similar to the project object returned by [Get project](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-projectidorkey-get) but it contains a subset of the properties, which are: `self`, `id`, `key`, `assigneeType`, `name`, `roles`, `avatarUrls`, `projectType`, `simplified`.  
-For a request, specify the `id` for the project.
-
-### role
-
- The project role that the filter is shared with.  
-For a request, specify the `id` for the role. You must also specify the `project` object and `id` for the project that the role is in.
-
-### group
-
-The group that the filter is shared with. For a request, specify the `name` property for the group.
-
-## Get dashboards
-
-This method returns a list of dashboards owned by or shared with the user. The list may be filtered to include only favorite or owned dashboards, the method returns the following information:
+* 🔒 **Permissions required**:  Anonymously
 
 ```go
 package main
@@ -79,16 +50,24 @@ func main() {
 
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(len(dashboards.Dashboards))
+
+	for _, dashboard := range dashboards.Dashboards {
+		log.Println(dashboard.ID, dashboard.Name)
+	}
 
 	return
 
 }
+
 ```
 
-## Create dashboard
+### Create dashboard
 
-Creates a dashboard.
+This method creates a dashboard on Jira Cloud.
+
+{% hint style="warning" %}
+This method is **Experimental**
+{% endhint %}
 
 ```go
 package main
@@ -150,7 +129,7 @@ func main() {
 
 ```
 
-## Search for dashboards
+### Search for dashboards
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of dashboards. This operation is similar to [Get dashboards](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-dashboards/#api-rest-api-3-dashboard-get) except that the results can be refined to include dashboards that have specific attributes. 
 
@@ -212,7 +191,7 @@ func main() {
 
 ```
 
-## Get dashboard
+### Get dashboard
 
 Returns a dashboard.
 
@@ -261,7 +240,7 @@ func main() {
 
 ```
 
-## Update dashboard
+### Update dashboard
 
 Updates a dashboard, replacing all the dashboard details with those provided.
 
@@ -325,7 +304,7 @@ func main() {
 
 ```
 
-## Delete dashboard
+### Delete dashboard
 
 Deletes a dashboard.
 
@@ -369,7 +348,7 @@ func main() {
 
 ```
 
-## Copy dashboard
+### Copy dashboard
 
 Copies a dashboard. Any values provided in the `dashboard` parameter replace those in the copied dashboard.
 
