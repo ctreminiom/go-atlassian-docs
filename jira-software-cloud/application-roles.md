@@ -1,16 +1,16 @@
----
-description: >-
-  This resource represents application roles. Use it to get details of an
-  application role or all application roles.
----
+# 🧱 Application Roles
 
-# 🌐 Application Roles
+This resource represents application roles. Use it to get details of an application role or all application roles.
 
-## Application Roles
+![This is the Application Roles with the groups associated ](../.gitbook/assets/image%20%282%29.png)
 
-This method returns all application roles stored on your Jira Cloud instance:
+### Get all application roles
 
-### Example
+ Returns all application roles. In Jira, application roles are managed using the [**Application access configuration**](https://confluence.atlassian.com/x/3YxjL) page.
+
+* 🔒 **Permissions required**:  Administer Jira [global permission](https://confluence.atlassian.com/x/x4dKLg)
+
+{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-application-roles/\#api-rest-api-2-applicationrole-get" caption="Atlassian Official Documentation" %}
 
 ```go
 package main
@@ -59,9 +59,32 @@ func main() {
 
 ```
 
-## Application Role
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
 
-This method returns an existing application role using the **key** as a parameter:
+```go
+type ApplicationRoleScheme struct {
+	Key                  string   `json:"key,omitempty"`
+	Groups               []string `json:"groups,omitempty"`
+	Name                 string   `json:"name,omitempty"`
+	DefaultGroups        []string `json:"defaultGroups,omitempty"`
+	SelectedByDefault    bool     `json:"selectedByDefault,omitempty"`
+	Defined              bool     `json:"defined,omitempty"`
+	NumberOfSeats        int      `json:"numberOfSeats,omitempty"`
+	RemainingSeats       int      `json:"remainingSeats,omitempty"`
+	UserCount            int      `json:"userCount,omitempty"`
+	UserCountDescription string   `json:"userCountDescription,omitempty"`
+	HasUnlimitedSeats    bool     `json:"hasUnlimitedSeats,omitempty"`
+	Platform             bool     `json:"platform,omitempty"`
+}
+```
+
+### Get application role
+
+This method returns an existing application role using the **key** as a parameter
+
+* 🔒 **Permissions required**:  Administer Jira [global permission](https://confluence.atlassian.com/x/x4dKLg)
 
 ### Example
 
