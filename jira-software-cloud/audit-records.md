@@ -1,21 +1,36 @@
----
-description: >-
-  This resource represents audits that record activities undertaken in Jira. Use
-  it to get a list of audit records.
----
+# 🛡️ Audit records
 
-# 🔎 Audit records
+The audit log tracks key activities that occur within the **Atlassian organization**. Use these activities to diagnose problems or questions related to user details, product access, managed accounts, and organization settings.
 
-## Get audit records
+This resource represents audits that record activities undertaken in Jira. Use it to get a list of audit records.
+
+{% hint style="warning" %}
+**Tip:** The audit log includes activities for up to **180 days**. To save activities before they pass 180 days, [export the audit log](https://support.atlassian.com/security-and-access-policies/docs/track-organization-activities-from-the-audit-log/#Auditlogging-export) periodically.
+{% endhint %}
+
+* 🗡️ **Product audit logs:** Audit logs already exist in Jira Software Cloud and Confluence Cloud. Refer to the table to understand the different types of activities you can find in each audit log.
+
+
+
+* 🏹 **Access audit log activities:** The audit log includes these types of activities.
+
+![](../.gitbook/assets/image%20%284%29.png)
+
+#### View the audit log
+
+To access your organization's audit log, you must be an organization admin. From your organization at [admin.atlassian.com](http://admin.atlassian.com), select **Security** and then **Audit log**.
+
+You’ll see a table of activities, organized by the date and time the activity happened, the actor who took the action, and the action itself.
+
+![Atlassian Audit Log](../.gitbook/assets/atlassian-api-audig-logs%20%281%29.gif)
+
+
+
+### Get audit records
 
 Returns a list of audit records. The list can be filtered to include items:
 
-* containing a string in at least one field. For example, providing _up_ will return all audit records where one or more fields contain words such as _update_.
-* created on or after a date and time.
-* created or before a date and time.
-* created during a time period.
-
-### Example
+* 🔒 **Permissions required**:  Administer Jira [global permission](https://confluence.atlassian.com/x/x4dKLg)
 
 ```go
 package main
@@ -47,13 +62,13 @@ func main() {
 	auditRecordOption := &jira.AuditRecordGetOptions{
 
 		//Filter the records by a word, in that case, the custom field history
-		Filter: "custom field",
+		Filter: "",
 
 		//Filter the records by the last month
-		From: time.Now().AddDate(0, -1, 0).Format(jira.DateFormatJira),
+		From: time.Now().AddDate(0, -1, 0),
 
 		// Today
-		To: time.Now().Format(jira.DateFormatJira),
+		To: time.Now(),
 	}
 
 	auditRecords, response, err := jiraCloud.Audit.Get(context.Background(), auditRecordOption, 0, 500)
@@ -80,5 +95,57 @@ func main() {
 
 }
 
+
+}
+
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type AuditRecordPageScheme struct {
+	Offset  int                  `json:"offset,omitempty"`
+	Limit   int                  `json:"limit,omitempty"`
+	Total   int                  `json:"total,omitempty"`
+	Records []*AuditRecordScheme `json:"records,omitempty"`
+}
+
+type AuditRecordScheme struct {
+	ID              int                                `json:"id,omitempty"`
+	Summary         string                             `json:"summary,omitempty"`
+	RemoteAddress   string                             `json:"remoteAddress,omitempty"`
+	AuthorKey       string                             `json:"authorKey,omitempty"`
+	Created         string                             `json:"created,omitempty"`
+	Category        string                             `json:"category,omitempty"`
+	EventSource     string                             `json:"eventSource,omitempty"`
+	Description     string                             `json:"description,omitempty"`
+	ObjectItem      *AuditRecordObjectItemScheme       `json:"objectItem,omitempty"`
+	ChangedValues   []*AuditRecordChangedValueScheme   `json:"changedValues,omitempty"`
+	AssociatedItems []*AuditRecordAssociatedItemScheme `json:"associatedItems,omitempty"`
+}
+
+type AuditRecordObjectItemScheme struct {
+	ID         string `json:"id,omitempty"`
+	Name       string `json:"name,omitempty"`
+	TypeName   string `json:"typeName,omitempty"`
+	ParentID   string `json:"parentId,omitempty"`
+	ParentName string `json:"parentName,omitempty"`
+}
+
+type AuditRecordChangedValueScheme struct {
+	FieldName   string `json:"fieldName,omitempty"`
+	ChangedFrom string `json:"changedFrom,omitempty"`
+	ChangedTo   string `json:"changedTo,omitempty"`
+}
+
+type AuditRecordAssociatedItemScheme struct {
+	ID         string `json:"id,omitempty"`
+	Name       string `json:"name,omitempty"`
+	TypeName   string `json:"typeName,omitempty"`
+	ParentID   string `json:"parentId,omitempty"`
+	ParentName string `json:"parentName,omitempty"`
+}
 ```
 
