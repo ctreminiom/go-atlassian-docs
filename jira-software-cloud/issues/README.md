@@ -4,11 +4,32 @@ description: This resource represents Jira issues
 
 # 🐞 Issues
 
+## Overview
+
+Need help working with issues? In Jira Software, issues help you manage code, estimate workload, and keep track of your team. On this page, you'll find a quick overview of everything that you can do with an issue.
+
+![Issue View](../../.gitbook/assets/image%20%288%29.png)
+
+{% embed url="https://support.atlassian.com/jira-software-cloud/docs/what-is-an-issue/" %}
+
+This resource represents Jira issues. Use it to:
+
+* create or edit issues, individually or in bulk.
+* retrieve metadata about the options for creating or editing issues.
+* delete an issue.
+* assign a user to an issue.
+* get issue changelogs.
+* send notifications about an issue.
+* get details of the transitions available for an issue.
+* transition an issue.
+
 ## Custom Fields
 
 In the Jira REST API, custom fields are uniquely identified by the field ID, as the display names are not unique within a Jira instance. For example, you could have two fields named "Escalation date", one with an ID of "12221" and one with an ID of "12222". A custom field is actually referenced by `customfield\_` + the field ID, rather than just the field ID.
 
-> For example, the "Story points" custom field with ID = "10000" is referenced as `customfield\_10000` for REST calls. You can get this reference identifier by requesting the create metadata for the issue type.
+{% hint style="info" %}
+**Note:** For example, the "Story points" custom field with ID = "10000" is referenced as customfield\_10000 for REST calls. You can get this reference identifier by requesting the create metadata for the issue type.
+{% endhint %}
 
 {% hint style="success" %}
 We support the following custom field types.
@@ -57,7 +78,7 @@ if err != nil {
 	log.Fatal(err)
 }
 
-//User picker customfield
+//Group picker customfield
 err = customFields.Group("customfield_10046", "scrum-masters")
 if err != nil {
 	log.Fatal(err)
@@ -331,7 +352,58 @@ func main() {
 
 ## Edit issue
 
-Edits an issue. A transition may be applied and issue properties updated as part of the edit.
+Edits an issue. The edits to the issue's fields are defined using `update` and `fields`. There're two ways to edit an issue on Jira, **implicit** and **explicit**.
+
+### Simple update \(implicit set via "fields"\) <a id="simple-update--implicit-set-via--fields--"></a>
+
+The simple way to update an issue is to do a GET, update the values inside "fields", and then PUT back.
+
+* If you PUT back exactly what you GOT, then you are also sending "names", "self", "key", etc. These are ignored.
+* You do not need to send all the fields inside "fields". You can just send the fields you want to update. Absent fields are left unchanged. For example, to update the summary:
+
+```go
+var payload = jira.IssueScheme{
+		Fields: &jira.IssueFieldsScheme{
+			Summary: "New summary test test",
+		},
+	}
+```
+
+* Some fields cannot be updated this way \(for example, comments\). Instead you must use explicit-verb updates \(see below\). You can tell if a field cannot be implicitly set by the fact it doesn't have a SET verb.
+* If you do send along such un-SET-able fields in this manner, they are ignored. This means that you can PUT what you GET, but not all of the document is taken into consideration.
+
+### Operation \(verb\) based update \(explicit verb via "update"\) <a id="operation--verb--based-update--explicit-verb-via--update--"></a>
+
+Each field supports a set of operations \(verbs\) for mutating the field. You can retrieve the editable fields and the operations they support using the "editmeta" resource. 
+
+{% hint style="warning" %}
+The _editmeta_ endpoint is not mapped, yet refer to this [**ticket**](https://github.com/ctreminiom/go-atlassian/issues/18)
+{% endhint %}
+
+The basic operations are defined below \(but custom fields can define their own\).
+
+The general shape of an update is field, array of verb-value pairs, for example:
+
+```go
+//Issue Update Operations
+var operations = &jira.UpdateOperations{}
+
+err = operations.AddArrayOperation("custom_field_id", map[string]string{
+	"value":   "verb",
+	"value": "verb",
+	"value": "verb",
+	"value":   "verb",
+})
+
+if err != nil {
+	log.Fatal(err)
+}
+```
+
+* **SET:** Sets the value of the field. The incoming value must be the same shape as the value of the field from a GET. For example, a string for "summary", and array of strings for "labels".
+* **ADD:** Adds an element to a field that is an array. The incoming value must be the same shape as the items of the array in a GET. For example, to add a label:
+* **REMOVE:** Removes an element from a field that is an array. The incoming value must be the same shape as the items of the array in a GET \(although you can remove parts of the object that are not needed to uniquely identify the object\).
+* **EDIT:** Edits an element in a field that is an array. The element is indexed/identified by the value itself \(usually by id/name/key\).
 
 ```go
 package main
@@ -376,7 +448,26 @@ func main() {
 		log.Fatal(err)
 	}
 
-	response, err := atlassian.Issue.Update(context.Background(), "KP-2", false, &payload, &customFields)
+	//Issue Update Operations
+	var operations = &jira.UpdateOperations{}
+
+	err = operations.AddArrayOperation("labels", map[string]string{
+		"triaged":   "remove",
+		"triaged-2": "remove",
+		"triaged-1": "remove",
+		"blocker":   "remove",
+	})
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = operations.AddStringOperation("summary", "set", "new summary using operation")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	response, err := atlassian.Issue.Update(context.Background(), "KP-2", false, &payload, &customFields, operations)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -388,6 +479,7 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+
 
 ```
 
@@ -605,6 +697,46 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueTransitionsScheme struct {
+	Expand      string                   `json:"expand,omitempty"`
+	Transitions []*IssueTransitionScheme `json:"transitions,omitempty"`
+}
+
+type IssueTransitionScheme struct {
+	ID            string              `json:"id,omitempty"`
+	Name          string              `json:"name,omitempty"`
+	To            *TransitionToScheme `json:"to,omitempty"`
+	HasScreen     bool                `json:"hasScreen,omitempty"`
+	IsGlobal      bool                `json:"isGlobal,omitempty"`
+	IsInitial     bool                `json:"isInitial,omitempty"`
+	IsAvailable   bool                `json:"isAvailable,omitempty"`
+	IsConditional bool                `json:"isConditional,omitempty"`
+	IsLooped      bool                `json:"isLooped,omitempty"`
+}
+
+type TransitionToScheme struct {
+	Self           string                `json:"self,omitempty"`
+	Description    string                `json:"description,omitempty"`
+	IconURL        string                `json:"iconUrl,omitempty"`
+	Name           string                `json:"name,omitempty"`
+	ID             string                `json:"id,omitempty"`
+	StatusCategory *StatusCategoryScheme `json:"statusCategory,omitempty"`
+}
+
+type StatusCategoryScheme struct {
+	Self      string `json:"self,omitempty"`
+	ID        int    `json:"id,omitempty"`
+	Key       string `json:"key,omitempty"`
+	ColorName string `json:"colorName,omitempty"`
+	Name      string `json:"name,omitempty"`
+}
+```
+
 ## Transition issue
 
 Performs an issue transition.
@@ -648,8 +780,4 @@ func main() {
 }
 
 ```
-
-{% hint style="danger" %}
-Screen updates are not supported, yet
-{% endhint %}
 
