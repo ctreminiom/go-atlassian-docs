@@ -1,14 +1,23 @@
----
-description: >-
-  This resource represents groups of users. Use it to get, create, find, and
-  delete groups as well as add and remove users from groups.
----
-
 # 👫 Groups
+
+A Jira group is a convenient way to manage a collection of users. You can use groups throughout Jira to:
+
+* Allow application access.
+* Grant global permissions or project-specific access.
+* Receive email notifications.
+* Access issue filters and dashboards.
+* Reference workflow conditions.
+* Integrate with project roles.
+
+![](../.gitbook/assets/image%20%285%29.png)
+
+This resource represents groups of users. Use it to get, create, find, and delete groups as well as add and remove users from groups.
 
 ## Create Group
 
-Creates a group, the method returns the following information:
+Creates a group
+
+* 🔒 **Permissions required**:  Site administration
 
 ```go
 package main
@@ -52,7 +61,9 @@ func main() {
 
 ## Remove group
 
-Deletes a group,  the method returns the following information:
+Deletes a group
+
+* 🔒 **Permissions required**:  Site administration
 
 ```go
 package main
@@ -146,6 +157,23 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type BulkGroupScheme struct {
+	MaxResults int  `json:"maxResults,omitempty"`
+	StartAt    int  `json:"startAt,omitempty"`
+	Total      int  `json:"total,omitempty"`
+	IsLast     bool `json:"isLast,omitempty"`
+	Values     []struct {
+		Name    string `json:"name,omitempty"`
+		GroupID string `json:"groupId,omitempty"`
+	} `json:"values,omitempty"`
+}
+```
+
 ## Get users from groups
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all users in a group, the method returns the following information:
@@ -194,9 +222,43 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type GroupMemberPageScheme struct {
+	Self       string               `json:"self,omitempty"`
+	NextPage   string               `json:"nextPage,omitempty"`
+	MaxResults int                  `json:"maxResults,omitempty"`
+	StartAt    int                  `json:"startAt,omitempty"`
+	Total      int                  `json:"total,omitempty"`
+	IsLast     bool                 `json:"isLast,omitempty"`
+	Values     []*GroupMemberScheme `json:"values,omitempty"`
+}
+
+type GroupMemberScheme struct {
+	Self         string `json:"self"`
+	Name         string `json:"name"`
+	Key          string `json:"key"`
+	AccountID    string `json:"accountId"`
+	EmailAddress string `json:"emailAddress"`
+	AvatarUrls   struct {
+		One6X16   string `json:"16x16"`
+		Two4X24   string `json:"24x24"`
+		Three2X32 string `json:"32x32"`
+		Four8X48  string `json:"48x48"`
+	} `json:"avatarUrls"`
+	DisplayName string `json:"displayName"`
+	Active      bool   `json:"active"`
+	TimeZone    string `json:"timeZone"`
+	AccountType string `json:"accountType"`
+}
+```
+
 ## Add user to group
 
-Adds a user to a group, the method returns the following information:
+Adds a user to a group
 
 ```go
 package main
@@ -239,7 +301,7 @@ func main() {
 
 ## Remove user from group
 
-Removes a user from a group, the method returns the following information:
+Removes a user from a group
 
 ```go
 package main

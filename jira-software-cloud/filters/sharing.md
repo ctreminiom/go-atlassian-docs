@@ -1,10 +1,6 @@
----
-description: >-
-  This resource represents options for sharing filters. Use it to get share
-  scopes as well as add and remove share scopes from filters.
----
-
 # 📐Sharing
+
+This resource represents options for sharing filters. Use it to get share scopes as well as add and remove share scopes from filters.
 
 ## Get default share scope
 
