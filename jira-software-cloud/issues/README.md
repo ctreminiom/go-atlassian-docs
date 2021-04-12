@@ -8,7 +8,7 @@ description: This resource represents Jira issues
 
 Need help working with issues? In Jira Software, issues help you manage code, estimate workload, and keep track of your team. On this page, you'll find a quick overview of everything that you can do with an issue.
 
-![Issue View](../../.gitbook/assets/image%20%288%29.png)
+![Issue View](../../.gitbook/assets/image%20%2810%29.png)
 
 {% embed url="https://support.atlassian.com/jira-software-cloud/docs/what-is-an-issue/" %}
 
