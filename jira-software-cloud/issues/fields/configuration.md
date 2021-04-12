@@ -6,6 +6,16 @@ description: >-
 
 # 🎛️Configuration
 
+As a Jira administrator, you can configure the default field configuration to make specific fields required or hidden based on the needs of your team. You can create additional field configurations to manage fields across multiple projects, issue types, and screens. A field configuration can be associated with an issue type within a field configuration scheme, which can then be associated with a project.
+
+
+
+![](../../../.gitbook/assets/image%20%2810%29.png)
+
+
+
+This resource represents issue field configurations. Use it to get, set, and delete field configurations and field configuration schemes.
+
 ## Get all field configurations
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all field configurations, the method returns the following information:
