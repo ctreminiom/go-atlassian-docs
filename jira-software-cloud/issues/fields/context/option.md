@@ -1,10 +1,12 @@
----
-description: >-
-  This resource represents custom issue field select list options created in
-  Jira or using the REST API. This resource supports the following field types:
----
-
 # 🕧 Option
+
+This resource represents custom issue field select list options created in Jira or using the REST API. This resource supports the following field types:
+
+* Checkboxes.
+* Radio Buttons.
+* Select List \(single choice\).
+* Select List \(multiple choices\).
+* Select List \(cascading\).
 
 ## Get custom field options
 
@@ -20,7 +22,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -36,17 +38,11 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	var (
-		fieldID   = "customfield_10038"
-		contextID = 10138
+		fieldID = "customfield_10038"
+		contextID = 10180
 	)
 
-	options := jira.FieldOptionContextParams{
-		FieldID:     fieldID,
-		ContextID:   contextID,
-		OnlyOptions: false,
-	}
-
-	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Gets(context.Background(), &options, 0, 60)
+	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Gets(context.Background(), fieldID, contextID, nil, 0, 50)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -57,11 +53,36 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, fieldOption := range fieldOptions.Values {
-		log.Println(fieldOption)
+	for _, option := range fieldOptions.Values {
+		log.Println(option)
 	}
+
 }
 
+
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type CustomFieldContextOptionPageScheme struct {
+	Self       string                            `json:"self,omitempty"`
+	NextPage   string                            `json:"nextPage,omitempty"`
+	MaxResults int                               `json:"maxResults,omitempty"`
+	StartAt    int                               `json:"startAt,omitempty"`
+	Total      int                               `json:"total,omitempty"`
+	IsLast     bool                              `json:"isLast,omitempty"`
+	Values     []*CustomFieldContextOptionScheme `json:"values,omitempty"`
+}
+
+type CustomFieldContextOptionScheme struct {
+	ID       string `json:"id,omitempty"`
+	Value    string `json:"value,omitempty"`
+	Disabled bool   `json:"disabled,omitempty"`
+	OptionID string `json:"optionId,omitempty"`
+}
 ```
 
 ## Create custom field options 
@@ -71,7 +92,6 @@ Creates options and, where the custom select field is of the type Select List \(
 The maximum number of options that can be created per request is 1000 and each field can have a maximum of **10000** options, the method returns the following information:
 
 ```go
-// EXAMPLE => SINGLE CHOICE
 package main
 
 import (
@@ -81,7 +101,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -96,20 +116,43 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var valuesToAdd []jira.FieldContextOptionValueScheme
+	var (
+		fieldID = "customfield_10038"
+		contextID = 10180
+		
+		payload = &jira.FieldContextOptionListScheme{
+			Options: []*jira.CustomFieldContextOptionScheme{
 
-	value00 := jira.FieldContextOptionValueScheme{
-		Value:    "Scranton 1",
-		Disabled: false,
-	}
+				// Single/Multiple Choice example
+				{
+					Value:    "Option 3",
+					Disabled: false,
+				},
+				{
+					Value:    "Option 4",
+					Disabled: false,
+				},
 
-	valuesToAdd = append(valuesToAdd, value00)
+				///////////////////////////////////////////
+				/*
+				// Cascading Choice example
+				{
+					OptionID: "1027",
+					Value:    "Argentina",
+					Disabled: false,
+				},
+				{
+					OptionID: "1027",
+					Value:    "Uruguay",
+					Disabled: false,
+				},
+				 */
 
-	var payload = jira.CreateCustomFieldOptionPayloadScheme{Options: valuesToAdd}
-	var fieldID = "customfield_10038"
-	var contextID = 10140
+			}}
+		
+	)
 
-	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Create(context.Background(), fieldID, contextID, &payload)
+	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Create(context.Background(), fieldID, contextID, payload)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -123,72 +166,27 @@ func main() {
 	for _, option := range fieldOptions.Options {
 		log.Println(option)
 	}
+
 }
+
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
 ```go
-// EXAMPLE => CASCADING CHOICE
-package main
-
-import (
-	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
-	"log"
-	"os"
-)
-
-func main() {
-
-	var (
-		host  = os.Getenv("HOST")
-		mail  = os.Getenv("MAIL")
-		token = os.Getenv("TOKEN")
-	)
-
-	atlassian, err := jira.New(nil, host)
-	if err != nil {
-		return
-	}
-
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-	var valuesToAdd []jira.FieldContextOptionValueScheme
-
-	argentinaOption := jira.FieldContextOptionValueScheme{
-		OptionID: "10027",
-		Value:    "Argentina",
-		Disabled: false,
-	}
-
-	uruguayOption := jira.FieldContextOptionValueScheme{
-		OptionID: "10027",
-		Value:    "Uruguay",
-		Disabled: false,
-	}
-
-	valuesToAdd = append(valuesToAdd, argentinaOption, uruguayOption)
-
-	var payload = jira.CreateCustomFieldOptionPayloadScheme{Options: valuesToAdd}
-	var fieldID = "customfield_10037"
-	var contextID = 10141
-
-	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Create(context.Background(), fieldID, contextID, &payload)
-	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
-	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
-	log.Println("HTTP Endpoint Used", response.Endpoint)
-
-	for _, option := range fieldOptions.Options {
-		log.Println(option)
-	}
+type FieldContextOptionListScheme struct {
+	Options []*CustomFieldContextOptionScheme `json:"options,omitempty"`
 }
 
+type CustomFieldContextOptionScheme struct {
+	ID       string `json:"id,omitempty"`
+	Value    string `json:"value,omitempty"`
+	Disabled bool   `json:"disabled,omitempty"`
+	OptionID string `json:"optionId,omitempty"`
+}
 ```
 
 ## Update custom field options
@@ -219,46 +217,81 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		log.Fatal(err)
+		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var optionsToUpdate []jira.FieldContextOptionValueScheme
+	var (
+		fieldID   = "customfield_10038"
+		contextID = 10180
 
-	Option1 := jira.FieldContextOptionValueScheme{
-		ID:       "10058",
-		Value:    "Scranton 1",
-		Disabled: false,
-	}
+		payload = &jira.FieldContextOptionListScheme{
+			Options: []*jira.CustomFieldContextOptionScheme{
 
-	Option2 := jira.FieldContextOptionValueScheme{
-		ID:       "10059",
-		Disabled: true,
-	}
+				// Single/Multiple Choice example
+				{
+					ID:       "10064",
+					Value:    "Option 3 - Updated",
+					Disabled: false,
+				},
+				{
+					ID:       "10065",
+					Value:    "Option 4 - Updated",
+					Disabled: true,
+				},
 
-	optionsToUpdate = append(optionsToUpdate, Option1, Option2)
+				///////////////////////////////////////////
+				/*
+					// Cascading Choice example
+					{
+						OptionID: "1027",
+						Value:    "Argentina",
+						Disabled: false,
+					},
+					{
+						OptionID: "1027",
+						Value:    "Uruguay",
+						Disabled: false,
+					},
+				*/
 
-	var payload = jira.CustomFieldOptionPayloadScheme{Options: optionsToUpdate}
-	var fieldID = "customfield_10047"
-	var contextID = 10175
+			}}
+	)
 
-	contextOptions, response, err := atlassian.Issue.Field.Context.Option.Update(context.Background(), fieldID, contextID, &payload)
+	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Update(context.Background(), fieldID, contextID, payload)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
 		}
-		log.Fatal(err)
+		return
 	}
 
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, option := range contextOptions.Options {
+	for _, option := range fieldOptions.Options {
 		log.Println(option)
 	}
+
+}
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type FieldContextOptionListScheme struct {
+	Options []*CustomFieldContextOptionScheme `json:"options,omitempty"`
 }
 
+type CustomFieldContextOptionScheme struct {
+	ID       string `json:"id,omitempty"`
+	Value    string `json:"value,omitempty"`
+	Disabled bool   `json:"disabled,omitempty"`
+	OptionID string `json:"optionId,omitempty"`
+}
 ```
 
 ## Delete custom field options
@@ -279,7 +312,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -289,21 +322,22 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		log.Fatal(err)
+		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var fieldID = "customfield_10047"
-	var contextID = 10175
-	var optionID = 10061
+	var (
+		fieldID = "customfield_10038"
+		contextID, optionID = 10180, 10065
+	)
 
 	response, err := atlassian.Issue.Field.Context.Option.Delete(context.Background(), fieldID, contextID, optionID)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
 		}
-		log.Fatal(err)
+		return
 	}
 
 	log.Println("Response HTTP Code", response.StatusCode)
