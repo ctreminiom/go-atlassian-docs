@@ -10,7 +10,7 @@ As a Jira administrator, you can configure the default field configuration to ma
 
 
 
-![](../../../.gitbook/assets/image%20%2810%29.png)
+![](../../../.gitbook/assets/view-field-configurations-jira.png)
 
 
 
@@ -71,9 +71,32 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type FieldConfigSearchScheme struct {
+   MaxResults int                  `json:"maxResults,omitempty"`
+   StartAt    int                  `json:"startAt,omitempty"`
+   Total      int                  `json:"total,omitempty"`
+   IsLast     bool                 `json:"isLast,omitempty"`
+   Values     []*FieldConfigScheme `json:"values,omitempty"`
+}
+
+type FieldConfigScheme struct {
+   ID          int    `json:"id,omitempty"`
+   Name        string `json:"name,omitempty"`
+   Description string `json:"description,omitempty"`
+   IsDefault   bool   `json:"isDefault,omitempty"`
+}
+```
+
 ## Get field configuration items
 
-Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all fields for a configuration, the method returns the following information:
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all fields for a configuration
+
+* 🔒 **Permissions required**:  _Administer Jira_ [global permission](https://confluence.atlassian.com/x/x4dKLg)
 
 ```go
 package main
@@ -85,7 +108,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -100,7 +123,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	configurationItems, response, err := atlassian.Issue.Field.Configuration.Items(context.Background(), "10000", 0, 50)
+	items, response, err := atlassian.Issue.Field.Configuration.Items(context.Background(), 10000, 0, 50)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -111,12 +134,33 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, item := range configurationItems.Values {
+	for _, item := range items.Values {
 		log.Println(item)
 	}
-
+	
 }
 
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type FieldConfigurationItemPageScheme struct {
+	MaxResults int                             `json:"maxResults,omitempty"`
+	StartAt    int                             `json:"startAt,omitempty"`
+	Total      int                             `json:"total,omitempty"`
+	IsLast     bool                            `json:"isLast,omitempty"`
+	Values     []*FieldConfigurationItemScheme `json:"values,omitempty"`
+}
+
+type FieldConfigurationItemScheme struct {
+	ID          string `json:"id,omitempty"`
+	IsHidden    bool   `json:"isHidden,omitempty"`
+	IsRequired  bool   `json:"isRequired,omitempty"`
+	Description string `json:"description,omitempty"`
+}
 ```
 
 ## Get all field configuration schemes
@@ -137,7 +181,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -152,7 +196,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	schemes, response, err := atlassian.Issue.Field.Configuration.Schemes(context.Background(), nil, 0, 50)
+	fieldConfigurationSchemes, response, err := atlassian.Issue.Field.Configuration.Schemes(context.Background(), nil, 0, 50)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -163,12 +207,31 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, scheme := range schemes.Values {
-		log.Println(scheme)
+	for _, fieldConfigurationScheme := range fieldConfigurationSchemes.Values {
+		log.Println(fieldConfigurationScheme)
 	}
 
 }
+```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type FieldConfigurationSchemePageScheme struct {
+	MaxResults int                               `json:"maxResults,omitempty"`
+	StartAt    int                               `json:"startAt,omitempty"`
+	Total      int                               `json:"total,omitempty"`
+	IsLast     bool                              `json:"isLast,omitempty"`
+	Values     []*FieldConfigurationSchemeScheme `json:"values,omitempty"`
+}
+
+type FieldConfigurationSchemeScheme struct {
+	ID          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+}
 ```
 
 ## Get field configuration issue type items
@@ -219,6 +282,26 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type FieldConfigurationIssueTypeItemPageScheme struct {
+   MaxResults int                                      `json:"maxResults,omitempty"`
+   StartAt    int                                      `json:"startAt,omitempty"`
+   Total      int                                      `json:"total,omitempty"`
+   IsLast     bool                                     `json:"isLast,omitempty"`
+   Values     []*FieldConfigurationIssueTypeItemScheme `json:"values,omitempty"`
+}
+
+type FieldConfigurationIssueTypeItemScheme struct {
+   FieldConfigurationSchemeID string `json:"fieldConfigurationSchemeId,omitempty"`
+   IssueTypeID                string `json:"issueTypeId,omitempty"`
+   FieldConfigurationID       string `json:"fieldConfigurationId,omitempty"`
+}
+```
+
 ## Get field configuration schemes for projects
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of field configuration schemes and, for each scheme, a list of the projects that use it. The list is sorted by field configuration scheme ID. The first item contains the list of project IDs assigned to the default field configuration scheme, the method returns the following information:
@@ -265,5 +348,24 @@ func main() {
 
 }
 
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type FieldConfigurationSchemeProjectPageScheme struct {
+   MaxResults int                                      `json:"maxResults,omitempty"`
+   StartAt    int                                      `json:"startAt,omitempty"`
+   Total      int                                      `json:"total,omitempty"`
+   IsLast     bool                                     `json:"isLast,omitempty"`
+   Values     []*FieldConfigurationSchemeProjectScheme `json:"values,omitempty"`
+}
+
+type FieldConfigurationSchemeProjectScheme struct {
+   ProjectIds               []string                        `json:"projectIds,omitempty"`
+   FieldConfigurationScheme *FieldConfigurationSchemeScheme `json:"fieldConfigurationScheme,omitempty"`
+}
 ```
 
