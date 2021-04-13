@@ -1,10 +1,6 @@
----
-description: >-
-  This resource represents issue link types. Use it to get, create, update, and
-  delete link issue types as well as get lists of all link issue types.
----
-
 # 🗞️ Types
+
+This resource represents issue link types. Use it to get, create, update, and delete link issue types as well as get lists of all link issue types.
 
 ## Get issue link types
 
@@ -20,7 +16,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -30,15 +26,15 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	linkTypes, response, err := atlassian.Issue.Link.Type.Gets(context.Background())
+	types, response, err := atlassian.Issue.Link.Type.Gets(context.Background())
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
 		}
 		log.Fatal(err)
 	}
@@ -46,11 +42,29 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, linkType := range linkTypes.IssueLinkTypes {
-		log.Println(linkType.Name)
+	for _, value := range types.IssueLinkTypes {
+		log.Println(value)
 	}
+
+}
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueLinkTypeSearchScheme struct {
+	IssueLinkTypes []*LinkTypeScheme `json:"issueLinkTypes,omitempty"`
 }
 
+type LinkTypeScheme struct {
+	Self    string `json:"self,omitempty"`
+	ID      string `json:"id,omitempty"`
+	Name    string `json:"name,omitempty"`
+	Inward  string `json:"inward,omitempty"`
+	Outward string `json:"outward,omitempty"`
+}
 ```
 
 ## Create issue link type
@@ -82,7 +96,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := jira.IssueLinkTypePayloadScheme{
+	payload := jira.LinkTypeScheme{
 		Inward:  "Clone/Duplicated by",
 		Name:    "Clone/Duplicate",
 		Outward: "Clone/Duplicates",
@@ -98,8 +112,24 @@ func main() {
 
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(issueLinkType)
 }
 
+
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type LinkTypeScheme struct {
+	Self    string `json:"self,omitempty"`
+	ID      string `json:"id,omitempty"`
+	Name    string `json:"name,omitempty"`
+	Inward  string `json:"inward,omitempty"`
+	Outward string `json:"outward,omitempty"`
+}
 ```
 
 ## Get issue link type
@@ -116,7 +146,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -126,24 +156,37 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	linkType, response, err := atlassian.Issue.Link.Type.Get(context.Background(), "$id")
+	issueLinkType, response, err := atlassian.Issue.Link.Type.Get(context.Background(), "10000")
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
 		}
 		log.Fatal(err)
 	}
 
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(linkType)
+	log.Println(issueLinkType)
 }
+```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type LinkTypeScheme struct {
+	Self    string `json:"self,omitempty"`
+	ID      string `json:"id,omitempty"`
+	Name    string `json:"name,omitempty"`
+	Inward  string `json:"inward,omitempty"`
+	Outward string `json:"outward,omitempty"`
+}
 ```
 
 ## Update issue link type
@@ -175,13 +218,13 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := jira.IssueLinkTypePayloadScheme{
+	payload := jira.LinkTypeScheme{
 		Inward:  "Clone/Duplicated by - Updated",
 		Name:    "Clone/Duplicate - Updated",
 		Outward: "Clone/Duplicates - Updated",
 	}
 
-	issueLinkType, response, err := atlassian.Issue.Link.Type.Update(context.Background(), id, &payload)
+	issueLinkType, response, err := atlassian.Issue.Link.Type.Update(context.Background(), "10008", &payload)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -193,7 +236,20 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueLinkType)
 }
+```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type LinkTypeScheme struct {
+	Self    string `json:"self,omitempty"`
+	ID      string `json:"id,omitempty"`
+	Name    string `json:"name,omitempty"`
+	Inward  string `json:"inward,omitempty"`
+	Outward string `json:"outward,omitempty"`
+}
 ```
 
 ## Delete issue link type
@@ -225,7 +281,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Issue.Link.Type.Delete(context.Background(), id)
+	response, err := atlassian.Issue.Link.Type.Delete(context.Background(), "10008")
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -236,6 +292,5 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
