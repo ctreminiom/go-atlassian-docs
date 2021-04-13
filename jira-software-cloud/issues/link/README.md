@@ -1,11 +1,18 @@
----
-description: >-
-  This resource represents links between issues. Use it to get, create, and
-  delete links between issues.To use this resource, the site must have issue
-  linking enabled.
----
-
 # 🔗 Link
+
+You can link issues to keep track of duplicate or related work. You can, for example: 
+
+* create a new linked issue from an existing issue in a service project or business project
+* create an association between an issue and a Confluence page
+* link an issue to any other web page
+
+Make sure you have the _link issues_ project permission before getting started. Note that your Jira administrator can customize the types of links that you can create.
+
+![](../../../.gitbook/assets/kp-board-agile-board-jira.png)
+
+{% hint style="info" %}
+This resource represents links between issues. Use it to get, create, and delete links between issues.To use this resource, the site must have issue linking enabled.
+{% endhint %}
 
 ## Create issue link
 
@@ -35,21 +42,59 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var (
-		linkType     = "Duplicate"
-		inWardIssue  = "KP-1"
-		outWardIssue = "KP-2"
-	)
+	payload := &jira.LinkPayloadScheme{
 
-	response, err := atlassian.Issue.Link.Create(context.Background(), linkType, inWardIssue, outWardIssue)
+		Comment: &jira.CommentPayloadScheme{
+
+			Body: &jira.CommentNodeScheme{
+				Version: 1,
+				Type:    "doc",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{
+								Type: "text",
+								Text: "Carlos Test",
+							},
+							{
+								Type: "emoji",
+								Attrs: map[string]interface{}{
+									"shortName": ":grin",
+									"id":        "1f601",
+									"text":      "😁",
+								},
+							},
+							{
+								Type: "text",
+								Text: " ",
+							},
+						},
+					},
+				},
+			},
+		},
+
+		InwardIssue: &jira.LinkedIssueScheme{
+			Key: "KP-1",
+		},
+		OutwardIssue: &jira.LinkedIssueScheme{
+			Key: "KP-2",
+		},
+		Type: &jira.LinkTypeScheme{
+			Name: "Duplicate",
+		},
+	}
+
+	response, err := atlassian.Issue.Link.Create(context.Background(), payload)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
 		}
 		log.Fatal(err)
 	}
@@ -57,6 +102,7 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+
 
 ```
 
@@ -74,7 +120,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -84,15 +130,15 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	links, response, err := atlassian.Issue.Link.Gets(context.Background(), "KP-1")
+	issueLinks, response, err := atlassian.Issue.Link.Gets(context.Background(), "KP-1")
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
 		}
 		log.Fatal(err)
 	}
@@ -100,11 +146,50 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, link := range links.Fields.IssueLinks {
-		log.Println(link.ID, link.Type.Name)
+
+	for _, link := range issueLinks.Fields.IssueLinks {
+		log.Println(link)
 	}
+
+}
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueLinkPageScheme struct {
+	Expand string `json:"expand,omitempty"`
+	ID     string `json:"id,omitempty"`
+	Self   string `json:"self,omitempty"`
+	Key    string `json:"key,omitempty"`
+	Fields struct {
+		IssueLinks []*IssueLinkScheme `json:"issuelinks,omitempty"`
+	} `json:"fields,omitempty"`
 }
 
+type IssueLinkScheme struct {
+	ID           string             `json:"id,omitempty"`
+	Type         *LinkTypeScheme    `json:"type,omitempty"`
+	InwardIssue  *LinkedIssueScheme `json:"inwardIssue,omitempty"`
+	OutwardIssue *LinkedIssueScheme `json:"outwardIssue,omitempty"`
+}
+
+type LinkTypeScheme struct {
+	Self    string `json:"self,omitempty"`
+	ID      string `json:"id,omitempty"`
+	Name    string `json:"name,omitempty"`
+	Inward  string `json:"inward,omitempty"`
+	Outward string `json:"outward,omitempty"`
+}
+
+type LinkedIssueScheme struct {
+	ID     string             `json:"id,omitempty"`
+	Key    string             `json:"key,omitempty"`
+	Self   string             `json:"self,omitempty"`
+	Fields *IssueFieldsScheme `json:"fields,omitempty"`
+}
 ```
 
 ## Get issue link
@@ -152,6 +237,34 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueLinkScheme struct {
+	ID           string             `json:"id,omitempty"`
+	Type         *LinkTypeScheme    `json:"type,omitempty"`
+	InwardIssue  *LinkedIssueScheme `json:"inwardIssue,omitempty"`
+	OutwardIssue *LinkedIssueScheme `json:"outwardIssue,omitempty"`
+}
+
+type LinkTypeScheme struct {
+	Self    string `json:"self,omitempty"`
+	ID      string `json:"id,omitempty"`
+	Name    string `json:"name,omitempty"`
+	Inward  string `json:"inward,omitempty"`
+	Outward string `json:"outward,omitempty"`
+}
+
+type LinkedIssueScheme struct {
+	ID     string             `json:"id,omitempty"`
+	Key    string             `json:"key,omitempty"`
+	Self   string             `json:"self,omitempty"`
+	Fields *IssueFieldsScheme `json:"fields,omitempty"`
+}	
+```
+
 ## Delete issue link
 
 Deletes an issue link, the method returns the following information:
@@ -166,7 +279,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -176,22 +289,24 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Issue.Link.Delete(context.Background(), "1111")
+
+	response, err := atlassian.Issue.Link.Delete(context.Background(), "10002")
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
 		}
 		log.Fatal(err)
 	}
 
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-}
 
+
+}
 ```
 
