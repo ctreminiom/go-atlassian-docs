@@ -1,10 +1,10 @@
----
-description: >-
-  This resource represents issue priorities. Use it to obtain a list of issue
-  priorities and details for individual issue priorities.
----
-
 # 🏣 Priorities
+
+An issue's priority defines its importance in relation to other issues, so it helps your users determine which issues should be tackled first. Jira comes with a set of default priorities, which you can modify or add to. You can also choose different priorities for your projects.
+
+![](../../.gitbook/assets/image%20%2812%29.png)
+
+This resource represents issue priorities. Use it to obtain a list of issue priorities and details for individual issue priorities.
 
 ## Get priorities
 
