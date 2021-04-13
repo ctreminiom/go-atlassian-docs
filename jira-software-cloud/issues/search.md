@@ -22,15 +22,6 @@ import (
 
 func main() {
 
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
-
 	var (
 		host  = os.Getenv("HOST")
 		mail  = os.Getenv("MAIL")

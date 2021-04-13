@@ -20,15 +20,6 @@ import (
 
 func main() {
 
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
-
 	var (
 		host  = os.Getenv("HOST")
 		mail  = os.Getenv("MAIL")
@@ -41,32 +32,49 @@ func main() {
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
-	var startAt int
-	for {
 
-		issueTypesSchemes, response, err := atlassian.Issue.Type.Scheme.Gets(context.Background(), nil, startAt, 50)
-		if err != nil {
-			if response != nil {
-				log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			}
-			log.Fatal(err)
+	issueTypeSchemes, response, err := atlassian.Issue.Type.Scheme.Gets(context.Background(), nil, 0, 50)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.BodyAsBytes))
 		}
-
-		log.Println("Response HTTP Code", response.StatusCode)
-		log.Println("HTTP Endpoint Used", response.Endpoint)
-
-		for _, scheme := range issueTypesSchemes.Values {
-			log.Println(scheme.ID, scheme.Name, scheme.DefaultIssueTypeID)
-		}
-
-		if issueTypesSchemes.IsLast {
-			break
-		}
-
-		startAt += 50
+		log.Fatal(err)
 	}
+
+	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+
+	for _, issueTypeScheme := range issueTypeSchemes.Values {
+		log.Println(issueTypeScheme)
+	}
+
 }
 
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueTypeSchemePageScheme struct {
+   Self       string                   `json:"self,omitempty"`
+   NextPage   string                   `json:"nextPage,omitempty"`
+   MaxResults int                      `json:"maxResults,omitempty"`
+   StartAt    int                      `json:"startAt,omitempty"`
+   Total      int                      `json:"total,omitempty"`
+   IsLast     bool                     `json:"isLast,omitempty"`
+   Values     []*IssueTypeSchemeScheme `json:"values,omitempty"`
+}
+
+type IssueTypeSchemeScheme struct {
+   ID                 string `json:"id,omitempty"`
+   Name               string `json:"name,omitempty"`
+   Description        string `json:"description,omitempty"`
+   DefaultIssueTypeID string `json:"defaultIssueTypeId,omitempty"`
+   IsDefault          bool   `json:"isDefault,omitempty"`
+}
 ```
 
 ## Create issue type scheme
@@ -132,7 +140,7 @@ func main() {
 
 ## Get issue type scheme items
 
-Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type scheme items. Only issue type scheme items used in classic projects are returned.
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue-type scheme items. Only issue type scheme items used in classic projects are returned.
 
 ```go
 package main
@@ -185,6 +193,25 @@ func main() {
 
 }
 
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueTypeSchemeItemPageScheme struct {
+   MaxResults int  `json:"maxResults,omitempty"`
+   StartAt    int  `json:"startAt,omitempty"`
+   Total      int  `json:"total,omitempty"`
+   IsLast     bool `json:"isLast,omitempty"`
+   Values     []*IssueTypeSchemeMappingScheme `json:"values,omitempty"`
+}
+
+type IssueTypeSchemeMappingScheme struct {
+   IssueTypeSchemeID string `json:"issueTypeSchemeId,omitempty"`
+   IssueTypeID       string `json:"issueTypeId,omitempty"`
+}
 ```
 
 ## Get issue type schemes for projects
@@ -242,6 +269,33 @@ func main() {
 
 }
 
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type ProjectIssueTypeSchemePageScheme struct {
+   MaxResults int                              `json:"maxResults"`
+   StartAt    int                              `json:"startAt"`
+   Total      int                              `json:"total"`
+   IsLast     bool                             `json:"isLast"`
+   Values     []*IssueTypeSchemeProjectsScheme `json:"values"`
+}
+
+type IssueTypeSchemeProjectsScheme struct {
+   IssueTypeScheme *IssueTypeSchemeScheme `json:"issueTypeScheme,omitempty"`
+   ProjectIds      []string               `json:"projectIds,omitempty"`
+}
+
+type IssueTypeSchemeScheme struct {
+	ID                 string `json:"id,omitempty"`
+	Name               string `json:"name,omitempty"`
+	Description        string `json:"description,omitempty"`
+	DefaultIssueTypeID string `json:"defaultIssueTypeId,omitempty"`
+	IsDefault          bool   `json:"isDefault,omitempty"`
+}
 ```
 
 ## Assign issue type scheme to project

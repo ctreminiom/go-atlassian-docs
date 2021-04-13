@@ -4,6 +4,10 @@ description: This resource represents issues types
 
 # 📦 Type
 
+Just as a project can have many different types of work, Jira uses different issue types to help identify, categorize, and report on your team’s work. We’ll cover Jira’s standard-issue types below.
+
+![](../../../.gitbook/assets/issue-types-gif.gif)
+
 ## Get all issue types for user
 
 Returns all issue types.
@@ -57,7 +61,30 @@ func main() {
 		log.Println(value.ID, value.Name, value.Subtask)
 	}
 }
+```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueTypeScheme struct {
+   Self           string                `json:"self,omitempty"`
+   ID             string                `json:"id,omitempty"`
+   Description    string                `json:"description,omitempty"`
+   IconURL        string                `json:"iconUrl,omitempty"`
+   Name           string                `json:"name,omitempty"`
+   Subtask        bool                  `json:"subtask,omitempty"`
+   AvatarID       int                   `json:"avatarId,omitempty"`
+   EntityID       string                `json:"entityId,omitempty"`
+   HierarchyLevel int                   `json:"hierarchyLevel,omitempty"`
+   Scope          *IssueTypeScopeScheme `json:"scope,omitempty"`
+}
+
+type IssueTypeScopeScheme struct {
+   Type    string         `json:"type,omitempty"`
+   Project *ProjectScheme `json:"project,omitempty"`
+}
 ```
 
 ## Create issue type
@@ -171,6 +198,30 @@ func main() {
 	log.Println(issueType.Name)
 }
 
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueTypeScheme struct {
+   Self           string                `json:"self,omitempty"`
+   ID             string                `json:"id,omitempty"`
+   Description    string                `json:"description,omitempty"`
+   IconURL        string                `json:"iconUrl,omitempty"`
+   Name           string                `json:"name,omitempty"`
+   Subtask        bool                  `json:"subtask,omitempty"`
+   AvatarID       int                   `json:"avatarId,omitempty"`
+   EntityID       string                `json:"entityId,omitempty"`
+   HierarchyLevel int                   `json:"hierarchyLevel,omitempty"`
+   Scope          *IssueTypeScopeScheme `json:"scope,omitempty"`
+}
+
+type IssueTypeScopeScheme struct {
+   Type    string         `json:"type,omitempty"`
+   Project *ProjectScheme `json:"project,omitempty"`
+}
 ```
 
 ## Update issue type
@@ -321,7 +372,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	issueTypes, response, err := atlassian.Issue.Type.Alternatives(context.Background(), id)
+	issueTypes, response, err := atlassian.Issue.Type.Alternatives(context.Background(), "")
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
