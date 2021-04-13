@@ -60,9 +60,31 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueTypeScreenSchemePageScheme struct {
+   Self       string                         `json:"self,omitempty"`
+   NextPage   string                         `json:"nextPage,omitempty"`
+   MaxResults int                            `json:"maxResults,omitempty"`
+   StartAt    int                            `json:"startAt,omitempty"`
+   Total      int                            `json:"total,omitempty"`
+   IsLast     bool                           `json:"isLast,omitempty"`
+   Values     []*IssueTypeScreenSchemeScheme `json:"values,omitempty"`
+}
+
+type IssueTypeScreenSchemeScheme struct {
+   ID          string `json:"id,omitempty"`
+   Name        string `json:"name,omitempty"`
+   Description string `json:"description,omitempty"`
+}
+```
+
 ## Create issue type screen scheme
 
-Creates an issue type screen scheme.
+Creates an issue-type screen scheme.
 
 ```go
 package main
@@ -98,22 +120,19 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := jira.IssueTypeScreenSchemePayloadScheme{}
-	payload.Name = "FX Issue Type Screen Scheme"
-
-	var mappings []jira.IssueTypeScreenSchemeMappingPayloadScheme
-
-	mappings = append(mappings, jira.IssueTypeScreenSchemeMappingPayloadScheme{
-		IssueTypeID:    "default",
-		ScreenSchemeID: "10000",
-	})
-
-	mappings = append(mappings, jira.IssueTypeScreenSchemeMappingPayloadScheme{
-		IssueTypeID:    "10004", // Bug
-		ScreenSchemeID: "10002",
-	})
-
-	payload.IssueTypeMappings = mappings
+	payload := jira.IssueTypeScreenSchemePayloadScheme{
+		Name:              "FX 2 Issue Type Screen Scheme",
+		IssueTypeMappings: []*jira.IssueTypeScreenSchemeMappingPayloadScheme{
+			{
+				IssueTypeID:    "default",
+				ScreenSchemeID: "10000",
+			},
+			{
+				IssueTypeID:    "10004", // Bug
+				ScreenSchemeID: "10002",
+			},
+		},
+	}
 
 	issueTypeScreenSchemeID, response, err := atlassian.Issue.Type.ScreenScheme.Create(context.Background(), &payload)
 	if err != nil {
@@ -128,11 +147,81 @@ func main() {
 	log.Println(issueTypeScreenSchemeID)
 }
 
+
+```
+
+## Get issue type screen scheme items
+
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue-type screen scheme items. Only issue type screen schemes used in classic projects are returned.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main()  {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	mapping, response, err := atlassian.Issue.Type.ScreenScheme.Mapping(context.Background(), nil, 0, 50)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, item := range mapping.Values {
+		log.Println(item)
+	}
+
+}
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueTypeScreenSchemeMappingScheme struct {
+	Self       string                             `json:"self,omitempty"`
+	NextPage   string                             `json:"nextPage,omitempty"`
+	MaxResults int                                `json:"maxResults,omitempty"`
+	StartAt    int                                `json:"startAt,omitempty"`
+	Total      int                                `json:"total,omitempty"`
+	IsLast     bool                               `json:"isLast,omitempty"`
+	Values     []*IssueTypeScreenSchemeItemScheme `json:"values,omitempty"`
+}
+
+type IssueTypeScreenSchemeItemScheme struct {
+	IssueTypeScreenSchemeID string `json:"issueTypeScreenSchemeId,omitempty"`
+	IssueTypeID             string `json:"issueTypeId,omitempty"`
+	ScreenSchemeID          string `json:"screenSchemeId,omitempty"`
+}
 ```
 
 ## Assign issue type screen scheme to project
 
-Assigns an issue type screen scheme to a project.
+Assigns an issue-type screen scheme to a project.
 
 ```go
 package main
@@ -185,6 +274,90 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 
+```
+
+## Get issue type screen schemes for projects
+
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type screen schemes and, for each issue type screen scheme, a list of the projects that use it. Only issue type screen schemes used in classic projects are returned.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main() {
+
+	/*
+		----------- Set an environment variable in git bash -----------
+		export HOST="https://ctreminiom.atlassian.net/"
+		export MAIL="MAIL_ADDRESS"
+		export TOKEN="TOKEN_API"
+
+		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
+	*/
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	issueTypeScreenSchemes, response, err := atlassian.Issue.Type.ScreenScheme.Projects(context.Background(), []int{10001}, 0, 50)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, issueTypeScreenScheme := range issueTypeScreenSchemes.Values {
+		log.Println(issueTypeScreenScheme.ProjectIds, issueTypeScreenScheme.IssueTypeScreenScheme.ID)
+	}
+}
+
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueTypeProjectScreenSchemePageScheme struct {
+	Self       string                                 `json:"self,omitempty"`
+	NextPage   string                                 `json:"nextPage,omitempty"`
+	MaxResults int                                    `json:"maxResults,omitempty"`
+	StartAt    int                                    `json:"startAt,omitempty"`
+	Total      int                                    `json:"total,omitempty"`
+	IsLast     bool                                   `json:"isLast,omitempty"`
+	Values     []*IssueTypeScreenSchemesProjectScheme `json:"values,omitempty"`
+}
+
+
+type IssueTypeScreenSchemesProjectScheme struct {
+	IssueTypeScreenScheme *IssueTypeScreenSchemeScheme `json:"issueTypeScreenScheme,omitempty"`
+	ProjectIds            []string                     `json:"projectIds,omitempty"`
+}
+
+type IssueTypeScreenSchemeScheme struct {
+	ID          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+}
 ```
 
 ## Update issue type screen scheme
@@ -339,23 +512,22 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var mappings []jira.IssueTypeScreenSchemeMappingPayloadScheme
+	var payload = &jira.IssueTypeScreenSchemePayloadScheme{
+		IssueTypeMappings: []*jira.IssueTypeScreenSchemeMappingPayloadScheme{
+			{
+				IssueTypeID:    "10000", // Epic Issue Type
+				ScreenSchemeID: "10002",
+			},
+			{
+				IssueTypeID:    "10002", // Task Issue Type
+				ScreenSchemeID: "10002",
+			},
+		},
+	}
 
-	mappings = append(mappings, jira.IssueTypeScreenSchemeMappingPayloadScheme{
-		IssueTypeID:    "10000", // Epic Issue Type
-		ScreenSchemeID: "10002",
-	})
+	var issueTypeScreenSchemeID = "10005"
 
-	mappings = append(mappings, jira.IssueTypeScreenSchemeMappingPayloadScheme{
-		IssueTypeID:    "10002", // Task Issue Type
-		ScreenSchemeID: "10002",
-	})
-
-	var (
-		issueTypeScreenSchemeID = "10005"
-	)
-
-	response, err := atlassian.Issue.Type.ScreenScheme.Append(context.Background(), issueTypeScreenSchemeID, &mappings)
+	response, err := atlassian.Issue.Type.ScreenScheme.Append(context.Background(), issueTypeScreenSchemeID, payload)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -371,7 +543,7 @@ func main() {
 
 ## Update issue type screen scheme default screen scheme
 
-Updates the default screen scheme of an issue type screen scheme. The default screen scheme is used for all unmapped issue types.
+Updates the default screen scheme of an issue-type screen scheme. The default screen scheme is used for all unmapped issue types.
 
 ```go
 package main
