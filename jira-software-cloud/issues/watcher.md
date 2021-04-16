@@ -44,7 +44,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	watchers, response, err := atlassian.Issue.Watchers.Get(context.Background(), "KP-2")
+	watchers, response, err := atlassian.Issue.Watchers.Gets(context.Background(), "KP-2")
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -62,6 +62,37 @@ func main() {
 	}
 }
 
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type IssueWatcherScheme struct {
+	Self       string               `json:"self,omitempty"`
+	IsWatching bool                 `json:"isWatching,omitempty"`
+	WatchCount int                  `json:"watchCount,omitempty"`
+	Watchers   []*IssueDetailScheme `json:"watchers,omitempty"`
+}
+
+type IssueDetailScheme struct {
+	Self         string `json:"self,omitempty"`
+	Name         string `json:"name,omitempty"`
+	Key          string `json:"key,omitempty"`
+	AccountID    string `json:"accountId,omitempty"`
+	EmailAddress string `json:"emailAddress,omitempty"`
+	AvatarUrls   struct {
+		One6X16   string `json:"16x16,omitempty"`
+		Two4X24   string `json:"24x24,omitempty"`
+		Three2X32 string `json:"32x32,omitempty"`
+		Four8X48  string `json:"48x48,omitempty"`
+	} `json:"avatarUrls,omitempty"`
+	DisplayName string `json:"displayName,omitempty"`
+	Active      bool   `json:"active,omitempty"`
+	TimeZone    string `json:"timeZone,omitempty"`
+	AccountType string `json:"accountType,omitempty"`
+}
 ```
 
 ## Add watcher
@@ -115,8 +146,6 @@ func main() {
 }
 
 ```
-
-
 
 ## Delete watcher
 

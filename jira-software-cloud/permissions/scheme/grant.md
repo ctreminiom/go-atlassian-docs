@@ -58,6 +58,35 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type PermissionSchemeGrantsScheme struct {
+	Permissions []*PermissionGrantScheme `json:"permissions,omitempty"`
+	Expand      string                   `json:"expand,omitempty"`
+}
+
+type PermissionGrantScheme struct {
+	ID         int                          `json:"id,omitempty"`
+	Self       string                       `json:"self,omitempty"`
+	Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
+	Permission string                       `json:"permission,omitempty"`
+}
+
+type PermissionGrantHolderScheme struct {
+	Type      string `json:"type,omitempty"`
+	Parameter string `json:"parameter,omitempty"`
+	Expand    string `json:"expand,omitempty"`
+}
+
+type PermissionGrantPayloadScheme struct {
+	Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
+	Permission string                       `json:"permission,omitempty"`
+}
+```
+
 ## Create permission grant
 
 Creates a permission grant in a permission scheme.
@@ -99,8 +128,8 @@ func main() {
 	var permissionSchemeID = 10001
 
 	grant := &jira.PermissionGrantPayloadScheme{
-		Holder: &jira.PermissionGrantHolderPayloadScheme{
-			Parameter: "scrum-masters",
+		Holder: &jira.PermissionGrantHolderScheme{
+			Parameter: "jira-administrators-system",
 			Type:      "group",
 		},
 		Permission: "EDIT_ISSUES",
@@ -118,7 +147,30 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(permissionGrant)
 }
+```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type PermissionGrantScheme struct {
+   ID         int                          `json:"id,omitempty"`
+   Self       string                       `json:"self,omitempty"`
+   Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
+   Permission string                       `json:"permission,omitempty"`
+}
+
+type PermissionGrantHolderScheme struct {
+   Type      string `json:"type,omitempty"`
+   Parameter string `json:"parameter,omitempty"`
+   Expand    string `json:"expand,omitempty"`
+}
+
+type PermissionGrantPayloadScheme struct {
+   Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
+   Permission string                       `json:"permission,omitempty"`
+}
 ```
 
 ## Get permission scheme grant

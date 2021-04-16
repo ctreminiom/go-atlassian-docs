@@ -190,34 +190,29 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var grants []jira.PermissionGrantPayloadScheme
+	payload := &jira.PermissionSchemeScheme{
+		Name:        "EF Permission Scheme",
+		Description: "EF Permission Scheme description",
 
-	grants = append(grants, jira.PermissionGrantPayloadScheme{
-
-		Holder: &jira.PermissionGrantHolderPayloadScheme{
-			Parameter: "jira-administrators-system",
-			Type:      "group",
+		Permissions: []*jira.PermissionGrantScheme{
+			{
+				Permission: "ADMINISTER_PROJECTS",
+				Holder: &jira.PermissionGrantHolderScheme{
+					Parameter: "jira-administrators-system",
+					Type:      "group",
+				},
+			},
+			{
+				Permission: "CLOSE_ISSUES",
+				Holder: &jira.PermissionGrantHolderScheme{
+					Type: "assignee",
+				},
+			},
 		},
+	}
 
-		Permission: "ADMINISTER_PROJECTS",
-	})
+	permissionScheme, response, err := atlassian.Permission.Scheme.Create(context.Background(), payload)
 
-	grants = append(grants, jira.PermissionGrantPayloadScheme{
-
-		Holder: &jira.PermissionGrantHolderPayloadScheme{
-			Type: "assignee",
-		},
-
-		Permission: "CLOSE_ISSUES",
-	})
-
-	var (
-		permissionSchemeName        = "EF Permission Scheme"
-		permissionSchemeDescription = "EF Permission Scheme description"
-	)
-
-	permissionScheme, response, err := atlassian.Permission.Scheme.Create(context.Background(),
-		permissionSchemeName, permissionSchemeDescription, &grants)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
@@ -228,17 +223,57 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	log.Println(permissionScheme.Name)
-	log.Println(permissionScheme.ID)
-	log.Println(permissionScheme.Description)
-	log.Println(permissionScheme.Self)
-
-	for _, permissionGrant := range permissionScheme.Permissions {
-		log.Println(permissionGrant.ID, permissionGrant.Permission)
-	}
+	log.Println(permissionScheme)
 }
 
+
 ```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type PermissionSchemeScheme struct {
+   Expand      string                       `json:"expand,omitempty"`
+   ID          int                          `json:"id,omitempty"`
+   Self        string                       `json:"self,omitempty"`
+   Name        string                       `json:"name,omitempty"`
+   Description string                       `json:"description,omitempty"`
+   Permissions []*PermissionGrantScheme     `json:"permissions,omitempty"`
+   Scope       *PermissionSchemeScopeScheme `json:"scope,omitempty"`
+}
+
+type PermissionSchemeScopeScheme struct {
+   Type    string                     `json:"type,omitempty"`
+   Project *PermissionScopeItemScheme `json:"project,omitempty"`
+}
+
+type PermissionScopeItemScheme struct {
+   Self            string                 `json:"self,omitempty"`
+   ID              string                 `json:"id,omitempty"`
+   Key             string                 `json:"key,omitempty"`
+   Name            string                 `json:"name,omitempty"`
+   ProjectTypeKey  string                 `json:"projectTypeKey,omitempty"`
+   Simplified      bool                   `json:"simplified,omitempty"`
+   ProjectCategory *ProjectCategoryScheme `json:"projectCategory,omitempty"`
+}
+
+type PermissionGrantScheme struct {
+	ID         int                          `json:"id,omitempty"`
+	Self       string                       `json:"self,omitempty"`
+	Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
+	Permission string                       `json:"permission,omitempty"`
+}
+
+type PermissionGrantHolderScheme struct {
+	Type      string `json:"type,omitempty"`
+	Parameter string `json:"parameter,omitempty"`
+	Expand    string `json:"expand,omitempty"`
+}
+```
+
+
 
 ## Delete permission scheme
 
@@ -297,6 +332,10 @@ func main() {
 
 Updates a permission scheme
 
+{% hint style="warning" %}
+This method overwriters all the permission grants.
+{% endhint %}
+
 ```go
 package main
 
@@ -331,31 +370,22 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var grants []jira.PermissionGrantPayloadScheme
+	payload := &jira.PermissionSchemeScheme{
+		Name:        "EF Permission Scheme - UPDATED",
+		Description:"EF Permission Scheme description - UPDATED",
 
-	grants = append(grants, jira.PermissionGrantPayloadScheme{
-
-		Holder: &jira.PermissionGrantHolderPayloadScheme{
-			Parameter: "jira-administrators-system",
-			Type:      "group",
+		Permissions: []*jira.PermissionGrantScheme{
+			{
+				Permission: "CLOSE_ISSUES",
+				Holder: &jira.PermissionGrantHolderScheme{
+					Parameter: "jira-administrators-system",
+					Type:      "group",
+				},
+			},
 		},
+	}
 
-		Permission: "CLOSE_ISSUES",
-	})
-
-	var (
-		permissionSchemeID          = 10003
-		permissionSchemeName        = "EF Permission Scheme - UPDATED"
-		permissionSchemeDescription = "EF Permission Scheme description - UPDATED"
-	)
-
-	permissionScheme, response, err := atlassian.Permission.Scheme.Update(
-		context.Background(),
-		permissionSchemeID,
-		permissionSchemeName,
-		permissionSchemeDescription,
-		&grants,
-	)
+	permissionScheme, response, err := atlassian.Permission.Scheme.Update(context.Background(), 10004, payload)
 
 	if err != nil {
 		if response != nil {
