@@ -12,7 +12,7 @@ go-atlassian is a library written in Go programming language that enables the in
 * Atlassian Access
 * Opsgenie
 * Trello
-* Bitbucket Cloud
+* Bitbucket Cloud.
 
 {% hint style="warning" %}
 Right now, the library supports the Jira Software Cloud and Jira Service Management Cloud services. This project's still in progress, and the remaining services will be mapped and documented.
