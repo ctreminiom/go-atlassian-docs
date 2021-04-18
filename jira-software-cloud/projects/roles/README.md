@@ -119,6 +119,38 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type ProjectRoleScheme struct {
+   Self             string                         `json:"self,omitempty"`
+   Name             string                         `json:"name,omitempty"`
+   ID               int                            `json:"id,omitempty"`
+   Description      string                         `json:"description,omitempty"`
+   Actors           []*RoleActorScheme             `json:"actors,omitempty"`
+   Scope            *TeamManagedProjectScopeScheme `json:"scope,omitempty"`
+   TranslatedName   string                         `json:"translatedName,omitempty"`
+   CurrentUserRole  bool                           `json:"currentUserRole,omitempty"`
+   Admin            bool                           `json:"admin,omitempty"`
+   RoleConfigurable bool                           `json:"roleConfigurable,omitempty"`
+   Default          bool                           `json:"default,omitempty"`
+}
+
+type RoleActorScheme struct {
+   ID          int    `json:"id,omitempty"`
+   DisplayName string `json:"displayName,omitempty"`
+   Type        string `json:"type,omitempty"`
+   Name        string `json:"name,omitempty"`
+   AvatarURL   string `json:"avatarUrl,omitempty"`
+   ActorUser   struct {
+      AccountID string `json:"accountId,omitempty"`
+   } `json:"actorUser,omitempty"`
+   ActorGroup *GroupScheme `json:"actorGroup,omitempty"`
+}
+```
+
 ## Get project role details
 
  Returns all [project roles](https://confluence.atlassian.com/x/3odKLg) and the details for each role. Note that the list of project roles is common to all projects.
@@ -177,6 +209,24 @@ func main() {
 	}
 }
 
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type ProjectRoleDetailScheme struct {
+   Self             string                         `json:"self,omitempty"`
+   Name             string                         `json:"name,omitempty"`
+   ID               int                            `json:"id,omitempty"`
+   Description      string                         `json:"description,omitempty"`
+   Admin            bool                           `json:"admin,omitempty"`
+   Scope            *TeamManagedProjectScopeScheme `json:"scope,omitempty"`
+   RoleConfigurable bool                           `json:"roleConfigurable,omitempty"`
+   TranslatedName   string                         `json:"translatedName,omitempty"`
+   Default          bool                           `json:"default,omitempty"`
+}
 ```
 
 ## Get all project roles

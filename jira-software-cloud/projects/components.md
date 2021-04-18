@@ -120,6 +120,28 @@ func main() {
 
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type ProjectComponentScheme struct {
+   Self                string      `json:"self,omitempty"`
+   ID                  string      `json:"id,omitempty"`
+   Name                string      `json:"name,omitempty"`
+   Description         string      `json:"description,omitempty"`
+   Lead                *UserScheme `json:"lead,omitempty"`
+   LeadUserName        string      `json:"leadUserName,omitempty"`
+   AssigneeType        string      `json:"assigneeType,omitempty"`
+   Assignee            *UserScheme `json:"assignee,omitempty"`
+   RealAssigneeType    string      `json:"realAssigneeType,omitempty"`
+   RealAssignee        *UserScheme `json:"realAssignee,omitempty"`
+   IsAssigneeTypeValid bool        `json:"isAssigneeTypeValid,omitempty"`
+   Project             string      `json:"project,omitempty"`
+   ProjectID           int         `json:"projectId,omitempty"`
+}
+```
+
 ## Update component
 
 Updates a component. Any fields included in the request are overwritten. If `leadAccountId` is an empty string \(""\) the component lead is removed.
