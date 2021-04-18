@@ -67,6 +67,9 @@
   * [☁️Feedback](jira-service-management-cloud/request/feedback.md)
   * [👥 Participants](jira-service-management-cloud/request/participants.md)
   * [⏰ SLA](jira-service-management-cloud/request/sla.md)
+  * [💾 Types](jira-service-management-cloud/request/types.md)
+  * [🗂️ Service Desk](jira-service-management-cloud/request/service-desk/README.md)
+    * [🛎️ Queue](jira-service-management-cloud/request/service-desk/queue.md)
 
 ## Confluence Cloud
 

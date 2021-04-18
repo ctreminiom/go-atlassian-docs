@@ -55,6 +55,36 @@ func main() {
 }
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type OrganizationPageScheme struct {
+   Size       int                   `json:"size"`
+   Start      int                   `json:"start"`
+   Limit      int                   `json:"limit"`
+   IsLastPage bool                  `json:"isLastPage"`
+   Values     []*OrganizationScheme `json:"values"`
+   Expands    []string              `json:"_expands"`
+   Links      struct {
+      Self    string `json:"self"`
+      Base    string `json:"base"`
+      Context string `json:"context"`
+      Next    string `json:"next"`
+      Prev    string `json:"prev"`
+   } `json:"_links"`
+}
+
+type OrganizationScheme struct {
+   ID    string `json:"id"`
+   Name  string `json:"name"`
+   Links struct {
+      Self string `json:"self"`
+   } `json:"_links"`
+}
+```
+
 ## Create organization
 
 This method creates an organization by passing the name of the organization.

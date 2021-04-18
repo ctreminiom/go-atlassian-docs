@@ -44,3 +44,25 @@ func main() {
 }
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type InfoScheme struct {
+   Version         string `json:"version"`
+   PlatformVersion string `json:"platformVersion"`
+   BuildDate       struct {
+      Iso8601     string `json:"iso8601"`
+      Jira        string `json:"jira"`
+      Friendly    string `json:"friendly"`
+      EpochMillis int64  `json:"epochMillis"`
+   } `json:"buildDate"`
+   BuildChangeSet   string `json:"buildChangeSet"`
+   IsLicensedForUse bool   `json:"isLicensedForUse"`
+   Links            struct {
+      Self string `json:"self"`
+   } `json:"_links"`
+}
+```
+

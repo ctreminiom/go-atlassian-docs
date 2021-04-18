@@ -61,6 +61,37 @@ func main() {
 }
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type ArticlePageScheme struct {
+	Size       int  `json:"size"`
+	Start      int  `json:"start"`
+	Limit      int  `json:"limit"`
+	IsLastPage bool `json:"isLastPage"`
+	Values     []struct {
+		Title   string `json:"title"`
+		Excerpt string `json:"excerpt"`
+		Source  struct {
+			Type string `json:"type"`
+		} `json:"source"`
+		Content struct {
+			IframeSrc string `json:"iframeSrc"`
+		} `json:"content"`
+	} `json:"values"`
+	Expands []string `json:"_expands"`
+	Links   struct {
+		Self    string `json:"self"`
+		Base    string `json:"base"`
+		Context string `json:"context"`
+		Next    string `json:"next"`
+		Prev    string `json:"prev"`
+	} `json:"_links"`
+}
+```
+
 ## Get articles
 
 Returns articles that match the given query and belong to the knowledge base linked to the service desk.

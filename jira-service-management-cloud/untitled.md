@@ -59,6 +59,32 @@ func main() {
 }
 ```
 
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
+
+```go
+type CustomerScheme struct {
+	AccountID    string `json:"accountId"`
+	Name         string `json:"name"`
+	Key          string `json:"key"`
+	EmailAddress string `json:"emailAddress"`
+	DisplayName  string `json:"displayName"`
+	Active       bool   `json:"active"`
+	TimeZone     string `json:"timeZone"`
+	Links        struct {
+		JiraRest   string `json:"jiraRest"`
+		AvatarUrls struct {
+			Four8X48  string `json:"48x48"`
+			Two4X24   string `json:"24x24"`
+			One6X16   string `json:"16x16"`
+			Three2X32 string `json:"32x32"`
+		} `json:"avatarUrls"`
+		Self string `json:"self"`
+	} `json:"_links"`
+}
+```
+
 ## Add customers
 
 Adds one or more customers to a service desk. If any of the passed customers are associated with the service desk, no changes will be made for those customers and the resource returns a 204 success code.
@@ -143,7 +169,7 @@ func main() {
       limit         = 50
    )
 
-   customers, response, err := atlassian.ServiceManagement.Customer.Get(context.Background(), serviceDeskID, query, start, limit)
+   customers, response, err := atlassian.ServiceManagement.Customer.Gets(context.Background(), serviceDeskID, query, start, limit)
    if err != nil {
       if response != nil {
          log.Println("Response HTTP Response", string(response.BodyAsBytes))
