@@ -48,7 +48,7 @@ func main() {
 		maxResult = 50
 	)
 
-	screens, response, err := atlassian.Screen.Get(context.Background(), fieldID, startAt, maxResult)
+	screens, response, err := atlassian.Screen.Fields(context.Background(), fieldID, startAt, maxResult)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", string(response.BodyAsBytes))
