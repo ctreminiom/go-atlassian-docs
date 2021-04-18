@@ -56,7 +56,7 @@
 
 ## Jira Service Management Cloud
 
-* [🙎‍♂️ Customer](jira-service-management-cloud/untitled.md)
+* [🙎‍♂️ Customer](jira-service-management-cloud/customer.md)
 * [🖥️ Info](jira-service-management-cloud/info.md)
 * [📚 Knowledgebase](jira-service-management-cloud/knowledgebase.md)
 * [🗳️ Organization](jira-service-management-cloud/organization.md)
