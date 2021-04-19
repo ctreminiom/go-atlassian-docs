@@ -77,9 +77,8 @@
 
 ## Atlassian Admin Cloud
 
-* [Untitled](atlassian-admin-cloud/untitled.md)
-
----
-
-* [TODO's](todos.md)
+* [📃 Overview](atlassian-admin-cloud/untitled.md)
+* [🗃️ Organization](atlassian-admin-cloud/organization/README.md)
+  * [👔 Policy](atlassian-admin-cloud/organization/policy.md)
+* [🙍‍♂️ User](atlassian-admin-cloud/user.md)
 
