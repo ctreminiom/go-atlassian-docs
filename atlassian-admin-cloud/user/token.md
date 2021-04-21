@@ -53,10 +53,10 @@ func main() {
 
 ```go
 type UserTokensScheme []struct {
-	ID         string    `json:"id"`
-	Label      string    `json:"label"`
-	CreatedAt  time.Time `json:"createdAt"`
-	LastAccess time.Time `json:"lastAccess"`
+	ID         string    `json:"id,omitempty"`
+	Label      string    `json:"label,omitempty"`
+	CreatedAt  time.Time `json:"createdAt,omitempty"`
+	LastAccess time.Time `json:"lastAccess,omitempty"`
 }
 ```
 
