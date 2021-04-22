@@ -82,5 +82,8 @@
   * [👔 Policy](atlassian-admin-cloud/organization/policy.md)
 * [🙍‍♂️ User](atlassian-admin-cloud/user/README.md)
   * [🗜️ Token](atlassian-admin-cloud/user/token.md)
-* [🧰 SCIM](atlassian-admin-cloud/scim.md)
+* [🧰 SCIM](atlassian-admin-cloud/scim/README.md)
+  * [🤹‍♂️ Users](atlassian-admin-cloud/scim/users.md)
+  * [🧩 Groups](atlassian-admin-cloud/scim/groups.md)
+  * [🏗️ Schemes](atlassian-admin-cloud/scim/schemes.md)
 
