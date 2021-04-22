@@ -50,10 +50,6 @@
 * [👨‍👧‍👧 Users](jira-software-cloud/users/README.md)
   * [🔰 Search](jira-software-cloud/users/search.md)
 
-## Jira Agile Cloud
-
-* [Untitled](jira-agile-cloud/untitled.md)
-
 ## Jira Service Management Cloud
 
 * [🙎‍♂️ Customer](jira-service-management-cloud/customer.md)
@@ -70,10 +66,6 @@
   * [💾 Types](jira-service-management-cloud/request/types.md)
   * [🗂️ Service Desk](jira-service-management-cloud/request/service-desk/README.md)
     * [🛎️ Queue](jira-service-management-cloud/request/service-desk/queue.md)
-
-## Confluence Cloud
-
-* [Untitled](confluence-cloud/untitled.md)
 
 ## Atlassian Admin Cloud
 
