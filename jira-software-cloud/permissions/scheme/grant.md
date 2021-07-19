@@ -42,20 +42,15 @@ func main() {
 
 	grants, response, err := atlassian.Permission.Scheme.Grant.Gets(context.Background(), permissionSchemeID, []string{"all"})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, grant := range grants.Permissions {
 		log.Println(grant)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -137,13 +132,9 @@ func main() {
 
 	permissionGrant, response, err := atlassian.Permission.Scheme.Grant.Create(context.Background(), permissionSchemeID, grant)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(permissionGrant)
 }
@@ -213,22 +204,17 @@ func main() {
 
 	var (
 		permissionSchemeID = 10002
-		permissionGrantID  = 10536
+		permissionGrantID  = 10517
 	)
 
 	grant, response, err := atlassian.Permission.Scheme.Grant.Get(context.Background(), permissionSchemeID, permissionGrantID, []string{"all"})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(grant)
 }
-
 ```
 
 ## Delete permission scheme grant
@@ -271,20 +257,15 @@ func main() {
 
 	var (
 		permissionSchemeID = 10002
-		permissionGrantID  = 10536
+		permissionGrantID  = 10517
 	)
 
 	response, err := atlassian.Permission.Scheme.Grant.Delete(context.Background(), permissionSchemeID, permissionGrantID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 

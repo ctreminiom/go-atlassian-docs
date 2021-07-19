@@ -12,6 +12,26 @@ description: >-
 Creates a project based on a project type template
 
 ```go
+const (
+	BusinessContentManagement    = "com.atlassian.jira-core-project-templates:jira-core-simplified-content-management"
+	BusinessDocumentApproval     = "com.atlassian.jira-core-project-templates:jira-core-simplified-document-approval"
+	BusinessLeadTracking         = "com.atlassian.jira-core-project-templates:jira-core-simplified-lead-tracking"
+	BusinessProcessControl       = "com.atlassian.jira-core-project-templates:jira-core-simplified-process-control"
+	BusinessProcurement          = "com.atlassian.jira-core-project-templates:jira-core-simplified-procurement"
+	BusinessProjectManagement    = "com.atlassian.jira-core-project-templates:jira-core-simplified-project-management"
+	BusinessRecruitment          = "com.atlassian.jira-core-project-templates:jira-core-simplified-recruitment"
+	BusinessTaskTracking         = "com.atlassian.jira-core-project-templates:jira-core-simplified-task-tracking"
+	ITSMServiceDesk              = "com.atlassian.servicedesk:simplified-it-service-desk"
+	ITSMInternalServiceDesk      = "com.atlassian.servicedesk:simplified-internal-service-desk"
+	ITSMExternalServiceDesk      = "com.atlassian.servicedesk:simplified-external-service-desk"
+	SoftwareTeamManagedKanban    = "com.pyxis.greenhopper.jira:gh-simplified-agility-kanban"
+	SoftwareTeamManagedScrum     = "com.pyxis.greenhopper.jira:gh-simplified-agility-scrum"
+	SoftwareCompanyManagedKanban = "com.pyxis.greenhopper.jira:gh-simplified-kanban-classic"
+	SoftwareCompanyManagedScrum  = "com.pyxis.greenhopper.jira:gh-simplified-scrum-classic"
+)
+```
+
+```go
 package main
 
 import (
@@ -48,28 +68,24 @@ func main() {
 	payload := &jira.ProjectPayloadScheme{
 		NotificationScheme:  10021,
 		Description:         "Example Project description",
-		LeadAccountID:       "5b10a0effa615349cb016cd8",
+		LeadAccountID:       "5b86be50b8e3cb5895860d6d",
 		URL:                 "http://atlassian.com",
-		ProjectTemplateKey:  "com.atlassian.jira-core-project-templates:jira-core-simplified-process-control",
+		ProjectTemplateKey:  "com.pyxis.greenhopper.jira:gh-simplified-agility-kanban",
 		AvatarID:            10200,
 		IssueSecurityScheme: 10001,
-		Name:                "Project DUMMY #2",
+		Name:                "Project DUMMY #3",
 		PermissionScheme:    10011,
 		AssigneeType:        "PROJECT_LEAD",
-		ProjectTypeKey:      "business",
-		Key:                 "DUMMY2",
+		ProjectTypeKey:      "software",
+		Key:                 "DUMMY3",
 		CategoryID:          10120,
 	}
 
 	newProject, response, err := atlassian.Project.Create(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Println("-------------------")
@@ -78,7 +94,6 @@ func main() {
 	log.Println(newProject.Key)
 	log.Println("-------------------")
 }
-
 ```
 
 ## Get projects paginated
@@ -132,20 +147,15 @@ func main() {
 
 	projects, response, err := atlassian.Project.Search(context.Background(), options, startAt, maxResults)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, project := range projects.Values {
 		log.Println(project)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -204,17 +214,16 @@ func main() {
 
 	project, response, err := atlassian.Project.Get(context.Background(), "KP", []string{"issueTypes"})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(project)
-}
 
+	for _, issueType := range project.IssueTypes {
+		log.Println(issueType.Name)
+	}
+}
 ```
 
 {% hint style="info" %}
@@ -296,23 +305,17 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	payload := &jira.ProjectUpdateScheme{
-		NotificationScheme: 10021,
-		Description:        "Example Project description",
+		Description: "Example Project description",
 	}
 
 	projectUpdated, response, err := atlassian.Project.Update(context.Background(), "KP", payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(projectUpdated)
 }
-
 ```
 
 ## Delete project
@@ -331,40 +334,27 @@ import (
 
 func main() {
 
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
-
 	var (
 		host  = os.Getenv("HOST")
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	jiraCloud, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	jiraCloud.Auth.SetBasicAuth(mail, token)
+	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+
+	response, err := jiraCloud.Project.Delete(context.Background(), "DUM", true)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-	response, err := atlassian.Project.Delete(context.Background(), "PK", true)
-	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		log.Fatal(err)
-	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Archive project
@@ -407,16 +397,11 @@ func main() {
 
 	response, err := atlassian.Project.Archive(context.Background(), "PK")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Delete project asynchronously
@@ -435,41 +420,29 @@ import (
 
 func main() {
 
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
-
 	var (
 		host  = os.Getenv("HOST")
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	jiraCloud, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	jiraCloud.Auth.SetBasicAuth(mail, token)
+	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+
+	task, response, err := jiraCloud.Project.DeleteAsynchronously(context.Background(), "DUM")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-	task, response, err := atlassian.Project.DeleteAsynchronously(context.Background(), "PK")
-	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		log.Fatal(err)
-	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(task.ID)
 	log.Println(task)
 }
-
 ```
 
 {% hint style="info" %}
@@ -509,41 +482,29 @@ import (
 
 func main() {
 
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
-
 	var (
 		host  = os.Getenv("HOST")
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	jiraCloud, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	jiraCloud.Auth.SetBasicAuth(mail, token)
+	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+
+	projectRestored, response, err := jiraCloud.Project.Restore(context.Background(), "DUM")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-	project, response, err := atlassian.Project.Restore(context.Background(), "PK")
-	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		log.Fatal(err)
-	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(project)
-}
+	log.Println(projectRestored)
 
+}
 ```
 
 ## Get all statuses for project
@@ -584,22 +545,17 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	statuses, response, err := atlassian.Project.Statuses(context.Background(), "PK")
+	statuses, response, err := atlassian.Project.Statuses(context.Background(), "KP")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, status := range *statuses {
+	for _, status := range statuses {
 		log.Println(status)
 	}
 }
-
 ```
 
 ## Get project issue type hierarchy
@@ -695,13 +651,9 @@ func main() {
 
 	notificationScheme, response, err := atlassian.Project.NotificationScheme(context.Background(), "KP", []string{"all"})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(notificationScheme)
 
@@ -717,7 +669,6 @@ func main() {
 
 	}
 }
-
 ```
 
 {% hint style="info" %}

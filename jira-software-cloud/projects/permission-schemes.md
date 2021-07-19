@@ -44,17 +44,12 @@ func main() {
 
 	scheme, response, err := atlassian.Project.Permission.Get(context.Background(), "KP", []string{"all"})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(scheme)
 }
-
 ```
 
 {% hint style="info" %}
@@ -122,23 +117,18 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	var (
-		projectKeyOrID     = "DUM"
+		projectKeyOrID     = "KP"
 		permissionSchemeID = 10000
 	)
 
 	scheme, response, err := atlassian.Project.Permission.Assign(context.Background(), projectKeyOrID, permissionSchemeID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(scheme)
 }
-
 ```
 
 ## Get project issue security levels
@@ -181,19 +171,14 @@ func main() {
 
 	levels, response, err := atlassian.Project.Permission.SecurityLevels(context.Background(), "KP")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, level := range levels.Levels {
 		log.Println(level)
 	}
 }
-
 ```
 

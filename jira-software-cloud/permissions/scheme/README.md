@@ -74,20 +74,15 @@ func main() {
 
 	permissionSchemes, response, err := atlassian.Permission.Scheme.Gets(context.Background())
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, permissionScheme := range permissionSchemes.PermissionSchemes {
-		log.Println(permissionScheme)
+		log.Println(permissionScheme.ID, permissionScheme.Name)
 	}
 }
-
 ```
 
 ## Get permission scheme
@@ -128,28 +123,18 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var permissionSchemeID = 10002
-	permissionScheme, response, err := atlassian.Permission.Scheme.Get(context.Background(), permissionSchemeID)
+	var (
+		permissionSchemeID = 10001
+		expand = []string{"field", "group", "permissions", "projectRole", "user"}
+	)
+	permissionScheme, response, err := atlassian.Permission.Scheme.Get(context.Background(), permissionSchemeID, expand)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
-	log.Println(permissionScheme.Name)
-	log.Println(permissionScheme.ID)
-	log.Println(permissionScheme.Description)
-	log.Println(permissionScheme.Self)
-
-	for _, permissionGrant := range permissionScheme.Permissions {
-		log.Println(permissionGrant.ID, permissionGrant.Permission)
-	}
+	log.Println(permissionScheme)
 }
-
 ```
 
 ## Create permission scheme
@@ -157,7 +142,7 @@ func main() {
 Creates a new permission scheme. You can create a permission scheme with or without defining a set of permission grants.
 
 ```go
-package main
+ package main
 
 import (
 	"context"
@@ -214,19 +199,13 @@ func main() {
 	permissionScheme, response, err := atlassian.Permission.Scheme.Create(context.Background(), payload)
 
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Println(permissionScheme)
 }
-
-
 ```
 
 {% hint style="info" %}
@@ -313,28 +292,19 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var permissionSchemeID = 10003
+	var permissionSchemeID = 10004
 	response, err := atlassian.Permission.Scheme.Delete(context.Background(), permissionSchemeID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Update permission scheme
 
 Updates a permission scheme
-
-{% hint style="warning" %}
-This method overwriters all the permission grants.
-{% endhint %}
 
 ```go
 package main
@@ -372,7 +342,7 @@ func main() {
 
 	payload := &jira.PermissionSchemeScheme{
 		Name:        "EF Permission Scheme - UPDATED",
-		Description:"EF Permission Scheme description - UPDATED",
+		Description: "EF Permission Scheme description - UPDATED",
 
 		Permissions: []*jira.PermissionGrantScheme{
 			{
@@ -388,13 +358,9 @@ func main() {
 	permissionScheme, response, err := atlassian.Permission.Scheme.Update(context.Background(), 10004, payload)
 
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Println(permissionScheme.Name)
@@ -406,7 +372,6 @@ func main() {
 		log.Println(permissionGrant.ID, permissionGrant.Permission)
 	}
 }
-
 ```
 
 

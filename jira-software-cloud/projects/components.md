@@ -47,7 +47,7 @@ func main() {
 
 	payload := &jira.ProjectComponentPayloadScheme{
 		IsAssigneeTypeValid: false,
-		Name:                "Component 1",
+		Name:                "Component 2",
 		Description:         "This is a Jira component",
 		Project:             "KP",
 		AssigneeType:        "PROJECT_LEAD",
@@ -56,17 +56,12 @@ func main() {
 
 	newComponent, response, err := atlassian.Project.Component.Create(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The new component has been created with the ID %v", newComponent.ID)
 }
-
 ```
 
 ## Get component
@@ -107,17 +102,14 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	component, response, err := atlassian.Project.Component.Get(context.Background(), "10004")
+	component, response, err := atlassian.Project.Component.Get(context.Background(), "10006")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
 	log.Println(component)
+	log.Println(response.Endpoint)
 }
-
 ```
 
 {% hint style="info" %}
@@ -186,17 +178,14 @@ func main() {
 		Description:         "This is a Jira component - UPDATED",
 	}
 
-	componentUpdated, response, err := atlassian.Project.Component.Update(context.Background(), "10004", payload)
+	componentUpdated, response, err := atlassian.Project.Component.Update(context.Background(), "10006", payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
+	log.Println(response.Endpoint)
 	log.Println(componentUpdated)
 }
-
 ```
 
 ## Delete component
@@ -237,18 +226,13 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Project.Component.Delete(context.Background(), "10004")
+	response, err := atlassian.Project.Component.Delete(context.Background(), "10006")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Get component issues count
@@ -289,17 +273,14 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	count, response, err := atlassian.Project.Component.Count(context.Background(), "10004")
+	count, response, err := atlassian.Project.Component.Count(context.Background(), "10005")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
 	log.Println(count)
+	log.Println(response.Endpoint)
 }
-
 ```
 
 ## Get project components paginated
@@ -343,16 +324,13 @@ func main() {
 	var projectKey = "KP"
 	components, response, err := atlassian.Project.Component.Gets(context.Background(), projectKey)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	for _, component := range *components {
+	log.Println(response.Endpoint)
+	for _, component := range components {
 		log.Println(component)
 	}
 }
-
 ```
 

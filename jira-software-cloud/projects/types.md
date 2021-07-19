@@ -48,19 +48,19 @@ func main() {
 	projectTypes, response, err := atlassian.Project.Type.Gets(context.Background())
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("Response Buffer", response.Bytes.String())
 
-	for _, projectType := range *projectTypes {
+	for _, projectType := range projectTypes {
 		log.Println(projectType)
 	}
 }
-
 ```
 
 ## Get licensed project types
@@ -104,19 +104,18 @@ func main() {
 	projectTypes, response, err := atlassian.Project.Type.Licensed(context.Background())
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, projectType := range *projectTypes {
+	for _, projectType := range projectTypes {
 		log.Println(projectType.Key)
 	}
 }
-
 ```
 
 ## Get project type by key
@@ -160,16 +159,15 @@ func main() {
 	projectType, response, err := atlassian.Project.Type.Get(context.Background(), "software")
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(projectType)
 }
-
 ```
 
 ## Get accessible project type by key
@@ -213,15 +211,14 @@ func main() {
 	projectType, response, err := atlassian.Project.Type.Accessible(context.Background(), "software")
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(projectType)
 }
-
 ```
 

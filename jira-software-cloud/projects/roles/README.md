@@ -46,20 +46,16 @@ func main() {
 
 	roles, response, err := atlassian.Project.Role.Gets(context.Background(), "KP")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for key, value := range *roles {
 		log.Println(key, value)
 	}
 }
-
 ```
 
 ## Get project role for project
@@ -102,13 +98,10 @@ func main() {
 
 	role, response, err := atlassian.Project.Role.Get(context.Background(), "KP", 10005)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Println(role.ID)
@@ -116,7 +109,6 @@ func main() {
 	log.Println(role.Description)
 	log.Println(role.Self)
 }
-
 ```
 
 {% hint style="info" %}
@@ -191,24 +183,19 @@ func main() {
 
 	rolesDetails, response, err := atlassian.Project.Role.Details(context.Background(), "KP")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, role := range *rolesDetails {
-
+	for _, role := range rolesDetails {
 		log.Println(role.Name)
 		log.Println(role.ID)
 		log.Println(role.Admin)
 		log.Println(role.TranslatedName)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -269,20 +256,15 @@ func main() {
 
 	roles, response, err := atlassian.Project.Role.Global(context.Background())
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, role := range *roles {
+	for _, role := range roles {
 		log.Println(role)
 	}
 }
-
 ```
 
 ## Create project role
@@ -323,18 +305,18 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	newRole, response, err := atlassian.Project.Role.Create(context.Background(), "Developers", "A project role that represents developers in a project")
+	var payload = &jira.ProjectRolePayloadScheme{
+		Name:        "Developers",
+		Description: "A project role that represents developers in a project",
+	}
+
+	newRole, response, err := atlassian.Project.Role.Create(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(newRole)
 }
-
 ```
 

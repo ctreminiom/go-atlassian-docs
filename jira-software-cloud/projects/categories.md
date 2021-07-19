@@ -21,16 +21,7 @@ import (
 	"os"
 )
 
-func main() {
-
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
+func main()  {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -48,15 +39,15 @@ func main() {
 	categories, response, err := atlassian.Project.Category.Gets(context.Background())
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, category := range *categories {
+	for _, category := range categories {
 
 		log.Println("----------------")
 		log.Println(category.Self)
@@ -65,8 +56,8 @@ func main() {
 		log.Println(category.Description)
 		log.Println("----------------")
 	}
-}
 
+}
 ```
 
 ## Create project category
@@ -78,6 +69,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/ctreminiom/go-atlassian/jira"
 	"log"
 	"math/rand"
@@ -108,25 +100,24 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var (
-		name        = fmt.Sprintf("Category #%v", rand.Intn(100))
-		description = "description sample"
-	)
+	var payload = &jira.ProjectCategoryPayloadScheme{
+		Name:        fmt.Sprintf("Category #%v", rand.Intn(100)),
+		Description: "description sample",
+	}
 
-	newCategory, response, err := atlassian.Project.Category.Create(context.Background(), name, description)
+	newCategory, response, err := atlassian.Project.Category.Create(context.Background(), payload)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Printf("The new category %v has been created with the ID %v", newCategory.Name, newCategory.ID)
 }
-
 ```
 
 ## Get project category by ID
@@ -167,19 +158,18 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	category, response, err := atlassian.Project.Category.Get(context.Background(), 10000)
+	category, response, err := atlassian.Project.Category.Get(context.Background(), 10002)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(category)
 }
-
 ```
 
 ## Update project category
@@ -191,8 +181,10 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/ctreminiom/go-atlassian/jira"
 	"log"
+	"math/rand"
 	"os"
 )
 
@@ -222,22 +214,23 @@ func main() {
 
 	var (
 		projectCategoryID = 10000
-		newName           = "Category description - UPDATED"
+		payload = &jira.ProjectCategoryPayloadScheme{
+			Name:        fmt.Sprintf("Category #%v - updated", rand.Intn(100)),
+		}
 	)
 
-	categoryUpdated, response, err := atlassian.Project.Category.Update(context.Background(), projectCategoryID, newName, "")
+	categoryUpdated, response, err := atlassian.Project.Category.Update(context.Background(), projectCategoryID, payload)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The project category %v has been updated", categoryUpdated.ID)
 }
-
 ```
 
 ## Delete project category
@@ -278,17 +271,17 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Project.Category.Delete(context.Background(), 10001)
+	response, err := atlassian.Project.Category.Delete(context.Background(), 10002)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("HTTP Endpoint Bytes", response.Bytes.String())
 }
-
 ```
 

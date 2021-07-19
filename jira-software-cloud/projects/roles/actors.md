@@ -54,21 +54,21 @@ func main() {
 
 	role, response, err := atlassian.Project.Role.Actor.Add(context.Background(),
 		projectKeyOrID, projectRoleID, accountIDs, groupsNames)
+
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, actor := range role.Actors {
 		log.Println(actor)
 	}
 }
-
 ```
 
 ## Delete actors from project role
@@ -125,14 +125,13 @@ func main() {
 
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 

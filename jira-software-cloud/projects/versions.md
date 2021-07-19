@@ -55,15 +55,18 @@ func main() {
 	versions, response, err := atlassian.Project.Version.Gets(context.Background(), "KP", options, 0, 50)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-}
 
+	for _, version := range versions.Values {
+		log.Println(version)
+	}
+}
 ```
 
 ## Create version
@@ -117,16 +120,15 @@ func main() {
 	newVersion, response, err := atlassian.Project.Version.Create(context.Background(), payload)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The new version has been created with the ID %v", newVersion.ID)
 }
-
 ```
 
 ## Get version
@@ -167,19 +169,18 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	version, response, err := atlassian.Project.Version.Get(context.Background(), "10000", []string{"issuesstatus", "operations"})
+	version, response, err := atlassian.Project.Version.Get(context.Background(), "10002", []string{"issuesstatus", "operations"})
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(version)
 }
-
 ```
 
 ## Update version
@@ -228,19 +229,18 @@ func main() {
 		Released:    true,
 	}
 
-	versionUpdated, response, err := atlassian.Project.Version.Update(context.Background(), "10001", payload)
+	versionUpdated, response, err := atlassian.Project.Version.Update(context.Background(), "10002", payload)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(versionUpdated)
 }
-
 ```
 
 ## Merge versions
@@ -284,15 +284,14 @@ func main() {
 	response, err := atlassian.Project.Version.Merge(context.Background(), "10001", "10000")
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Get version's related issues count
@@ -313,7 +312,7 @@ import (
 	"os"
 )
 
-func main() {
+func main()  {
 
 	/*
 		----------- Set an environment variable in git bash -----------
@@ -337,17 +336,15 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	count, response, err := atlassian.Project.Version.UnresolvedIssueCount(context.Background(), "10000")
+
+	count, response, err := atlassian.Project.Version.RelatedIssueCounts(context.Background(), "10002")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
-	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(response.Endpoint)
 	log.Println(count)
+
 }
 
 ```
@@ -389,18 +386,18 @@ func main() {
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
+
 	count, response, err := atlassian.Project.Version.UnresolvedIssueCount(context.Background(), "10000")
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(count)
 }
-
 ```
 
