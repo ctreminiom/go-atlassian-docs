@@ -54,28 +54,25 @@ func main() {
 	var fieldID = "customfield_10038"
 
 	options := jira.FieldContextOptionsScheme{
-		IsAnyIssueType:  true,
+		IsAnyIssueType:  false,
 		IsGlobalContext: false,
 		ContextID:       nil,
 	}
 
 	contexts, response, err := atlassian.Issue.Field.Context.Gets(context.Background(), fieldID, &options, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	log.Println(contexts)
 
 	for _, fieldContext := range contexts.Values {
 		log.Println(fieldContext)
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -135,26 +132,21 @@ func main() {
 
 	payload := jira.FieldContextPayloadScheme{
 		IssueTypeIDs: []int{10004},
-		ProjectIDs:   []int{10001},
-		Name:         "Bug fields context $3",
+		ProjectIDs:   []int{10002},
+		Name:         "Bug fields context $3 aaw",
 		Description:  "A context used to define the custom field options for bugs.",
 	}
 
 	contextCreated, response, err := atlassian.Issue.Field.Context.Create(context.Background(), fieldID, &payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(contextCreated)
 
 }
-
-
 ```
 
 {% hint style="info" %}
@@ -187,7 +179,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -205,29 +197,22 @@ func main()  {
 
 	defaultValues, response, err := atlassian.Issue.Field.Context.GetDefaultValues(context.Background(), fieldID, nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, value := range defaultValues.Values {
 
 		/*
-		For singleOption customField type, use value.OptionID
-		For multipleOption customField type, use value.OptionIDs
-		For cascadingOption customField type, use value.OptionID and value.CascadingOptionID
+			For singleOption customField type, use value.OptionID
+			For multipleOption customField type, use value.OptionIDs
+			For cascadingOption customField type, use value.OptionID and value.CascadingOptionID
 		*/
-
 		log.Println(value)
 	}
 
-
 }
-
 ```
 
 {% hint style="info" %}
@@ -330,7 +315,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -350,25 +335,20 @@ func main()  {
 	var payload = &jira.FieldContextDefaultPayloadScheme{
 		DefaultValues: []*jira.CustomFieldDefaultValueScheme{
 			{
-				ContextID:         "10138",
-				OptionID:          "10022",
-				Type:              "option.single",
+				ContextID: "10138",
+				OptionID:  "10022",
+				Type:      "option.single",
 			},
 		},
 	}
 
 	response, err := atlassian.Issue.Field.Context.SetDefaultValue(context.Background(), fieldID, payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Update custom field context
@@ -379,45 +359,40 @@ func main()  {
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
 )
 
-func main()  {
+func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetBasicAuth(mail, token)
 
+	var (
+		customFieldID  = "customfield_10038"
+		contextID      = 10140
+		newName        = "New Context Name"
+		newDescription = "New Context Description"
+	)
 
-   var (
-      customFieldID = "customfield_10038"
-      contextID = 10140
-      newName = "New Context Name"
-      newDescription = "New Context Description"
-   )
+	response, err := atlassian.Issue.Field.Context.Update(context.Background(), customFieldID, contextID, newName, newDescription)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   response, err := atlassian.Issue.Field.Context.Update(context.Background(), customFieldID, contextID, newName, newDescription)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-      }
-      return
-   }
-
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
 
@@ -435,7 +410,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -450,24 +425,19 @@ func main()  {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-
 	var (
 		customFieldID = "customfield_10038"
-		contextID = 10140
+		contextID     = 10140
 	)
 
 	response, err := atlassian.Issue.Field.Context.Delete(context.Background(), customFieldID, contextID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Add issue types to context
@@ -478,43 +448,40 @@ Adds issue types to a custom field context, appending the issue types to the iss
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
 )
 
-func main()  {
+func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetBasicAuth(mail, token)
 
-   var (
-      customFieldID = "customfield_10038"
-      contextID = 10180
-      issueTypesIDs = []string{"10007", "10002"}
-   )
+	var (
+		customFieldID = "customfield_10038"
+		contextID     = 10180
+		issueTypesIDs = []string{"10007", "10002"}
+	)
 
-   response, err := atlassian.Issue.Field.Context.AddIssueTypes(context.Background(), customFieldID, contextID, issueTypesIDs)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-      }
-      return
-   }
+	response, err := atlassian.Issue.Field.Context.AddIssueTypes(context.Background(), customFieldID, contextID, issueTypesIDs)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
 
@@ -532,7 +499,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -549,22 +516,17 @@ func main()  {
 
 	var (
 		customFieldID = "customfield_10038"
-		contextID = 10180
+		contextID     = 10180
 		issueTypesIDs = []string{"10007", "10002"}
 	)
 
 	response, err := atlassian.Issue.Field.Context.RemoveIssueTypes(context.Background(), customFieldID, contextID, issueTypesIDs)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Assign custom field context to projects
@@ -604,16 +566,11 @@ func main() {
 
 	response, err := atlassian.Issue.Field.Context.Link(context.Background(), customFieldID, contextID, projectIDs)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Remove custom field context from projects
@@ -653,15 +610,53 @@ func main() {
 
 	response, err := atlassian.Issue.Field.Context.UnLink(context.Background(), customFieldID, contextID, projectIDs)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 
+```
+
+## Get project mappings for custom field context
+
+ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of context to project mappings for a custom field. The result can be filtered by `contextId`. Otherwise, all mappings are returned. Invalid IDs are ignored.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	var fieldID = "customfield_10038"
+
+	mapping, response, err := atlassian.Issue.Field.Context.ProjectsContext(context.Background(), fieldID, nil, 0, 50)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(mapping.Total)
+
+}
 ```
 
