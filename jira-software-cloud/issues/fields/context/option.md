@@ -22,7 +22,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -38,19 +38,15 @@ func main()  {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	var (
-		fieldID = "customfield_10038"
+		fieldID   = "customfield_10038"
 		contextID = 10180
 	)
 
 	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Gets(context.Background(), fieldID, contextID, nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, option := range fieldOptions.Values {
@@ -58,8 +54,6 @@ func main()  {
 	}
 
 }
-
-
 ```
 
 {% hint style="info" %}
@@ -101,7 +95,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -117,9 +111,9 @@ func main()  {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	var (
-		fieldID = "customfield_10038"
+		fieldID   = "customfield_10038"
 		contextID = 10180
-		
+
 		payload = &jira.FieldContextOptionListScheme{
 			Options: []*jira.CustomFieldContextOptionScheme{
 
@@ -135,32 +129,27 @@ func main()  {
 
 				///////////////////////////////////////////
 				/*
-				// Cascading Choice example
-				{
-					OptionID: "1027",
-					Value:    "Argentina",
-					Disabled: false,
-				},
-				{
-					OptionID: "1027",
-					Value:    "Uruguay",
-					Disabled: false,
-				},
-				 */
+					// Cascading Choice example
+					{
+						OptionID: "1027",
+						Value:    "Argentina",
+						Disabled: false,
+					},
+					{
+						OptionID: "1027",
+						Value:    "Uruguay",
+						Disabled: false,
+					},
+				*/
 
 			}}
-		
 	)
 
 	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Create(context.Background(), fieldID, contextID, payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, option := range fieldOptions.Options {
@@ -168,8 +157,6 @@ func main()  {
 	}
 
 }
-
-
 ```
 
 {% hint style="info" %}
@@ -261,13 +248,9 @@ func main() {
 
 	fieldOptions, response, err := atlassian.Issue.Field.Context.Option.Update(context.Background(), fieldID, contextID, payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, option := range fieldOptions.Options {
@@ -312,7 +295,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -328,21 +311,97 @@ func main()  {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	var (
-		fieldID = "customfield_10038"
-		contextID, optionID = 10180, 10065
+		fieldID             = "customfield_10038"
+		contextID, optionID = 10180, 10064
 	)
 
 	response, err := atlassian.Issue.Field.Context.Option.Delete(context.Background(), fieldID, contextID, optionID)
 	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+}
+```
+
+## Reorder custom field options
+
+Changes the order of custom field options or cascading options in a context.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+	"sort"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	var (
+		fieldID   = "customfield_10038"
+		contextID = 10180
+	)
+
+	log.Println("Getting the field context options")
+	options, response, err := atlassian.Issue.Field.Context.Option.Gets(context.Background(), fieldID, contextID, nil, 0, 50)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	var (
+		optionsAsMap = make(map[string]string)
+		optionsAsList []string
+	)
+
+	for _, option := range options.Values {
+		optionsAsList = append(optionsAsList, option.Value)
+		optionsAsMap[option.Value] = option.ID
+	}
+
+	log.Println("Sorting the fields")
+	sort.Strings(optionsAsList)
+
+	log.Println("Creating the new option ID's payload to order")
+	var optionsIDsAsList []string
+	for _, option := range optionsAsList {
+		optionsIDsAsList = append(optionsIDsAsList, optionsAsMap[option])
+	}
+
+	var payload = &jira.OrderFieldOptionPayloadScheme{
+		Position:             "First",
+		CustomFieldOptionIds: optionsIDsAsList,
+	}
+
+	log.Println("Ordering the options")
+	response, err = atlassian.Issue.Field.Context.Option.Order(context.Background(), fieldID, contextID, payload)
+	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("HTTP Endpoint Used", response.Endpoint)
+			log.Fatal(err)
 		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
