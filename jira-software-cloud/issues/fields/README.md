@@ -41,22 +41,17 @@ func main() {
 
 	fields, response, err := atlassian.Issue.Field.Gets(context.Background())
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, field := range *fields {
+	for _, field := range fields {
 		log.Println(field)
 	}
 
 }
-
-
 ```
 
 ## Create custom field
@@ -89,7 +84,7 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	fieldNewCreate := jira.CustomFieldScheme{
-		Name:        "Alliance",
+		Name:        "Alliance 2",
 		Description: "this is the alliance description field",
 		FieldType:   "cascadingselect",
 		SearcherKey: "cascadingselectsearcher",
@@ -97,18 +92,13 @@ func main() {
 
 	field, response, err := atlassian.Issue.Field.Create(context.Background(), &fieldNewCreate)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("field", field)
 
 }
-
 ```
 
 ## Get fields paginated
@@ -155,13 +145,10 @@ func main() {
 
 	fields, response, err := atlassian.Issue.Field.Search(context.Background(), &options, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(fields.IsLast, fields.Total, fields.MaxResults, fields.StartAt)
 
@@ -170,6 +157,5 @@ func main() {
 	}
 
 }
-
 ```
 

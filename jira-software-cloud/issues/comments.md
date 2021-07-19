@@ -46,21 +46,15 @@ func main() {
 
 	comments, response, err := atlassian.Issue.Comment.Gets(context.Background(), "KP-2", "", nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, comment := range comments.Comments {
 		log.Println(comment.ID, comment.Created)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -76,32 +70,16 @@ type IssueCommentPageScheme struct {
 }
 
 type IssueCommentScheme struct {
-	Self         string      `json:"self,omitempty"`
-	ID           string      `json:"id,omitempty"`
-	Author       *UserScheme `json:"author,omitempty"`
-	RenderedBody string      `json:"renderedBody,omitempty"`
-	Body         struct {
-		Version int    `json:"version,omitempty"`
-		Type    string `json:"type,omitempty"`
-		Content []struct {
-			Type    string `json:"type,omitempty"`
-			Content []struct {
-				Type string `json:"type,omitempty"`
-				Text string `json:"text,omitempty"`
-			} `json:"content,omitempty"`
-		} `json:"content,omitempty"`
-	} `json:"body,omitempty"`
-	JSDPublic    bool        `json:"jsdPublic,omitempty"`
-	UpdateAuthor *UserScheme `json:"updateAuthor,omitempty"`
-	Created      string      `json:"created,omitempty"`
-	Updated      string      `json:"updated,omitempty"`
-	Visibility   struct {
-		Type  string `json:"type,omitempty"`
-		Value string `json:"value,omitempty"`
-	} `json:"visibility,omitempty"`
-	Properties []struct {
-		Key string `json:"key,omitempty"`
-	} `json:"properties,omitempty"`
+	Self         string                   `json:"self,omitempty"`
+	ID           string                   `json:"id,omitempty"`
+	Author       *UserScheme              `json:"author,omitempty"`
+	RenderedBody string                   `json:"renderedBody,omitempty"`
+	Body         *CommentNodeScheme       `json:"body,omitempty"`
+	JSDPublic    bool                     `json:"jsdPublic,omitempty"`
+	UpdateAuthor *UserScheme              `json:"updateAuthor,omitempty"`
+	Created      string                   `json:"created,omitempty"`
+	Updated      string                   `json:"updated,omitempty"`
+	Visibility   *CommentVisibilityScheme `json:"visibility,omitempty"`
 }
 ```
 
@@ -136,16 +114,12 @@ func main() {
 
 	comment, response, err := atlassian.Issue.Comment.Get(context.Background(), "KP-2", "10011")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
+	log.Println(response.Endpoint)
 	log.Println(comment.ID, comment.Created)
 }
-
 ```
 
 ## Delete comment
@@ -179,17 +153,11 @@ func main() {
 
 	response, err := atlassian.Issue.Comment.Delete(context.Background(), "KP-2", "10011")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Add comment
@@ -222,32 +190,188 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-
 	commentBody := jira.CommentNodeScheme{}
 	commentBody.Version = 1
 	commentBody.Type = "doc"
 
-	commentBody.AppendNode(&jira.CommentNodeScheme{
-		Type: "paragraph",
+	//Create the Tables Headers
+	tableHeaders := &jira.CommentNodeScheme{
+		Type: "tableRow",
 		Content: []*jira.CommentNodeScheme{
+
 			{
-				Type: "text",
-				Text: "Carlos Test",
-			},
-			{
-				Type: "emoji",
-				Attrs: map[string]interface{}{
-					"shortName": ":grin",
-					"id":        "1f601",
-					"text":      "😁",
+				Type: "tableHeader",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{
+								Type: "text",
+								Text: "Header 1",
+								Marks: []*jira.MarkScheme{
+									{
+										Type: "strong",
+									},
+								},
+							},
+						},
+					},
 				},
 			},
+
 			{
-				Type: "text",
-				Text: " ",
+				Type: "tableHeader",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{
+								Type: "text",
+								Text: "Header 2",
+								Marks: []*jira.MarkScheme{
+									{
+										Type: "strong",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+
+			{
+				Type: "tableHeader",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{
+								Type: "text",
+								Text: "Header 3",
+								Marks: []*jira.MarkScheme{
+									{
+										Type: "strong",
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
+	}
+
+	row1 := &jira.CommentNodeScheme{
+		Type: "tableRow",
+		Content: []*jira.CommentNodeScheme{
+			{
+				Type: "tableCell",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{Type: "text", Text: "Row 00"},
+						},
+					},
+				},
+			},
+
+			{
+				Type: "tableCell",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{Type: "text", Text: "Row 01"},
+						},
+					},
+				},
+			},
+
+			{
+				Type: "tableCell",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{Type: "text", Text: "Row 02"},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	row2 := &jira.CommentNodeScheme{
+		Type: "tableRow",
+		Content: []*jira.CommentNodeScheme{
+			{
+				Type: "tableCell",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{Type: "text", Text: "Row 10"},
+						},
+					},
+				},
+			},
+
+			{
+				Type: "tableCell",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{Type: "text", Text: "Row 11"},
+						},
+					},
+				},
+			},
+
+			{
+				Type: "tableCell",
+				Content: []*jira.CommentNodeScheme{
+					{
+						Type: "paragraph",
+						Content: []*jira.CommentNodeScheme{
+							{Type: "text", Text: "Row 12"},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	commentBody.AppendNode(&jira.CommentNodeScheme{
+		Type:    "table",
+		Attrs:   map[string]interface{}{"isNumberColumnEnabled": false, "layout": "default"},
+		Content: []*jira.CommentNodeScheme{tableHeaders, row1, row2},
 	})
+
+	/*
+		commentBody.AppendNode(&jira.CommentNodeScheme{
+			Type: "paragraph",
+			Content: []*jira.CommentNodeScheme{
+				{
+					Type: "text",
+					Text: "Carlos Test",
+				},
+				{
+					Type: "emoji",
+					Attrs: map[string]interface{}{
+						"shortName": ":grin",
+						"id":        "1f601",
+						"text":      "😁",
+					},
+				},
+				{
+					Type: "text",
+					Text: " ",
+				},
+			},
+		})
+	*/
 
 	payload := &jira.CommentPayloadScheme{
 		Visibility: &jira.CommentVisibilityScheme{
@@ -259,18 +383,12 @@ func main() {
 
 	newComment, response, err := atlassian.Issue.Comment.Add(context.Background(), "KP-2", payload, nil)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
 	log.Println(newComment.ID)
 }
-
 ```
 
 ## Atlassian Document Format <a id="atlassian-document-format"></a>

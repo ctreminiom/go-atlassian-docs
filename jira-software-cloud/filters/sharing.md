@@ -34,58 +34,15 @@ func main() {
 	scope, response, err := atlassian.Filter.Share.Scope(context.Background())
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("Scope", scope)
 }
-
-```
-
-## Set default share scope
-
-Sets the default sharing for new filters and dashboards for a user, the method returns the following information:
-
-```go
-package main
-
-import (
-	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
-	"log"
-	"os"
-)
-
-func main() {
-
-	var (
-		host  = os.Getenv("HOST")
-		mail  = os.Getenv("MAIL")
-		token = os.Getenv("TOKEN")
-	)
-
-	atlassian, err := jira.New(nil, host)
-	if err != nil {
-		return
-	}
-
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-	response, err := atlassian.Filter.Share.SetScope(context.Background(), "GLOBAL")
-	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
-	}
-
-	log.Println(response)
-}
-
 ```
 
 ## Get share permissions
@@ -119,20 +76,15 @@ func main() {
 
 	permissions, response, err := atlassian.Filter.Share.Gets(context.Background(), 1)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for index, permission := range *permissions {
-		log.Println(index, permission.ID, permission.Type)
+	for index, permission := range permissions {
+		log.Println(index, permission.Type, permission.Type)
 	}
 }
-
 ```
 
 ## Add share permission
@@ -187,29 +139,22 @@ func main() {
 			}
 	*/
 
-	payload := jira.PermissionFilterBodyScheme{
+	payload := jira.PermissionFilterPayloadScheme{
 		Type:      "project",
 		ProjectID: "10000",
 	}
 
-	permissions, response, err := atlassian.Filter.Share.Add(context.Background(), 10001, &payload)
+	permissions, response, err := atlassian.Filter.Share.Add(context.Background(), 1001, &payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("Response HTTP Code", response.StatusCode)
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for index, permission := range *permissions {
+	for index, permission := range permissions {
 		log.Println(index, permission.ID, permission.Type)
 	}
 }
-
 ```
 
 ## Get share permission
@@ -238,22 +183,18 @@ func main() {
 	if err != nil {
 		return
 	}
-	
+
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	permission, response, err := atlassian.Filter.Share.Get(context.Background(), 10001, 100024)
+	permission, response, err := atlassian.Filter.Share.Get(context.Background(), 10001, 100012)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(permission)
 }
-
 ```
 
 ## Delete share permission
@@ -283,17 +224,17 @@ func main() {
 		return
 	}
 
+	atlassian.Auth.SetBasicAuth(mail, token)
+
 	response, err := atlassian.Filter.Share.Delete(context.Background(), 11111, 11111)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+
 
 ```
 

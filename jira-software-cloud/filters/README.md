@@ -4,8 +4,6 @@ A filter is a saved issue search. Jira users can search for issues using differe
 
 The owner can decide what to do with their filter—either make it private for personal use or share it with different entities, such as users, projects, or groups. If the filter is private, only the owner and Jira admin can view and modify it.
 
-![](../../.gitbook/assets/atlassian-api-filter.gif)
-
 > This resource represents filters. Use it to get, create, update, or delete filters. Also use it to configure the columns for a filter and set favorite filters.
 
 ## Create Filter
@@ -39,7 +37,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	newFilterBody := jira.FilterBodyScheme{
+	newFilterBody := jira.FilterPayloadScheme{
 		Name:        fmt.Sprintf("Filter #%v", uuid.New().String()),
 		Description: "Filter's description",
 		JQL:         "issuetype = Bug",
@@ -62,13 +60,9 @@ func main() {
 
 	filter, response, err := atlassian.Filter.Create(context.Background(), &newFilterBody)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The filter has been created: %v - %v", filter.ID, filter.Name)
 
@@ -151,22 +145,17 @@ func main() {
 
 	filters, response, err := atlassian.Filter.Favorite(context.Background())
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println("favorite filters", len(*filters))
+	log.Println("favorite filters", len(filters))
 
-	for _, filter := range *filters {
+	for _, filter := range filters {
 		log.Println(filter)
 	}
 
 }
-
 ```
 
 ## Get My Filters
@@ -200,17 +189,14 @@ func main() {
 
 	myFilters, response, err := atlassian.Filter.My(context.Background(), false, []string{"sharedUsers", "subscriptions"})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println("my filters", len(*myFilters))
+	log.Println("my filters", len(myFilters))
 
-	for _, filter := range *myFilters {
+	for _, filter := range myFilters {
 		log.Println(filter.ID)
 
 		for _, shareUser := range filter.ShareUsers.Items {
@@ -224,7 +210,6 @@ func main() {
 	}
 
 }
-
 ```
 
 ## Search Filters
@@ -282,16 +267,13 @@ func main() {
 	if err != nil {
 		if response != nil {
 			log.Println("HTTP Endpoint Used", response.Endpoint)
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
 		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("Filters found", len(filters.Values))
 }
-
 ```
 
 ## Get Filter
@@ -323,19 +305,14 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	filter, response, err := atlassian.Filter.Get(context.Background(), 1, []string{})
+	filter, response, err := atlassian.Filter.Get(context.Background(), 1, nil)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("Get Filter result", filter.Name, filter.Name)
 }
-
 ```
 
 {% hint style="info" %}
@@ -402,7 +379,7 @@ func main() {
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
-	
+
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
 		return
@@ -410,23 +387,18 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := jira.FilterBodyScheme{
+	payload := jira.FilterPayloadScheme{
 		JQL: "issuetype = Story",
 	}
 
 	filter, response, err := atlassian.Filter.Update(context.Background(), 1, &payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("new JQL filter value", filter.Jql)
 }
-
 ```
 
 ## Delete Filter
@@ -448,7 +420,7 @@ func main() {
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
-	
+
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
 		return
@@ -458,15 +430,10 @@ func main() {
 
 	response, err := atlassian.Filter.Delete(context.Background(), 1)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 

@@ -33,22 +33,18 @@ func main() {
 	if err != nil {
 		return
 	}
-	
+
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	settings, response, err := atlassian.Issue.Attachment.Settings(context.Background())
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("settings", settings.Enabled, settings.UploadLimit)
 }
-
 ```
 
 ## Get attachment metadata
@@ -77,23 +73,20 @@ func main() {
 	if err != nil {
 		return
 	}
-	
+
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	metadata, response, err := atlassian.Issue.Attachment.Metadata(context.Background(), "attachmentID")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(metadata)
 	return
 }
-
 ```
 
 ## Get all metadata for an expanded attachment
@@ -122,22 +115,18 @@ func main() {
 	if err != nil {
 		return
 	}
-	
+
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	humanMetadata, response, err := atlassian.Issue.Attachment.Human(context.Background(), "attachmentID")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(humanMetadata)
 }
-
 ```
 
 ## Delete attachment
@@ -171,16 +160,12 @@ func main() {
 
 	response, err := atlassian.Issue.Attachment.Delete(context.Background(), "attachmentID")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Add attachment
@@ -202,6 +187,7 @@ import (
 	"github.com/ctreminiom/go-atlassian/jira"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func main() {
@@ -219,27 +205,39 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
+
 	absolutePath, err := filepath.Abs("jira/mocks/image.png")
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
-	attachments, response, err := atlassian.Issue.Attachment.Add("KP-1", absolutePath)
+	log.Println("Using the path", absolutePath)
+
+	reader, err := os.Open(absolutePath)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
+		log.Fatal(err)
+	}
+
+	defer reader.Close()
+
+	var (
+		issueKeyOrID = "KP-2"
+		fileName = "image-mock-00.png"
+	)
+
+	attachments, response, err := atlassian.Issue.Attachment.Add(context.Background(), issueKeyOrID, fileName, reader)
+	if err != nil {
+		log.Fatal(err)
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Printf("We've found %v attachments", len(*attachments))
+	log.Printf("We've found %v attachments", len(attachments))
 
-	for _, attachment := range *attachments {
+	for _, attachment := range attachments {
 		log.Println(attachment.ID, attachment.Filename)
 	}
 }
-
 ```
 

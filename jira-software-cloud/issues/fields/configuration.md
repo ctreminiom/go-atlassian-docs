@@ -54,21 +54,16 @@ func main() {
 	)
 
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, fieldConfiguration := range fieldConfigurations.Values {
-		log.Println(fieldConfiguration)
+	for _, configuration := range fieldConfigurations.Values {
+		log.Println(configuration)
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -81,7 +76,7 @@ type FieldConfigSearchScheme struct {
    StartAt    int                  `json:"startAt,omitempty"`
    Total      int                  `json:"total,omitempty"`
    IsLast     bool                 `json:"isLast,omitempty"`
-   Values     []*FieldConfigScheme `json:"values,omitempty"`
+   Values     []*FieldConfigurationScheme `json:"values,omitempty"`
 }
 
 type FieldConfigScheme struct {
@@ -108,7 +103,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -125,21 +120,16 @@ func main()  {
 
 	items, response, err := atlassian.Issue.Field.Configuration.Items(context.Background(), 10000, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, item := range items.Values {
 		log.Println(item)
 	}
-	
-}
 
+}
 ```
 
 {% hint style="info" %}
@@ -181,7 +171,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -198,13 +188,9 @@ func main()  {
 
 	fieldConfigurationSchemes, response, err := atlassian.Issue.Field.Configuration.Schemes(context.Background(), nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, fieldConfigurationScheme := range fieldConfigurationSchemes.Values {
@@ -265,13 +251,9 @@ func main() {
 
 	configurationIssueTypeItems, response, err := atlassian.Issue.Field.Configuration.IssueTypeItems(context.Background(), nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, issueTypeItem := range configurationIssueTypeItems.Values {
@@ -279,7 +261,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -333,13 +314,9 @@ func main() {
 
 	schemes, response, err := atlassian.Issue.Field.Configuration.SchemesByProject(context.Background(), []int{10001, 10000}, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		return
+		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, scheme := range schemes.Values {
@@ -347,7 +324,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}

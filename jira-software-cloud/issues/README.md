@@ -190,14 +190,9 @@ func main() {
 
 	newIssue, response, err := atlassian.Issue.Create(context.Background(), &payload, &customFields)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Printf("The new issue %v has been created with the ID %v", newIssue.Key, newIssue.ID)
@@ -231,7 +226,7 @@ func main() {
 	if err != nil {
 		return
 	}
-	
+
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	//CustomFields
@@ -284,14 +279,9 @@ func main() {
 
 	newIssues, response, err := atlassian.Issue.Creates(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, issue := range newIssues.Issues {
@@ -302,6 +292,7 @@ func main() {
 		log.Println(apiError.Status, apiError.Status)
 	}
 }
+
 
 ```
 
@@ -334,18 +325,28 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	issue, response, err := atlassian.Issue.Get(context.Background(), "KP-12", []string{"status"}, []string{"transitions"})
+	issue, response, err := atlassian.Issue.Get(context.Background(), "KP-2", nil, []string{"transitions"})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(issue)
+
+	log.Println(issue.Key)
+	log.Println(issue.Fields.Reporter.AccountID)
+
+	for _, transition := range issue.Transitions {
+		log.Println(transition.Name, transition.ID, transition.To.ID, transition.HasScreen)
+	}
+
+	// Check if the issue contains sub-tasks
+	if issue.Fields.Subtasks != nil {
+
+		for _, subTask := range issue.Fields.Subtasks {
+			log.Println("Sub-Task: ", subTask.Key, subTask.Fields.Summary)
+		}
+
+	}
 }
 
 ```
@@ -432,7 +433,7 @@ func main() {
 
 	var payload = jira.IssueScheme{
 		Fields: &jira.IssueFieldsScheme{
-			Summary: "New summary test test",
+			//		Summary: "New summary test test",
 		},
 	}
 
@@ -469,18 +470,11 @@ func main() {
 
 	response, err := atlassian.Issue.Update(context.Background(), "KP-2", false, &payload, &customFields, operations)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
-
 ```
 
 ## Delete issue
@@ -514,14 +508,9 @@ func main() {
 
 	response, err := atlassian.Issue.Delete(context.Background(), "KP-6")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 
@@ -558,14 +547,9 @@ func main() {
 
 	response, err := atlassian.Issue.Assign(context.Background(), "KP-2", "bedc0e56-c9d1-4f5d-b380-cbced9125849")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 
@@ -636,14 +620,9 @@ func main() {
 
 	response, err := atlassian.Issue.Notify(context.Background(), "KP-2", opts)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 
@@ -680,14 +659,9 @@ func main() {
 
 	transitions, response, err := atlassian.Issue.Transitions(context.Background(), "KP-2")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, transition := range transitions.Transitions {
@@ -766,18 +740,47 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Issue.Move(context.Background(), "KP-2", "11")
+	var payload = &jira.IssueScheme{
+		Fields: &jira.IssueFieldsScheme{
+			Summary: "New summary test test",
+		},
+	}
+
+	//CustomFields
+	var customFields = &jira.CustomFields{}
+	err = customFields.Groups("customfield_10052", []string{"jira-administrators", "jira-administrators-system"})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println(response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	//Issue Update Operations
+	var operations = &jira.UpdateOperations{}
+
+	err = operations.AddArrayOperation("labels", map[string]string{
+		"triaged":   "add",
+		"triaged-2": "add",
+		"triaged-1": "add",
+		"blocker":   "add",
+	})
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	options := &jira.IssueMoveOptions{
+		Fields:       payload,
+		Operations:   operations,
+		CustomFields: customFields,
+	}
+
+	response, err := atlassian.Issue.Move(context.Background(), "KP-7", "41", options)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+
 
 ```
 

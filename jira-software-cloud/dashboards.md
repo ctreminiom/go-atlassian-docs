@@ -41,14 +41,9 @@ func main() {
 	dashboards, response, err := jiraCloud.Dashboard.Gets(context.Background(), 0, 50, "")
 
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, dashboard := range dashboards.Dashboards {
@@ -58,7 +53,6 @@ func main() {
 	return
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -127,31 +121,31 @@ func main() {
 	jiraCloud.Auth.SetBasicAuth(mail, token)
 	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
 
-
-	var payload = []jira.SharePermissionScheme{
-		{
-			Type:    "project",
-			Project: &jira.ProjectScheme{
-				ID:        "10000",
+	var payload = &jira.DashboardPayloadScheme{
+		Name:        "Team Tracking 3",
+		Description: "description sample",
+		SharePermissions: []*jira.SharePermissionScheme{
+			{
+				Type: "project",
+				Project: &jira.ProjectScheme{
+					ID: "10000",
+				},
+				Role:  nil,
+				Group: nil,
 			},
-			Role:    nil,
-			Group:   nil,
-		},
-		{
-			Type:    "group",
-			Group:   &jira.GroupScheme{Name: "jira-administrators"},
+			{
+				Type:  "group",
+				Group: &jira.GroupScheme{Name: "jira-administrators"},
+			},
 		},
 	}
 
-	dashboard, response, err := jiraCloud.Dashboard.Create(context.Background(), "Team Tracking 3", "", &payload)
+	dashboard, response, err := jiraCloud.Dashboard.Create(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Printf("Dashboard Name: %v", dashboard.Name)
@@ -227,23 +221,24 @@ func main() {
 
 	dashboards, response, err := jiraCloud.Dashboard.Search(context.Background(), &searchOptions, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, dashboard := range dashboards.Values {
 		log.Printf("Dashboard Name: %v", dashboard.Name)
 		log.Printf("Dashboard ID: %v", dashboard.ID)
 		log.Printf("Dashboard View: %v", dashboard.View)
+
+		if dashboard.SharePermissions != nil {
+			for _, permission := range dashboard.SharePermissions {
+				log.Println(permission)
+			}
+		}
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -335,13 +330,9 @@ func main() {
 
 	dashboard, response, err := jiraCloud.Dashboard.Get(context.Background(), "10001")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Printf("Dashboard Name: %v", dashboard.Name)
@@ -349,7 +340,6 @@ func main() {
 	log.Printf("Dashboard View: %v", dashboard.View)
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -408,30 +398,30 @@ func main() {
 	jiraCloud.Auth.SetBasicAuth(mail, token)
 	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
 
-	var sharePermissions = []jira.SharePermissionScheme{
-		{
-			Type:    "project",
-			Project: &jira.ProjectScheme{
-				ID:        "10000",
+	var payload = &jira.DashboardPayloadScheme{
+		Name:             "Team Tracking #1111",
+		Description:      "",
+		SharePermissions: []*jira.SharePermissionScheme{
+			{
+				Type: "project",
+				Project: &jira.ProjectScheme{
+					ID: "10000",
+				},
+				Role:  nil,
+				Group: nil,
 			},
-			Role:    nil,
-			Group:   nil,
-		},
-		{
-			Type:    "group",
-			Group:   &jira.GroupScheme{Name: "jira-administrators"},
+			{
+				Type:  "group",
+				Group: &jira.GroupScheme{Name: "jira-administrators"},
+			},
 		},
 	}
 
-	dashboard, response, err := jiraCloud.Dashboard.Update(context.Background(), "10001", "Team Tracking #1111", "", &sharePermissions)
+	dashboard, response, err := jiraCloud.Dashboard.Update(context.Background(), "10001", payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Printf("Dashboard Name: %v", dashboard.Name)
@@ -472,16 +462,12 @@ func main() {
 
 	response, err := jiraCloud.Dashboard.Delete(context.Background(), "10003")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ### Copy dashboard
@@ -514,37 +500,40 @@ func main() {
 	jiraCloud.Auth.SetBasicAuth(mail, token)
 	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
 
-	var sharePermissions = []jira.SharePermissionScheme{
-		{
-			Type:    "project",
-			Project: &jira.ProjectScheme{
-				ID:        "10000",
+	var payload = &jira.DashboardPayloadScheme{
+		Name:             "Team Tracking #2 copy",
+		Description:      "Description sample",
+		SharePermissions: []*jira.SharePermissionScheme{
+			{
+				Type: "project",
+				Project: &jira.ProjectScheme{
+					ID: "10000",
+				},
+				Role:  nil,
+				Group: nil,
 			},
-			Role:    nil,
-			Group:   nil,
-		},
-		{
-			Type:    "group",
-			Group:   &jira.GroupScheme{Name: "jira-administrators"},
+			{
+				Type:  "group",
+				Group: &jira.GroupScheme{Name: "jira-administrators"},
+			},
 		},
 	}
 
-	dashboard, response, err := jiraCloud.Dashboard.Copy(context.Background(), "10001", "Team Tracking #2 copy", "", &sharePermissions)
+	dashboard, response, err := jiraCloud.Dashboard.Copy(context.Background(), "10001", payload)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Printf("Dashboard Name: %v", dashboard.Name)
 	log.Printf("Dashboard ID: %v", dashboard.ID)
 	log.Printf("Dashboard View: %v", dashboard.View)
 }
-
 ```
 
 
