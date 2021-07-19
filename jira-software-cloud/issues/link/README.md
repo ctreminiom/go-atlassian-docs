@@ -93,17 +93,11 @@ func main() {
 
 	response, err := atlassian.Issue.Link.Create(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
-
 ```
 
 ## Get issue links
@@ -120,7 +114,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -137,15 +131,10 @@ func main()  {
 
 	issueLinks, response, err := atlassian.Issue.Link.Gets(context.Background(), "KP-1")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
 
 	for _, link := range issueLinks.Fields.IssueLinks {
 		log.Println(link)
@@ -216,24 +205,30 @@ func main() {
 
 	atlassian, err := jira.New(nil, host)
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	issueLink, response, err := atlassian.Issue.Link.Get(context.Background(), "10001")
+	issueLink, response, err := atlassian.Issue.Link.Get(context.Background(), "10002")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	log.Println(issueLink)
+	log.Println(issueLink.ID)
+	log.Println("----------------")
+	log.Println(issueLink.Type.Name)
+	log.Println(issueLink.Type.ID)
+	log.Println(issueLink.Type.Self)
+	log.Println(issueLink.Type.Inward)
+	log.Println(issueLink.Type.Outward)
+	log.Println("----------------")
+	log.Println(issueLink.InwardIssue)
+	log.Println(issueLink.OutwardIssue)
 }
+
 
 ```
 
@@ -279,7 +274,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -294,18 +289,12 @@ func main()  {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-
 	response, err := atlassian.Issue.Link.Delete(context.Background(), "10002")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
 
 }
 ```

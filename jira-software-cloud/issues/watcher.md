@@ -46,13 +46,9 @@ func main() {
 
 	watchers, response, err := atlassian.Issue.Watchers.Gets(context.Background(), "KP-2")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Println(watchers.IsWatching, watchers.WatchCount)
@@ -61,7 +57,6 @@ func main() {
 		log.Println(watcher.Self, watcher.AccountID)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -135,16 +130,11 @@ func main() {
 
 	response, err := atlassian.Issue.Watchers.Add(context.Background(), "KP-2")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Delete watcher
@@ -187,15 +177,10 @@ func main() {
 
 	response, err := atlassian.Issue.Watchers.Delete(context.Background(), "KP-2", "5b86be50b8e3cb5895860d6d")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 

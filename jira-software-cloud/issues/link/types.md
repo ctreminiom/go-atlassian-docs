@@ -16,7 +16,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -33,13 +33,9 @@ func main()  {
 
 	types, response, err := atlassian.Issue.Link.Type.Gets(context.Background())
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, value := range types.IssueLinkTypes {
@@ -104,18 +100,12 @@ func main() {
 
 	issueLinkType, response, err := atlassian.Issue.Link.Type.Create(context.Background(), &payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueLinkType)
 }
-
-
 ```
 
 {% hint style="info" %}
@@ -146,7 +136,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -163,13 +153,9 @@ func main()  {
 
 	issueLinkType, response, err := atlassian.Issue.Link.Type.Get(context.Background(), "10000")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes), response.StatusCode)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueLinkType)
 }
@@ -226,13 +212,9 @@ func main() {
 
 	issueLinkType, response, err := atlassian.Issue.Link.Type.Update(context.Background(), "10008", &payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueLinkType)
 }
@@ -283,13 +265,9 @@ func main() {
 
 	response, err := atlassian.Issue.Link.Type.Delete(context.Background(), "10008")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```

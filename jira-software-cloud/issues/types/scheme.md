@@ -35,22 +35,16 @@ func main() {
 
 	issueTypeSchemes, response, err := atlassian.Issue.Type.Scheme.Gets(context.Background(), nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
 
 	for _, issueTypeScheme := range issueTypeSchemes.Values {
 		log.Println(issueTypeScheme)
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -124,18 +118,13 @@ func main() {
 
 	issueTypeSchemeID, response, err := atlassian.Issue.Type.Scheme.Create(context.Background(), &payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("issueTypeSchemeID", issueTypeSchemeID)
 
 }
-
 ```
 
 ## Get issue type scheme items
@@ -178,13 +167,9 @@ func main() {
 
 	items, response, err := atlassian.Issue.Type.Scheme.Items(context.Background(), nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, item := range items.Values {
@@ -192,7 +177,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -254,13 +238,9 @@ func main() {
 
 	issueTypesSchemes, response, err := atlassian.Issue.Type.Scheme.Projects(context.Background(), []int{10000}, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, issueTypeScheme := range issueTypesSchemes.Values {
@@ -268,7 +248,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -338,16 +317,11 @@ func main() {
 
 	response, err := atlassian.Issue.Type.Scheme.Assign(context.Background(), "schemeID", "projectID")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Update issue type scheme
@@ -393,18 +367,13 @@ func main() {
 		Description: "A collection of issue types suited to use in a kanban style project.- UPDATED",
 	}
 
-	response, err := atlassian.Issue.Type.Scheme.Update(context.Background(), "id", &payload)
+	response, err := atlassian.Issue.Type.Scheme.Update(context.Background(), 1000, &payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Delete issue type scheme
@@ -445,18 +414,13 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Issue.Type.Scheme.Delete(context.Background(), "id")
+	response, err := atlassian.Issue.Type.Scheme.Delete(context.Background(), 1001)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Add issue types to issue type scheme
@@ -497,18 +461,13 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Issue.Type.Scheme.AddIssueTypes(context.Background(), "schemeID", []int{10003, 10000})
+	response, err := atlassian.Issue.Type.Scheme.Append(context.Background(), 10182, []int{10003, 10000})
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Remove issue type from issue type scheme
@@ -549,17 +508,12 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Issue.Type.Scheme.RemoveIssueType(context.Background(), "schemeID", 10003)
+	response, err := atlassian.Issue.Type.Scheme.Remove(context.Background(), 10182, 10003)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 

@@ -22,6 +22,51 @@ import (
 
 func main() {
 
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := jira.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	permissions, response, err := atlassian.Permission.Gets(context.Background())
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, permission := range permissions {
+		log.Println(permission)
+	}
+}
+```
+
+## Check permissions
+
+* for a list of global permissions, the global permissions are granted to a user.
+* for a list of project permissions and lists of projects and issues, for each project permission a list of the projects and issues a user can access or manipulate.
+
+If no account ID is provided, the operation returns details for the logged-in user.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira"
+	"log"
+	"os"
+)
+
+func main() {
+
 	/*
 		----------- Set an environment variable in git bash -----------
 		export HOST="https://ctreminiom.atlassian.net/"
@@ -44,18 +89,29 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	permissions, response, err := atlassian.Permission.Gets(context.Background())
+	payload := &jira.PermissionCheckPayload{
+		GlobalPermissions: []string{"ADMINISTER"},
+		AccountID:         "", //
+		ProjectPermissions: []*jira.BulkProjectPermissionsScheme{
+			{
+				Issues:      nil,
+				Projects:    []int{10000},
+				Permissions: []string{"EDIT_ISSUES"},
+			},
+		},
+	}
+
+	grants, response, err := atlassian.Permission.Check(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(permissions)
-}
 
+	for _, permission := range grants.ProjectPermissions {
+		log.Println(permission.Permission, permission.Issues)
+	}
+
+}
 ```
 

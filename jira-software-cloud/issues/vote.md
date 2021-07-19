@@ -46,23 +46,15 @@ func main() {
 
 	votes, response, err := atlassian.Issue.Votes.Gets(context.Background(), "KP-2")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
-	log.Println(votes.Votes)
-	log.Println(votes.HasVoted)
 
 	for _, voter := range votes.Voters {
 		log.Println(voter.DisplayName, voter.Self)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -118,16 +110,11 @@ func main() {
 
 	response, err := atlassian.Issue.Votes.Add(context.Background(), "KP-2")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
- 
 ```
 
 ## Delete vote
@@ -170,15 +157,10 @@ func main() {
 
 	response, err := atlassian.Issue.Votes.Delete(context.Background(), "KP-2")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 

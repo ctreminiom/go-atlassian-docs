@@ -48,17 +48,13 @@ func main() {
 
 	types, response, err := atlassian.Issue.Type.Gets(context.Background())
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, value := range *types {
-		log.Println(value.ID, value.Name, value.Subtask)
+	for _, value := range types {
+		log.Println(value.ID, value.Name, value.Subtask, value.Scope)
 	}
 }
 ```
@@ -133,17 +129,12 @@ func main() {
 
 	issueType, response, err := atlassian.Issue.Type.Create(context.Background(), &issueTypePayload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueType.Name)
 }
-
 ```
 
 ## Get issue type
@@ -184,20 +175,15 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	issueType, response, err := atlassian.Issue.Type.Get(context.Background(), "id")
+	issueType, response, err := atlassian.Issue.Type.Get(context.Background(), "10000")
 
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueType.Name)
 }
-
 ```
 
 {% hint style="info" %}
@@ -269,17 +255,12 @@ func main() {
 
 	issueType, response, err := atlassian.Issue.Type.Update(context.Background(), "id", &issueTypePayload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueType.Name)
 }
-
 ```
 
 ## Delete issue type
@@ -322,16 +303,11 @@ func main() {
 
 	response, err := atlassian.Issue.Type.Delete(context.Background(), "id")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Get alternative issue types
@@ -374,19 +350,14 @@ func main() {
 
 	issueTypes, response, err := atlassian.Issue.Type.Alternatives(context.Background(), "")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, issueType := range *issueTypes {
+	for _, issueType := range issueTypes {
 		log.Println(issueType)
 	}
 }
-
 ```
 

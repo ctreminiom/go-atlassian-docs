@@ -44,20 +44,16 @@ func main() {
 
 	screenSchemes, response, err := atlassian.Issue.Type.ScreenScheme.Gets(context.Background(), []int{10001, 10002}, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(screenSchemes)
 
 	for _, screenScheme := range screenSchemes.Values {
 		log.Println(screenScheme)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -121,7 +117,7 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	payload := jira.IssueTypeScreenSchemePayloadScheme{
-		Name:              "FX 2 Issue Type Screen Scheme",
+		Name: "FX 2 Issue Type Screen Scheme",
 		IssueTypeMappings: []*jira.IssueTypeScreenSchemeMappingPayloadScheme{
 			{
 				IssueTypeID:    "default",
@@ -136,18 +132,12 @@ func main() {
 
 	issueTypeScreenSchemeID, response, err := atlassian.Issue.Type.ScreenScheme.Create(context.Background(), &payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueTypeScreenSchemeID)
 }
-
-
 ```
 
 ## Get issue type screen scheme items
@@ -164,7 +154,7 @@ import (
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -181,13 +171,9 @@ func main()  {
 
 	mapping, response, err := atlassian.Issue.Type.ScreenScheme.Mapping(context.Background(), nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, item := range mapping.Values {
@@ -264,16 +250,11 @@ func main() {
 
 	response, err := atlassian.Issue.Type.ScreenScheme.Assign(context.Background(), issueTypeScreenSchemeID, projectID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Get issue type screen schemes for projects
@@ -316,20 +297,15 @@ func main() {
 
 	issueTypeScreenSchemes, response, err := atlassian.Issue.Type.ScreenScheme.Projects(context.Background(), []int{10001}, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, issueTypeScreenScheme := range issueTypeScreenSchemes.Values {
 		log.Println(issueTypeScreenScheme.ProjectIds, issueTypeScreenScheme.IssueTypeScreenScheme.ID)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -406,16 +382,11 @@ func main() {
 
 	response, err := atlassian.Issue.Type.ScreenScheme.Update(context.Background(), issueTypeScreenSchemeID, name, description)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Delete issue type screen scheme
@@ -462,16 +433,11 @@ func main() {
 
 	response, err := atlassian.Issue.Type.ScreenScheme.Delete(context.Background(), issueTypeScreenSchemeID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Append mappings to issue type screen scheme
@@ -529,16 +495,11 @@ func main() {
 
 	response, err := atlassian.Issue.Type.ScreenScheme.Append(context.Background(), issueTypeScreenSchemeID, payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Update issue type screen scheme default screen scheme
@@ -586,16 +547,11 @@ func main() {
 
 	response, err := atlassian.Issue.Type.ScreenScheme.UpdateDefault(context.Background(), issueTypeScreenSchemeID, screenSchemeID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Remove mappings from issue type screen scheme
@@ -643,15 +599,10 @@ func main() {
 
 	response, err := atlassian.Issue.Type.ScreenScheme.Remove(context.Background(), issueTypeScreenSchemeID, issueTypesIDs)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
