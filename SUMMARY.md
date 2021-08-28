@@ -66,6 +66,16 @@
   * [🗂️ Service Desk](jira-service-management-cloud/request/service-desk/README.md)
     * [🛎️ Queue](jira-service-management-cloud/request/service-desk/queue.md)
 
+## Confluence Cloud
+
+* [📃 Content](confluence-cloud/content/README.md)
+  * [🎮 Properties](confluence-cloud/content/properties.md)
+  * [📎 Attachments](confluence-cloud/content/attachments.md)
+  * [📬 Comments](confluence-cloud/content/comments.md)
+  * [🏷️ Labels](confluence-cloud/content/labels.md)
+  * [🛡️ Permissions](confluence-cloud/content/permissions.md)
+* [💾 Space](confluence-cloud/space.md)
+
 ## Atlassian Admin Cloud
 
 * [📃 Overview](atlassian-admin-cloud/untitled.md)
