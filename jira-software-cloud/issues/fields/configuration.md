@@ -10,7 +10,7 @@ As a Jira administrator, you can configure the default field configuration to ma
 
 
 
-![](../../../.gitbook/assets/view-field-configurations-jira.png)
+![](../../../.gitbook/assets/View-Field-Configurations-Jira.png)
 
 
 

@@ -8,7 +8,7 @@ You can link issues to keep track of duplicate or related work. You can, for exa
 
 Make sure you have the _link issues _project permission before getting started. Note that your Jira administrator can customize the types of links that you can create.
 
-![](../../../.gitbook/assets/kp-board-agile-board-jira.png)
+![](../../../.gitbook/assets/KP-board-Agile-Board-Jira.png)
 
 {% hint style="info" %}
 This resource represents links between issues. Use it to get, create, and delete links between issues.To use this resource, the site must have issue linking enabled.

@@ -56,7 +56,7 @@ func main() {
 
 ## Create request comment
 
-This method creates a public or private \(internal\) comment on a customer request, with the comment visibility set by `public`. The user recorded as the author of the comment.
+This method creates a public or private (internal) comment on a customer request, with the comment visibility set by `public`. The user recorded as the author of the comment.
 
 ```go
 package main
@@ -234,4 +234,3 @@ func main() {
 
 }
 ```
-

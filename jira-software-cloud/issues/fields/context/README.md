@@ -4,7 +4,7 @@ When you create a custom field as a Jira administrator, you automatically create
 
 This lets you select a custom field language and default value, as well as which issue types or projects the custom field appears in. If you're looking to simply edit the name or description of a custom field, or if you need to delete a custom field
 
-![](../../../../.gitbook/assets/configure-custom-field-alliance-jira.png)
+![](../../../../.gitbook/assets/Configure-Custom-Field-Alliance-Jira.png)
 
 This resource represents issue custom field contexts. Use it to:
 

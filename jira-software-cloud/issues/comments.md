@@ -2,12 +2,12 @@
 
 Comments can range from simple text updates to let watchers know what's happening on the issue, to code snippets, images, tables, and more. The editor converts things like links, code, and markdown on-the-fly, so you can paste in your content and let the editor do the work.
 
-![](<../../.gitbook/assets/image (7).png>)
+![](<../../.gitbook/assets/image (9).png>)
 
 * **Mention your teammates:** If you need someone to know about a comment, you can mention them in it. Type @ followed by their name, then choose the right person from the list. The person you mention will be notified about your comment and can quickly jump to the issue to see what's happening.
 * **Apply comment permissions: **If your comment is only meant for a specific Jira group or project role, comment permissions let you restrict your comments to the appropriate audience. When writing your comment, click the lock icon under it and choose a Jira group or project role to restrict it to.
 
-![](<../../.gitbook/assets/image (9).png>)
+![](<../../.gitbook/assets/image (10).png>)
 
 This resource represents issue comments. Use it to:
 

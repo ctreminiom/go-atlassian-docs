@@ -2,7 +2,7 @@
 
 This resource represents application roles. Use it to get details of an application role or all application roles.
 
-![This is the Application Roles with the groups associated ](<../.gitbook/assets/image (3).png>)
+![This is the Application Roles with the groups associated ](<../.gitbook/assets/image (2).png>)
 
 ### Get all application roles
 

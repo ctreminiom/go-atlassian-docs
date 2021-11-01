@@ -9,7 +9,7 @@ A Jira group is a convenient way to manage a collection of users. You can use gr
 * Reference workflow conditions.
 * Integrate with project roles.
 
-![](<../.gitbook/assets/image (5).png>)
+![](<../.gitbook/assets/image (6).png>)
 
 This resource represents groups of users. Use it to get, create, find, and delete groups as well as add and remove users from groups.
 

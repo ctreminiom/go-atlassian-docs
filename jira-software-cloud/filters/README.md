@@ -69,7 +69,7 @@ func main() {
 }
 ```
 
-![Filter permissions on the UI interface](<../../.gitbook/assets/image (6).png>)
+![Filter permissions on the UI interface](<../../.gitbook/assets/image (5).png>)
 
 {% hint style="info" %}
 🧚‍♀️ **Tips: **You can extract the following struct tags

@@ -2,7 +2,7 @@
 
 ## Get queues
 
-This method returns the queues in a service desk. To include a customer request count for each queue \(in the `issueCount` field\) in the response, set the query parameter `includeCount` to true \(its default is false\).
+This method returns the queues in a service desk. To include a customer request count for each queue (in the `issueCount` field) in the response, set the query parameter `includeCount` to true (its default is false).
 
 ```go
 package main
@@ -62,7 +62,7 @@ func main() {
 
 ## Get queue
 
-This method returns a specific queues in a service desk. To include a customer request count for the queue \(in the `issueCount` field\) in the response, set the query parameter `includeCount` to true \(its default is false\).
+This method returns a specific queues in a service desk. To include a customer request count for the queue (in the `issueCount` field) in the response, set the query parameter `includeCount` to true (its default is false).
 
 ```go
 package main
@@ -170,4 +170,3 @@ func main() {
 }
 
 ```
-

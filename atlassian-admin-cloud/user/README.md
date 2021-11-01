@@ -7,7 +7,7 @@ The [user management REST API](https://developer.atlassian.com/cloud/admin/user-
 * Update a user profile or set a user's email address
 * Enable or disable a user
 
-![](<../../.gitbook/assets/image (13).png>)
+![](<../../.gitbook/assets/image (15).png>)
 
 ## Get user management permissions
 

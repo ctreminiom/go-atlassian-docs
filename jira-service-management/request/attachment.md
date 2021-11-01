@@ -2,7 +2,7 @@
 
 ## Create attachment
 
- This method adds one or more temporary files \(attached to the request's service desk using [servicedesk/{serviceDeskId}/attachTemporaryFile](https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/#api-rest-servicedeskapi-request-issueidorkey-attachment-post)\) as attachments to a customer request and set the attachment visibility using the `public` flag.
+&#x20;This method adds one or more temporary files (attached to the request's service desk using [servicedesk/{serviceDeskId}/attachTemporaryFile](https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/#api-rest-servicedeskapi-request-issueidorkey-attachment-post)) as attachments to a customer request and set the attachment visibility using the `public` flag.
 
 ```go
 package main
@@ -103,4 +103,3 @@ func main() {
    }
 }
 ```
-
