@@ -9,7 +9,7 @@ A Jira group is a convenient way to manage a collection of users. You can use gr
 * Reference workflow conditions.
 * Integrate with project roles.
 
-![](../.gitbook/assets/image%20%285%29.png)
+![](<../.gitbook/assets/image (5).png>)
 
 This resource represents groups of users. Use it to get, create, find, and delete groups as well as add and remove users from groups.
 
@@ -147,7 +147,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -209,7 +209,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -324,4 +324,3 @@ func main() {
 }
 
 ```
-

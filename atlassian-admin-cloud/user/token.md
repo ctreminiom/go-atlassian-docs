@@ -48,7 +48,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -104,4 +104,3 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
-

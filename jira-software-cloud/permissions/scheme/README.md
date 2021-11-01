@@ -13,26 +13,26 @@ A permission scheme is a collection of permission grants. A permission grant con
 
 ### Holder Object
 
- The `holder` object contains information about the user or group being granted the permission. For example, the _Administer projects_ permission is granted to a group named _Teams in space administrators_. In this case, the type is `"type": "group"`, and the parameter is the group name, `"parameter": "Teams in space administrators"`. The `holder` object is defined by the following properties:
+&#x20;The `holder` object contains information about the user or group being granted the permission. For example, the _Administer projects_ permission is granted to a group named _Teams in space administrators_. In this case, the type is `"type": "group"`, and the parameter is the group name, `"parameter": "Teams in space administrators"`. The `holder` object is defined by the following properties:
 
-* `type` Identifies the user or group \(see the list of types below\).
+* `type` Identifies the user or group (see the list of types below).
 * `parameter` The value of this property depends on the `type`. For example, if the `type` is a group, then you need to specify the group name.
 
-The following `types` are available. The expected values for the `parameter` are given in parenthesis \(some `types` may not have a `parameter`\):
+The following `types` are available. The expected values for the `parameter` are given in parenthesis (some `types` may not have a `parameter`):
 
-| name | description |
-| :--- | :--- |
-|  `anyone` | Grant for anonymous users. |
-|  `applicationRole` |  Grant for users with access to the specified application \(application name\). See [Update product access settings](https://confluence.atlassian.com/x/3YxjL) for more information. |
-|  `assignee` | Grant for the user currently assigned to an issue. |
-|  `group` | Grant for the specified group \(group name\). |
-|  `groupCustomField` | Grant for a user in the group selected in the specified custom field \(custom field ID\). |
-|  `projectLead` | Grant for a project lead. |
-|  `projectRole` | Grant for the specified project role \(project role ID\). |
-|  `reporter` | Grant for the user who reported the issue. |
-|  `sd.customer.portal.only` | Jira Service Desk only. Grants customers permission to access the customer portal but not Jira |
-|  `user` | Grant for the specified user \(user ID - historically this was the userkey but that is deprecated and the account ID should be used\). |
-|  `userCustomField` | Grant for a user selected in the specified custom field \(custom field ID\). |
+| name                       | description                                                                                                                                                                        |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  `anyone`                  | Grant for anonymous users.                                                                                                                                                         |
+|  `applicationRole`         |  Grant for users with access to the specified application (application name). See [Update product access settings](https://confluence.atlassian.com/x/3YxjL) for more information. |
+|  `assignee`                | Grant for the user currently assigned to an issue.                                                                                                                                 |
+|  `group`                   | Grant for the specified group (group name).                                                                                                                                        |
+|  `groupCustomField`        | Grant for a user in the group selected in the specified custom field (custom field ID).                                                                                            |
+|  `projectLead`             | Grant for a project lead.                                                                                                                                                          |
+|  `projectRole`             | Grant for the specified project role (project role ID).                                                                                                                            |
+|  `reporter`                | Grant for the user who reported the issue.                                                                                                                                         |
+|  `sd.customer.portal.only` | Jira Service Desk only. Grants customers permission to access the customer portal but not Jira                                                                                     |
+|  `user`                    | Grant for the specified user (user ID - historically this was the userkey but that is deprecated and the account ID should be used).                                               |
+|  `userCustomField`         | Grant for a user selected in the specified custom field (custom field ID).                                                                                                         |
 
 ## Get all permission schemes
 
@@ -209,7 +209,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -373,6 +373,4 @@ func main() {
 	}
 }
 ```
-
-
 

@@ -8,7 +8,7 @@ description: This resource represents Jira issues
 
 Need help working with issues? In Jira Software, issues help you manage code, estimate workload, and keep track of your team. On this page, you'll find a quick overview of everything that you can do with an issue.
 
-![Issue View](../../.gitbook/assets/image%20%2811%29.png)
+![Issue View](<../../.gitbook/assets/image (11).png>)
 
 {% embed url="https://support.atlassian.com/jira-software-cloud/docs/what-is-an-issue/" %}
 
@@ -34,10 +34,10 @@ In the Jira REST API, custom fields are uniquely identified by the field ID, as 
 {% hint style="success" %}
 We support the following custom field types.
 
-* Group\(s\) Picker
-* User\(s\) Picker
+* Group(s) Picker
+* User(s) Picker
 * URL's
-* Text 
+* Text&#x20;
 * Number
 * Date
 * DateTime
@@ -353,9 +353,9 @@ func main() {
 
 ## Edit issue
 
-Edits an issue. The edits to the issue's fields are defined using `update` and `fields`. There're two ways to edit an issue on Jira, **implicit** and **explicit**.
+Edits an issue. The edits to the issue's fields are defined using `update` and `fields`. There're two ways to edit an issue on Jira, **implicit **and **explicit**.
 
-### Simple update \(implicit set via "fields"\) <a id="simple-update--implicit-set-via--fields--"></a>
+### Simple update (implicit set via "fields") <a href="simple-update-implicit-set-via-fields" id="simple-update-implicit-set-via-fields"></a>
 
 The simple way to update an issue is to do a GET, update the values inside "fields", and then PUT back.
 
@@ -370,18 +370,18 @@ var payload = jira.IssueScheme{
 	}
 ```
 
-* Some fields cannot be updated this way \(for example, comments\). Instead you must use explicit-verb updates \(see below\). You can tell if a field cannot be implicitly set by the fact it doesn't have a SET verb.
+* Some fields cannot be updated this way (for example, comments). Instead you must use explicit-verb updates (see below). You can tell if a field cannot be implicitly set by the fact it doesn't have a SET verb.
 * If you do send along such un-SET-able fields in this manner, they are ignored. This means that you can PUT what you GET, but not all of the document is taken into consideration.
 
-### Operation \(verb\) based update \(explicit verb via "update"\) <a id="operation--verb--based-update--explicit-verb-via--update--"></a>
+### Operation (verb) based update (explicit verb via "update") <a href="operation-verb-based-update-explicit-verb-via-update" id="operation-verb-based-update-explicit-verb-via-update"></a>
 
-Each field supports a set of operations \(verbs\) for mutating the field. You can retrieve the editable fields and the operations they support using the "editmeta" resource. 
+Each field supports a set of operations (verbs) for mutating the field. You can retrieve the editable fields and the operations they support using the "editmeta" resource.&#x20;
 
 {% hint style="warning" %}
-The _editmeta_ endpoint is not mapped, yet refer to this [**ticket**](https://github.com/ctreminiom/go-atlassian/issues/18)
+The _editmeta _endpoint is not mapped, yet refer to this [**ticket**](https://github.com/ctreminiom/go-atlassian/issues/18)
 {% endhint %}
 
-The basic operations are defined below \(but custom fields can define their own\).
+The basic operations are defined below (but custom fields can define their own).
 
 The general shape of an update is field, array of verb-value pairs, for example:
 
@@ -403,8 +403,8 @@ if err != nil {
 
 * **SET:** Sets the value of the field. The incoming value must be the same shape as the value of the field from a GET. For example, a string for "summary", and array of strings for "labels".
 * **ADD:** Adds an element to a field that is an array. The incoming value must be the same shape as the items of the array in a GET. For example, to add a label:
-* **REMOVE:** Removes an element from a field that is an array. The incoming value must be the same shape as the items of the array in a GET \(although you can remove parts of the object that are not needed to uniquely identify the object\).
-* **EDIT:** Edits an element in a field that is an array. The element is indexed/identified by the value itself \(usually by id/name/key\).
+* **REMOVE:** Removes an element from a field that is an array. The incoming value must be the same shape as the items of the array in a GET (although you can remove parts of the object that are not needed to uniquely identify the object).
+* **EDIT: **Edits an element in a field that is an array. The element is indexed/identified by the value itself (usually by id/name/key).
 
 ```go
 package main
@@ -672,7 +672,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -783,4 +783,3 @@ func main() {
 
 
 ```
-

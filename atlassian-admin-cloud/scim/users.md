@@ -4,15 +4,15 @@
 The following user attributes can be updated through the user provisioning API.
 {% endhint %}
 
-| User profile field | SCIM field | Attribute type | Required |
-| :---: | :---: | :---: | :---: |
-| Display name | displayName | Singular | false |
-| Email address | emails | Multi-Valued | true |
-| Organization | organization | Singular | false |
-| Job title | title | Singular | false |
-| Timezone | timezone | Singular | false |
-| Department | department | Singular | false |
-| Preferred language | preferredLanguage | Singular | false |
+| User profile field |     SCIM field    | Attribute type | Required |
+| :----------------: | :---------------: | :------------: | :------: |
+|    Display name    |    displayName    |    Singular    |   false  |
+|    Email address   |       emails      |  Multi-Valued  |   true   |
+|    Organization    |    organization   |    Singular    |   false  |
+|      Job title     |       title       |    Singular    |   false  |
+|      Timezone      |      timezone     |    Singular    |   false  |
+|     Department     |     department    |    Singular    |   false  |
+| Preferred language | preferredLanguage |    Singular    |   false  |
 
 ## Get a user by ID
 
@@ -64,7 +64,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -197,7 +197,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -268,7 +268,7 @@ type SCIMExtensionScheme struct {
 
 ## Deactivate a user
 
-Deactivate a user by `userId`. The user is not available for future requests until activated again. Any future operation for the deactivated user returns the 404 \(resource not found\) error.
+Deactivate a user by `userId`. The user is not available for future requests until activated again. Any future operation for the deactivated user returns the 404 (resource not found) error.
 
 ```go
 package main
@@ -312,7 +312,7 @@ func main() {
 
 ```
 
-## Update user by ID \(PATCH\)
+## Update user by ID (PATCH)
 
 This operation updates a user's information in a directory by `userId` via `PATCH`
 
@@ -463,7 +463,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -534,7 +534,7 @@ type SCIMExtensionScheme struct {
 
 ## Get users
 
-Get users from the specified directory. Filtering is supported with a single exact match \(`eq`\) against the `userName` and `externalId` attributes. Pagination is supported. Sorting is not supported.
+Get users from the specified directory. Filtering is supported with a single exact match (`eq`) against the `userName` and `externalId` attributes. Pagination is supported. Sorting is not supported.
 
 ```go
 package main
@@ -588,7 +588,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -603,7 +603,7 @@ type SCIMUserPageScheme struct {
 
 ## Create a user
 
-Create a user in a directory. An attempt to create an existing user fails with a 409 \(Conflict\) error. A user account can only be created if it has an email address on a verified domain. If a managed Atlassian account already exists on the Atlassian platform for the specified email address, the user in your identity provider is linked to the user in your Atlassian organization.
+Create a user in a directory. An attempt to create an existing user fails with a 409 (Conflict) error. A user account can only be created if it has an email address on a verified domain. If a managed Atlassian account already exists on the Atlassian platform for the specified email address, the user in your identity provider is linked to the user in your Atlassian organization.
 
 ```go
 package main
@@ -672,7 +672,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -740,4 +740,3 @@ type SCIMExtensionScheme struct {
 	AtlassianAccountID string `json:"atlassianAccountId,omitempty"`
 }
 ```
-

@@ -52,7 +52,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -129,7 +129,7 @@ func main() {
 
 ## Delete a group by ID
 
-Delete a group from a directory. An attempt to delete a non-existent group fails with a 404 \(Resource Not found\) error.
+Delete a group from a directory. An attempt to delete a non-existent group fails with a 404 (Resource Not found) error.
 
 ```go
 package main
@@ -174,7 +174,7 @@ func main()  {
 
 ```
 
-## Update a group by ID \(PATCH\)
+## Update a group by ID (PATCH)
 
 Update a group's information in a directory by `groupId` via `PATCH`. You can use this API to manage group membership.
 
@@ -249,7 +249,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -279,7 +279,7 @@ type ScimMetadata struct {
 
 ## Get groups
 
-Get groups from a directory. Filtering is supported with a single exact match \(`eq`\) against the `displayName` attribute. Pagination is supported. Sorting is not supported.
+Get groups from a directory. Filtering is supported with a single exact match (`eq`) against the `displayName` attribute. Pagination is supported. Sorting is not supported.
 
 ```go
 package main
@@ -325,7 +325,7 @@ func main()  {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -340,7 +340,7 @@ type ScimGroupPageScheme struct {
 
 ## Create a group
 
-Create a group in a directory. An attempt to create a group with an existing name fails with a 409 \(Conflict\) error.
+Create a group in a directory. An attempt to create a group with an existing name fails with a 409 (Conflict) error.
 
 ```go
 package main
@@ -385,7 +385,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -412,4 +412,3 @@ type ScimMetadata struct {
 	Created      string `json:"created,omitempty"`
 }
 ```
-

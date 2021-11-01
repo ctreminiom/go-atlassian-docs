@@ -1,12 +1,12 @@
 # 🔗 Link
 
-You can link issues to keep track of duplicate or related work. You can, for example: 
+You can link issues to keep track of duplicate or related work. You can, for example:&#x20;
 
 * create a new linked issue from an existing issue in a service project or business project
 * create an association between an issue and a Confluence page
 * link an issue to any other web page
 
-Make sure you have the _link issues_ project permission before getting started. Note that your Jira administrator can customize the types of links that you can create.
+Make sure you have the _link issues _project permission before getting started. Note that your Jira administrator can customize the types of links that you can create.
 
 ![](../../../.gitbook/assets/kp-board-agile-board-jira.png)
 
@@ -16,7 +16,7 @@ This resource represents links between issues. Use it to get, create, and delete
 
 ## Create issue link
 
- Creates a link between two issues. Use this operation to indicate a relationship between two issues and optionally add a comment to the from \(outward\) issue, the method returns the following information:
+&#x20;Creates a link between two issues. Use this operation to indicate a relationship between two issues and optionally add a comment to the from (outward) issue, the method returns the following information:
 
 {% hint style="warning" %}
 If the link request duplicates a link, the response indicates that the issue link was created. If the request included a comment, the comment is added.
@@ -144,7 +144,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -233,7 +233,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -298,4 +298,3 @@ func main() {
 
 }
 ```
-

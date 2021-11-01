@@ -6,7 +6,7 @@ description: This resource represents permission schemes for a project.
 
 ## Get assigned permission scheme
 
- Gets the [permission scheme](https://confluence.atlassian.com/x/yodKLg) associated with the project.
+&#x20;Gets the [permission scheme](https://confluence.atlassian.com/x/yodKLg) associated with the project.
 
 ```go
 package main
@@ -53,7 +53,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -133,7 +133,7 @@ func main() {
 
 ## Get project issue security levels
 
- Returns all [issue security](https://confluence.atlassian.com/x/J4lKLg) levels for the project that the user has access to.
+&#x20;Returns all [issue security](https://confluence.atlassian.com/x/J4lKLg) levels for the project that the user has access to.
 
 ```go
 package main
@@ -181,4 +181,3 @@ func main() {
 	}
 }
 ```
-

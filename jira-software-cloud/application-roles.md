@@ -2,15 +2,17 @@
 
 This resource represents application roles. Use it to get details of an application role or all application roles.
 
-![This is the Application Roles with the groups associated ](../.gitbook/assets/image%20%283%29.png)
+![This is the Application Roles with the groups associated ](<../.gitbook/assets/image (3).png>)
 
 ### Get all application roles
 
- Returns all application roles. In Jira, application roles are managed using the [**Application access configuration**](https://confluence.atlassian.com/x/3YxjL) page.
+&#x20;Returns all application roles. In Jira, application roles are managed using the [**Application access configuration**](https://confluence.atlassian.com/x/3YxjL) page.
 
 * 🔒 **Permissions required**:  Administer Jira [global permission](https://confluence.atlassian.com/x/x4dKLg)
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-application-roles/\#api-rest-api-2-applicationrole-get" caption="Atlassian Official Documentation" %}
+{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-application-roles/#api-rest-api-2-applicationrole-get" %}
+Atlassian Official Documentation
+{% endembed %}
 
 ```go
 package main
@@ -59,7 +61,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -81,7 +83,7 @@ type ApplicationRoleScheme struct {
 
 ### Get application role
 
-This method returns an existing application role using the **key** as a parameter
+This method returns an existing application role using the **key **as a parameter
 
 * 🔒 **Permissions required**:  Administer Jira [global permission](https://confluence.atlassian.com/x/x4dKLg)
 
@@ -132,4 +134,3 @@ func main() {
 
 }
 ```
-

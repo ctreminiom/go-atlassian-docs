@@ -56,7 +56,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -155,7 +155,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -180,7 +180,7 @@ type SharePermissionScheme struct {
 
 ### Search for dashboards
 
-Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of dashboards. This operation is similar to [Get dashboards](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-dashboards/#api-rest-api-3-dashboard-get) except that the results can be refined to include dashboards that have specific attributes. 
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of dashboards. This operation is similar to [Get dashboards](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-dashboards/#api-rest-api-3-dashboard-get) except that the results can be refined to include dashboards that have specific attributes.&#x20;
 
 {% hint style="info" %}
 For example, dashboards with a particular name. When multiple attributes are specified only filters matching all attributes are returned.
@@ -242,7 +242,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -299,7 +299,7 @@ Returns a dashboard using the _dashboard-id_
 * 🔒 **Permissions required**:  Access to the application
 
 {% hint style="warning" %}
- However, to get a dashboard, the dashboard must be shared with the user or the user must own it. Note, users with _**Administer Jira**_ [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users.
+&#x20;However, to get a dashboard, the dashboard must be shared with the user or the user must own it. Note, users with _**Administer Jira**_ [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users.
 {% endhint %}
 
 ```go
@@ -343,7 +343,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -535,8 +535,6 @@ func main() {
 	log.Printf("Dashboard View: %v", dashboard.View)
 }
 ```
-
-
 
 
 

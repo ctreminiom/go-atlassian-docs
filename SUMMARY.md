@@ -1,6 +1,7 @@
 # Table of contents
 
 * [📑 Introduction](README.md)
+* [📊 Mapping Status](mapping-status.md)
 
 ## Jira Software Cloud
 
@@ -49,22 +50,26 @@
 * [👨‍👧‍👧 Users](jira-software-cloud/users/README.md)
   * [🔰 Search](jira-software-cloud/users/search.md)
 
-## Jira Service Management Cloud
+## Jira Software Cloud v2
 
-* [🙎‍♂️ Customer](jira-service-management-cloud/customer.md)
-* [🖥️ Info](jira-service-management-cloud/info.md)
-* [📚 Knowledgebase](jira-service-management-cloud/knowledgebase.md)
-* [🗳️ Organization](jira-service-management-cloud/organization.md)
-* [📙 Request](jira-service-management-cloud/request/README.md)
-  * [🚫 Approval](jira-service-management-cloud/request/approval.md)
-  * [📎 Attachments](jira-service-management-cloud/request/attachment.md)
-  * [📬 Comments](jira-service-management-cloud/request/comments.md)
-  * [☁️Feedback](jira-service-management-cloud/request/feedback.md)
-  * [👥 Participants](jira-service-management-cloud/request/participants.md)
-  * [⏰ SLA](jira-service-management-cloud/request/sla.md)
-  * [💾 Types](jira-service-management-cloud/request/types.md)
-  * [🗂️ Service Desk](jira-service-management-cloud/request/service-desk/README.md)
-    * [🛎️ Queue](jira-service-management-cloud/request/service-desk/queue.md)
+* [Page 1](jira-software-cloud-v2/page-1.md)
+
+## Jira Service Management
+
+* [🙎‍♂️ Customer](jira-service-management/customer.md)
+* [🖥️ Info](jira-service-management/info.md)
+* [📚 Knowledgebase](jira-service-management/knowledgebase.md)
+* [🗳️ Organization](jira-service-management/organization.md)
+* [📙 Request](jira-service-management/request/README.md)
+  * [🚫 Approval](jira-service-management/request/approval.md)
+  * [📎 Attachments](jira-service-management/request/attachment.md)
+  * [📬 Comments](jira-service-management/request/comments.md)
+  * [☁️Feedback](jira-service-management/request/feedback.md)
+  * [👥 Participants](jira-service-management/request/participants.md)
+  * [⏰ SLA](jira-service-management/request/sla.md)
+  * [💾 Types](jira-service-management/request/types.md)
+  * [🗂️ Service Desk](jira-service-management/request/service-desk/README.md)
+    * [🛎️ Queue](jira-service-management/request/service-desk/queue.md)
 
 ## Confluence Cloud
 
@@ -87,4 +92,3 @@
   * [🤹‍♂️ Users](atlassian-admin-cloud/scim/users.md)
   * [🧩 Groups](atlassian-admin-cloud/scim/groups.md)
   * [🏗️ Schemes](atlassian-admin-cloud/scim/schemes.md)
-

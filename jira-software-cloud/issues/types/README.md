@@ -60,7 +60,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -187,7 +187,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -265,7 +265,7 @@ func main() {
 
 ## Delete issue type
 
-Deletes the issue type. If the issue type is in use, all uses are updated with the alternative issue type \(`alternativeIssueTypeId`\). 
+Deletes the issue type. If the issue type is in use, all uses are updated with the alternative issue type (`alternativeIssueTypeId`).&#x20;
 
 ```go
 package main
@@ -360,4 +360,3 @@ func main() {
 	}
 }
 ```
-

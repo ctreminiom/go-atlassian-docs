@@ -113,7 +113,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -136,7 +136,7 @@ type ProjectComponentScheme struct {
 
 ## Update component
 
-Updates a component. Any fields included in the request are overwritten. If `leadAccountId` is an empty string \(""\) the component lead is removed.
+Updates a component. Any fields included in the request are overwritten. If `leadAccountId` is an empty string ("") the component lead is removed.
 
 ```go
 package main
@@ -285,7 +285,7 @@ func main() {
 
 ## Get project components paginated
 
- Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all components in a project
+&#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all components in a project
 
 ```go
 package main
@@ -333,4 +333,3 @@ func main() {
 	}
 }
 ```
-

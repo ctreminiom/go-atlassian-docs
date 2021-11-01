@@ -1,13 +1,13 @@
 # 🙍‍♂️ User
 
-The [user management REST API](https://developer.atlassian.com/cloud/admin/user-management/rest/intro/) lets you manage users \(managed accounts\) in an organization. Only an organization admin can edit the details of a managed account. As an organization admin with verified domains, you can use the user management REST API to perform operations including:
+The [user management REST API](https://developer.atlassian.com/cloud/admin/user-management/rest/intro/) lets you manage users (managed accounts) in an organization. Only an organization admin can edit the details of a managed account. As an organization admin with verified domains, you can use the user management REST API to perform operations including:
 
 * Get a list of your permissions to manage a user
 * Get information about a user
 * Update a user profile or set a user's email address
 * Enable or disable a user
 
-![](../../.gitbook/assets/image%20%2813%29.png)
+![](<../../.gitbook/assets/image (13).png>)
 
 ## Get user management permissions
 
@@ -101,7 +101,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -293,4 +293,3 @@ func main() {
 }
 
 ```
-

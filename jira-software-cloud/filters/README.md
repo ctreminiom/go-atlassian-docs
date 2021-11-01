@@ -1,6 +1,6 @@
 # ✂️ Filters
 
-A filter is a saved issue search. Jira users can search for issues using different criteria in basic or advanced search, and then save their results as a filter, becoming the filter’s owner. 
+A filter is a saved issue search. Jira users can search for issues using different criteria in basic or advanced search, and then save their results as a filter, becoming the filter’s owner.&#x20;
 
 The owner can decide what to do with their filter—either make it private for personal use or share it with different entities, such as users, projects, or groups. If the filter is private, only the owner and Jira admin can view and modify it.
 
@@ -69,10 +69,10 @@ func main() {
 }
 ```
 
-![Filter permissions on the UI interface](../../.gitbook/assets/image%20%286%29.png)
+![Filter permissions on the UI interface](<../../.gitbook/assets/image (6).png>)
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -221,10 +221,9 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 * 🔒 **Permissions required**:  None, however, only the following filters that match the query parameters are returned:
   * filters owned by the user.
   * filters shared with a group that the user is a member of.
-  * filters shared with a private project that the user has _Browse projects_ [project permission](https://confluence.atlassian.com/x/yodKLg)
+  *   filters shared with a private project that the user has _Browse projects_ [project permission](https://confluence.atlassian.com/x/yodKLg)
 
-    for.
-
+      for.
   * filters shared with a public project.
   * filters shared with the public.
 
@@ -316,7 +315,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -436,4 +435,3 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
-

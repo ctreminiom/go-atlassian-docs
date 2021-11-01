@@ -1,6 +1,6 @@
 # 🍳 Context
 
-When you create a custom field as a Jira administrator, you automatically create what's called a custom field context or custom field configuration scheme. 
+When you create a custom field as a Jira administrator, you automatically create what's called a custom field context or custom field configuration scheme.&#x20;
 
 This lets you select a custom field language and default value, as well as which issue types or projects the custom field appears in. If you're looking to simply edit the name or description of a custom field, or if you need to delete a custom field
 
@@ -17,14 +17,14 @@ This resource represents issue custom field contexts. Use it to:
 
 ## Get custom field contexts
 
- Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of [contexts](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html)
+&#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of [contexts](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html)
 
- for a custom field. Contexts can be returned as follows:
+&#x20;for a custom field. Contexts can be returned as follows:
 
 * With no other parameters set, all contexts.
 * By defining `id` only, all contexts from the list of IDs.
-* By defining `isAnyIssueType`, limit the list of contexts returned to either those that apply to all issue types \(true\) or those that apply to only a subset of issue types \(false\)
-* By defining `isGlobalContext`, limit the list of contexts return to either those that apply to all projects \(global contexts\) \(true\) or those that apply to only a subset of projects \(false\)
+* By defining `isAnyIssueType`, limit the list of contexts returned to either those that apply to all issue types (true) or those that apply to only a subset of issue types (false)
+* By defining `isGlobalContext`, limit the list of contexts return to either those that apply to all projects (global contexts) (true) or those that apply to only a subset of projects (false)
 
 ```go
 package main
@@ -76,7 +76,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -150,7 +150,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -167,7 +167,7 @@ type FieldContextScheme struct {
 
 ## Get custom field contexts default values
 
- Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of defaults for a custom field. The results can be filtered by `contextId`, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
+&#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of defaults for a custom field. The results can be filtered by `contextId`, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
 
 ```go
 package main
@@ -216,7 +216,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -241,65 +241,11 @@ type CustomFieldDefaultValueScheme struct {
 
 Sets default for contexts of a custom field. Default is defined using these objects:
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Type</th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">
-        <p></p>
-        <p><code>CustomFieldContextDefaultValueSingleOption</code>
-        </p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p><code>option.single</code>
-        </p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p>For single choice select lists and radio buttons.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">
-        <p></p>
-        <p><code>CustomFieldContextDefaultValueMultipleOption</code>
-        </p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p><code>option.multiple</code>
-        </p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p>For multiple-choice select lists and checkboxes.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">
-        <p></p>
-        <p><code>CustomFieldContextDefaultValueCascadingOption</code>
-        </p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p><code>option.cascading</code>
-        </p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p>For cascading select lists.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name                                                                     | Type                                        | Description                                                     |
+| ------------------------------------------------------------------------ | ------------------------------------------- | --------------------------------------------------------------- |
+| <p></p><p><code>CustomFieldContextDefaultValueSingleOption</code></p>    | <p></p><p><code>option.single</code></p>    | <p></p><p>For single choice select lists and radio buttons.</p> |
+| <p></p><p><code>CustomFieldContextDefaultValueMultipleOption</code></p>  | <p></p><p><code>option.multiple</code></p>  | <p></p><p>For multiple-choice select lists and checkboxes.</p>  |
+| <p></p><p><code>CustomFieldContextDefaultValueCascadingOption</code></p> | <p></p><p><code>option.cascading</code></p> | <p></p><p>For cascading select lists.</p>                       |
 
 {% hint style="info" %}
 Only one type of default object can be included in a request. To remove a default for a context, set the default parameter to `null`.
@@ -353,7 +299,7 @@ func main() {
 
 ## Update custom field context
 
- Updates a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
+&#x20;Updates a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
 
 ```go
 package main
@@ -398,7 +344,7 @@ func main() {
 
 ## Delete custom field context
 
- Deletes a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
+&#x20;Deletes a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
 
 ```go
 package main
@@ -620,7 +566,7 @@ func main() {
 
 ## Get project mappings for custom field context
 
- Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of context to project mappings for a custom field. The result can be filtered by `contextId`. Otherwise, all mappings are returned. Invalid IDs are ignored.
+&#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of context to project mappings for a custom field. The result can be filtered by `contextId`. Otherwise, all mappings are returned. Invalid IDs are ignored.
 
 ```go
 package main
@@ -659,4 +605,3 @@ func main() {
 
 }
 ```
-

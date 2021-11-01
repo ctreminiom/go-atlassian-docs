@@ -64,7 +64,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -349,7 +349,7 @@ func main() {
 
 ## Get all users
 
-Returns a list of all \(active and inactive\) users.
+Returns a list of all (active and inactive) users.
 
 ```go
 package main
@@ -408,4 +408,3 @@ func main() {
 }
 
 ```
-

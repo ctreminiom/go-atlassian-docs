@@ -159,7 +159,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -176,7 +176,7 @@ type ProjectSearchScheme struct {
 
 ## Get project
 
- Returns the [project details](https://confluence.atlassian.com/x/ahLpNw)
+&#x20;Returns the [project details](https://confluence.atlassian.com/x/ahLpNw)
 
 ```go
 package main
@@ -227,7 +227,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags   
+🧚‍♀️ **Tips: **You can extract the following struct tags  &#x20;
 {% endhint %}
 
 ```go
@@ -268,7 +268,7 @@ type ProjectScheme struct {
 
 ## Update project
 
- Updates the [project details](https://confluence.atlassian.com/x/ahLpNw) of a project.
+&#x20;Updates the [project details](https://confluence.atlassian.com/x/ahLpNw) of a project.
 
 ```go
 package main
@@ -446,7 +446,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags   
+🧚‍♀️ **Tips: **You can extract the following struct tags  &#x20;
 {% endhint %}
 
 ```go
@@ -613,7 +613,7 @@ func main() {
 
 ## Get project notification scheme
 
- Gets a [notification scheme](https://confluence.atlassian.com/x/8YdKLg) associated with the project. 
+&#x20;Gets a [notification scheme](https://confluence.atlassian.com/x/8YdKLg) associated with the project.&#x20;
 
 ```go
 package main
@@ -672,7 +672,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -710,4 +710,3 @@ type EventNotificationScheme struct {
    User             *UserScheme        `json:"user,omitempty"`
 }
 ```
-

@@ -8,7 +8,7 @@ description: >-
 
 ## Get project roles for project
 
- Returns a list of [project roles](https://confluence.atlassian.com/x/3odKLg) for the project returning the name and self URL for each role.
+&#x20;Returns a list of [project roles](https://confluence.atlassian.com/x/3odKLg) for the project returning the name and self URL for each role.
 
 ```go
 package main
@@ -112,7 +112,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -145,7 +145,7 @@ type RoleActorScheme struct {
 
 ## Get project role details
 
- Returns all [project roles](https://confluence.atlassian.com/x/3odKLg) and the details for each role. Note that the list of project roles is common to all projects.
+&#x20;Returns all [project roles](https://confluence.atlassian.com/x/3odKLg) and the details for each role. Note that the list of project roles is common to all projects.
 
 ```go
 package main
@@ -199,7 +199,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
+🧚‍♀️ **Tips: **You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -269,7 +269,7 @@ func main() {
 
 ## Create project role
 
-Creates a new project role with no [default actors](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-resolutions/#api-rest-api-3-resolution-get). 
+Creates a new project role with no [default actors](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-resolutions/#api-rest-api-3-resolution-get).&#x20;
 
 ```go
 package main
@@ -319,4 +319,3 @@ func main() {
 	log.Println(newRole)
 }
 ```
-
