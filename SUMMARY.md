@@ -52,7 +52,7 @@
 
 ## Jira Software Cloud v2
 
-* [Page 1](jira-software-cloud-v2/page-1.md)
+* [🐞 Issues](jira-software-cloud-v2/issues.md)
 
 ## Jira Service Management
 
