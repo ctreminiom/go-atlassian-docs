@@ -50,6 +50,12 @@
 * [👨‍👧‍👧 Users](jira-software-cloud/users/README.md)
   * [🔰 Search](jira-software-cloud/users/search.md)
 
+## Jira Agile
+
+* [📉 Boards](jira-agile/boards.md)
+* [🗓 Sprints](jira-agile/sprints.md)
+* [📈 Epics](jira-agile/epics.md)
+
 ## Jira Software Cloud v2
 
 * [🐞 Issues](jira-software-cloud-v2/issues.md)
