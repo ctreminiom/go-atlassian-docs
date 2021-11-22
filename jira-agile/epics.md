@@ -21,7 +21,11 @@ Returns the epic for a given epic ID. This epic will only be returned if the use
 Returns all issues that belong to the epic, for the given epic ID. This only includes issues that the user has permission to view. Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
 
 {% hint style="warning" %}
-**Note:** If you are querying a next-gen project, do not use this operation. Instead, search for issues that belong to an epic by using the Search for issues using JQL operation in the Jira platform REST API. Build your JQL query using the parent clause. For more information on the parent JQL field, see Advanced searching.
+**Note:** If you are querying a next-gen project, do not use this operation. Instead, search for issues that belong to an epic by using the Search for issues using JQL operation in the Jira platform REST API.&#x20;
+{% endhint %}
+
+{% hint style="warning" %}
+Build your JQL query using the parent clause. For more information on the parent JQL field, see Advanced searching.
 {% endhint %}
 
 {% embed url="https://gist.github.com/ctreminiom/fab5aaae6608469e3f7dc2ca4feb6fd7" %}

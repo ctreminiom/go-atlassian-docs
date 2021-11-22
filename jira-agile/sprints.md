@@ -7,7 +7,7 @@ description: >-
 
 # 🗓 Sprints
 
-### Create sprint <a href="api-agile-1-0-sprint-post" id="api-agile-1-0-sprint-post"></a>
+### Create sprint <a href="create-print" id="create-print"></a>
 
 Creates a future sprint. Sprint name and origin board id are required. Start date, end date, and goal are optional.
 
