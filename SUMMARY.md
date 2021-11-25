@@ -1,6 +1,8 @@
 # Table of contents
 
 * [📑 Introduction](README.md)
+* [🛠 Cookbooks](cookbooks/README.md)
+  * [TODO](cookbooks/todo.md)
 
 ## Jira Software Cloud
 
