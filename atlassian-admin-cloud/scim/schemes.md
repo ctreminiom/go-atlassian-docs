@@ -1,4 +1,4 @@
-# 🏗️ Schemes
+# 🔩 Schemes
 
 ## Get all schemas
 

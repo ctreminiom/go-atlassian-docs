@@ -1,4 +1,4 @@
-# 🖥️ Info
+# ℹ Info
 
 ## Get info
 

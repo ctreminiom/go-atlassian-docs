@@ -1,4 +1,4 @@
-# 🏷️ Labels
+# 🚩 Labels
 
 ## Get labels for content
 

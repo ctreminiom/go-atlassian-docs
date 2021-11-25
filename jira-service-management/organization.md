@@ -1,4 +1,4 @@
-# 🗳️ Organization
+# 🪜 Organization
 
 ## Get organizations
 

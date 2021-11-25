@@ -12,7 +12,7 @@ coverY: -477.5
 
 go-atlassian is a Go module that enables the interaction with the Atlassian Cloud Services.
 
-## ✨ Features
+## :sparkles: Features
 
 * Supports Jira Software v3.0 API. **(88% mapped)**
 * Interacts with the Jira Agile entities such as: Epics, Board, Backlog, Ranks, etc.
@@ -28,7 +28,7 @@ go-atlassian is a Go module that enables the interaction with the Atlassian Clou
 * Every method has their corresponding example documented.
 * 3036 Unit Test Cases created and passed.
 
-## 🔰 Installation
+## :information\_source: Installation
 
 Make sure you have Go installed (download). Version `1.13` or higher is required.
 
@@ -43,11 +43,11 @@ $ go get -u -v github.com/ctreminiom/go-atlassian/admin/
 $ go get -u -v github.com/ctreminiom/go-atlassian/confluence/
 ```
 
-## 📓 Documentation
+## :book: Documentation
 
 Documentation is hosted live at [https://docs.go-atlassian.io/](https://docs.go-atlassian.io)
 
-## 📝 Usage
+## :chart\_with\_upwards\_trend: Usage
 
 More examples in `jira/examples` `admin/examples` `jira/sm/examples` directories. Here's a short example of how to get a Jira Issue:
 
@@ -98,15 +98,15 @@ func main() {
 }
 ```
 
-## 🧳 JetBrains OS licenses
+## :package: JetBrains OS licenses
 
 `go-atlassian` had been being developed with GoLand under the **free JetBrains Open Source license(s)** granted by JetBrains s.r.o., hence I would like to express my thanks here.
 
-## 🪐 GitBook Host
+## :airplane: GitBook Host
 
 `go-atlassian` documentation is hosted using the GitBook non-profit / open-source plan so hence I would like to express my thanks here.
 
-## ⭐️ Project assistance
+## :star: Project assistance
 
 If you want to say **thank you** or/and support active development of `go-atlassian`:
 
@@ -118,17 +118,17 @@ If you want to say **thank you** or/and support active development of `go-atlass
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom\_images/orange\_img.png)](https://www.buymeacoffee.com/ctreminiom)
 
-## 💡 Inspiration
+## :bulb: Inspiration
 
 The project was created with the purpose to provide a unique point to provide an interface for interacting with Atlassian products. This module is highly inspired by the Go library [https://github.com/andygrunwald/go-jira](https://github.com/andygrunwald/go-jira) but focused on Cloud solutions.
 
-## 🧪 Run Test Cases
+## :test\_tube: Run Test Cases
 
 ```bash
 go test -v ./...
 ```
 
-## 📝 License
+## :space\_invader: License
 
 Copyright © 2021 [Carlos Treminio](https://github.com/ctreminiom). This project is [MIT](https://opensource.org/licenses/MIT) licensed.
 

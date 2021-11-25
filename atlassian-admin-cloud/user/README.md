@@ -1,4 +1,4 @@
-# 🙍‍♂️ User
+# 👥 User
 
 The [user management REST API](https://developer.atlassian.com/cloud/admin/user-management/rest/intro/) lets you manage users (managed accounts) in an organization. Only an organization admin can edit the details of a managed account. As an organization admin with verified domains, you can use the user management REST API to perform operations including:
 

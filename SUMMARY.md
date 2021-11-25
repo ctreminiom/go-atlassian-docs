@@ -1,7 +1,6 @@
 # Table of contents
 
 * [📑 Introduction](README.md)
-* [📊 Mapping Status](mapping-status.md)
 
 ## Jira Software Cloud
 
@@ -58,39 +57,39 @@
 
 ## Jira Service Management
 
-* [🙎‍♂️ Customer](jira-service-management/customer.md)
-* [🖥️ Info](jira-service-management/info.md)
+* [🧑🚀 Customer](jira-service-management/customer.md)
+* [ℹ Info](jira-service-management/info.md)
 * [📚 Knowledgebase](jira-service-management/knowledgebase.md)
-* [🗳️ Organization](jira-service-management/organization.md)
+* [🪜 Organization](jira-service-management/organization.md)
 * [📙 Request](jira-service-management/request/README.md)
   * [🚫 Approval](jira-service-management/request/approval.md)
-  * [📎 Attachments](jira-service-management/request/attachment.md)
+  * [📂 Attachments](jira-service-management/request/attachment.md)
   * [📬 Comments](jira-service-management/request/comments.md)
-  * [☁️Feedback](jira-service-management/request/feedback.md)
+  * [📮 Feedback](jira-service-management/request/feedback.md)
   * [👥 Participants](jira-service-management/request/participants.md)
   * [⏰ SLA](jira-service-management/request/sla.md)
   * [💾 Types](jira-service-management/request/types.md)
-  * [🗂️ Service Desk](jira-service-management/request/service-desk/README.md)
-    * [🛎️ Queue](jira-service-management/request/service-desk/queue.md)
+  * [🗄 Service Desk](jira-service-management/request/service-desk/README.md)
+    * [🛎 Queue](jira-service-management/request/service-desk/queue.md)
 
 ## Confluence Cloud
 
 * [📃 Content](confluence-cloud/content/README.md)
   * [🎮 Properties](confluence-cloud/content/properties.md)
-  * [📎 Attachments](confluence-cloud/content/attachments.md)
+  * [📂 Attachments](confluence-cloud/content/attachments.md)
   * [📬 Comments](confluence-cloud/content/comments.md)
-  * [🏷️ Labels](confluence-cloud/content/labels.md)
-  * [🛡️ Permissions](confluence-cloud/content/permissions.md)
+  * [🚩 Labels](confluence-cloud/content/labels.md)
+  * [🛡 Permissions](confluence-cloud/content/permissions.md)
 * [💾 Space](confluence-cloud/space.md)
 
 ## Atlassian Admin Cloud
 
 * [📃 Overview](atlassian-admin-cloud/untitled.md)
-* [🗃️ Organization](atlassian-admin-cloud/organization/README.md)
+* [📔 Organization](atlassian-admin-cloud/organization/README.md)
   * [👔 Policy](atlassian-admin-cloud/organization/policy.md)
-* [🙍‍♂️ User](atlassian-admin-cloud/user/README.md)
-  * [🗜️ Token](atlassian-admin-cloud/user/token.md)
+* [👥 User](atlassian-admin-cloud/user/README.md)
+  * [🔓 Token](atlassian-admin-cloud/user/token.md)
 * [🧰 SCIM](atlassian-admin-cloud/scim/README.md)
-  * [🤹‍♂️ Users](atlassian-admin-cloud/scim/users.md)
+  * [🧙♂ Users](atlassian-admin-cloud/scim/users.md)
   * [⛹♂ Groups](atlassian-admin-cloud/scim/groups.md)
-  * [🏗️ Schemes](atlassian-admin-cloud/scim/schemes.md)
+  * [🔩 Schemes](atlassian-admin-cloud/scim/schemes.md)

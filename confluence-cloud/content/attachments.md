@@ -1,4 +1,4 @@
-# 📎 Attachments
+# 📂 Attachments
 
 ## Get attachments
 

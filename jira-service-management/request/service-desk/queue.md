@@ -1,4 +1,4 @@
-# 🛎️ Queue
+# 🛎 Queue
 
 ## Get queues
 

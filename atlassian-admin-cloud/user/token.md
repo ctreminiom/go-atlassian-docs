@@ -1,4 +1,4 @@
-# 🗜️ Token
+# 🔓 Token
 
 ## Get API tokens
 

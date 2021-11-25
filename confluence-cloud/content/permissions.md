@@ -1,4 +1,4 @@
-# 🛡️ Permissions
+# 🛡 Permissions
 
 ## Check content permissions
 

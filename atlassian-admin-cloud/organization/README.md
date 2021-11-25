@@ -1,4 +1,4 @@
-# 🗃️ Organization
+# 📔 Organization
 
 The [organizations REST API](https://developer.atlassian.com/cloud/admin/organization/rest/intro/) lets you get information about your organizations, including:
 
