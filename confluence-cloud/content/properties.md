@@ -66,48 +66,49 @@ Creates a property for an existing piece of content. For more information about 
 package main
 
 import (
-   "context"
-   "fmt"
-   "github.com/ctreminiom/go-atlassian/confluence"
-   "log"
-   "net/http"
-   "os"
+	"context"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/confluence"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"net/http"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   instance, err := confluence.New(nil, host)
-   if err != nil {
-      log.Fatal(err)
-   }
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   instance.Auth.SetBasicAuth(mail, token)
-   instance.Auth.SetUserAgent("curl/7.54.0")
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
 
-   var payload = &confluence.ContentPropertyPayloadScheme{
-      Key:   "key",
-      Value: "value",
-   }
+	var payload = &models.ContentPropertyPayloadScheme{
+		Key:   "key",
+		Value: "value",
+	}
 
-   property, response, err := instance.Content.Property.Create(context.Background(), "80412692", payload)
-   if err != nil {
-      if response != nil {
-         if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
-         }
-      }
-      log.Fatal(err)
-   }
+	property, response, err := instance.Content.Property.Create(context.Background(), "80412692", payload)
+	if err != nil {
+		if response != nil {
+			if response.Code == http.StatusBadRequest {
+				log.Println(response.API)
+			}
+		}
+		log.Fatal(err)
+	}
 
-   log.Println("Endpoint:", response.Endpoint)
-   log.Println("Status Code:", response.Code)
-   fmt.Println(property)
+	log.Println("Endpoint:", response.Endpoint)
+	log.Println("Status Code:", response.Code)
+	fmt.Println(property)
 
 }
 ```
@@ -205,4 +206,3 @@ func main() {
    log.Println("Status Code:", response.Code)
 }
 ```
-

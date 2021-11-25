@@ -4,15 +4,7 @@
 The following user attributes can be updated through the user provisioning API.
 {% endhint %}
 
-| User profile field |     SCIM field    | Attribute type | Required |
-| :----------------: | :---------------: | :------------: | :------: |
-|    Display name    |    displayName    |    Singular    |   false  |
-|    Email address   |       emails      |  Multi-Valued  |   true   |
-|    Organization    |    organization   |    Singular    |   false  |
-|      Job title     |       title       |    Singular    |   false  |
-|      Timezone      |      timezone     |    Singular    |   false  |
-|     Department     |     department    |    Singular    |   false  |
-| Preferred language | preferredLanguage |    Singular    |   false  |
+<table data-header-hidden><thead><tr><th align="center">User profile field</th><th align="center">SCIM field</th><th align="center">Attribute type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td align="center">User profile field</td><td align="center">SCIM field</td><td align="center">Attribute type</td><td></td></tr><tr><td align="center">Display name</td><td align="center">displayName</td><td align="center">Singular</td><td></td></tr><tr><td align="center">Email address</td><td align="center">emails</td><td align="center">Multi-Valued</td><td></td></tr><tr><td align="center">Organization</td><td align="center">organization</td><td align="center">Singular</td><td></td></tr><tr><td align="center">Job title</td><td align="center">title</td><td align="center">Singular</td><td></td></tr><tr><td align="center">Timezone</td><td align="center">timezone</td><td align="center">Singular</td><td></td></tr><tr><td align="center">Department</td><td align="center">department</td><td align="center">Singular</td><td></td></tr><tr><td align="center">Preferred language</td><td align="center">preferredLanguage</td><td align="center">Singular</td><td></td></tr></tbody></table>
 
 ## Get a user by ID
 
@@ -143,6 +135,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -165,13 +158,13 @@ func main() {
 		userID      = "ef5ff80e-9ca6-449c-8cca-5b621085c6c9"
 	)
 
-	payload := &admin.SCIMUserScheme{
+	payload := &models.SCIMUserScheme{
 		UserName:    "username-updated-with-overwrite-method",
 		DisplayName: "AA",
 		NickName:    "AA",
 		Title:       "AA",
 		Department:  "President",
-		Emails: []*admin.SCIMUserEmailScheme{
+		Emails: []*models.SCIMUserEmailScheme{
 			{
 				Value:   "carlos@go-atlassian.io",
 				Type:    "work",
@@ -182,18 +175,19 @@ func main() {
 	userUpdated, response, err := cloudAdmin.SCIM.User.Update(context.Background(), directoryID, userID, payload, nil, nil)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(userUpdated.DisplayName)
 	log.Println(userUpdated.Active)
 	log.Println(userUpdated.Department)
 
 }
+
 ```
 
 {% hint style="info" %}
@@ -322,6 +316,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -344,7 +339,7 @@ func main() {
 		userID      = "ef5ff80e-9ca6-449c-8cca-5b621085c6c9"
 	)
 
-	payload := &admin.SCIMUserToPathScheme{
+	payload := &models.SCIMUserToPathScheme{
 		Schemas: []string{"urn:ietf:params:scim:api:messages:2.0:PatchOp"},
 	}
 
@@ -360,7 +355,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err = payload.AddComplexOperation("add", "emails", []*admin.SCIMUserComplexOperationScheme{
+	if err = payload.AddComplexOperation("add", "emails", []*models.SCIMUserComplexOperationScheme{
 		{
 			Value:     "primary@go-atlassian.io",
 			ValueType: "work",
@@ -445,12 +440,12 @@ func main() {
 	userUpdated, response, err := cloudAdmin.SCIM.User.Path(context.Background(), directoryID, userID, payload, nil, nil)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(userUpdated.DisplayName)
 	log.Println(userUpdated.Active)
@@ -459,7 +454,6 @@ func main() {
 		log.Println(mail)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -542,6 +536,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -561,7 +556,7 @@ func main() {
 
 	var directoryID = "bcdde508-ee40-4df2-89cc-d3f6292c5971"
 
-	options := &admin.SCIMUserGetsOptionsScheme{
+	options := &models.SCIMUserGetsOptionsScheme{
 		Attributes:         nil,
 		ExcludedAttributes: nil,
 		Filter:             "",
@@ -570,12 +565,12 @@ func main() {
 	users, response, err := cloudAdmin.SCIM.User.Gets(context.Background(), directoryID, options, 0, 50)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, user := range users.Resources {
@@ -584,7 +579,6 @@ func main() {
 
 	log.Println(users.ItemsPerPage, users.TotalResults)
 }
-
 ```
 
 {% hint style="info" %}
@@ -611,6 +605,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -630,16 +625,16 @@ func main() {
 
 	var directoryID = "bcdde508-ee40-4df2-89cc-d3f6292c5971"
 
-	var payload = &admin.SCIMUserScheme{
-		UserName: "Example Username 3",
-		Emails: []*admin.SCIMUserEmailScheme{
+	var payload = &models.SCIMUserScheme{
+		UserName: "Example Username 4",
+		Emails: []*models.SCIMUserEmailScheme{
 			{
-				Value:   "example-2@go-atlassian.io",
+				Value:   "example-4@go-atlassian.io",
 				Type:    "work",
 				Primary: true,
 			},
 		},
-		Name: &admin.SCIMUserNameScheme{
+		Name: &models.SCIMUserNameScheme{
 			Formatted:       "Example Full Name with Last Name",
 			FamilyName:      "Example Family Name",
 			GivenName:       "Example Name",
@@ -658,17 +653,16 @@ func main() {
 	newUser, response, err := cloudAdmin.SCIM.User.Create(context.Background(), directoryID, payload, nil, nil)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(newUser.ID)
 
 }
-
 ```
 
 {% hint style="info" %}

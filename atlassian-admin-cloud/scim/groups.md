@@ -1,4 +1,4 @@
-# 🧩 Groups
+# ⛹♂ Groups
 
 ## Get a group by ID
 
@@ -188,6 +188,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -211,13 +212,13 @@ func main() {
 		accountID   = "635cdb2f-e72c-4122-bfd3-3aa6c7f02f96"
 	)
 
-	payload := &admin.SCIMGroupPathScheme{
+	payload := &models.SCIMGroupPathScheme{
 		Schemas: []string{"urn:ietf:params:scim:api:messages:2.0:PatchOp"},
-		Operations: []*admin.SCIMGroupOperationScheme{
+		Operations: []*models.SCIMGroupOperationScheme{
 			{
 				Op:   "add",
 				Path: "members",
-				Value: []*admin.SCIMGroupOperationValueScheme{
+				Value: []*models.SCIMGroupOperationValueScheme{
 					{
 						Value:   accountID,
 						Display: "Example Display Name",
@@ -230,12 +231,12 @@ func main() {
 	group, response, err := cloudAdmin.SCIM.Group.Path(context.Background(), directoryID, groupID, payload)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	log.Println(group.ID, group.DisplayName)
@@ -245,7 +246,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}

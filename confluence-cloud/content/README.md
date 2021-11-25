@@ -61,57 +61,63 @@ Creates a new piece of content or publishes an existing draft. To publish a draf
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/confluence"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/confluence"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   instance, err := confluence.New(nil, host)
-   if err != nil {
-      log.Fatal(err)
-   }
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   instance.Auth.SetBasicAuth(mail, token)
-   instance.Auth.SetUserAgent("curl/7.54.0")
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
 
-   var payload = &confluence.ContentScheme{
-      Type:  "page", // Valid values: page, blogpost, comment
-      Title: "Confluence Page Title",
-      Space: &confluence.SpaceScheme{Key: "DUMMY"},
-      Body: &confluence.BodyScheme{
-         Storage: &confluence.BodyNodeScheme{
-            Value:          "<p>This is <br/> a new page</p>",
-            Representation: "storage",
-         },
-      },
-   }
+	var payload = &models.ContentScheme{
+		Type:  "page", // Valid values: page, blogpost, comment
+		Title: "Confluence Page Title",
+		Space: &models.SpaceScheme{Key: "DUMMY"},
+		Body: &models.BodyScheme{
+			Storage: &models.BodyNodeScheme{
+				Value:          "<p>This is <br/> a new page</p>",
+				Representation: "storage",
+			},
+		},
+		Ancestors: []*models.ContentScheme{
+			{
+				ID: "78643265",
+			},
+		},
+	}
 
-   newConfluence, response, err := instance.Content.Create(context.Background(), payload)
-   if err != nil {
+	newConfluence, response, err := instance.Content.Create(context.Background(), payload)
+	if err != nil {
 
-      if response != nil {
-         log.Fatal(response.API)
-      }
-      log.Fatal(err)
-   }
+		if response != nil {
+			log.Fatal(response.API)
+		}
+		log.Fatal(err)
+	}
 
-   log.Println("Endpoint:", response.Endpoint)
-   log.Println("Status Code:", response.Code)
+	log.Println("Endpoint:", response.Endpoint)
+	log.Println("Status Code:", response.Code)
 
-   log.Println("The new content has been created")
-   log.Println(newConfluence.ID)
-   log.Println(newConfluence.Links.Self)
-   log.Println(newConfluence.Title)
-   log.Println(newConfluence.Space.Name)
+	log.Println("The new content has been created")
+	log.Println(newConfluence.ID)
+	log.Println(newConfluence.Links.Self)
+	log.Println(newConfluence.Title)
+	log.Println(newConfluence.Space.Name)
 }
 ```
 
@@ -180,53 +186,54 @@ Updates a piece of content. Use this method to update the title or body of a pie
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/confluence"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/confluence"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
 )
 
 func main()  {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   instance, err := confluence.New(nil, host)
-   if err != nil {
-      log.Fatal(err)
-   }
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   instance.Auth.SetBasicAuth(mail, token)
-   instance.Auth.SetUserAgent("curl/7.54.0")
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
 
-   var payload = &confluence.ContentScheme{
-      Type:  "page", // Valid values: page, blogpost, comment
-      Title: "Confluence Page Title - Updated",
-      Body: &confluence.BodyScheme{
-         Storage: &confluence.BodyNodeScheme{
-            Value:          "<p>This is <br/> a new page - updated</p>",
-            Representation: "storage",
-         },
-      },
-      Version: &confluence.VersionScheme{Number: 2},
-   }
+	var payload = &models.ContentScheme{
+		Type:  "page", // Valid values: page, blogpost, comment
+		Title: "Confluence Page Title - Updated",
+		Body: &models.BodyScheme{
+			Storage: &models.BodyNodeScheme{
+				Value:          "<p>This is <br/> a new page - updated</p>",
+				Representation: "storage",
+			},
+		},
+		Version: &models.ContentVersionScheme{Number: 2},
+	}
 
-   content, response, err := instance.Content.Update(context.Background(), "64290828", payload)
-   if err != nil {
+	content, response, err := instance.Content.Update(context.Background(), "64290828", payload)
+	if err != nil {
 
-      if response != nil {
-         log.Println(response.API)
-      }
+		if response != nil {
+			log.Println(response.API)
+		}
 
-      log.Fatal(err)
-   }
+		log.Fatal(err)
+	}
 
-   log.Println("Endpoint:",    response.Endpoint)
-   log.Println("Status Code:", response.Code)
-   log.Println(content)
+	log.Println("Endpoint:",	 response.Endpoint)
+	log.Println("Status Code:", response.Code)
+	log.Println(content)
 }
 ```
 
@@ -333,3 +340,61 @@ func main()  {
 }
 ```
 
+## Search Contents by CQL
+
+Returns the list of content that matches a Confluence Query Language (CQL) query. For information on CQL, see: [Advanced searching using CQL](https://developer.atlassian.com/cloud/confluence/advanced-searching-using-cql/).
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/confluence"
+	"log"
+	"net/http"
+	"os"
+)
+
+func main()  {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
+
+	var (
+		cql = "type=page"
+		cqlContext = ""
+		expand = []string{"childTypes.all", "metadata.labels"}
+		maxResults = 50
+	)
+
+	contentPage, response, err := instance.Content.Search(context.Background(), cql, cqlContext, expand, "", maxResults)
+	if err != nil {
+
+		if response.Code == http.StatusBadRequest {
+			log.Println(response.API)
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Endpoint:", response.Endpoint)
+	log.Println("Status Code:", response.Code)
+	log.Println(contentPage.Links.Next)
+
+
+	for _, content := range contentPage.Results {
+		log.Println(content.Title, content.ID)
+	}
+}
+
+```

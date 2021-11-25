@@ -2,7 +2,7 @@
 
 ## Get content for space
 
-Returns all content in a space. The returned content is grouped by type \(pages then blogposts\), then ordered by content ID in ascending order.
+Returns all content in a space. The returned content is grouped by type (pages then blogposts), then ordered by content ID in ascending order.
 
 ```go
 package main
@@ -131,57 +131,58 @@ Creates a new space. Note, currently you cannot set space labels when creating a
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/confluence"
-   "log"
-   "net/http"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/confluence"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"net/http"
+	"os"
 )
 
 func main()  {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   instance, err := confluence.New(nil, host)
-   if err != nil {
-      log.Fatal(err)
-   }
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   instance.Auth.SetBasicAuth(mail, token)
-   instance.Auth.SetUserAgent("curl/7.54.0")
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
 
-   var payload = &confluence.CreateSpaceScheme{
-      Key:              "DUM",
-      Name:             "Dum Confluence Space",
-      Description:      &confluence.CreateSpaceDescriptionScheme{
-         Plain: &confluence.CreateSpaceDescriptionPlainScheme{
-            Value:          "Confluence Space Description Sample",
-            Representation: "plain",
-         },
-      },
-      AnonymousAccess:  true,
-      UnlicensedAccess: false,
-   }
+	var payload = &models.CreateSpaceScheme{
+		Key:              "DUM",
+		Name:             "Dum Confluence Space",
+		Description:      &models.CreateSpaceDescriptionScheme{
+			Plain: &models.CreateSpaceDescriptionPlainScheme{
+				Value:          "Confluence Space Description Sample",
+				Representation: "plain",
+			},
+		},
+		AnonymousAccess:  true,
+		UnlicensedAccess: false,
+	}
 
-   space, response, err := instance.Space.Create(context.Background(), payload, false)
-   if err != nil {
+	space, response, err := instance.Space.Create(context.Background(), payload, false)
+	if err != nil {
 
-      if response != nil {
-         if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
-         }
-      }
-      log.Println("Endpoint:", response.Endpoint)
-      log.Fatal(err)
-   }
+		if response != nil {
+			if response.Code == http.StatusBadRequest {
+				log.Println(response.API)
+			}
+		}
+		log.Println("Endpoint:", response.Endpoint)
+		log.Fatal(err)
+	}
 
-   log.Println("Endpoint:", response.Endpoint)
-   log.Println("Status Code:", response.Code)
-   log.Println(space)
+	log.Println("Endpoint:", response.Endpoint)
+	log.Println("Status Code:", response.Code)
+	log.Println(space)
 }
 ```
 
@@ -285,6 +286,74 @@ func main()  {
 }
 ```
 
+## Get Spaces
+
+Returns all spaces. The returned spaces are ordered alphabetically in ascending order by space key.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/confluence"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"net/http"
+	"os"
+)
+
+func main()  {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
+
+	var (
+		options = &models.GetSpacesOptionScheme{
+			SpaceKeys:       nil,
+			SpaceIDs:        []int{80838666, 196613},
+			SpaceType:       "",
+			Status:          "",
+			Labels:          nil,
+			Favorite:        false,
+			FavoriteUserKey: "",
+			Expand:          nil,
+		}
+		startAt = 0
+		maxResults = 25
+	)
+
+	spaces, response, err := instance.Space.Gets(context.Background(), options, startAt, maxResults)
+	if err != nil {
+
+		if response != nil {
+			if response.Code == http.StatusBadRequest {
+				log.Println(response.API)
+			}
+		}
+		log.Println("Endpoint:", response.Endpoint)
+		log.Fatal(err)
+	}
+
+	log.Println("Endpoint:", response.Endpoint)
+	log.Println("Status Code:", response.Code)
+
+	for _, space := range spaces.Results {
+		log.Println(space.Name, space.Key, space.ID)
+	}
+}
+```
+
 ## Update space
 
 Updates the name, description, or homepage of a space.
@@ -296,58 +365,59 @@ Updates the name, description, or homepage of a space.
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/confluence"
-   "log"
-   "net/http"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/confluence"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"net/http"
+	"os"
 )
 
 func main()  {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   instance, err := confluence.New(nil, host)
-   if err != nil {
-      log.Fatal(err)
-   }
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   instance.Auth.SetBasicAuth(mail, token)
-   instance.Auth.SetUserAgent("curl/7.54.0")
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
 
-   var (
-      spaceKey = "DUMMY"
-      payload = &confluence.UpdateSpaceScheme{
-         Name:        "DUMMY Space - Updated",
-         Description: &confluence.CreateSpaceDescriptionScheme{
-            Plain: &confluence.CreateSpaceDescriptionPlainScheme{
-               Value:          "Dummy Space - Description - Updated",
-               Representation: "plain",
-            },
-         },
-         Homepage:    &confluence.UpdateSpaceHomepageScheme{ID: "65798145"},
-      }
-   )
+	var (
+		spaceKey = "DUMMY"
+		payload = &models.UpdateSpaceScheme{
+			Name:        "DUMMY Space - Updated",
+			Description: &models.CreateSpaceDescriptionScheme{
+				Plain: &models.CreateSpaceDescriptionPlainScheme{
+					Value:          "Dummy Space - Description - Updated",
+					Representation: "plain",
+				},
+			},
+			Homepage:    &models.UpdateSpaceHomepageScheme{ID: "65798145"},
+		}
+	)
 
-   spaceUpdated, response, err := instance.Space.Update(context.Background(), spaceKey, payload)
-   if err != nil {
+	spaceUpdated, response, err := instance.Space.Update(context.Background(), spaceKey, payload)
+	if err != nil {
 
-      if response != nil {
-         if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
-         }
-      }
-      log.Println("Endpoint:", response.Endpoint)
-      log.Fatal(err)
-   }
+		if response != nil {
+			if response.Code == http.StatusBadRequest {
+				log.Println(response.API)
+			}
+		}
+		log.Println("Endpoint:", response.Endpoint)
+		log.Fatal(err)
+	}
 
-   log.Println("Endpoint:", response.Endpoint)
-   log.Println("Status Code:", response.Code)
-   log.Println(spaceUpdated)
+	log.Println("Endpoint:", response.Endpoint)
+	log.Println("Status Code:", response.Code)
+	log.Println(spaceUpdated)
 }
-```
 
+```

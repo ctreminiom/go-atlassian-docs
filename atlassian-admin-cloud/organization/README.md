@@ -18,7 +18,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"github.com/ctreminiom/go-atlassian/admin"
 	"log"
 	"os"
@@ -26,7 +25,7 @@ import (
 
 func main() {
 
-	//ATLASSIAN_ADMIN_TOKEN
+	//https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/
 	var apiKey = os.Getenv("ATLASSIAN_ADMIN_TOKEN")
 
 	cloudAdmin, err := admin.New(nil)
@@ -40,17 +39,14 @@ func main() {
 	organizations, response, err := cloudAdmin.Organization.Gets(context.Background(), "")
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	fmt.Println(string(response.BodyAsBytes))
-
-	log.Println(organizations.Links)
 	for _, organization := range organizations.Data {
 		log.Println(organization.ID, organization.Attributes.Name)
 	}
@@ -166,6 +162,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"net/url"
 	"os"
@@ -187,7 +184,7 @@ func main() {
 	var (
 		organizationID = "9a1jj823-jac8-123d-jj01-63315k059cb2"
 		cursor         string
-		userChunks     []*admin.OrganizationUserPageScheme
+		userChunks     []*models.OrganizationUserPageScheme
 	)
 
 	for {
@@ -195,12 +192,12 @@ func main() {
 		users, response, err := cloudAdmin.Organization.Users(context.Background(), organizationID, cursor)
 		if err != nil {
 			if response != nil {
-				log.Println("Response HTTP Response", string(response.BodyAsBytes))
+				log.Println("Response HTTP Response", response.Bytes.String())
 			}
 			log.Fatal(err)
 		}
 
-		log.Println("Response HTTP Code", response.StatusCode)
+		log.Println("Response HTTP Code", response.Code)
 		log.Println("HTTP Endpoint Used", response.Endpoint)
 
 		userChunks = append(userChunks, users)
@@ -227,7 +224,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -236,14 +232,14 @@ func main() {
 
 ```go
 type OrganizationUserPageScheme struct {
-	Data  []*OrganizationUserScheme `json:"data,omitempty"`
-	Links *LinkPageModelScheme      `json:"links,omitempty"`
+	Data  []*AdminOrganizationUserScheme `json:"data,omitempty"`
+	Links *LinkPageModelScheme           `json:"links,omitempty"`
 	Meta  struct {
 		Total int `json:"total,omitempty"`
 	} `json:"meta,omitempty"`
 }
 
-type OrganizationUserScheme struct {
+ttype AdminOrganizationUserScheme struct {
 	AccountID      string                           `json:"account_id,omitempty"`
 	AccountType    string                           `json:"account_type,omitempty"`
 	AccountStatus  string                           `json:"account_status,omitempty"`
@@ -274,6 +270,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"net/url"
 	"os"
@@ -295,7 +292,7 @@ func main() {
 	var (
 		organizationID = "9a1jj823-jac8-123d-jj01-63315k059cb2"
 		cursor         string
-		domainChunks   []*admin.OrganizationDomainPageScheme
+		domainChunks   []*models.OrganizationDomainPageScheme
 	)
 
 	for {
@@ -303,12 +300,12 @@ func main() {
 		domains, response, err := cloudAdmin.Organization.Domains(context.Background(), organizationID, cursor)
 		if err != nil {
 			if response != nil {
-				log.Println("Response HTTP Response", string(response.BodyAsBytes))
+				log.Println("Response HTTP Response", response.Bytes.String())
 			}
 			log.Fatal(err)
 		}
 
-		log.Println("Response HTTP Code", response.StatusCode)
+		log.Println("Response HTTP Code", response.Code)
 		log.Println("HTTP Endpoint Used", response.Endpoint)
 		domainChunks = append(domainChunks, domains)
 
@@ -334,7 +331,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -396,16 +392,15 @@ func main() {
 	domain, response, err := cloudAdmin.Organization.Domain(context.Background(), organizationID, domainID)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(domain.Data.Attributes.Name, domain.Data.Attributes.Claim.Status)
 }
-
 ```
 
 {% hint style="info" %}
@@ -414,20 +409,22 @@ func main() {
 
 ```go
 type OrganizationDomainScheme struct {
-   Data struct {
-      ID         string `json:"id"`
-      Type       string `json:"type"`
-      Attributes struct {
-         Name  string `json:"name"`
-         Claim struct {
-            Type   string `json:"type"`
-            Status string `json:"status"`
-         } `json:"claim"`
-      } `json:"attributes"`
-      Links struct {
-         Self string `json:"self"`
-      } `json:"links"`
-   } `json:"data"`
+	Data *OrganizationDomainDataScheme `json:"data"`
+}
+
+type OrganizationDomainDataScheme struct {
+	ID         string `json:"id"`
+	Type       string `json:"type"`
+	Attributes struct {
+		Name  string `json:"name"`
+		Claim struct {
+			Type   string `json:"type"`
+			Status string `json:"status"`
+		} `json:"claim"`
+	} `json:"attributes"`
+	Links struct {
+		Self string `json:"self"`
+	} `json:"links"`
 }
 ```
 
@@ -441,6 +438,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"net/url"
 	"os"
@@ -463,12 +461,12 @@ func main() {
 	var (
 		organizationID = "9a1jj823-jac8-123d-jj01-63315k059cb2"
 		cursor         string
-		eventChunks    []*admin.OrganizationEventPageScheme
+		eventChunks    []*models.OrganizationEventPageScheme
 	)
 
 	for {
 
-		opts := &admin.OrganizationEventOptScheme{
+		opts := &models.OrganizationEventOptScheme{
 			Q:      "",
 			From:   time.Now().Add(time.Duration(-24) * time.Hour),
 			To:     time.Time{},
@@ -478,12 +476,12 @@ func main() {
 		events, response, err := cloudAdmin.Organization.Events(context.Background(), organizationID, opts, cursor)
 		if err != nil {
 			if response != nil {
-				log.Println("Response HTTP Response", string(response.BodyAsBytes))
+				log.Println("Response HTTP Response", response.Bytes.String())
 			}
 			log.Fatal(err)
 		}
 
-		log.Println("Response HTTP Code", response.StatusCode)
+		log.Println("Response HTTP Code", response.Code)
 		log.Println("HTTP Endpoint Used", response.Endpoint)
 		eventChunks = append(eventChunks, events)
 
@@ -509,7 +507,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -619,14 +616,16 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/kr/pretty"
 	"log"
 	"os"
 )
 
 func main() {
 
-	//ATLASSIAN_ADMIN_TOKEN
+	//https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/
 	var apiKey = os.Getenv("ATLASSIAN_ADMIN_TOKEN")
 
 	cloudAdmin, err := admin.New(nil)
@@ -642,18 +641,17 @@ func main() {
 	actions, response, err := cloudAdmin.Organization.Actions(context.Background(), organizationID)
 	if err != nil {
 		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
+			log.Println("Response HTTP Response", response.Bytes.String())
 		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, action := range actions.Data {
-		log.Println(action.ID, action.Type, action.Attributes.DisplayName)
+		fmt.Printf("%# v\n", pretty.Formatter(action))
 	}
-
 }
 
 ```

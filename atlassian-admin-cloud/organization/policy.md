@@ -10,6 +10,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"net/url"
 	"os"
@@ -31,7 +32,7 @@ func main() {
 	var (
 		organizationID = "9a1jj823-jac8-123d-jj01-63315k059cb2"
 		policyType     = ""
-		policyChunks   []*admin.OrganizationPolicyPageScheme
+		policyChunks   []*models.OrganizationPolicyPageScheme
 		cursor         string
 	)
 
@@ -40,12 +41,12 @@ func main() {
 		policies, response, err := cloudAdmin.Organization.Policy.Gets(context.Background(), organizationID, policyType, cursor)
 		if err != nil {
 			if response != nil {
-				log.Println("Response HTTP Response", string(response.BodyAsBytes))
+				log.Println("Response HTTP Response", response.Bytes.String())
 			}
 			log.Fatal(err)
 		}
 
-		log.Println("Response HTTP Code", response.StatusCode)
+		log.Println("Response HTTP Code", response.Code)
 		log.Println("HTTP Endpoint Used", response.Endpoint)
 		policyChunks = append(policyChunks, policies)
 
@@ -72,7 +73,6 @@ func main() {
 	}
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -118,59 +118,59 @@ Create a policy for an org
 package main
 
 import (
-   "context"
-   "encoding/json"
-   "fmt"
-   "github.com/ctreminiom/go-atlassian/admin"
-   "log"
-   "os"
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
 )
 
 func main() {
 
-   //ATLASSIAN_ADMIN_TOKEN
-   var apiKey = os.Getenv("ATLASSIAN_ADMIN_TOKEN")
+	//ATLASSIAN_ADMIN_TOKEN
+	var apiKey = os.Getenv("ATLASSIAN_ADMIN_TOKEN")
 
-   cloudAdmin, err := admin.New(nil)
-   if err != nil {
-      log.Fatal(err)
-   }
+	cloudAdmin, err := admin.New(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   cloudAdmin.Auth.SetBearerToken(apiKey)
-   cloudAdmin.Auth.SetUserAgent("curl/7.54.0")
+	cloudAdmin.Auth.SetBearerToken(apiKey)
+	cloudAdmin.Auth.SetUserAgent("curl/7.54.0")
 
-   payload := &admin.OrganizationPolicyData{
-      Type: "policy",
-      Attributes: &admin.OrganizationPolicyAttributes{
-         Type:   "data-residency", //ip-allowlist
-         Name:   "SCIMUserNameScheme of this Policy",
-         Status: "enabled", //disabled
-      },
-   }
+	payload := &models.OrganizationPolicyData{
+		Type: "policy",
+		Attributes: &models.OrganizationPolicyAttributes{
+			Type:   "data-residency", //ip-allowlist
+			Name:   "SCIMUserNameScheme of this Policy",
+			Status: "enabled", //disabled
+		},
+	}
 
-   var organizationID = "9a1jj823-jac8-123d-jj01-63315k059cb2"
+	var organizationID = "9a1jj823-jac8-123d-jj01-63315k059cb2"
 
-   newPolicy, response, err := cloudAdmin.Organization.Policy.Create(context.Background(), organizationID, payload)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-      }
-      log.Fatal(err)
-   }
+	newPolicy, response, err := cloudAdmin.Organization.Policy.Create(context.Background(), organizationID, payload)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+		}
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-   policyAsJSONKeys, err := json.MarshalIndent(newPolicy, "", "  ")
-   if err != nil {
-      log.Fatal(err)
-   }
+	policyAsJSONKeys, err := json.MarshalIndent(newPolicy, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   fmt.Printf("MarshalIndent Struct keys output\n %s\n", string(policyAsJSONKeys))
-
-   fmt.Println(payload)
-
+	fmt.Printf("MarshalIndent Struct keys output\n %s\n", string(policyAsJSONKeys))
+	fmt.Println(payload)
 }
+
 ```
 
 ## Get a policy by ID
@@ -229,57 +229,59 @@ Update a policy for an org
 package main
 
 import (
-   "context"
-   "encoding/json"
-   "fmt"
-   "github.com/ctreminiom/go-atlassian/admin"
-   "log"
-   "os"
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/admin"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
 )
 
 func main() {
 
-   //ATLASSIAN_ADMIN_TOKEN
-   var apiKey = os.Getenv("ATLASSIAN_ADMIN_TOKEN")
+	//ATLASSIAN_ADMIN_TOKEN
+	var apiKey = os.Getenv("ATLASSIAN_ADMIN_TOKEN")
 
-   cloudAdmin, err := admin.New(nil)
-   if err != nil {
-      log.Fatal(err)
-   }
+	cloudAdmin, err := admin.New(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   cloudAdmin.Auth.SetBearerToken(apiKey)
-   cloudAdmin.Auth.SetUserAgent("curl/7.54.0")
+	cloudAdmin.Auth.SetBearerToken(apiKey)
+	cloudAdmin.Auth.SetUserAgent("curl/7.54.0")
 
-   payload := &admin.OrganizationPolicyData{
-      Type: "policy",
-      Attributes: &admin.OrganizationPolicyAttributes{
-         Status: "disabled", //disabled
-      },
-   }
+	payload := &models.OrganizationPolicyData{
+		Type: "policy",
+		Attributes: &models.OrganizationPolicyAttributes{
+			Status: "disabled", //disabled
+		},
+	}
 
-   var (
-      organizationID = "9a1jj823-jac8-123d-jj01-63315k059cb2"
-      policyID       = "eaffa6f0-eb42-4b09-b2fb-0c7932187783"
-   )
+	var (
+		organizationID = "9a1jj823-jac8-123d-jj01-63315k059cb2"
+		policyID       = "eaffa6f0-eb42-4b09-b2fb-0c7932187783"
+	)
 
-   policy, response, err := cloudAdmin.Organization.Policy.Update(context.Background(), organizationID, policyID, payload)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-      }
-      log.Fatal(err)
-   }
+	policy, response, err := cloudAdmin.Organization.Policy.Update(context.Background(), organizationID, policyID, payload)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+		}
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-   policyAsJSONKeys, err := json.MarshalIndent(policy, "", "  ")
-   if err != nil {
-      log.Fatal(err)
-   }
+	policyAsJSONKeys, err := json.MarshalIndent(policy, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   fmt.Printf("MarshalIndent Struct keys output\n %s\n", string(policyAsJSONKeys))
+	fmt.Printf("MarshalIndent Struct keys output\n %s\n", string(policyAsJSONKeys))
 }
+
 ```
 
 ## Delete a policy

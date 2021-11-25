@@ -56,10 +56,6 @@
 * [🗓 Sprints](jira-agile/sprints.md)
 * [📈 Epics](jira-agile/epics.md)
 
-## Jira Software Cloud v2
-
-* [🐞 Issues](jira-software-cloud-v2/issues.md)
-
 ## Jira Service Management
 
 * [🙎‍♂️ Customer](jira-service-management/customer.md)
@@ -96,5 +92,5 @@
   * [🗜️ Token](atlassian-admin-cloud/user/token.md)
 * [🧰 SCIM](atlassian-admin-cloud/scim/README.md)
   * [🤹‍♂️ Users](atlassian-admin-cloud/scim/users.md)
-  * [🧩 Groups](atlassian-admin-cloud/scim/groups.md)
+  * [⛹♂ Groups](atlassian-admin-cloud/scim/groups.md)
   * [🏗️ Schemes](atlassian-admin-cloud/scim/schemes.md)
