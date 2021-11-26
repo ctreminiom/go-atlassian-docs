@@ -26,18 +26,16 @@ You’ll see a table of activities, organized by the date and time the activity 
 
 
 
-### Get audit records
+## Get audit records
 
-Returns a list of audit records. The list can be filtered to include items:
-
-* 🔒 **Permissions required**:  Administer Jira [global permission](https://confluence.atlassian.com/x/x4dKLg)
+Returns a list of audit records.
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"log"
 	"os"
 	"time"
@@ -51,7 +49,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := jira.New(nil, host)
+	jiraCloud, err := v3.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -59,7 +57,7 @@ func main() {
 	jiraCloud.Auth.SetBasicAuth(mail, token)
 	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
 
-	auditRecordOption := &jira.AuditRecordGetOptions{
+	auditRecordOption := &v3.AuditRecordGetOptions{
 
 		//Filter the records by a word, in that case, the custom field history
 		Filter: "",
@@ -94,6 +92,7 @@ func main() {
 	}
 
 }
+
 ```
 
 {% hint style="info" %}

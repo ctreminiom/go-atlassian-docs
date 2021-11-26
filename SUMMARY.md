@@ -10,7 +10,7 @@
 * [🧱 Application Roles](jira-software-cloud/application-roles.md)
 * [🛡️ Audit records](jira-software-cloud/audit-records.md)
 * [📈 Dashboards](jira-software-cloud/dashboards.md)
-* [✂️ Filters](jira-software-cloud/filters/README.md)
+* [✂ Filters](jira-software-cloud/filters/README.md)
   * [📐Sharing](jira-software-cloud/filters/sharing.md)
 * [👫 Groups](jira-software-cloud/groups.md)
 * [🐞 Issues](jira-software-cloud/issues/README.md)

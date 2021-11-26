@@ -1,4 +1,4 @@
-# ✂️ Filters
+# ✂ Filters
 
 A filter is a saved issue search. Jira users can search for issues using different criteria in basic or advanced search, and then save their results as a filter, becoming the filter’s owner.&#x20;
 
