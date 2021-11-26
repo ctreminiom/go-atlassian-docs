@@ -9,7 +9,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -22,7 +22,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -35,16 +35,12 @@ func main() {
 		limit = 50
 	)
 
-	serviceDesks, response, err := atlassian.ServiceManagement.ServiceDesk.Gets(context.Background(), start, limit)
+	serviceDesks, response, err := atlassian.ServiceDesk.Gets(context.Background(), start, limit)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, serviceDesk := range serviceDesks.Values {
@@ -52,7 +48,6 @@ func main() {
 	}
 
 }
-
 ```
 
 ## Get service desk by id
@@ -64,7 +59,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -77,7 +72,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -89,22 +84,16 @@ func main() {
 		serviceDeskProjectID = 1
 	)
 
-	serviceDesk, response, err := atlassian.ServiceManagement.ServiceDesk.Get(context.Background(), serviceDeskProjectID)
+	serviceDesk, response, err := atlassian.ServiceDesk.Get(context.Background(), serviceDeskProjectID)
 
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(serviceDesk.ID, serviceDesk.ProjectName, serviceDesk.ProjectKey)
-
 }
-
 ```
 
 ## Attach temporary file
@@ -116,25 +105,23 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 	"path/filepath"
 )
 
 func main() {
-
 	var (
 		host  = os.Getenv("HOST")
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
-
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
@@ -148,22 +135,22 @@ func main() {
 		return
 	}
 
-	attachments, response, err := atlassian.ServiceManagement.ServiceDesk.Attach(context.Background(), serviceDeskProjectID, absolutePath)
+	reader, err := os.Open(absolutePath)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
+		log.Fatal(err)
+	}
+	defer reader.Close()
+
+	attachments, response, err := atlassian.ServiceDesk.Attach(context.Background(), serviceDeskProjectID, filePath, reader)
+	if err != nil {
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, attachment := range attachments.TemporaryAttachments {
 		log.Println(attachment.FileName, attachment.TemporaryAttachmentID)
 	}
-
 }
-
 ```

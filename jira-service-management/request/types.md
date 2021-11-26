@@ -8,48 +8,44 @@ This method returns all customer request types used in the Jira Service Manageme
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-   var (
-      query        = ""
-      start, limit = 0, 50
-   )
+	var (
+		query        = ""
+		start, limit = 0, 50
+	)
 
-   requestTypes, response, err := atlassian.ServiceManagement.RequestType.Search(context.Background(), query, start, limit)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
+	requestTypes, response, err := atlassian.RequestType.Search(context.Background(), query, start, limit)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-   for _, requestType := range requestTypes.Values {
-      log.Println(requestType.Name, requestType.Name)
-   }
+	for _, requestType := range requestTypes.Values {
+		log.Println(requestType.Name, requestType.Name)
+	}
 
 }
 ```
@@ -66,7 +62,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -79,7 +75,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -89,28 +85,22 @@ func main() {
 
 	var (
 		ctx                        = context.Background()
-		serviceDeskID, groupID int = 1, 0
-		start, limit           int = 0, 50
+		serviceDeskID, groupID = 1, 0
+		start, limit           = 0, 50
 	)
 
-	requestTypes, response, err := atlassian.ServiceManagement.RequestType.Gets(ctx, serviceDeskID, groupID, start, limit)
+	requestTypes, response, err := atlassian.RequestType.Gets(ctx, serviceDeskID, groupID, start, limit)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, requestType := range requestTypes.Values {
 		log.Println(requestType.Name, requestType.Name)
 	}
-
 }
-
 ```
 
 {% hint style="info" %}
@@ -119,18 +109,31 @@ func main() {
 
 ```go
 type ProjectRequestTypePageScheme struct {
-   Expands    []string `json:"_expands"`
-   Size       int      `json:"size"`
-   Start      int      `json:"start"`
-   Limit      int      `json:"limit"`
-   IsLastPage bool     `json:"isLastPage"`
-   Links      struct {
-      Base    string `json:"base"`
-      Context string `json:"context"`
-      Next    string `json:"next"`
-      Prev    string `json:"prev"`
-   } `json:"_links"`
-   Values []*RequestTypeScheme `json:"values"`
+	Expands    []string                          `json:"_expands,omitempty"`
+	Size       int                               `json:"size,omitempty"`
+	Start      int                               `json:"start,omitempty"`
+	Limit      int                               `json:"limit,omitempty"`
+	IsLastPage bool                              `json:"isLastPage,omitempty"`
+	Values     []*RequestTypeScheme              `json:"values,omitempty"`
+	Links      *ProjectRequestTypePageLinkScheme `json:"_links,omitempty"`
+}
+
+type ProjectRequestTypePageLinkScheme struct {
+	Base    string `json:"base,omitempty"`
+	Context string `json:"context,omitempty"`
+	Next    string `json:"next,omitempty"`
+	Prev    string `json:"prev,omitempty"`
+}
+
+type RequestTypeScheme struct {
+	ID            string   `json:"id,omitempty"`
+	Name          string   `json:"name,omitempty"`
+	Description   string   `json:"description,omitempty"`
+	HelpText      string   `json:"helpText,omitempty"`
+	IssueTypeID   string   `json:"issueTypeId,omitempty"`
+	ServiceDeskID string   `json:"serviceDeskId,omitempty"`
+	GroupIds      []string `json:"groupIds,omitempty"`
+	Expands       []string `json:"_expands,omitempty"`
 }
 ```
 
@@ -152,7 +155,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -165,7 +168,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -182,7 +185,7 @@ func main() {
 		helpText      = "Request Type Sample HelpText"
 	)
 
-	newRequestType, response, err := atlassian.ServiceManagement.RequestType.Create(ctx,
+	newRequestType, response, err := atlassian.RequestType.Create(ctx,
 		serviceDeskID,
 		issueTypeID,
 		name,
@@ -191,18 +194,13 @@ func main() {
 	)
 
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("newRequestType", newRequestType.ID, newRequestType.Name)
 }
-
 ```
 
 ## Get request type by id
@@ -214,7 +212,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -227,7 +225,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -240,21 +238,15 @@ func main() {
 		requestTypeID = 9
 	)
 
-	requestType, response, err := atlassian.ServiceManagement.RequestType.Get(context.Background(), serviceDeskID, requestTypeID)
+	requestType, response, err := atlassian.RequestType.Get(context.Background(), serviceDeskID, requestTypeID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("newRequestType", requestType.ID, requestType.Name)
-
 }
-
 ```
 
 ## Delete request type
@@ -266,7 +258,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -279,7 +271,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -292,19 +284,14 @@ func main() {
 		requestTypeID = 9
 	)
 
-	response, err := atlassian.ServiceManagement.RequestType.Delete(context.Background(), serviceDeskID, requestTypeID)
+	response, err := atlassian.RequestType.Delete(context.Background(), serviceDeskID, requestTypeID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Get request type fields
@@ -321,7 +308,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -334,7 +321,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -347,21 +334,16 @@ func main() {
 		requestTypeID = 9
 	)
 
-	fields, response, err := atlassian.ServiceManagement.RequestType.Fields(context.Background(), serviceDeskID, requestTypeID)
+	fields, response, err := atlassian.RequestType.Fields(context.Background(), serviceDeskID, requestTypeID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, field := range fields.RequestTypeFields {
 		log.Println(field.Name, field.Description, field.FieldID)
 	}
 }
-
 ```

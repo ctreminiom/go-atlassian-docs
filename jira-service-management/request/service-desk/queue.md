@@ -9,7 +9,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -22,7 +22,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -36,12 +36,8 @@ func main() {
 		start, limit  int  = 0, 50
 	)
 
-	queues, response, err := atlassian.ServiceManagement.ServiceDesk.Queue.Gets(context.Background(), serviceDeskID, includeCount, start, limit)
+	queues, _, err := atlassian.ServiceDesk.Queue.Gets(context.Background(), serviceDeskID, includeCount, start, limit)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
@@ -57,7 +53,6 @@ func main() {
 	}
 
 }
-
 ```
 
 ## Get queue
@@ -69,7 +64,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -82,7 +77,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -96,12 +91,8 @@ func main() {
 		includeCount  bool = true
 	)
 
-	queue, response, err := atlassian.ServiceManagement.ServiceDesk.Queue.Get(context.Background(), serviceDeskID, queueID, includeCount)
+	queue, _, err := atlassian.ServiceDesk.Queue.Get(context.Background(), serviceDeskID, queueID, includeCount)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
@@ -114,7 +105,6 @@ func main() {
 	log.Println("------------------------------------")
 
 }
-
 ```
 
 ## Get issues in queue
@@ -127,7 +117,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
 	"log"
 	"os"
 )
@@ -140,7 +130,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := sm.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -154,19 +144,13 @@ func main() {
 		start, limit  = 0, 50
 	)
 
-	issues, response, err := atlassian.ServiceManagement.ServiceDesk.Queue.Issues(context.Background(), serviceDeskID, queueID, start, limit)
+	issues, _, err := atlassian.ServiceDesk.Queue.Issues(context.Background(), serviceDeskID, queueID, start, limit)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-			log.Println("HTTP Endpoint Used", response.Endpoint)
-		}
 		log.Fatal(err)
 	}
 
 	for _, issue := range issues.Values {
 		fmt.Println(issue)
 	}
-
 }
-
 ```

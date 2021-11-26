@@ -5,42 +5,57 @@
 This method retrieves information about the Jira Service Management instance such as software version, builds, and related links.
 
 ```go
-package main
+ppackage main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-   info, response, err := atlassian.ServiceManagement.Info.Get(context.Background())
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-      }
-      log.Fatal(err)
-   }
+	var (
+		email       = "example12@gmail.com"
+		displayName = "Example Customer 1"
+	)
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
-   log.Println(info)
+	newCustomer, response, err := atlassian.Customer.Create(context.Background(), email, displayName)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	log.Println("The new customer has been created!!")
+	log.Println("-------------------------")
+	log.Println(newCustomer.Name)
+	log.Println(newCustomer.DisplayName)
+	log.Println(newCustomer.AccountID)
+	log.Println(newCustomer.EmailAddress)
+	log.Println(newCustomer.Links)
+	log.Println(newCustomer)
+	log.Println("-------------------------")
+
 }
 ```
 
@@ -50,18 +65,18 @@ func main() {
 
 ```go
 type InfoScheme struct {
-   Version         string `json:"version"`
-   PlatformVersion string `json:"platformVersion"`
-   BuildDate       struct {
-      Iso8601     string `json:"iso8601"`
-      Jira        string `json:"jira"`
-      Friendly    string `json:"friendly"`
-      EpochMillis int64  `json:"epochMillis"`
-   } `json:"buildDate"`
-   BuildChangeSet   string `json:"buildChangeSet"`
-   IsLicensedForUse bool   `json:"isLicensedForUse"`
-   Links            struct {
-      Self string `json:"self"`
-   } `json:"_links"`
+	Version          string               `json:"version,omitempty"`
+	PlatformVersion  string               `json:"platformVersion,omitempty"`
+	BuildDate        *InfoBuildDataScheme `json:"buildDate,omitempty"`
+	BuildChangeSet   string               `json:"buildChangeSet,omitempty"`
+	IsLicensedForUse bool                 `json:"isLicensedForUse,omitempty"`
+	Links            *InfoLinkScheme      `json:"_links,omitempty"`
+}
+
+type InfoBuildDataScheme struct {
+	Iso8601     string `json:"iso8601,omitempty"`
+	Jira        string `json:"jira,omitempty"`
+	Friendly    string `json:"friendly,omitempty"`
+	EpochMillis int64  `json:"epochMillis,omitempty"`
 }
 ```

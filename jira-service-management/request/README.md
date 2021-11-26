@@ -8,62 +8,61 @@ This method returns all customer requests for the user executing the query.
 package main
 
 import (
-   "context"
-   "encoding/json"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "github.com/ctreminiom/go-atlassian/jira/sm"
-   "log"
-   "os"
+	"context"
+	"encoding/json"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-   options := &sm.RequestGetOptionsScheme{
-      SearchTerm:        "",
-      RequestOwnerships: []string{"OWNED_REQUESTS"},
-      RequestStatus:     "ALL_REQUESTS",
-      ApprovalStatus:    "",
-      OrganizationId:    0,
-      ServiceDeskID:     0,
-      RequestTypeID:     0,
-      Expand:            []string{"serviceDesk", "requestType", "status", "action"},
-   }
+	options := &sm.RequestGetOptionsScheme{
+		SearchTerm:        "",
+		RequestOwnerships: []string{"OWNED_REQUESTS"},
+		RequestStatus:     "ALL_REQUESTS",
+		ApprovalStatus:    "",
+		OrganizationId:    0,
+		ServiceDeskID:     0,
+		RequestTypeID:     0,
+		Expand:            []string{"serviceDesk", "requestType", "status", "action"},
+	}
 
-   customerRequests, response, err := atlassian.ServiceManagement.Request.Gets(context.Background(), options, 0, 50)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
+	customerRequests, response, err := atlassian.Request.Gets(context.Background(), options, 0, 50)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+			log.Println("HTTP Endpoint Used", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-   for _, customRequest := range customerRequests.Values {
+	for _, customRequest := range customerRequests.Values {
 
-      dataAsJson, err := json.MarshalIndent(customRequest, "", "\t")
-      if err != nil {
-         log.Fatal(err)
-      }
+		dataAsJson, err := json.MarshalIndent(customRequest, "", "\t")
+		if err != nil {
+			log.Fatal(err)
+		}
 
-      log.Println(string(dataAsJson))
-   }
+		log.Println(string(dataAsJson))
+	}
 
 }
 ```
@@ -76,52 +75,52 @@ This method returns a customer request.
 package main
 
 import (
-   "context"
-   "encoding/json"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"encoding/json"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-   var (
-      issueKey = "DESK-11"
-      expand   = []string{"serviceDesk", "requestType"}
-   )
+	var (
+		issueKey = "DESK-11"
+		expand   = []string{"serviceDesk", "requestType"}
+	)
 
-   request, response, err := atlassian.ServiceManagement.Request.Get(context.Background(), issueKey, expand)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
+	request, response, err := atlassian.Request.Get(context.Background(), issueKey, expand)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+			log.Println("HTTP Endpoint Used", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-   dataAsJson, err := json.MarshalIndent(request, "", "\t")
-   if err != nil {
-      log.Fatal(err)
-   }
+	dataAsJson, err := json.MarshalIndent(request, "", "\t")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   log.Println(string(dataAsJson))
+	log.Println(string(dataAsJson))
 
 }
 ```
@@ -134,39 +133,34 @@ This method subscribes the user to receiving notifications from a customer reque
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
-
 func main() {
-
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
-
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
-
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
-
-   response, err := atlassian.ServiceManagement.Request.Subscribe(context.Background(), "DUMMY-4")
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
-
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	
+	response, err := atlassian.Request.Subscribe(context.Background(), "DUMMY-4")
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+			log.Println("HTTP Endpoint Used", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
 
@@ -178,41 +172,36 @@ This method unsubscribes the user from notifications from a customer request.
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
-
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
-
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
-
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
-
-   response, err := atlassian.ServiceManagement.Request.Unsubscribe(context.Background(), "DUMMY-4")
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
-
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
-
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	response, err := atlassian.Request.Unsubscribe(context.Background(), "DUMMY-4")
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.Bytes.String()))
+			log.Println("HTTP Endpoint Used", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+
 ```
 
 ## Get customer transitions
@@ -223,51 +212,51 @@ This method returns a list of transitions, the workflow processes that moves a c
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-   var (
-      issueKeyOrID = "DESK-3"
-      start        = 0
-      limit        = 50
-   )
+	var (
+		issueKeyOrID = "DESK-3"
+		start        = 0
+		limit        = 50
+	)
 
-   transitions, response, err := atlassian.ServiceManagement.Request.Transitions(context.Background(), issueKeyOrID, start, limit)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
+	transitions, response, err := atlassian.Request.Transitions(context.Background(), issueKeyOrID, start, limit)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+			log.Println("HTTP Endpoint Used", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-   for _, transition := range transitions.Values {
-      log.Println(transition.ID, transition.Name)
-   }
-
+	for _, transition := range transitions.Values {
+		log.Println(transition.ID, transition.Name)
+	}
 }
+
 ```
 
 ## Perform customer transition
@@ -278,45 +267,45 @@ This method performs a customer transition for a given request and transition. A
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-   var (
-      issueKeyOrID = "DESK-3"
-      transitionID = "921"
-      comment      = "lorem"
-   )
+	var (
+		issueKeyOrID = "DESK-3"
+		transitionID = "921"
+		comment      = "lorem"
+	)
 
-   response, err := atlassian.ServiceManagement.Request.Transition(context.Background(), issueKeyOrID, transitionID, comment)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
+	response, err := atlassian.Request.Transition(context.Background(), issueKeyOrID, transitionID, comment)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+			log.Println("HTTP Endpoint Used", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
-
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+
 ```

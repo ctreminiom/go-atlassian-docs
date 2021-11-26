@@ -8,50 +8,45 @@ This method returns all the SLA records on a customer request. A customer reques
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-   var (
-      issueKeyOrID = "DESK-3"
-      start        = 0
-      limit        = 50
-   )
+	var (
+		issueKeyOrID = "DESK-3"
+		start        = 0
+		limit        = 50
+	)
 
-   slas, response, err := atlassian.ServiceManagement.Request.SLA.Gets(context.Background(), issueKeyOrID, start, limit)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
+	slas, response, err := atlassian.Request.SLA.Gets(context.Background(), issueKeyOrID, start, limit)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-   for _, sla := range slas.Values {
-      log.Println(sla)
-   }
-
+	for _, sla := range slas.Values {
+		log.Println(sla)
+	}
 }
 ```
 
@@ -63,46 +58,43 @@ This method returns the details for an SLA on a customer request.
 package main
 
 import (
-   "context"
-   "github.com/ctreminiom/go-atlassian/jira"
-   "log"
-   "os"
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
 )
 
 func main() {
 
-   var (
-      host  = os.Getenv("HOST")
-      mail  = os.Getenv("MAIL")
-      token = os.Getenv("TOKEN")
-   )
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
 
-   atlassian, err := jira.New(nil, host)
-   if err != nil {
-      return
-   }
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
 
-   atlassian.Auth.SetBasicAuth(mail, token)
-   atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-   var (
-      issueKeyOrID = "DESK-3"
-      slaMetricID  = 1
-   )
+	var (
+		issueKeyOrID = "DESK-3"
+		slaMetricID  = 1
+	)
 
-   sla, response, err := atlassian.ServiceManagement.Request.SLA.Get(context.Background(), issueKeyOrID, slaMetricID)
-   if err != nil {
-      if response != nil {
-         log.Println("Response HTTP Response", string(response.BodyAsBytes))
-         log.Println("HTTP Endpoint Used", response.Endpoint)
-      }
-      log.Fatal(err)
-   }
+	sla, response, err := atlassian.Request.SLA.Get(context.Background(), issueKeyOrID, slaMetricID)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-   log.Println("Response HTTP Code", response.StatusCode)
-   log.Println("HTTP Endpoint Used", response.Endpoint)
-   log.Println("SLA ID", sla.ID)
-   log.Println("SLA Name", sla.Name)
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println("SLA ID", sla.ID)
+	log.Println("SLA Name", sla.Name)
 
 }
+
 ```
