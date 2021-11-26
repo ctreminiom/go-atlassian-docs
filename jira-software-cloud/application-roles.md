@@ -8,8 +8,8 @@ This resource represents application roles. Use it to get details of an applicat
 
 &#x20;Returns all application roles. In Jira, application roles are managed using the [**Application access configuration**](https://confluence.atlassian.com/x/3YxjL) page.
 
-{% tabs %}
-{% tab title="Version 2" %}
+### Version 2
+
 ```go
 package main
 
@@ -53,12 +53,11 @@ func main() {
 
 	return
 
-}
-
+}gg
 ```
-{% endtab %}
 
-{% tab title="Version 3" %}
+### Version 3
+
 ```go
 package main
 
@@ -104,8 +103,6 @@ func main() {
 
 }
 ```
-{% endtab %}
-{% endtabs %}
 
 {% hint style="info" %}
 🧚‍♀️ **Tips: **You can extract the following struct tags
@@ -128,20 +125,18 @@ type ApplicationRoleScheme struct {
 }
 ```
 
-### Get application role
+## Get application role
 
 This method returns an existing application role using the **key **as a parameter
 
-* 🔒 **Permissions required**:  Administer Jira [global permission](https://confluence.atlassian.com/x/x4dKLg)
-
-### Example
+### Version 2
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -154,7 +149,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := jira.New(nil, host)
+	jiraCloud, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -178,6 +173,53 @@ func main() {
 		log.Printf("Application Role Key: %v", applicationRole.Key)
 		log.Printf("Application Role User Count: %v", applicationRole.UserCount)
 	}
-
 }
+```
+
+### Version 3
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	jiraCloud, err := v3.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	jiraCloud.Auth.SetBasicAuth(mail, token)
+	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+
+	applicationRoles, response, err := jiraCloud.Role.Gets(context.Background())
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, applicationRole := range applicationRoles {
+		log.Printf("Application Role Name: %v", applicationRole.Name)
+		log.Printf("Application Role Key: %v", applicationRole.Key)
+		log.Printf("Application Role User Count: %v", applicationRole.UserCount)
+	}
+}
+
 ```
