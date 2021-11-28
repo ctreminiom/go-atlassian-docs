@@ -17,7 +17,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -30,7 +30,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -74,7 +74,7 @@ type CustomFieldContextOptionPageScheme struct {
 type CustomFieldContextOptionScheme struct {
 	ID       string `json:"id,omitempty"`
 	Value    string `json:"value,omitempty"`
-	Disabled bool   `json:"disabled,omitempty"`
+	Disabled bool   `json:"disabled"`
 	OptionID string `json:"optionId,omitempty"`
 }
 ```
@@ -90,7 +90,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -103,7 +104,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -114,8 +115,8 @@ func main() {
 		fieldID   = "customfield_10038"
 		contextID = 10180
 
-		payload = &jira.FieldContextOptionListScheme{
-			Options: []*jira.CustomFieldContextOptionScheme{
+		payload = &models.FieldContextOptionListScheme{
+			Options: []*models.CustomFieldContextOptionScheme{
 
 				// Single/Multiple Choice example
 				{
@@ -155,7 +156,6 @@ func main() {
 	for _, option := range fieldOptions.Options {
 		log.Println(option)
 	}
-
 }
 ```
 
@@ -171,7 +171,7 @@ type FieldContextOptionListScheme struct {
 type CustomFieldContextOptionScheme struct {
 	ID       string `json:"id,omitempty"`
 	Value    string `json:"value,omitempty"`
-	Disabled bool   `json:"disabled,omitempty"`
+	Disabled bool   `json:"disabled"`
 	OptionID string `json:"optionId,omitempty"`
 }
 ```
@@ -189,7 +189,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -202,7 +203,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -213,8 +214,8 @@ func main() {
 		fieldID   = "customfield_10038"
 		contextID = 10180
 
-		payload = &jira.FieldContextOptionListScheme{
-			Options: []*jira.CustomFieldContextOptionScheme{
+		payload = &models.FieldContextOptionListScheme{
+			Options: []*models.CustomFieldContextOptionScheme{
 
 				// Single/Multiple Choice example
 				{
@@ -290,7 +291,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -303,7 +304,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -333,7 +334,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 	"sort"
@@ -347,7 +349,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -386,7 +388,7 @@ func main() {
 		optionsIDsAsList = append(optionsIDsAsList, optionsAsMap[option])
 	}
 
-	var payload = &jira.OrderFieldOptionPayloadScheme{
+	var payload = &models.OrderFieldOptionPayloadScheme{
 		Position:             "First",
 		CustomFieldOptionIds: optionsIDsAsList,
 	}

@@ -16,7 +16,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"github.com/google/uuid"
 	"log"
 	"os"
@@ -30,22 +31,22 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	newFilterBody := jira.FilterPayloadScheme{
+	newFilterBody := models.FilterPayloadScheme{
 		Name:        fmt.Sprintf("Filter #%v", uuid.New().String()),
 		Description: "Filter's description",
 		JQL:         "issuetype = Bug",
 		Favorite:    false,
-		SharePermissions: []*jira.SharePermissionScheme{
+		SharePermissions: []*models.SharePermissionScheme{
 			{
 				Type: "project",
-				Project: &jira.ProjectScheme{
+				Project: &models.ProjectScheme{
 					ID: "10000",
 				},
 				Role:  nil,
@@ -53,7 +54,7 @@ func main() {
 			},
 			{
 				Type:  "group",
-				Group: &jira.GroupScheme{Name: "jira-administrators"},
+				Group: &models.GroupScheme{Name: "jira-administrators"},
 			},
 		},
 	}
@@ -65,8 +66,8 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The filter has been created: %v - %v", filter.ID, filter.Name)
-
 }
+
 ```
 
 ![Filter permissions on the UI interface](<../../.gitbook/assets/image (5).png>)
@@ -123,7 +124,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -136,7 +137,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -156,6 +157,7 @@ func main() {
 	}
 
 }
+
 ```
 
 ## Get My Filters
@@ -167,7 +169,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -180,7 +182,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -232,7 +234,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+		"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -245,14 +248,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	options := jira.FilterSearchOptionScheme{
+	options := models.FilterSearchOptionScheme{
 		Name:      "",
 		AccountID: "",
 		Group:     "",
@@ -273,6 +276,7 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("Filters found", len(filters.Values))
 }
+
 ```
 
 ## Get Filter
@@ -284,7 +288,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -297,7 +301,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -312,6 +316,7 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("Get Filter result", filter.Name, filter.Name)
 }
+
 ```
 
 {% hint style="info" %}
@@ -366,7 +371,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -379,14 +385,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := jira.FilterPayloadScheme{
+	payload := models.FilterPayloadScheme{
 		JQL: "issuetype = Story",
 	}
 
@@ -398,6 +404,7 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("new JQL filter value", filter.Jql)
 }
+
 ```
 
 ## Delete Filter
@@ -407,7 +414,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -420,7 +427,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -434,4 +441,5 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+
 ```

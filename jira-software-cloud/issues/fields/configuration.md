@@ -4,7 +4,7 @@ description: >-
   delete field configurations and field configuration schemes.
 ---
 
-# 🎛️Configuration
+# 🖼 Configuration
 
 As a Jira administrator, you can configure the default field configuration to make specific fields required or hidden based on the needs of your team. You can create additional field configurations to manage fields across multiple projects, issue types, and screens. A field configuration can be associated with an issue type within a field configuration scheme, which can then be associated with a project.
 
@@ -25,7 +25,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -38,7 +38,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -64,6 +64,7 @@ func main() {
 	}
 
 }
+
 ```
 
 {% hint style="info" %}
@@ -71,19 +72,19 @@ func main() {
 {% endhint %}
 
 ```go
-type FieldConfigSearchScheme struct {
-   MaxResults int                  `json:"maxResults,omitempty"`
-   StartAt    int                  `json:"startAt,omitempty"`
-   Total      int                  `json:"total,omitempty"`
-   IsLast     bool                 `json:"isLast,omitempty"`
-   Values     []*FieldConfigurationScheme `json:"values,omitempty"`
+type FieldConfigurationPageScheme struct {
+	MaxResults int                         `json:"maxResults,omitempty"`
+	StartAt    int                         `json:"startAt,omitempty"`
+	Total      int                         `json:"total,omitempty"`
+	IsLast     bool                        `json:"isLast,omitempty"`
+	Values     []*FieldConfigurationScheme `json:"values,omitempty"`
 }
 
-type FieldConfigScheme struct {
-   ID          int    `json:"id,omitempty"`
-   Name        string `json:"name,omitempty"`
-   Description string `json:"description,omitempty"`
-   IsDefault   bool   `json:"isDefault,omitempty"`
+type FieldConfigurationScheme struct {
+	ID          int    `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	IsDefault   bool   `json:"isDefault,omitempty"`
 }
 ```
 
@@ -98,7 +99,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -111,7 +112,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -166,7 +167,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -179,7 +180,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -229,7 +230,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -242,7 +243,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -269,17 +270,17 @@ func main() {
 
 ```go
 type FieldConfigurationIssueTypeItemPageScheme struct {
-   MaxResults int                                      `json:"maxResults,omitempty"`
-   StartAt    int                                      `json:"startAt,omitempty"`
-   Total      int                                      `json:"total,omitempty"`
-   IsLast     bool                                     `json:"isLast,omitempty"`
-   Values     []*FieldConfigurationIssueTypeItemScheme `json:"values,omitempty"`
+	MaxResults int                                      `json:"maxResults,omitempty"`
+	StartAt    int                                      `json:"startAt,omitempty"`
+	Total      int                                      `json:"total,omitempty"`
+	IsLast     bool                                     `json:"isLast,omitempty"`
+	Values     []*FieldConfigurationIssueTypeItemScheme `json:"values,omitempty"`
 }
 
 type FieldConfigurationIssueTypeItemScheme struct {
-   FieldConfigurationSchemeID string `json:"fieldConfigurationSchemeId,omitempty"`
-   IssueTypeID                string `json:"issueTypeId,omitempty"`
-   FieldConfigurationID       string `json:"fieldConfigurationId,omitempty"`
+	FieldConfigurationSchemeID string `json:"fieldConfigurationSchemeId,omitempty"`
+	IssueTypeID                string `json:"issueTypeId,omitempty"`
+	FieldConfigurationID       string `json:"fieldConfigurationId,omitempty"`
 }
 ```
 
@@ -292,7 +293,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -305,7 +306,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -332,15 +333,21 @@ func main() {
 
 ```go
 type FieldConfigurationSchemeProjectPageScheme struct {
-   MaxResults int                                      `json:"maxResults,omitempty"`
-   StartAt    int                                      `json:"startAt,omitempty"`
-   Total      int                                      `json:"total,omitempty"`
-   IsLast     bool                                     `json:"isLast,omitempty"`
-   Values     []*FieldConfigurationSchemeProjectScheme `json:"values,omitempty"`
+	MaxResults int                                      `json:"maxResults,omitempty"`
+	StartAt    int                                      `json:"startAt,omitempty"`
+	Total      int                                      `json:"total,omitempty"`
+	IsLast     bool                                     `json:"isLast,omitempty"`
+	Values     []*FieldConfigurationSchemeProjectScheme `json:"values,omitempty"`
 }
 
 type FieldConfigurationSchemeProjectScheme struct {
-   ProjectIds               []string                        `json:"projectIds,omitempty"`
-   FieldConfigurationScheme *FieldConfigurationSchemeScheme `json:"fieldConfigurationScheme,omitempty"`
+	ProjectIds               []string                        `json:"projectIds,omitempty"`
+	FieldConfigurationScheme *FieldConfigurationSchemeScheme `json:"fieldConfigurationScheme,omitempty"`
+}
+
+type FieldConfigurationSchemeScheme struct {
+	ID          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 ```

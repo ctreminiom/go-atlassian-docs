@@ -1,4 +1,4 @@
-# 📐Sharing
+# 📐 Sharing
 
 This resource represents options for sharing filters. Use it to get share scopes as well as add and remove share scopes from filters.
 
@@ -11,7 +11,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -24,7 +24,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -54,7 +54,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -67,7 +67,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -85,18 +85,20 @@ func main() {
 		log.Println(index, permission.Type, permission.Type)
 	}
 }
+
 ```
 
 ## Add share permission
 
-Add a share permissions to a filter. If you add global share permission \(one for all logged-in users or the public\) it will overwrite all share permissions for the filter, the method returns the following information:
+Add a share permissions to a filter. If you add global share permission (one for all logged-in users or the public) it will overwrite all share permissions for the filter, the method returns the following information:
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -109,7 +111,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -139,7 +141,7 @@ func main() {
 			}
 	*/
 
-	payload := jira.PermissionFilterPayloadScheme{
+	payload := models.PermissionFilterPayloadScheme{
 		Type:      "project",
 		ProjectID: "10000",
 	}
@@ -155,6 +157,7 @@ func main() {
 		log.Println(index, permission.ID, permission.Type)
 	}
 }
+
 ```
 
 ## Get share permission
@@ -166,7 +169,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -179,7 +182,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -195,6 +198,7 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(permission)
 }
+
 ```
 
 ## Delete share permission
@@ -206,7 +210,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -219,7 +223,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -234,7 +238,44 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
-
 ```
 
+## Set default share scope
+
+Sets the default sharing for new filters and dashboards for a user.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	response, err := atlassian.Filter.Share.SetScope(context.Background(), "GLOBAL")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+}
+```
+
+\

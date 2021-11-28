@@ -19,7 +19,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -32,7 +32,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -63,7 +63,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -76,14 +77,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	fieldNewCreate := jira.CustomFieldScheme{
+	fieldNewCreate := models.CustomFieldScheme{
 		Name:        "Alliance 2",
 		Description: "this is the alliance description field",
 		FieldType:   "cascadingselect",
@@ -97,7 +98,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("field", field)
-
 }
 ```
 
@@ -117,7 +117,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -130,14 +131,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	options := jira.FieldSearchOptionsScheme{
+	options := models.FieldSearchOptionsScheme{
 		Types:   []string{"custom"},
 		OrderBy: "lastUsed",
 		Expand:  []string{"screensCount", "lastUsed"},
@@ -158,4 +159,3 @@ func main() {
 
 }
 ```
-

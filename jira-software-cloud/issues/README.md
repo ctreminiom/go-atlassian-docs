@@ -148,7 +148,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -161,23 +162,23 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var payload = jira.IssueScheme{
-		Fields: &jira.IssueFieldsScheme{
+	var payload = models.IssueSchemeV2{
+		Fields: &models.IssueFieldsSchemeV2{
 			Summary:   "New summary test",
-			Project:   &jira.ProjectScheme{ID: "10000"},
-			IssueType: &jira.IssueTypeScheme{Name: "Story"},
+			Project:   &models.ProjectScheme{ID: "10000"},
+			IssueType: &models.IssueTypeScheme{Name: "Story"},
 		},
 	}
 
 	//CustomFields
-	var customFields = jira.CustomFields{}
+	var customFields = models.CustomFields{}
 	err = customFields.Groups("customfield_10052", []string{"jira-administrators", "jira-administrators-system"})
 	if err != nil {
 		log.Fatal(err)
@@ -194,7 +195,6 @@ func main() {
 	}
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
 	log.Printf("The new issue %v has been created with the ID %v", newIssue.Key, newIssue.ID)
 }
 
@@ -209,7 +209,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -222,7 +223,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -230,7 +231,7 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 
 	//CustomFields
-	var customFields = jira.CustomFields{}
+	var customFields = models.CustomFields{}
 	err = customFields.Groups("customfield_10052", []string{"jira-administrators", "jira-administrators-system"})
 	if err != nil {
 		log.Fatal(err)
@@ -241,40 +242,40 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var issue1 = jira.IssueBulkScheme{
-		Payload: &jira.IssueScheme{
-			Fields: &jira.IssueFieldsScheme{
+	var issue1 = models.IssueBulkSchemeV2{
+		Payload: &models.IssueSchemeV2{
+			Fields: &models.IssueFieldsSchemeV2{
 				Summary:   "New summary test",
-				Project:   &jira.ProjectScheme{ID: "10000"},
-				IssueType: &jira.IssueTypeScheme{Name: "Story"},
+				Project:   &models.ProjectScheme{ID: "10000"},
+				IssueType: &models.IssueTypeScheme{Name: "Story"},
 			},
 		},
 		CustomFields: &customFields,
 	}
 
-	var issue2 = jira.IssueBulkScheme{
-		Payload: &jira.IssueScheme{
-			Fields: &jira.IssueFieldsScheme{
+	var issue2 = models.IssueBulkSchemeV2{
+		Payload: &models.IssueSchemeV2{
+			Fields: &models.IssueFieldsSchemeV2{
 				Summary:   "New summary test",
-				Project:   &jira.ProjectScheme{ID: "10000"},
-				IssueType: &jira.IssueTypeScheme{Name: "Story"},
+				Project:   &models.ProjectScheme{ID: "10000"},
+				IssueType: &models.IssueTypeScheme{Name: "Story"},
 			},
 		},
 		CustomFields: &customFields,
 	}
 
-	var issue3 = jira.IssueBulkScheme{
-		Payload: &jira.IssueScheme{
-			Fields: &jira.IssueFieldsScheme{
+	var issue3 = models.IssueBulkSchemeV2{
+		Payload: &models.IssueSchemeV2{
+			Fields: &models.IssueFieldsSchemeV2{
 				Summary:   "New summary test",
-				Project:   &jira.ProjectScheme{ID: "10000"},
-				IssueType: &jira.IssueTypeScheme{Name: "Story"},
+				Project:   &models.ProjectScheme{ID: "10000"},
+				IssueType: &models.IssueTypeScheme{Name: "Story"},
 			},
 		},
 		CustomFields: &customFields,
 	}
 
-	var payload []*jira.IssueBulkScheme
+	var payload []*models.IssueBulkSchemeV2
 	payload = append(payload, &issue1, &issue2, &issue3)
 
 	newIssues, response, err := atlassian.Issue.Creates(context.Background(), payload)
@@ -292,8 +293,6 @@ func main() {
 		log.Println(apiError.Status, apiError.Status)
 	}
 }
-
-
 ```
 
 ## Get issue
@@ -305,7 +304,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -318,7 +317,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -341,14 +340,11 @@ func main() {
 
 	// Check if the issue contains sub-tasks
 	if issue.Fields.Subtasks != nil {
-
 		for _, subTask := range issue.Fields.Subtasks {
 			log.Println("Sub-Task: ", subTask.Key, subTask.Fields.Summary)
 		}
-
 	}
 }
-
 ```
 
 ## Edit issue
@@ -411,7 +407,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -424,21 +421,21 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var payload = jira.IssueScheme{
-		Fields: &jira.IssueFieldsScheme{
-			//		Summary: "New summary test test",
+	var payload = models.IssueSchemeV2{
+		Fields: &models.IssueFieldsSchemeV2{
+			//		Summary: "New summary test",
 		},
 	}
 
 	//CustomFields
-	var customFields = jira.CustomFields{}
+	var customFields = models.CustomFields{}
 	err = customFields.Groups("customfield_10052", []string{"jira-administrators", "jira-administrators-system"})
 	if err != nil {
 		log.Fatal(err)
@@ -450,7 +447,7 @@ func main() {
 	}
 
 	//Issue Update Operations
-	var operations = &jira.UpdateOperations{}
+	var operations = &models.UpdateOperations{}
 
 	err = operations.AddArrayOperation("labels", map[string]string{
 		"triaged":   "remove",
@@ -475,6 +472,7 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+
 ```
 
 ## Delete issue
@@ -486,7 +484,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -499,21 +497,20 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Issue.Delete(context.Background(), "KP-6")
+	response, err := atlassian.Issue.Delete(context.Background(), "KP-6", false)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Assign issue
@@ -525,7 +522,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -538,7 +535,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -552,7 +549,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Send notification for issue
@@ -564,7 +560,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -577,22 +574,22 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var userRecipients []*jira.IssueNotifyUserScheme
-	userRecipients = append(userRecipients, &jira.IssueNotifyUserScheme{AccountID: "87dde939-73be-465f-83c5-2217fb9dd9de"})
-	userRecipients = append(userRecipients, &jira.IssueNotifyUserScheme{AccountID: "8abc0d5f-5eb9-48af-bd8d-b83451828a40"})
+	var userRecipients []*models.IssueNotifyUserScheme
+	userRecipients = append(userRecipients, &models.IssueNotifyUserScheme{AccountID: "87dde939-73be-465f-83c5-2217fb9dd9de"})
+	userRecipients = append(userRecipients, &models.IssueNotifyUserScheme{AccountID: "8abc0d5f-5eb9-48af-bd8d-b83451828a40"})
 
-	var groupsRecipients []*jira.IssueNotifyGroupScheme
-	groupsRecipients = append(groupsRecipients, &jira.IssueNotifyGroupScheme{Name: "jira-users"})
-	groupsRecipients = append(groupsRecipients, &jira.IssueNotifyGroupScheme{Name: "scrum-masters"})
+	var groupsRecipients []*models.IssueNotifyGroupScheme
+	groupsRecipients = append(groupsRecipients, &models.IssueNotifyGroupScheme{Name: "jira-users"})
+	groupsRecipients = append(groupsRecipients, &models.IssueNotifyGroupScheme{Name: "scrum-masters"})
 
-	opts := &jira.IssueNotifyOptionsScheme{
+	opts := &models.IssueNotifyOptionsScheme{
 
 		// The HTML body of the email notification for the issue.
 		HTMLBody: "The <strong>latest</strong> test results for this ticket are now available.",
@@ -605,7 +602,7 @@ func main() {
 		// TextBody: "lorem",
 
 		// The recipients of the email notification for the issue.
-		To: &jira.IssueNotifyToScheme{
+		To: &models.IssueNotifyToScheme{
 			Reporter: true,
 			Assignee: true,
 			Watchers: true,
@@ -625,7 +622,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Get transitions
@@ -637,7 +633,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -650,7 +646,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -668,7 +664,6 @@ func main() {
 		log.Println(transition.ID, transition.Name)
 	}
 }
-
 ```
 
 {% hint style="info" %}
@@ -720,7 +715,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -733,28 +729,28 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var payload = &jira.IssueScheme{
-		Fields: &jira.IssueFieldsScheme{
+	var payload = &models.IssueSchemeV2{
+		Fields: &models.IssueFieldsSchemeV2{
 			Summary: "New summary test test",
 		},
 	}
 
 	//CustomFields
-	var customFields = &jira.CustomFields{}
+	var customFields = &models.CustomFields{}
 	err = customFields.Groups("customfield_10052", []string{"jira-administrators", "jira-administrators-system"})
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	//Issue Update Operations
-	var operations = &jira.UpdateOperations{}
+	var operations = &models.UpdateOperations{}
 
 	err = operations.AddArrayOperation("labels", map[string]string{
 		"triaged":   "add",
@@ -767,7 +763,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	options := &jira.IssueMoveOptions{
+	options := &models.IssueMoveOptionsV2{
 		Fields:       payload,
 		Operations:   operations,
 		CustomFields: customFields,
@@ -780,6 +776,4 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
-
 ```

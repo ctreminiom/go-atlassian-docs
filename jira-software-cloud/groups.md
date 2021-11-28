@@ -24,7 +24,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -37,14 +37,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	group, response, err := atlassian.Group.Create(context.Background(), "jira-users-2")
+	group, response, err := atlassian.Group.Create(context.Background(), "jira-users-22")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -66,7 +66,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -79,15 +79,16 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.Group.Remove(context.Background(), "groupName", "accountID")
+	response, err := atlassian.Group.Delete(context.Background(), "jira-users-2")
 	if err != nil {
+		log.Fatal(err)
 		return
 	}
 
@@ -105,7 +106,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -118,14 +120,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	options := jira.GroupBulkOptionsScheme{
+	options := models.GroupBulkOptionsScheme{
 		GroupIDs:   nil,
 		GroupNames: nil,
 	}
@@ -142,7 +144,6 @@ func main() {
 		log.Printf("#%v, Group: %v", index, group.Name)
 	}
 }
-
 
 ```
 
@@ -172,7 +173,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -185,7 +186,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -214,31 +215,25 @@ func main() {
 
 ```go
 type GroupMemberPageScheme struct {
-	Self       string               `json:"self,omitempty"`
-	NextPage   string               `json:"nextPage,omitempty"`
-	MaxResults int                  `json:"maxResults,omitempty"`
-	StartAt    int                  `json:"startAt,omitempty"`
-	Total      int                  `json:"total,omitempty"`
-	IsLast     bool                 `json:"isLast,omitempty"`
-	Values     []*GroupMemberScheme `json:"values,omitempty"`
+	Self       string                   `json:"self,omitempty"`
+	NextPage   string                   `json:"nextPage,omitempty"`
+	MaxResults int                      `json:"maxResults,omitempty"`
+	StartAt    int                      `json:"startAt,omitempty"`
+	Total      int                      `json:"total,omitempty"`
+	IsLast     bool                     `json:"isLast,omitempty"`
+	Values     []*GroupUserDetailScheme `json:"values,omitempty"`
 }
 
-type GroupMemberScheme struct {
+type GroupUserDetailScheme struct {
 	Self         string `json:"self"`
 	Name         string `json:"name"`
 	Key          string `json:"key"`
 	AccountID    string `json:"accountId"`
 	EmailAddress string `json:"emailAddress"`
-	AvatarUrls   struct {
-		One6X16   string `json:"16x16"`
-		Two4X24   string `json:"24x24"`
-		Three2X32 string `json:"32x32"`
-		Four8X48  string `json:"48x48"`
-	} `json:"avatarUrls"`
-	DisplayName string `json:"displayName"`
-	Active      bool   `json:"active"`
-	TimeZone    string `json:"timeZone"`
-	AccountType string `json:"accountType"`
+	DisplayName  string `json:"displayName"`
+	Active       bool   `json:"active"`
+	TimeZone     string `json:"timeZone"`
+	AccountType  string `json:"accountType"`
 }
 ```
 
@@ -251,7 +246,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -264,7 +259,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -279,7 +274,6 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 
-
 ```
 
 ## Remove user from group
@@ -291,7 +285,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -304,7 +298,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -313,14 +307,9 @@ func main() {
 
 	response, err := atlassian.Group.Remove(context.Background(), "groupName", "accountID")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		return
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```

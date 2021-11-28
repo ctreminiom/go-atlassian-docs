@@ -99,9 +99,144 @@ type DashboardSearchPageScheme struct {
 
 This method creates a dashboard on Jira Cloud.
 
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	jiraCloud, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	jiraCloud.Auth.SetBasicAuth(mail, token)
+	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+
+	var payload = &models.DashboardPayloadScheme{
+		Name:        "Team Tracking 4",
+		Description: "description sample",
+		SharePermissions: []*models.SharePermissionScheme{
+			{
+				Type: "project",
+				Project: &models.ProjectScheme{
+					ID: "10000",
+				},
+				Role:  nil,
+				Group: nil,
+			},
+			{
+				Type:  "group",
+				Group: &models.GroupScheme{Name: "jira-administrators"},
+			},
+		},
+	}
+
+	dashboard, response, err := jiraCloud.Dashboard.Create(context.Background(), payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	log.Printf("Dashboard Name: %v", dashboard.Name)
+	log.Printf("Dashboard ID: %v", dashboard.ID)
+	log.Printf("Dashboard View: %v", dashboard.View)
+}
+```
+
+{% hint style="info" %}
+🧚‍♀️ **Tips: **You can extract the following struct tags
+{% endhint %}
+
+```go
+type DashboardScheme struct {
+	ID               string                   `json:"id,omitempty"`
+	IsFavourite      bool                     `json:"isFavourite,omitempty"`
+	Name             string                   `json:"name,omitempty"`
+	Owner            *UserScheme              `json:"owner,omitempty"`
+	Popularity       int                      `json:"popularity,omitempty"`
+	Rank             int                      `json:"rank,omitempty"`
+	Self             string                   `json:"self,omitempty"`
+	SharePermissions []*SharePermissionScheme `json:"sharePermissions,omitempty"`
+	EditPermission   []*SharePermissionScheme `json:"editPermissions,omitempty"`
+	View             string                   `json:"view,omitempty"`
+}
+```
+
 ## Search for dashboards
 
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of dashboards. This operation is similar to [Get dashboards](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-dashboards/#api-rest-api-3-dashboard-get) except that the results can be refined to include dashboards that have specific attributes. For example, dashboards with a particular name. When multiple attributes are specified only filters matching all attributes are returned.
 
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	jiraCloud, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	jiraCloud.Auth.SetBasicAuth(mail, token)
+	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+
+	searchOptions := models.DashboardSearchOptionsScheme{
+		DashboardName:       "Bug",
+		GroupPermissionName: "administrators",
+		OrderBy:             "description",
+		Expand:              []string{"description", "favourite", "sharePermissions"},
+	}
+
+	dashboards, response, err := jiraCloud.Dashboard.Search(context.Background(), &searchOptions, 0, 50)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, dashboard := range dashboards.Values {
+		log.Printf("Dashboard Name: %v", dashboard.Name)
+		log.Printf("Dashboard ID: %v", dashboard.ID)
+		log.Printf("Dashboard View: %v", dashboard.View)
+
+		if dashboard.SharePermissions != nil {
+			for _, permission := range dashboard.SharePermissions {
+				log.Println(permission)
+			}
+		}
+	}
+
+}
+```
 
 ## Get dashboard
 
@@ -183,6 +318,66 @@ type SharePermissionScheme struct {
 
 Updates a dashboard, replacing all the dashboard details with those provided. **The dashboard to be updated must be owned by the user.**
 
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	jiraCloud, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	jiraCloud.Auth.SetBasicAuth(mail, token)
+	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+
+	var payload = &models.DashboardPayloadScheme{
+		Name:        "Team Tracking #1111",
+		Description: "",
+		SharePermissions: []*models.SharePermissionScheme{
+			{
+				Type: "project",
+				Project: &models.ProjectScheme{
+					ID: "10000",
+				},
+				Role:  nil,
+				Group: nil,
+			},
+			{
+				Type:  "group",
+				Group: &models.GroupScheme{Name: "jira-administrators"},
+			},
+		},
+	}
+
+	dashboard, response, err := jiraCloud.Dashboard.Update(context.Background(), "10001", payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	log.Printf("Dashboard Name: %v", dashboard.Name)
+	log.Printf("Dashboard ID: %v", dashboard.ID)
+	log.Printf("Dashboard View: %v", dashboard.View)
+}
+
+```
+
 ## Delete dashboard
 
 Deletes a dashboard**, The dashboard to be deleted must be owned by the user.**
@@ -226,3 +421,66 @@ func main() {
 ## Copy dashboard
 
 Copies a dashboard. Any values provided in the `dashboard` parameter replace those in the copied dashboard.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	jiraCloud, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	jiraCloud.Auth.SetBasicAuth(mail, token)
+	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+
+	var payload = &models.DashboardPayloadScheme{
+		Name:        "Team Tracking #2 copy",
+		Description: "Description sample",
+		SharePermissions: []*models.SharePermissionScheme{
+			{
+				Type: "project",
+				Project: &models.ProjectScheme{
+					ID: "10000",
+				},
+				Role:  nil,
+				Group: nil,
+			},
+			{
+				Type:  "group",
+				Group: &models.GroupScheme{Name: "jira-administrators"},
+			},
+		},
+	}
+
+	dashboard, response, err := jiraCloud.Dashboard.Copy(context.Background(), "10001", payload)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	log.Printf("Dashboard Name: %v", dashboard.Name)
+	log.Printf("Dashboard ID: %v", dashboard.ID)
+	log.Printf("Dashboard View: %v", dashboard.View)
+}
+```

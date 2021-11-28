@@ -31,7 +31,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -44,7 +45,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -53,7 +54,7 @@ func main() {
 
 	var fieldID = "customfield_10038"
 
-	options := jira.FieldContextOptionsScheme{
+	options := models.FieldContextOptionsScheme{
 		IsAnyIssueType:  false,
 		IsGlobalContext: false,
 		ContextID:       nil,
@@ -81,21 +82,21 @@ func main() {
 
 ```go
 type CustomFieldContextPageScheme struct {
-	MaxResults int                  `json:"maxResults,omitempty"`
-	StartAt    int                  `json:"startAt,omitempty"`
-	Total      int                  `json:"total,omitempty"`
-	IsLast     bool                 `json:"isLast,omitempty"`
+	MaxResults int                   `json:"maxResults,omitempty"`
+	StartAt    int                   `json:"startAt,omitempty"`
+	Total      int                   `json:"total,omitempty"`
+	IsLast     bool                  `json:"isLast,omitempty"`
 	Values     []*FieldContextScheme `json:"values,omitempty"`
 }
 
 type FieldContextScheme struct {
-	ID              string `json:"id,omitempty"`
-	Name            string `json:"name,omitempty"`
-	Description     string `json:"description,omitempty"`
-	IsGlobalContext bool   `json:"isGlobalContext,omitempty"`
-	IsAnyIssueType  bool   `json:"isAnyIssueType,omitempty"`
-	ProjectIds   []string `json:"projectIds,omitempty"`
-	IssueTypeIds []string `json:"issueTypeIds,omitempty"`
+	ID              string   `json:"id,omitempty"`
+	Name            string   `json:"name,omitempty"`
+	Description     string   `json:"description,omitempty"`
+	IsGlobalContext bool     `json:"isGlobalContext,omitempty"`
+	IsAnyIssueType  bool     `json:"isAnyIssueType,omitempty"`
+	ProjectIds      []string `json:"projectIds,omitempty"`
+	IssueTypeIds    []string `json:"issueTypeIds,omitempty"`
 }
 ```
 
@@ -108,7 +109,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -121,7 +123,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -130,7 +132,7 @@ func main() {
 
 	var fieldID = "customfield_10038"
 
-	payload := jira.FieldContextPayloadScheme{
+	payload := models.FieldContextPayloadScheme{
 		IssueTypeIDs: []int{10004},
 		ProjectIDs:   []int{10002},
 		Name:         "Bug fields context $3 aaw",
@@ -145,7 +147,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(contextCreated)
-
 }
 ```
 
@@ -155,13 +156,13 @@ func main() {
 
 ```go
 type FieldContextScheme struct {
-   ID              string `json:"id,omitempty"`
-   Name            string `json:"name,omitempty"`
-   Description     string `json:"description,omitempty"`
-   IsGlobalContext bool   `json:"isGlobalContext,omitempty"`
-   IsAnyIssueType  bool   `json:"isAnyIssueType,omitempty"`
-   ProjectIds   []string `json:"projectIds,omitempty"`
-   IssueTypeIds []string `json:"issueTypeIds,omitempty"`
+	ID              string   `json:"id,omitempty"`
+	Name            string   `json:"name,omitempty"`
+	Description     string   `json:"description,omitempty"`
+	IsGlobalContext bool     `json:"isGlobalContext,omitempty"`
+	IsAnyIssueType  bool     `json:"isAnyIssueType,omitempty"`
+	ProjectIds      []string `json:"projectIds,omitempty"`
+	IssueTypeIds    []string `json:"issueTypeIds,omitempty"`
 }
 ```
 
@@ -174,7 +175,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -187,7 +188,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -256,7 +257,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -269,7 +271,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -278,8 +280,8 @@ func main() {
 
 	var fieldID = "customfield_10038"
 
-	var payload = &jira.FieldContextDefaultPayloadScheme{
-		DefaultValues: []*jira.CustomFieldDefaultValueScheme{
+	var payload = &models.FieldContextDefaultPayloadScheme{
+		DefaultValues: []*models.CustomFieldDefaultValueScheme{
 			{
 				ContextID: "10138",
 				OptionID:  "10022",
@@ -306,7 +308,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -319,7 +321,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -351,7 +353,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -364,7 +366,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -395,7 +397,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -408,7 +410,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -440,7 +442,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -453,7 +455,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -484,7 +486,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -497,7 +499,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -528,7 +530,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -541,7 +543,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -561,7 +563,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Get project mappings for custom field context
@@ -573,7 +574,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -586,7 +587,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
