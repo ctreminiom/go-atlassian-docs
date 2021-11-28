@@ -43,7 +43,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -65,7 +65,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -94,7 +94,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -116,7 +116,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -142,11 +142,12 @@ func main() {
 Creates a new permission scheme. You can create a permission scheme with or without defining a set of permission grants.
 
 ```go
- package main
+package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -168,28 +169,28 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.PermissionSchemeScheme{
+	payload := &models.PermissionSchemeScheme{
 		Name:        "EF Permission Scheme",
 		Description: "EF Permission Scheme description",
 
-		Permissions: []*jira.PermissionGrantScheme{
+		Permissions: []*models.PermissionGrantScheme{
 			{
 				Permission: "ADMINISTER_PROJECTS",
-				Holder: &jira.PermissionGrantHolderScheme{
+				Holder: &models.PermissionGrantHolderScheme{
 					Parameter: "jira-administrators-system",
 					Type:      "group",
 				},
 			},
 			{
 				Permission: "CLOSE_ISSUES",
-				Holder: &jira.PermissionGrantHolderScheme{
+				Holder: &models.PermissionGrantHolderScheme{
 					Type: "assignee",
 				},
 			},
@@ -263,7 +264,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -285,7 +286,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -311,7 +312,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -333,21 +335,21 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.PermissionSchemeScheme{
+	payload := &models.PermissionSchemeScheme{
 		Name:        "EF Permission Scheme - UPDATED",
 		Description: "EF Permission Scheme description - UPDATED",
 
-		Permissions: []*jira.PermissionGrantScheme{
+		Permissions: []*models.PermissionGrantScheme{
 			{
 				Permission: "CLOSE_ISSUES",
-				Holder: &jira.PermissionGrantHolderScheme{
+				Holder: &models.PermissionGrantHolderScheme{
 					Parameter: "jira-administrators-system",
 					Type:      "group",
 				},

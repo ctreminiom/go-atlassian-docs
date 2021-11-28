@@ -2,7 +2,7 @@
 
 An issue's priority defines its importance in relation to other issues, so it helps your users determine which issues should be tackled first. Jira comes with a set of default priorities, which you can modify or add to. You can also choose different priorities for your projects.
 
-![](../../.gitbook/assets/image%20%2812%29.png)
+![](<../../.gitbook/assets/image (12).png>)
 
 This resource represents issue priorities. Use it to obtain a list of issue priorities and details for individual issue priorities.
 
@@ -15,7 +15,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -28,7 +28,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -57,7 +57,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -70,7 +70,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -87,5 +87,5 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(priority)
 }
-```
 
+```

@@ -27,7 +27,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -40,24 +41,26 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.LinkPayloadScheme{
+	// Payload for the package v3 ---> ADF Format sample
 
-		Comment: &jira.CommentPayloadScheme{
+	/*
+	payloadADF := &models.LinkPayloadSchemeV3{
+		Comment: &models.CommentPayloadScheme{
 
-			Body: &jira.CommentNodeScheme{
+			Body: &models.CommentNodeScheme{
 				Version: 1,
 				Type:    "doc",
-				Content: []*jira.CommentNodeScheme{
+				Content: []*models.CommentNodeScheme{
 					{
 						Type: "paragraph",
-						Content: []*jira.CommentNodeScheme{
+						Content: []*models.CommentNodeScheme{
 							{
 								Type: "text",
 								Text: "Carlos Test",
@@ -80,13 +83,32 @@ func main() {
 			},
 		},
 
-		InwardIssue: &jira.LinkedIssueScheme{
+		InwardIssue: &models.LinkedIssueScheme{
 			Key: "KP-1",
 		},
-		OutwardIssue: &jira.LinkedIssueScheme{
+		OutwardIssue: &models.LinkedIssueScheme{
 			Key: "KP-2",
 		},
-		Type: &jira.LinkTypeScheme{
+		Type: &models.LinkTypeScheme{
+			Name: "Duplicate",
+		},
+	}
+	*/
+
+
+	payload := &models.LinkPayloadSchemeV2{
+
+		Comment: &models.CommentPayloadSchemeV2{
+			Body:       "test",
+		},
+
+		InwardIssue: &models.LinkedIssueScheme{
+			Key: "KP-1",
+		},
+		OutwardIssue: &models.LinkedIssueScheme{
+			Key: "KP-2",
+		},
+		Type: &models.LinkTypeScheme{
 			Name: "Duplicate",
 		},
 	}
@@ -109,7 +131,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -122,7 +144,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -190,7 +212,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -203,7 +225,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -228,8 +250,6 @@ func main() {
 	log.Println(issueLink.InwardIssue)
 	log.Println(issueLink.OutwardIssue)
 }
-
-
 ```
 
 {% hint style="info" %}
@@ -269,7 +289,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -282,7 +302,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,4 +1,4 @@
-# 🗞️ Types
+# 🖇 Types
 
 This resource represents issue link types. Use it to get, create, update, and delete link issue types as well as get lists of all link issue types.
 
@@ -11,7 +11,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -24,7 +24,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -72,7 +72,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -85,14 +86,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := jira.LinkTypeScheme{
+	payload := models.LinkTypeScheme{
 		Inward:  "Clone/Duplicated by",
 		Name:    "Clone/Duplicate",
 		Outward: "Clone/Duplicates",
@@ -131,7 +132,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -144,7 +145,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -184,7 +185,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -197,14 +199,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := jira.LinkTypeScheme{
+	payload := models.LinkTypeScheme{
 		Inward:  "Clone/Duplicated by - Updated",
 		Name:    "Clone/Duplicate - Updated",
 		Outward: "Clone/Duplicates - Updated",
@@ -243,7 +245,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -256,7 +258,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
