@@ -2,7 +2,7 @@
 description: This resource represent users.
 ---
 
-# 👨‍👧‍👧 Users
+# 🤓 Users
 
 ## Get user
 
@@ -13,7 +13,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -35,7 +35,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,18 +49,13 @@ func main() {
 
 	user, response, err := atlassian.User.Get(context.Background(), accountID, expands)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(user)
 
 }
-
 ```
 
 {% hint style="info" %}
@@ -122,7 +117,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -144,33 +140,27 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.UserPayloadScheme{
-		EmailAddress: "example@example.com",
+	payload := &models.UserPayloadScheme{
+		EmailAddress: "example1@go-atlassian.io",
 		DisplayName:  "Example DisplayName",
 		Notification: false,
 	}
 
 	newUser, response, err := atlassian.User.Create(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("The new user has been created", newUser.AccountID)
-
 }
-
 ```
 
 ## Delete user
@@ -182,7 +172,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -204,26 +194,20 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	response, err := atlassian.User.Delete(context.Background(), "603edd77ee117700705ec331")
+	response, err := atlassian.User.Delete(context.Background(), "607b98df2ad11c0072664322")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
 }
-
 ```
 
 ## Bulk get users
@@ -235,7 +219,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -257,7 +241,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -272,21 +256,15 @@ func main() {
 
 	users, response, err := atlassian.User.Find(context.Background(), accountIDs, startAt, maxResults)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, user := range users.Values {
 		log.Println(user.DisplayName)
 	}
-
 }
-
 ```
 
 ## Get user groups
@@ -298,7 +276,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -320,7 +298,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -330,16 +308,12 @@ func main() {
 	var accountID = "5b86be50b8e3cb5895860d6d"
 	groups, response, err := atlassian.User.Groups(context.Background(), accountID)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, group := range *groups {
+	for _, group := range groups {
 		log.Println(group)
 	}
 
@@ -356,7 +330,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -378,7 +352,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -392,19 +366,13 @@ func main() {
 
 	users, response, err := atlassian.User.Gets(context.Background(), startAt, maxResults)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, user := range *users {
+	for _, user := range users {
 		log.Println(user)
 	}
-
 }
-
 ```

@@ -16,12 +16,12 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -29,7 +29,7 @@ func main()  {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -56,7 +56,6 @@ func main()  {
 		log.Println(category.Description)
 		log.Println("----------------")
 	}
-
 }
 ```
 
@@ -70,7 +69,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"math/rand"
 	"os"
@@ -93,14 +93,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	var payload = &jira.ProjectCategoryPayloadScheme{
+	var payload = &models.ProjectCategoryPayloadScheme{
 		Name:        fmt.Sprintf("Category #%v", rand.Intn(100)),
 		Description: "description sample",
 	}
@@ -129,7 +129,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -151,7 +151,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -182,7 +182,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"math/rand"
 	"os"
@@ -205,7 +206,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -214,8 +215,8 @@ func main() {
 
 	var (
 		projectCategoryID = 10000
-		payload = &jira.ProjectCategoryPayloadScheme{
-			Name:        fmt.Sprintf("Category #%v - updated", rand.Intn(100)),
+		payload           = &models.ProjectCategoryPayloadScheme{
+			Name: fmt.Sprintf("Category #%v - updated", rand.Intn(100)),
 		}
 	)
 
@@ -242,7 +243,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -264,7 +265,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -284,4 +285,3 @@ func main() {
 	log.Println("HTTP Endpoint Bytes", response.Bytes.String())
 }
 ```
-

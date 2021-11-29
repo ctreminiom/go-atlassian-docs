@@ -5,7 +5,7 @@ description: >-
   task.
 ---
 
-# ⚗️ Tasks
+# ⚗ Tasks
 
 ## Get task
 
@@ -20,7 +20,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -42,7 +42,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -51,18 +51,14 @@ func main() {
 
 	task, response, err := atlassian.Task.Get(context.Background(), "1000")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(task)
 
 }
-
 ```
 
 ## Cancel task
@@ -74,7 +70,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -96,7 +92,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -105,16 +101,11 @@ func main() {
 
 	response, err := atlassian.Task.Cancel(context.Background(), "1000")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 }
-
 ```
-

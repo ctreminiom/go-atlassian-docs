@@ -4,7 +4,7 @@ description: >-
   create, update, and delete screen schemes.
 ---
 
-# 🗃️ Schemes
+# 📠 Schemes
 
 ## Get screen schemes
 
@@ -15,7 +15,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -37,7 +37,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,20 +46,16 @@ func main() {
 
 	screenSchemes, response, err := atlassian.Screen.Scheme.Gets(context.Background(), nil, 0, 50)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, screenScheme := range screenSchemes.Values {
 		log.Println(screenScheme)
 	}
 }
-
 ```
 
 ## Create screen scheme
@@ -71,7 +67,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -93,15 +90,15 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.ScreenSchemePayloadScheme{
-		Screens: &jira.ScreenSchemeScreensPayloadScheme{
+	payload := &models.ScreenSchemePayloadScheme{
+		Screens: &models.ScreenTypesScheme{
 			Default: 10000,
 			View:    10000,
 			Edit:    10000,
@@ -112,17 +109,13 @@ func main() {
 
 	newScreenScheme, response, err := atlassian.Screen.Scheme.Create(context.Background(), payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The new screen scheme has been created with the ID %v", newScreenScheme.ID)
 }
-
 ```
 
 ## Update screen scheme
@@ -134,7 +127,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -156,15 +150,15 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.ScreenSchemePayloadScheme{
-		Screens: &jira.ScreenSchemeScreensPayloadScheme{
+	payload := &models.ScreenSchemePayloadScheme{
+		Screens: &models.ScreenTypesScheme{
 			Default: 10001,
 			View:    10000,
 			Edit:    10000,
@@ -175,16 +169,12 @@ func main() {
 
 	response, err := atlassian.Screen.Scheme.Update(context.Background(), "10005", payload)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Delete screen scheme
@@ -196,7 +186,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -218,7 +208,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -227,15 +217,10 @@ func main() {
 
 	response, err := atlassian.Screen.Scheme.Delete(context.Background(), "10005")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
-

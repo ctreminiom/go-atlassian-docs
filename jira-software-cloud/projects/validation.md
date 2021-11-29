@@ -13,12 +13,12 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
 
-func main() {
+func main()  {
 
 	/*
 		----------- Set an environment variable in git bash -----------
@@ -35,25 +35,21 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
-	message, response, err := atlassian.Project.Valid.Validate(context.Background(), "AKP")
+
+	message, response, err := atlassian.Project.Valid.Validate(context.Background(), "KP")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(message)
 }
-
 ```
 
 ## Get valid project key
@@ -65,12 +61,12 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
 
-func main() {
+func main()  {
 
 	/*
 		----------- Set an environment variable in git bash -----------
@@ -87,26 +83,21 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	newKey, response, err := atlassian.Project.Valid.Key(context.Background(), "KP")
+	message, response, err := atlassian.Project.Valid.Key(context.Background(), "KP")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(newKey)
+	log.Println(message)
 }
-
 ```
 
 ## Get valid project name
@@ -118,12 +109,12 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
 
-func main() {
+func main()  {
 
 	/*
 		----------- Set an environment variable in git bash -----------
@@ -140,25 +131,20 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	newName, response, err := atlassian.Project.Valid.Name(context.Background(), "KaaaP")
+	message, response, err := atlassian.Project.Valid.Name(context.Background(), "KP")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(newName)
+	log.Println(message)
 }
 
 ```
-

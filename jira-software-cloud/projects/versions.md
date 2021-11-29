@@ -7,16 +7,17 @@ description: >-
 
 # 🧱 Versions
 
-## Get project versions paginated
+## Get project versions
 
- Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all versions in a project.
+Returns all versions in a project. The response is not paginated.
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -38,21 +39,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	options := &jira.ProjectVersionGetsOptions{
-		OrderBy: "description",
-		Query:   "",
-		Status:  "unreleased",
-		Expand:  []string{"issuesstatus", "operations"},
-	}
-
-	versions, response, err := atlassian.Project.Version.Gets(context.Background(), "KP", options, 0, 50)
+	versions, response, err := atlassian.Project.Version.Gets(context.Background(), "KP")
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", response.Bytes.String())
@@ -63,8 +57,8 @@ func main() {
 	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, version := range versions.Values {
-		log.Println(version)
+	for _, version := range versions {
+		fmt.Println(version)
 	}
 }
 ```
@@ -78,7 +72,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -100,14 +95,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.ProjectVersionPayloadScheme{
+	payload := &models.VersionPayloadScheme{
 		Archived:    false,
 		ReleaseDate: "2021-03-06",
 		Name:        "Version Sandbox",
@@ -140,7 +135,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -162,7 +157,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -192,7 +187,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -214,14 +210,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.ProjectVersionPayloadScheme{
+	payload := &models.VersionPayloadScheme{
 		Archived:    false,
 		Name:        "Version Sandbox - UPDATED",
 		Description: "Version Sandbox description - UPDATED",
@@ -252,7 +248,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -274,7 +270,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -307,58 +303,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
-	"log"
-	"os"
-)
-
-func main()  {
-
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
-
-	var (
-		host  = os.Getenv("HOST")
-		mail  = os.Getenv("MAIL")
-		token = os.Getenv("TOKEN")
-	)
-
-	atlassian, err := jira.New(nil, host)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-
-	count, response, err := atlassian.Project.Version.RelatedIssueCounts(context.Background(), "10002")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	log.Println(response.Endpoint)
-	log.Println(count)
-
-}
-
-```
-
-## Get version's unresolved issues count
-
-Returns counts of the issues and unresolved issues for the project version.
-
-```go
-package main
-
-import (
-	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -380,7 +325,56 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	count, response, err := atlassian.Project.Version.RelatedIssueCounts(context.Background(), "10002")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println(response.Endpoint)
+	log.Println(count)
+
+}
+```
+
+## Get version's unresolved issues count
+
+Returns counts of the issues and unresolved issues for the project version.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"log"
+	"os"
+)
+
+func main() {
+
+	/*
+		----------- Set an environment variable in git bash -----------
+		export HOST="https://ctreminiom.atlassian.net/"
+		export MAIL="MAIL_ADDRESS"
+		export TOKEN="TOKEN_API"
+
+		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
+	*/
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -400,4 +394,3 @@ func main() {
 	log.Println(count)
 }
 ```
-

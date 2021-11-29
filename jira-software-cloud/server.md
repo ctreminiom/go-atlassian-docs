@@ -2,7 +2,7 @@
 description: This resource provides information about the Jira instance.
 ---
 
-# ⚙️ Server
+# ⚙ Server
 
 ## Get Jira instance info
 
@@ -13,7 +13,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -35,7 +35,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -44,16 +44,11 @@ func main() {
 
 	info, response, err := atlassian.Server.Info(context.Background())
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(info)
 }
-
 ```
-

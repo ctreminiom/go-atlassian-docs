@@ -36,7 +36,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -58,18 +59,18 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.ProjectPayloadScheme{
+	payload := &models.ProjectPayloadScheme{
 		NotificationScheme:  10021,
 		Description:         "Example Project description",
 		LeadAccountID:       "5b86be50b8e3cb5895860d6d",
-		URL:                 "http://atlassian.com",
+		URL:                 "https://atlassian.com",
 		ProjectTemplateKey:  "com.pyxis.greenhopper.jira:gh-simplified-agility-kanban",
 		AvatarID:            10200,
 		IssueSecurityScheme: 10001,
@@ -105,7 +106,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -127,14 +129,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	options := &jira.ProjectSearchOptionsScheme{
+	options := &models.ProjectSearchOptionsScheme{
 		OrderBy: "issueCount",
 		Action:  "browse",
 		Expand:  []string{"insight", "lead", "issueTypes", "projectKeys", "description"},
@@ -183,7 +185,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -205,7 +207,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -232,37 +234,37 @@ func main() {
 
 ```go
 type ProjectScheme struct {
-   Expand            string                    `json:"expand,omitempty"`
-   Self              string                    `json:"self,omitempty"`
-   ID                string                    `json:"id,omitempty"`
-   Key               string                    `json:"key,omitempty"`
-   Description       string                    `json:"description,omitempty"`
-   URL               string                    `json:"url,omitempty"`
-   Email             string                    `json:"email,omitempty"`
-   AssigneeType      string                    `json:"assigneeType,omitempty"`
-   Name              string                    `json:"name,omitempty"`
-   ProjectTypeKey    string                    `json:"projectTypeKey,omitempty"`
-   Simplified        bool                      `json:"simplified,omitempty"`
-   Style             string                    `json:"style,omitempty"`
-   Favourite         bool                      `json:"favourite,omitempty"`
-   IsPrivate         bool                      `json:"isPrivate,omitempty"`
-   UUID              string                    `json:"uuid,omitempty"`
-   Lead              *UserScheme               `json:"lead,omitempty"`
-   Components        []*ProjectComponentScheme `json:"components,omitempty"`
-   IssueTypes        []*IssueTypeScheme        `json:"issueTypes,omitempty"`
-   Versions          []*ProjectVersionScheme   `json:"versions,omitempty"`
-   Roles             *ProjectRolesScheme       `json:"roles,omitempty"`
-   AvatarUrls        *AvatarURLScheme          `json:"avatarUrls,omitempty"`
-   ProjectKeys       []string                  `json:"projectKeys,omitempty"`
-   Insight           *ProjectInsightScheme     `json:"insight,omitempty"`
-   Category          *ProjectCategoryScheme    `json:"projectCategory,omitempty"`
-   Deleted           bool                      `json:"deleted,omitempty"`
-   RetentionTillDate string                    `json:"retentionTillDate,omitempty"`
-   DeletedDate       string                    `json:"deletedDate,omitempty"`
-   DeletedBy         *UserScheme               `json:"deletedBy,omitempty"`
-   Archived          bool                      `json:"archived,omitempty"`
-   ArchivedDate      string                    `json:"archivedDate,omitempty"`
-   ArchivedBy        *UserScheme               `json:"archivedBy,omitempty"`
+	Expand            string                 `json:"expand,omitempty"`
+	Self              string                 `json:"self,omitempty"`
+	ID                string                 `json:"id,omitempty"`
+	Key               string                 `json:"key,omitempty"`
+	Description       string                 `json:"description,omitempty"`
+	URL               string                 `json:"url,omitempty"`
+	Email             string                 `json:"email,omitempty"`
+	AssigneeType      string                 `json:"assigneeType,omitempty"`
+	Name              string                 `json:"name,omitempty"`
+	ProjectTypeKey    string                 `json:"projectTypeKey,omitempty"`
+	Simplified        bool                   `json:"simplified,omitempty"`
+	Style             string                 `json:"style,omitempty"`
+	Favourite         bool                   `json:"favourite,omitempty"`
+	IsPrivate         bool                   `json:"isPrivate,omitempty"`
+	UUID              string                 `json:"uuid,omitempty"`
+	Lead              *UserScheme            `json:"lead,omitempty"`
+	Components        []*ComponentScheme     `json:"components,omitempty"`
+	IssueTypes        []*IssueTypeScheme     `json:"issueTypes,omitempty"`
+	Versions          []*VersionScheme       `json:"versions,omitempty"`
+	Roles             *ProjectRolesScheme    `json:"roles,omitempty"`
+	AvatarUrls        *AvatarURLScheme       `json:"avatarUrls,omitempty"`
+	ProjectKeys       []string               `json:"projectKeys,omitempty"`
+	Insight           *ProjectInsightScheme  `json:"insight,omitempty"`
+	Category          *ProjectCategoryScheme `json:"projectCategory,omitempty"`
+	Deleted           bool                   `json:"deleted,omitempty"`
+	RetentionTillDate string                 `json:"retentionTillDate,omitempty"`
+	DeletedDate       string                 `json:"deletedDate,omitempty"`
+	DeletedBy         *UserScheme            `json:"deletedBy,omitempty"`
+	Archived          bool                   `json:"archived,omitempty"`
+	ArchivedDate      string                 `json:"archivedDate,omitempty"`
+	ArchivedBy        *UserScheme            `json:"archivedBy,omitempty"`
 }
 ```
 
@@ -275,7 +277,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -297,14 +300,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.ProjectUpdateScheme{
+	payload := &models.ProjectUpdateScheme{
 		Description: "Example Project description",
 	}
 
@@ -327,7 +330,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -340,7 +343,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := jira.New(nil, host)
+	jiraCloud, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -366,7 +369,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -388,7 +391,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -413,7 +416,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -426,7 +429,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := jira.New(nil, host)
+	jiraCloud, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -475,7 +478,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -488,7 +491,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := jira.New(nil, host)
+	jiraCloud, err := v2.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -516,7 +519,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -538,7 +541,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -558,59 +561,6 @@ func main() {
 }
 ```
 
-## Get project issue type hierarchy
-
-Get the issue type hierarchy for a next-gen project.
-
-```go
-package main
-
-import (
-	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
-	"log"
-	"os"
-)
-
-func main() {
-
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
-
-	var (
-		host  = os.Getenv("HOST")
-		mail  = os.Getenv("MAIL")
-		token = os.Getenv("TOKEN")
-	)
-
-	atlassian, err := jira.New(nil, host)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-	hierarchy, response, err := atlassian.Project.Hierarchy(context.Background(), "PK")
-	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
-		log.Fatal(err)
-	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
-	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(hierarchy)
-}
-
-```
-
 ## Get project notification scheme
 
 &#x20;Gets a [notification scheme](https://confluence.atlassian.com/x/8YdKLg) associated with the project.&#x20;
@@ -620,7 +570,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -642,7 +592,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -666,7 +616,6 @@ func main() {
 		for index, notification := range event.Notifications {
 			log.Println(index, event.Event.Name, notification.ID, notification.NotificationType, notification.Parameter)
 		}
-
 	}
 }
 ```

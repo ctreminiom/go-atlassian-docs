@@ -9,14 +9,14 @@ description: >-
 
 ## Get all project types
 
- Returns all [project types](https://confluence.atlassian.com/x/Var1Nw)
+&#x20;Returns all [project types](https://confluence.atlassian.com/x/Var1Nw)
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -38,7 +38,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -65,14 +65,14 @@ func main() {
 
 ## Get licensed project types
 
- Returns all [project types](https://confluence.atlassian.com/x/Var1Nw)
+&#x20;Returns all [project types](https://confluence.atlassian.com/x/Var1Nw)
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -94,7 +94,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -120,14 +120,14 @@ func main() {
 
 ## Get project type by key
 
- Returns a [project type](https://confluence.atlassian.com/x/Var1Nw)
+&#x20;Returns a [project type](https://confluence.atlassian.com/x/Var1Nw)
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -149,7 +149,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -172,14 +172,14 @@ func main() {
 
 ## Get accessible project type by key
 
- Returns a [project type](https://confluence.atlassian.com/x/Var1Nw)
+&#x20;Returns a [project type](https://confluence.atlassian.com/x/Var1Nw)
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -201,7 +201,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -221,4 +221,3 @@ func main() {
 	log.Println(projectType)
 }
 ```
-

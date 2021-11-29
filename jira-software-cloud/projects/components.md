@@ -16,7 +16,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -38,14 +39,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.ProjectComponentPayloadScheme{
+	payload := &models.ComponentPayloadScheme{
 		IsAssigneeTypeValid: false,
 		Name:                "Component 2",
 		Description:         "This is a Jira component",
@@ -73,7 +74,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -95,7 +96,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -117,20 +118,20 @@ func main() {
 {% endhint %}
 
 ```go
-type ProjectComponentScheme struct {
-   Self                string      `json:"self,omitempty"`
-   ID                  string      `json:"id,omitempty"`
-   Name                string      `json:"name,omitempty"`
-   Description         string      `json:"description,omitempty"`
-   Lead                *UserScheme `json:"lead,omitempty"`
-   LeadUserName        string      `json:"leadUserName,omitempty"`
-   AssigneeType        string      `json:"assigneeType,omitempty"`
-   Assignee            *UserScheme `json:"assignee,omitempty"`
-   RealAssigneeType    string      `json:"realAssigneeType,omitempty"`
-   RealAssignee        *UserScheme `json:"realAssignee,omitempty"`
-   IsAssigneeTypeValid bool        `json:"isAssigneeTypeValid,omitempty"`
-   Project             string      `json:"project,omitempty"`
-   ProjectID           int         `json:"projectId,omitempty"`
+type ComponentScheme struct {
+	Self                string      `json:"self,omitempty"`
+	ID                  string      `json:"id,omitempty"`
+	Name                string      `json:"name,omitempty"`
+	Description         string      `json:"description,omitempty"`
+	Lead                *UserScheme `json:"lead,omitempty"`
+	LeadUserName        string      `json:"leadUserName,omitempty"`
+	AssigneeType        string      `json:"assigneeType,omitempty"`
+	Assignee            *UserScheme `json:"assignee,omitempty"`
+	RealAssigneeType    string      `json:"realAssigneeType,omitempty"`
+	RealAssignee        *UserScheme `json:"realAssignee,omitempty"`
+	IsAssigneeTypeValid bool        `json:"isAssigneeTypeValid,omitempty"`
+	Project             string      `json:"project,omitempty"`
+	ProjectID           int         `json:"projectId,omitempty"`
 }
 ```
 
@@ -143,7 +144,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -165,14 +167,14 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &jira.ProjectComponentPayloadScheme{
+	payload := &models.ComponentPayloadScheme{
 		IsAssigneeTypeValid: false,
 		Name:                "Component 1 - UPDATED",
 		Description:         "This is a Jira component - UPDATED",
@@ -197,7 +199,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -219,7 +221,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -244,7 +246,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -266,7 +268,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -292,7 +294,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -314,7 +316,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}

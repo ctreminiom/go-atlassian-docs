@@ -13,7 +13,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -35,7 +35,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -50,20 +50,16 @@ func main() {
 
 	screens, response, err := atlassian.Screen.Fields(context.Background(), fieldID, startAt, maxResult)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
 	for _, screen := range screens.Values {
 		log.Println(screen.ID, screen.Name, screen.Description)
 	}
 }
-
 ```
 
 ## Get screens
@@ -72,60 +68,46 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 
 ```go
 package main
-
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
-
 func main() {
-
 	/*
 		----------- Set an environment variable in git bash -----------
 		export HOST="https://ctreminiom.atlassian.net/"
 		export MAIL="MAIL_ADDRESS"
 		export TOKEN="TOKEN_API"
-
 		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
 	*/
-
 	var (
 		host  = os.Getenv("HOST")
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
-
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	atlassian.Auth.SetBasicAuth(mail, token)
-
 	var (
 		screenIDs  = []int{10000}
 		startAt    = 0
 		maxResults = 0
 	)
-
 	screens, response, err := atlassian.Screen.Gets(context.Background(), screenIDs, startAt, maxResults)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
+	
 	for _, screen := range screens.Values {
 		log.Println(screen.ID, screen.Name, screen.Description)
 	}
 }
-
 ```
 
 ## Create screen
@@ -137,7 +119,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -159,7 +141,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -168,17 +150,13 @@ func main() {
 
 	newScreen, response, err := atlassian.Screen.Create(context.Background(), "FX Screen", "sample description")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The new screen has been created with the ID %v", newScreen.ID)
 }
-
 ```
 
 ## Add field to default screen
@@ -187,22 +165,18 @@ Adds a field to the default tab of the default screen.
 
 ```go
 package main
-
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
-
 func main() {
-
 	/*
 		----------- Set an environment variable in git bash -----------
 		export HOST="https://ctreminiom.atlassian.net/"
 		export MAIL="MAIL_ADDRESS"
 		export TOKEN="TOKEN_API"
-
 		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
 	*/
 
@@ -211,26 +185,19 @@ func main() {
 		mail  = os.Getenv("MAIL")
 		token = os.Getenv("TOKEN")
 	)
-
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	
 	atlassian.Auth.SetBasicAuth(mail, token)
-
 	response, err := atlassian.Screen.AddToDefault(context.Background(), "customfield_xxxx")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
-
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Update screen
@@ -242,7 +209,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -264,7 +231,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -273,17 +240,13 @@ func main() {
 
 	screenUpdated, response, err := atlassian.Screen.Update(context.Background(), 10015, "AX Screen", "")
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(screenUpdated)
 }
-
 ```
 
 ## Delete screen
@@ -295,7 +258,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -317,7 +280,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -326,16 +289,12 @@ func main() {
 
 	response, err := atlassian.Screen.Delete(context.Background(), 10015)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Get available screen fields
@@ -347,7 +306,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
 )
@@ -369,7 +328,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	atlassian, err := jira.New(nil, host)
+	atlassian, err := v2.New(nil, host)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -378,19 +337,14 @@ func main() {
 
 	fields, response, err := atlassian.Screen.Available(context.Background(), 10000)
 	if err != nil {
-		if response != nil {
-			log.Println("Response HTTP Response", string(response.BodyAsBytes))
-		}
 		log.Fatal(err)
 	}
 
-	log.Println("Response HTTP Code", response.StatusCode)
+	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	for _, field := range *fields {
+	for _, field := range fields {
 		log.Println(field.ID, field.Name)
 	}
 }
-
 ```
-
