@@ -85,6 +85,7 @@
   * [📂 Attachments](confluence-cloud/content/attachments.md)
   * [📬 Comments](confluence-cloud/content/comments.md)
   * [🚩 Labels](confluence-cloud/content/labels.md)
+  * [🎎 Children/Descendants](confluence-cloud/content/children-descendants.md)
   * [🛡 Permissions](confluence-cloud/content/permissions.md)
 * [💾 Space](confluence-cloud/space.md)
 

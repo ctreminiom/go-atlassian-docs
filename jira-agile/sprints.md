@@ -45,3 +45,9 @@ Returns all issues in a sprint, for a given sprint ID. This only includes issues
 
 {% embed url="https://gist.github.com/ctreminiom/537e6078aebb9a9df5598c59952b6b8b" %}
 
+## Delete Sprint
+
+{% hint style="warning" %}
+TODO
+{% endhint %}
+

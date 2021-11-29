@@ -32,3 +32,9 @@ Build your JQL query using the parent clause. For more information on the parent
 \
 
 {% endembed %}
+
+## Move issues to Epic
+
+{% hint style="warning" %}
+TODO
+{% endhint %}
