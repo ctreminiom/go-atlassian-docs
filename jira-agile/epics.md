@@ -6,7 +6,7 @@ description: >-
 
 # 📈 Epics
 
-### Get epic <a href="api-agile-1-0-epic-epicidorkey-get" id="api-agile-1-0-epic-epicidorkey-get"></a>
+## Get Epic
 
 Returns the epic for a given epic ID. This epic will only be returned if the user has permission to view it.
 
@@ -16,7 +16,7 @@ Returns the epic for a given epic ID. This epic will only be returned if the use
 
 {% embed url="https://gist.github.com/ctreminiom/55b6c5d3f9e29b69088b86aca5669d85" %}
 
-### Get issues for epic
+## Get Issues for epic
 
 Returns all issues that belong to the epic, for the given epic ID. This only includes issues that the user has permission to view. Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
 
