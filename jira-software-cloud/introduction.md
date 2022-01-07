@@ -9,7 +9,7 @@ This document contains examples of the Jira API v3 and v2. Both versions offer t
 * `description` and `environment` fields in issues.
 * `textarea` type custom fields (multi-line text fields) in issues. Single line custom fields (`textfield`) accept a string and don't handle Atlassian Document Format content.
 
-The version separation is through packages, if you need to use version 3, use the **v3 **package
+The version separation is through packages, if you need to use version 3, use the **v3** package
 
 ![](<../.gitbook/assets/image (18).png>)
 

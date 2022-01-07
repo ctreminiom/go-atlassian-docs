@@ -6,7 +6,7 @@ You can link issues to keep track of duplicate or related work. You can, for exa
 * create an association between an issue and a Confluence page
 * link an issue to any other web page
 
-Make sure you have the _link issues _project permission before getting started. Note that your Jira administrator can customize the types of links that you can create.
+Make sure you have the _link issues_ project permission before getting started. Note that your Jira administrator can customize the types of links that you can create.
 
 ![](../../../.gitbook/assets/KP-board-Agile-Board-Jira.png)
 
@@ -166,7 +166,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -253,7 +253,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go

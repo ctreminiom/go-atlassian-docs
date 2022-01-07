@@ -1,4 +1,4 @@
-# 🤹‍♂️ Users
+# 🧙♂ Users
 
 {% hint style="info" %}
 The following user attributes can be updated through the user provisioning API.
@@ -56,7 +56,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -191,7 +191,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -457,7 +457,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -582,7 +582,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -666,7 +666,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go

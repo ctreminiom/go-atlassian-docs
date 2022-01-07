@@ -55,7 +55,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -77,7 +77,7 @@ type ApplicationRoleScheme struct {
 
 ## Get application role
 
-This method returns an existing application role using the **key **as a parameter
+This method returns an existing application role using the **key** as a parameter
 
 ```go
 package main

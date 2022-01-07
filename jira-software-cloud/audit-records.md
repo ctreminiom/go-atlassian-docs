@@ -5,14 +5,14 @@ The audit log tracks key activities that occur within the **Atlassian organizati
 This resource represents audits that record activities undertaken in Jira. Use it to get a list of audit records.
 
 {% hint style="warning" %}
-**Tip: **The audit log includes activities for up to **180 days**. To save activities before they pass 180 days, [export the audit log](https://support.atlassian.com/security-and-access-policies/docs/track-organization-activities-from-the-audit-log/#Auditlogging-export) periodically.
+**Tip:** The audit log includes activities for up to **180 days**. To save activities before they pass 180 days, [export the audit log](https://support.atlassian.com/security-and-access-policies/docs/track-organization-activities-from-the-audit-log/#Auditlogging-export) periodically.
 {% endhint %}
 
 * 🗡️ **Product audit logs:** Audit logs already exist in Jira Software Cloud and Confluence Cloud. Refer to the table to understand the different types of activities you can find in each audit log.
 
 
 
-* 🏹 **Access audit log activities: **The audit log includes these types of activities.
+* 🏹 **Access audit log activities:** The audit log includes these types of activities.
 
 ![](<../.gitbook/assets/image (4).png>)
 
@@ -96,7 +96,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go

@@ -55,7 +55,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -143,7 +143,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -227,7 +227,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -334,7 +334,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -404,7 +404,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -510,7 +510,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -657,7 +657,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go

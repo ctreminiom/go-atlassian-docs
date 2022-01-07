@@ -57,7 +57,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -83,7 +83,7 @@ type CustomFieldContextOptionScheme struct {
 
 Creates options and, where the custom select field is of the type Select List (cascading), cascading options for a custom select field. The options are added to a context of the field.&#x20;
 
-The maximum number of options that can be created per request is 1000 and each field can have a maximum of **10000 **options, the method returns the following information:
+The maximum number of options that can be created per request is 1000 and each field can have a maximum of **10000** options, the method returns the following information:
 
 ```go
 package main
@@ -160,7 +160,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -181,7 +181,7 @@ type CustomFieldContextOptionScheme struct {
 Updates the options of a custom field. If any of the options are not found, no options are updated. Options where the values in the request match the current values aren't updated and aren't reported in the response.
 
 {% hint style="warning" %}
-Note that this operation **only works for issue field select list options created in Jira or using operations from the **[**Issue custom field options**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-options/#api-group-issue-custom-field-options)** resource**, it cannot be used with issue field select list options created by Connect apps.
+Note that this operation **only works for issue field select list options created in Jira or using operations from the** [**Issue custom field options**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-options/#api-group-issue-custom-field-options) **resource**, it cannot be used with issue field select list options created by Connect apps.
 {% endhint %}
 
 ```go
@@ -262,7 +262,7 @@ func main() {
 ```
 
 {% hint style="info" %}
-🧚‍♀️ **Tips: **You can extract the following struct tags
+🧚‍♀️ **Tips:** You can extract the following struct tags
 {% endhint %}
 
 ```go
@@ -283,7 +283,7 @@ type CustomFieldContextOptionScheme struct {
 Deletes a custom field option. Options with cascading options cannot be deleted without deleting the cascading options first.
 
 {% hint style="warning" %}
-&#x20;This operation works for custom field options created in Jira or the operations from this resource. **To work with issue field select list options created for Connect apps use the **[**Issue custom field options (apps)**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-options/#api-rest-api-3-field-fieldid-context-contextid-option-optionid-delete) **operations.**
+&#x20;This operation works for custom field options created in Jira or the operations from this resource. **To work with issue field select list options created for Connect apps use the** [**Issue custom field options (apps)**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-options/#api-rest-api-3-field-fieldid-context-contextid-option-optionid-delete) **operations.**
 {% endhint %}
 
 ```go
