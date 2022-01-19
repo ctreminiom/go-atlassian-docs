@@ -89,6 +89,7 @@
   * [🚩 Labels](confluence-cloud/content/labels.md)
   * [🎎 Children/Descendants](confluence-cloud/content/children-descendants.md)
   * [🛡 Permissions](confluence-cloud/content/permissions.md)
+  * [🔞 Restrictions](confluence-cloud/content/restrictions.md)
 * [💾 Space](confluence-cloud/space.md)
 
 ## Atlassian Admin Cloud
