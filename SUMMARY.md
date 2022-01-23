@@ -93,7 +93,7 @@
     * [🚧 Operations](confluence-cloud/content/restrictions/operations/README.md)
       * [🫂 Group](confluence-cloud/content/restrictions/operations/group.md)
       * [👤 User](confluence-cloud/content/restrictions/operations/user.md)
-  * [🖍 Versions](confluence-cloud/content/versions.md)
+  * [🔃 Versions](confluence-cloud/content/versions.md)
 * [💾 Space](confluence-cloud/space.md)
 
 ## Atlassian Admin Cloud
