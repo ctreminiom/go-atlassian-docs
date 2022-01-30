@@ -48,6 +48,7 @@
   * [🧵 Types](jira-software-cloud/projects/types.md)
   * [🧱 Versions](jira-software-cloud/projects/versions.md)
   * [🪔 Validation](jira-software-cloud/projects/validation.md)
+  * [🙌 Features](jira-software-cloud/projects/features.md)
 * [📓 Screens](jira-software-cloud/screens/README.md)
   * [📂 Tabs](jira-software-cloud/screens/tabs/README.md)
     * [🧰 Fields](jira-software-cloud/screens/tabs/fields.md)
