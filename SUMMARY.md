@@ -97,6 +97,7 @@
   * [🔃 Versions](confluence-cloud/content/versions.md)
 * [💾 Space](confluence-cloud/space.md)
 * [🔰 Label](confluence-cloud/label.md)
+* [🔎 Search](confluence-cloud/search.md)
 
 ## Atlassian Admin Cloud
 
