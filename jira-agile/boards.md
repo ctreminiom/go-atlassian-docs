@@ -8,21 +8,187 @@ description: >-
 
 ### Get issues for backlog
 
-Returns all issues from the board's backlog, for the given board ID. This only includes issues that the user has permission to view. The backlog contains incomplete issues that are not assigned to any future or active sprint. Note, if the user does not have permission to view the board, no issues will be returned at all. Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
+Returns all issues from the board's backlog, for the given board ID.&#x20;
 
-{% embed url="https://gist.github.com/ctreminiom/cfdabcaef92f4e59157a9c91bb3749ee" %}
+* This only includes issues that the user has permission to view.&#x20;
+* The backlog contains incomplete issues that are not assigned to any future or active sprint.&#x20;
+
+{% hint style="info" %}
+Note, if the user does not have permission to view the board, no issues will be returned at all.&#x20;
+{% endhint %}
+
+Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
+
+{% embed url="https://developer.atlassian.com/cloud/jira/software/rest/api-group-board#api-agile-1-0-board-boardid-backlog-get" %}
+Official Documentation
+{% endembed %}
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/agile"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := agile.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
+
+	var (
+		options = &models.IssueOptionScheme{
+			JQL:           "project = KP",
+			ValidateQuery: true,
+			Fields:        []string{"status", "issuetype", "summary"},
+			Expand:        []string{"changelog"},
+		}
+
+		boardID   = 4
+		startAt   = 0
+		maxResult = 50
+	)
+
+	issues, response, err := atlassian.Board.Backlog(context.Background(), boardID, startAt, maxResult, options)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", string(response.Bytes.Bytes()))
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, issue := range issues.Issues {
+		log.Println(issue.Key)
+	}
+}
+```
 
 ### Get configuration
 
 Get the board configuration.&#x20;
 
-{% embed url="https://gist.github.com/ctreminiom/0c36c4e93d9f3401a22c2512c5f6d7de" %}
+{% embed url="https://developer.atlassian.com/cloud/jira/software/rest/api-group-board#api-agile-1-0-board-boardid-configuration-get" %}
+Official Documentation
+{% endembed %}
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/agile"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := agile.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
+
+	boardConfig, response, err := atlassian.Board.Configuration(context.Background(), 4)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(boardConfig)
+}
+```
 
 ### Create board
 
 Creates a new board. Board name, type ,and filter ID is required
 
-{% embed url="https://gist.github.com/ctreminiom/f5b63ad61ed6834d0eb9b31d77bdc5be" %}
+{% embed url="https://developer.atlassian.com/cloud/jira/software/rest/api-group-board#api-agile-1-0-board-post" %}
+Official Documentation
+{% endembed %}
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/agile"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := agile.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
+
+	newBoard := &models.BoardPayloadScheme{
+		Name:     "DUMMY Board Name",
+		Type:     "scrum", //scrum or kanban
+		FilterID: 10016,
+
+		// Omit the Location if you want to the board to yourself (location)
+		Location: &models.BoardPayloadLocationScheme{
+			ProjectKeyOrID: "KP",
+			Type:           "project",
+		},
+	}
+
+	board, response, err := atlassian.Board.Create(context.Background(), newBoard)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(board)
+}
+
+```
 
 ### Get epics
 
