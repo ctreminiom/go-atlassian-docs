@@ -2,7 +2,7 @@
 
 * [📑 Introduction](README.md)
 * [🛠 Cookbooks](cookbooks/README.md)
-  * [TODO](cookbooks/todo.md)
+  * [⏱ Changelogs](cookbooks/changelogs.md)
 
 ## Jira Software Cloud
 
