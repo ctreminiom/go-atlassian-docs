@@ -607,3 +607,9 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+
+## Get issue type screen scheme projects
+
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of projects associated with an issue-type screen scheme. Only company-managed projects associated with an issue-type screen scheme are returned.
+
+{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-type-screen-schemes#api-rest-api-3-issuetypescreenscheme-issuetypescreenschemeid-project-get" %}
