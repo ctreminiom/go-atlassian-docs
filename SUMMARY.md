@@ -96,7 +96,8 @@
       * [🫂 Group](confluence-cloud/content/restrictions/operations/group.md)
       * [👤 User](confluence-cloud/content/restrictions/operations/user.md)
   * [🔃 Versions](confluence-cloud/content/versions.md)
-* [💾 Space](confluence-cloud/space.md)
+* [💾 Space](confluence-cloud/space/README.md)
+  * [🛡 Permissions](confluence-cloud/space/permissions.md)
 * [🔰 Label](confluence-cloud/label.md)
 * [🔎 Search](confluence-cloud/search.md)
 
