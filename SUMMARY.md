@@ -100,6 +100,7 @@
   * [🛡 Permissions](confluence-cloud/space/permissions.md)
 * [🔰 Label](confluence-cloud/label.md)
 * [🔎 Search](confluence-cloud/search.md)
+* [🖼 Long Task](confluence-cloud/long-task.md)
 
 ## Atlassian Admin Cloud
 

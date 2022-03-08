@@ -399,9 +399,64 @@ func main()  {
 
 ```
 
-## Get all contents
+## Archive Pages
 
-{% hint style="warning" %}
-TODO
+Archives a list of pages. The pages to be archived are specified as a list of content IDs. This API accepts the archival request and returns a task ID.&#x20;
+
+{% hint style="info" %}
+The archival process happens asynchronously. Use the **/longtask/** REST API to get the copy task status.
 {% endhint %}
 
+{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content#api-wiki-rest-api-content-archive-post" %}
+Official Documentation
+{% endembed %}
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/confluence"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
+
+	payload := &models.ContentArchivePayloadScheme{
+		Pages: []*models.ContentArchiveIDPayloadScheme{
+			{
+				ID: 78675984,
+			},
+		},
+	}
+
+	task, response, err := instance.Content.Archive(context.Background(), payload)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Endpoint:", response.Endpoint)
+	log.Println("Status Code:", response.Code)
+	log.Println(task.ID, task.Links.Status)
+}
+
+```
