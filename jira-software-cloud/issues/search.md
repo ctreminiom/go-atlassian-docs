@@ -120,3 +120,57 @@ func main() {
 	log.Println(issues.Total)
 }
 ```
+
+## Check issues against JQL
+
+Checks whether one or more issues would be returned by one or more JQL queries.
+
+{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search#api-rest-api-3-jql-match-post" %}
+Official V3 Documentation
+{% endembed %}
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	payload := &models.IssueSearchCheckPayloadScheme{
+		IssueIds: []int{10036},
+		JQLs:     []string{"issuekey = KP-23"},
+	}
+
+	matches, response, err := atlassian.Issue.Search.Checks(context.Background(), payload)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, match := range matches.Matches {
+		fmt.Println(match)
+	}
+}
+
+```
