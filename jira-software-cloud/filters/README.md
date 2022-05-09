@@ -441,5 +441,46 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
+```
 
+## Change filter owner
+
+{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filters#api-rest-api-3-filter-id-owner-put" %}
+Official Documentation
+{% endembed %}
+
+Changes the owner of the filter.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	response, err := atlassian.Filter.Change(context.Background(), 1, "asda03333")
+	if err != nil {
+		return
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+}gg
 ```
