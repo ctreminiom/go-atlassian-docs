@@ -313,3 +313,77 @@ func main() {
 ## Create Customer Request
 
 This method creates a customer request at a service desk. The payload must include the service desk and customer request type, as well as any fields that are required for the request type. A list of the fields required by a customer request type can be obtained using the `sm.RequestType.Fields` method.
+
+{% embed url="https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/#api-rest-servicedeskapi-request-post" %}
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+	"time"
+)
+
+func main()  {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
+
+	form := &models.CustomerRequestFields{}
+
+	if err := form.Text("summary", "Summary Sample"); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := form.Date("duedate", time.Now()); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := form.Components([]string{"Intranet"}); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := form.Labels([]string{"label-00", "label-01"}); err != nil {
+		log.Fatal(err)
+	}
+
+	payload := &models.CreateCustomerRequestPayloadScheme{
+		RequestParticipants: nil,
+		ServiceDeskID:       "1",
+		RequestTypeID:       "10",
+	}
+
+	ticket, response, err := atlassian.Request.Create(context.Background(), payload, form)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	fmt.Println("IssueID", ticket.IssueID)
+	fmt.Println("IssueKey", ticket.IssueKey)
+	fmt.Println("Reporter.EmailAddress", ticket.Reporter.EmailAddress)
+	fmt.Println("CreatedDate.Friendly", ticket.CreatedDate.Friendly)
+
+	for _, field := range ticket.RequestFieldValues {
+		fmt.Println(field)
+	}
+}
+```
