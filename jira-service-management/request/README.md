@@ -309,3 +309,7 @@ func main() {
 }
 
 ```
+
+## Create Customer Request
+
+This method creates a customer request at a service desk. The payload must include the service desk and customer request type, as well as any fields that are required for the request type. A list of the fields required by a customer request type can be obtained using the `sm.RequestType.Fields` method.
