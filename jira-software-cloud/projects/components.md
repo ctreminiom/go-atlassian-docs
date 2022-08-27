@@ -285,10 +285,11 @@ func main() {
 }
 ```
 
-## Get project components paginated
+## Get project components <a href="#get-project-components" id="get-project-components"></a>
 
-&#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all components in a project
+Returns all components in a project.
 
+{% code overflow="wrap" lineNumbers="true" %}
 ```go
 package main
 
@@ -335,3 +336,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}
