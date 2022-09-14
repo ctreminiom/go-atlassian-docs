@@ -2,7 +2,7 @@
 
 ## Gets Workflows Schemes
 
-## Create Workflows Schemes
+## Create Workflows Scheme
 
 ## Get Workflow Scheme
 
