@@ -187,7 +187,7 @@ func main() {
 
 ### Example 1
 
-![](../../.gitbook/assets/image.png)
+![](<../../.gitbook/assets/image (1).png>)
 
 ```go
 	commentBody := jira.CommentNodeScheme{}
@@ -316,7 +316,7 @@ func main() {
 
 ### Example 2
 
-![](<../../.gitbook/assets/image (1).png>)
+![](<../../.gitbook/assets/image (1) (1).png>)
 
 ```go
 	commentBody := jira.CommentNodeScheme{}

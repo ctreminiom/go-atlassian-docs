@@ -1,16 +1,10 @@
----
-cover: >-
-  https://images.unsplash.com/photo-1517814179247-2f8e4c9288cb?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxOTcwMjR8MHwxfHNlYXJjaHw5fHxtaW5pbWFsaXN0JTIwYmx1ZXxlbnwwfHx8fDE2MzU3NDM4OTU&ixlib=rb-1.2.1&q=85
-coverY: -477.5
----
-
 # 📑 Introduction
 
 
 
 ![](.gitbook/assets/131232958-022b0382-e6bc-42db-97b6-82fbd190e19a.png)
 
-&#x20;[![](https://img.shields.io/github/v/release/ctreminiom/go-atlassian)](https://github.com/ctreminiom/go-atlassian/releases/latest) [![](https://pkg.go.dev/badge/github.com/ctreminiom/go-atlassian)](https://pkg.go.dev/github.com/ctreminiom/go-atlassian) [![](https://goreportcard.com/badge/ctreminiom/go-atlassian)](https://goreportcard.com/report/github.com/ctreminiom/go-atlassian) [![](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fctreminiom%2Fgo-atlassian.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fctreminiom%2Fgo-atlassian?ref=badge\_shield) [![](https://codecov.io/gh/ctreminiom/go-atlassian/branch/main/graph/badge.svg?token=G0KPNMTIRV)](https://codecov.io/gh/ctreminiom/go-atlassian) [![](https://app.codacy.com/project/badge/Grade/fe5c1b3c9fd64f84989ae51c42803456)](https://www.codacy.com/gh/ctreminiom/go-atlassian/dashboard) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ctreminiom/go-atlassian/blob/master/LICENSE) [![](https://img.shields.io/github/workflow/status/ctreminiom/go-atlassian/Testing?label=%F0%9F%A7%AA%20tests\&style=flat\&color=75C46B)](https://github.com/ctreminiom/go-atlassian/actions?query=workflow%3ATesting) [![](https://img.shields.io/badge/%F0%9F%92%A1%20go-documentation-00ACD7.svg?style=flat)](https://docs.go-atlassian.io) [![](https://bestpractices.coreinfrastructure.org/projects/4861/badge)](https://bestpractices.coreinfrastructure.org/projects/4861) [![chat on Discord](https://img.shields.io/discord/838149936101064724.svg?label=\&logo=discord\&logoColor=ffffff\&color=7389D8\&labelColor=6A7EC2)](https://discord.gg/yqaQFYHS)
+&#x20;[![](https://img.shields.io/github/v/release/ctreminiom/go-atlassian)](https://github.com/ctreminiom/go-atlassian/releases/latest) [![](https://pkg.go.dev/badge/github.com/ctreminiom/go-atlassian?utm\_source=godoc)](https://pkg.go.dev/github.com/ctreminiom/go-atlassian) [![](https://goreportcard.com/badge/ctreminiom/go-atlassian)](https://goreportcard.com/report/github.com/ctreminiom/go-atlassian) [![](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fctreminiom%2Fgo-atlassian.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fctreminiom%2Fgo-atlassian?ref=badge\_shield) [![](https://codecov.io/gh/ctreminiom/go-atlassian/branch/main/graph/badge.svg?token=G0KPNMTIRV)](https://codecov.io/gh/ctreminiom/go-atlassian) [![](https://app.codacy.com/project/badge/Grade/fe5c1b3c9fd64f84989ae51c42803456)](https://www.codacy.com/gh/ctreminiom/go-atlassian/dashboard?utm\_source=github.com\&utm\_medium=referral\&utm\_content=ctreminiom/go-atlassian\&utm\_campaign=Badge\_Grade) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ctreminiom/go-atlassian/blob/master/LICENSE) [![](https://img.shields.io/github/workflow/status/ctreminiom/go-atlassian/Testing?label=%F0%9F%A7%AA%20tests\&style=flat\&color=75C46B)](https://github.com/ctreminiom/go-atlassian/actions?query=workflow%3ATesting) [![](https://img.shields.io/badge/%F0%9F%92%A1%20go-documentation-00ACD7.svg?style=flat)](https://docs.go-atlassian.io/) [![](https://bestpractices.coreinfrastructure.org/projects/4861/badge)](https://bestpractices.coreinfrastructure.org/projects/4861) [![chat on Discord](https://img.shields.io/discord/838149936101064724.svg?label=\&logo=discord\&logoColor=ffffff\&color=7389D8\&labelColor=6A7EC2)](https://discord.gg/yqaQFYHS)
 
 
 
@@ -20,7 +14,7 @@ If you find an endpoint not supported, please submit a pull request or raise a f
 
 ### Installation
 
-If you do not have [Go](https://golang.org) installed yet, you can find installation instructions [here](https://golang.org/doc/install). Please note that the package requires Go version 1.13 or later for module support.
+If you do not have [Go](https://golang.org/) installed yet, you can find installation instructions [here](https://golang.org/doc/install). Please note that the package requires Go version 1.13 or later for module support.
 
 To pull the most recent version of **go-atlassian**, use `go get`.
 
@@ -125,7 +119,7 @@ log.Println("HTTP Endpoint Used", response.Endpoint)
 log.Println(issues.Total)
 ```
 
-The rest of the service functions work much the same way; they are concise and behave as you would expect. The [documentation](https://docs.go-atlassian.io) contains several examples on how to use each service function.
+The rest of the service functions work much the same way; they are concise and behave as you would expect. The [documentation](https://docs.go-atlassian.io/) contains several examples on how to use each service function.
 
 ## ✍️ Contributions
 
@@ -156,6 +150,6 @@ Copyright © 2021 [Carlos Treminio](https://github.com/ctreminiom). This project
 
 In addition to all the contributors we would like to thanks to these companies:
 
-* [Atlassian](https://www.atlassian.com) for providing us Atlassian Admin/Jira/Confluence Standard licenses.
-* [JetBrains](https://www.jetbrains.com) for providing us with free licenses of [GoLand](https://www.jetbrains.com/pycharm/)
-* [GitBook](https://www.gitbook.com) for providing us non-profit / open-source plan so hence I would like to express my thanks here.
+* [Atlassian](https://www.atlassian.com/) for providing us Atlassian Admin/Jira/Confluence Standard licenses.
+* [JetBrains](https://www.jetbrains.com/) for providing us with free licenses of [GoLand](https://www.jetbrains.com/pycharm/)
+* [GitBook](https://www.gitbook.com/) for providing us non-profit / open-source plan so hence I would like to express my thanks here.
