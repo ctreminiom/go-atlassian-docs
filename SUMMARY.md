@@ -61,6 +61,7 @@
   * [🔰 Search](jira-software-cloud/users/search.md)
 * [🧮 Workflow](jira-software-cloud/workflow/README.md)
   * [📟 Scheme](jira-software-cloud/workflow/scheme.md)
+  * [🔄 Status](jira-software-cloud/workflow/status.md)
 
 ## Jira Agile
 
