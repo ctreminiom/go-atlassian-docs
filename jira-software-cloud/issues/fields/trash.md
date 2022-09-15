@@ -1,4 +1,4 @@
-# 🛒 Trash
+# 🗑 Trash
 
 ## Search Fields In Trash
 

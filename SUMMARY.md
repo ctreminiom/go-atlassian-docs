@@ -22,7 +22,7 @@
       * [🔃 Schemes](jira-software-cloud/issues/fields/configuration/schemes.md)
     * [🍳 Context](jira-software-cloud/issues/fields/context/README.md)
       * [🕧 Option](jira-software-cloud/issues/fields/context/option.md)
-    * [🛒 Trash](jira-software-cloud/issues/fields/trash.md)
+    * [🗑 Trash](jira-software-cloud/issues/fields/trash.md)
   * [🏷️ Labels](jira-software-cloud/issues/labels.md)
   * [🔗 Link](jira-software-cloud/issues/link/README.md)
     * [🖇 Types](jira-software-cloud/issues/link/types.md)
