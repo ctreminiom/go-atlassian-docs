@@ -256,3 +256,7 @@ Returns all sprints from a board, for a given board ID. This only includes sprin
 Returns all versions from a board, for a given board ID. This only includes versions that the user has permission to view. Note, if the user does not have permission to view the board, no versions will be returned at all. Returned versions are ordered by the name of the project from which they belong and then by sequence defined by user.
 
 {% embed url="https://gist.github.com/ctreminiom/ed2e5a1aed651991c3ba36895433d814" %}
+
+## Delete Board
+
+## Get Boards
