@@ -324,6 +324,8 @@ func main() {
 }
 ```
 
+## Get Project Organizations
+
 ## Get users in organization
 
 This method returns all the users associated with an organization. Use this method where you want to provide a list of users for an organization or determine if a user is associated with an organization.w
