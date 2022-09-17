@@ -177,6 +177,8 @@ func main()  {
 }
 ```
 
+## Delete Organization
+
 ## Get organizations
 
 This method returns a list of all organizations associated with a service desk.
