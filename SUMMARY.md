@@ -71,7 +71,7 @@
 
 ## Jira Service Management
 
-* [🧑🚀 Customer](jira-service-management/customer.md)
+* [👨⚖ Customer](jira-service-management/customer.md)
 * [ℹ Info](jira-service-management/info.md)
 * [📚 Knowledgebase](jira-service-management/knowledgebase.md)
 * [🪜 Organization](jira-service-management/organization.md)

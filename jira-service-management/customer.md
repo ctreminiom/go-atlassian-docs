@@ -1,4 +1,4 @@
-# 🧑🚀 Customer
+# 👨⚖ Customer
 
 ## Create customer
 
@@ -59,9 +59,9 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
+<details>
+
+<summary>Tips: You can extract the following struct tags</summary>
 
 ```go
 type CustomerScheme struct {
@@ -75,6 +75,12 @@ type CustomerScheme struct {
 	Links        *CustomerLinkScheme `json:"_links,omitempty"`
 }
 ```
+
+</details>
+
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
 
 ## Add customers
 
