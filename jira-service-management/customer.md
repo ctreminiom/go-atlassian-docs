@@ -1,5 +1,9 @@
 # 👨⚖ Customer
 
+{% embed url="https://github.com/ctreminiom/go-atlassian/blob/main/pkg/infra/models/sm_customer.go" %}
+SM Customer Models
+{% endembed %}
+
 ## Create customer
 
 This method adds a customer to the Jira Service Management instance by passing a JSON file including an email address and display name. The display name does not need to be unique. The record's identifiers, `name` and `key`, are automatically generated from the request details.
@@ -59,9 +63,9 @@ func main() {
 }
 ```
 
-<details>
-
-<summary>Tips: You can extract the following struct tags</summary>
+{% hint style="info" %}
+🧚‍♀️ **Tips:** You can extract the following struct tags
+{% endhint %}
 
 ```go
 type CustomerScheme struct {
@@ -75,12 +79,6 @@ type CustomerScheme struct {
 	Links        *CustomerLinkScheme `json:"_links,omitempty"`
 }
 ```
-
-</details>
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
 
 ## Add customers
 
@@ -158,6 +156,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetExperimentalFlag()
 
 	var (
 		serviceDeskID = 1
@@ -213,6 +212,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetExperimentalFlag()
 
 	var (
 		accountIDs = []string{"qm:7ee1b8dc-1ce3-467b-94cd-9bb2dcf083e2:3f06c44b-36e8-4394-9ff3-d679f854477c"}

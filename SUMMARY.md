@@ -74,7 +74,7 @@
 * [👨⚖ Customer](jira-service-management/customer.md)
 * [ℹ Info](jira-service-management/info.md)
 * [📚 Knowledgebase](jira-service-management/knowledgebase.md)
-* [🪜 Organization](jira-service-management/organization.md)
+* [🛂 Organization](jira-service-management/organization.md)
 * [📙 Request](jira-service-management/request/README.md)
   * [🚫 Approval](jira-service-management/request/approval.md)
   * [📂 Attachments](jira-service-management/request/attachment.md)
@@ -83,7 +83,7 @@
   * [👥 Participants](jira-service-management/request/participants.md)
   * [⏰ SLA](jira-service-management/request/sla.md)
   * [💾 Types](jira-service-management/request/types.md)
-  * [🗄 Service Desk](jira-service-management/request/service-desk/README.md)
+  * [⚙ Service Desk](jira-service-management/request/service-desk/README.md)
     * [🛎 Queue](jira-service-management/request/service-desk/queue.md)
 
 ## Confluence Cloud

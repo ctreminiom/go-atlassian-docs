@@ -29,13 +29,15 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetExperimentalFlag()
+	
 
 	var (
 		query        = ""
 		start, limit = 0, 50
 	)
 
-	requestTypes, response, err := atlassian.RequestType.Search(context.Background(), query, start, limit)
+	requestTypes, response, err := atlassian.Request.Type.Search(context.Background(), query, start, limit)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -89,7 +91,7 @@ func main() {
 		start, limit           = 0, 50
 	)
 
-	requestTypes, response, err := atlassian.RequestType.Gets(ctx, serviceDeskID, groupID, start, limit)
+	requestTypes, response, err := atlassian.Request.Type.Gets(ctx, serviceDeskID, groupID, start, limit)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -175,6 +177,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetExperimentalFlag()
 
 	var (
 		ctx           = context.Background()
@@ -185,7 +188,7 @@ func main() {
 		helpText      = "Request Type Sample HelpText"
 	)
 
-	newRequestType, response, err := atlassian.RequestType.Create(ctx,
+	newRequestType, response, err := atlassian.Request.Type.Create(ctx,
 		serviceDeskID,
 		issueTypeID,
 		name,
@@ -238,7 +241,7 @@ func main() {
 		requestTypeID = 9
 	)
 
-	requestType, response, err := atlassian.RequestType.Get(context.Background(), serviceDeskID, requestTypeID)
+	requestType, response, err := atlassian.Request.Type.Get(context.Background(), serviceDeskID, requestTypeID)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -278,13 +281,14 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetExperimentalFlag()
 
 	var (
 		serviceDeskID = 1
 		requestTypeID = 9
 	)
 
-	response, err := atlassian.RequestType.Delete(context.Background(), serviceDeskID, requestTypeID)
+	response, err := atlassian.Request.Type.Delete(context.Background(), serviceDeskID, requestTypeID)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -334,7 +338,7 @@ func main() {
 		requestTypeID = 9
 	)
 
-	fields, response, err := atlassian.RequestType.Fields(context.Background(), serviceDeskID, requestTypeID)
+	fields, response, err := atlassian.Request.Type.Fields(context.Background(), serviceDeskID, requestTypeID)
 	if err != nil {
 		log.Fatal(err)
 	}

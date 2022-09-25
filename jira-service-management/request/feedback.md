@@ -29,6 +29,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetExperimentalFlag()
 
 	var (
 		issueKey = "DESK-12"
@@ -76,6 +77,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetExperimentalFlag()
 
 	var (
 		issueKey = "DESK-12"
@@ -125,6 +127,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
+	atlassian.Auth.SetExperimentalFlag()
 
 	var (
 		issueKey = "DESK-12"

@@ -1,5 +1,9 @@
 # ℹ Info
 
+{% embed url="https://github.com/ctreminiom/go-atlassian/blob/main/pkg/infra/models/sm_info.go" %}
+SM Info Models
+{% endembed %}
+
 ## Get info
 
 This method retrieves information about the Jira Service Management instance such as software version, builds, and related links.

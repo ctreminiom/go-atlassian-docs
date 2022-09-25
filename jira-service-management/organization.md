@@ -1,4 +1,4 @@
-# 🪜 Organization
+# 🛂 Organization
 
 ## Get organizations
 
@@ -51,7 +51,6 @@ func main() {
 	for _, organization := range organizations.Values {
 		log.Println(organization)
 	}
-
 }
 ```
 
@@ -76,14 +75,6 @@ type OrganizationPageLinkScheme struct {
 	Context string `json:"context,omitempty"`
 	Next    string `json:"next,omitempty"`
 	Prev    string `json:"prev,omitempty"`
-}
-
-type OrganizationScheme struct {
-	ID    string `json:"id,omitempty"`
-	Name  string `json:"name,omitempty"`
-	Links struct {
-		Self string `json:"self,omitempty"`
-	} `json:"_links,omitempty"`
 }
 ```
 

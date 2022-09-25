@@ -42,7 +42,6 @@ func main() {
 	}
 
 	for pos, queue := range queues.Values {
-
 		log.Println("------------------------------------")
 		log.Printf("Queue ID #%v: %v", pos+1, queue.ID)
 		log.Printf("Queue Name #%v: %v", pos+1, queue.Name)

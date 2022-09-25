@@ -314,8 +314,6 @@ func main() {
 
 This method creates a customer request at a service desk. The payload must include the service desk and customer request type, as well as any fields that are required for the request type. A list of the fields required by a customer request type can be obtained using the `sm.RequestType.Fields` method.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/#api-rest-servicedeskapi-request-post" %}
-
 ```go
 package main
 
