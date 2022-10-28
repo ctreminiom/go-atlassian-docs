@@ -56,6 +56,7 @@
     * [🧰 Fields](jira-software-cloud/screens/tabs/fields.md)
   * [📠 Schemes](jira-software-cloud/screens/schemes.md)
 * [⚙ Server](jira-software-cloud/server.md)
+* [🔩 JQL](jira-software-cloud/jql.md)
 * [⚗ Tasks](jira-software-cloud/tasks.md)
 * [🤓 Users](jira-software-cloud/users/README.md)
   * [🔰 Search](jira-software-cloud/users/search.md)
