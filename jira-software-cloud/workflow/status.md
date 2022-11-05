@@ -322,3 +322,5 @@ func main() {
 }
 ```
 {% endcode %}
+
+## Bulk Workflow Statuses
