@@ -7,7 +7,7 @@ description: >-
 
 # 🗓 Sprints
 
-### Create sprint <a href="create-print" id="create-print"></a>
+### Create sprint <a href="#create-print" id="create-print"></a>
 
 Creates a future sprint. Sprint name and origin board id are required. Start date, end date, and goal are optional.
 
@@ -31,7 +31,7 @@ Performs a partial update of a sprint. A partial update means that fields not pr
 
 {% embed url="https://gist.github.com/ctreminiom/7b8c576c2056aee3edc355214430684d" %}
 
-### Get issues for sprint <a href="get-issues-for-sprint" id="get-issues-for-sprint"></a>
+### Get issues for sprint <a href="#get-issues-for-sprint" id="get-issues-for-sprint"></a>
 
 Returns all issues in a sprint, for a given sprint ID. This only includes issues that the user has permission to view. By default, the returned issues are ordered by rank.
 
@@ -50,4 +50,6 @@ Returns all issues in a sprint, for a given sprint ID. This only includes issues
 {% hint style="warning" %}
 TODO
 {% endhint %}
+
+## Move Issues To Sprint
 
