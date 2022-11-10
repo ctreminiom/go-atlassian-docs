@@ -324,3 +324,5 @@ func main() {
 {% endcode %}
 
 ## Bulk Workflow Statuses
+
+## Get Workflow Status
