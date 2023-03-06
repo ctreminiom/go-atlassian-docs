@@ -77,6 +77,10 @@ instance.Auth.SetBasicAuth("YOUR_CLIENT_MAIL", "YOUR_APP_ACCESS_TOKEN")
 
 The library uses the services interfaces to provide a modular and flexible way to interact with Atlassian products' REST APIs. It defines a set of services interfaces that define the functionality of each API, and then provides implementations of those interfaces that can be used to interact with the APIs.
 
+{% embed url="https://github.com/ctreminiom/go-atlassian/tree/main/service/jira" %}
+Service folder
+{% endembed %}
+
 ```go
 // BoardConnector represents the Jira boards.
 // Use it to search, get, create, delete, and change boards.
