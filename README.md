@@ -26,7 +26,7 @@ go get -v github.com/ctreminiom/go-atlassian
 
 You can import the package you need into your project as you normally would. You can import the following packages:
 
-<table><thead><tr><th>Product</th><th>Package</th><th data-type="content-ref"></th></tr></thead><tbody><tr><td>Jira V2</td><td><code>github.com/ctreminiom/go-atlassian/jira/v2</code></td><td><a href="./">.</a></td></tr><tr><td>Jira V3</td><td><code>github.com/ctreminiom/go-atlassian/jira/v3</code></td><td></td></tr><tr><td>Jira Agile</td><td><code>github.com/ctreminiom/go-atlassian/jira/agile</code></td><td></td></tr><tr><td>Jira ITSM</td><td><code>github.com/ctreminiom/go-atlassian/jira/sm</code></td><td></td></tr><tr><td>Confluence</td><td><code>github.com/ctreminiom/go-atlassian/confluence</code></td><td></td></tr><tr><td>Cloud Admin</td><td><code>github.com/ctreminiom/go-atlassian/admin</code></td><td></td></tr></tbody></table>
+<table><thead><tr><th>Product</th><th>Package</th><th data-type="content-ref"></th></tr></thead><tbody><tr><td>Jira V2</td><td><code>github.com/ctreminiom/go-atlassian/jira/v2</code></td><td><a href="jira-software-cloud/introduction.md">introduction.md</a></td></tr><tr><td>Jira V3</td><td><code>github.com/ctreminiom/go-atlassian/jira/v3</code></td><td></td></tr><tr><td>Jira Agile</td><td><code>github.com/ctreminiom/go-atlassian/jira/agile</code></td><td></td></tr><tr><td>Jira ITSM</td><td><code>github.com/ctreminiom/go-atlassian/jira/sm</code></td><td></td></tr><tr><td>Confluence</td><td><code>github.com/ctreminiom/go-atlassian/confluence</code></td><td></td></tr><tr><td>Cloud Admin</td><td><code>github.com/ctreminiom/go-atlassian/admin</code></td><td></td></tr></tbody></table>
 
 ## Usage
 
@@ -35,7 +35,7 @@ Before using the **go-atlassian** package, you need to have an Atlassian API key
 Create a client with your instance host and access token to start communicating with the Atlassian API's. In this example, we're going to instance a new Confluence Cloud client.
 
 {% code lineNumbers="true" %}
-```
+```go
 instance, err := confluence.New(nil, "INSTANCE_HOST")
 if err != nil {
     log.Fatal(err)
@@ -154,5 +154,7 @@ The library shares many similarities with _go-jira_, including its use of servic
 For example, _go-atlassian_ provides support for additional Atlassian products like Confluence, Jira Agile, Atlassian Admin, and Jira Service Management, while _go-jira_ is focused exclusively on Jira.&#x20;
 
 Despite these differences, _go-atlassian_ remains heavily inspired by _go-jira_, and many of the core design principles and patterns used in _go-jira_ can be found in _go-atlassian_ as well.
+
+
 
 Copyright © 2021 [Carlos Treminio](https://github.com/ctreminiom). This project is [MIT](https://opensource.org/licenses/MIT) licensed.
