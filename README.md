@@ -8,12 +8,6 @@ The **go-atlassian** library is designed to simplify the process of building Go 
 
 One of the advantages of using **go-atlassian** is that it abstracts away much of the complexity of working with the Atlassian REST APIs, allowing developers to focus on the logic of their application rather than the details of the API. Additionally, **go-atlassian** is well-documented and actively maintained, making it a reliable choice for integrating with Atlassian products in a Go-based project.
 
-## Contents
-
-* Installation
-* Features
-* Packages
-
 ## Installation
 
 ```
@@ -136,7 +130,7 @@ for _, transition := range issue.Transitions {
 
 The rest of the service functions work much the same way; they are concise and behave as you would expect. The [documentation](https://docs.go-atlassian.io/) contains several examples on how to use each service function.
 
-## ✍️ Contributions
+## Contributions
 
 If you would like to contribute to this project, please adhere to the following guidelines.
 
