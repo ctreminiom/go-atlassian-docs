@@ -5,7 +5,7 @@
 
 UPDATING THE DOCUMENTATION.....&#x20;
 
-If you need a specific example (extract changelogs, time-in-status report, custom-field extractor, ect), feel free to append a comment on the Cookbooks section.
+If you need a specific example (extract changelogs, time-in-status report, custom-field extractor, ect), please create a new idea here: [https://github.com/ctreminiom/go-atlassian/discussions/categories/ideas](https://github.com/ctreminiom/go-atlassian/discussions/categories/ideas)
 
 Constructive or destructive feedback are welcome....
 
