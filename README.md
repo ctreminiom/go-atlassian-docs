@@ -8,6 +8,10 @@ The **go-atlassian** library is designed to simplify the process of building Go 
 
 One of the advantages of using **go-atlassian** is that it abstracts away much of the complexity of working with the Atlassian REST APIs, allowing developers to focus on the logic of their application rather than the details of the API. Additionally, **go-atlassian** is well-documented and actively maintained, making it a reliable choice for integrating with Atlassian products in a Go-based project.
 
+{% embed url="https://github.com/ctreminiom/go-atlassian" %}
+GitHub Repository
+{% endembed %}
+
 ## Installation
 
 ```
