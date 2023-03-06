@@ -1,4 +1,4 @@
-# 🗄 Service Desk
+# ⚙ Service Desk
 
 ## Get service desks
 
