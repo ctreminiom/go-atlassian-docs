@@ -1,23 +1,27 @@
 # 📈 Dashboards
 
-This resource represents dashboards. Use it to obtain the details of dashboards as well as add and remove item properties from dashboards.
+Jira dashboards are customizable, visual displays that provide an overview of project status and performance metrics in real-time. Dashboards are used to track progress and identify trends, enabling teams to make informed decisions and prioritize tasks.
 
 ![.gif created using the video https://www.youtube.com/watch?v=VswPTqLQzqA](../.gitbook/assets/atlassian-api-dashboard.gif)
 
+Here are some key elements of Jira dashboards:
 
+1. **Gadgets**: Gadgets are the building blocks of Jira dashboards. They are small, customizable widgets that display information in various formats, such as charts, lists, or calendars. Examples of gadgets include the Agile Sprint Burndown gadget, which shows the remaining work in a sprint, or the Pie Chart gadget, which displays the distribution of issues across a project.
+2. **Filters**: Filters are used to specify which data should be displayed in a gadget. For example, you can create a filter that displays all open bugs assigned to a specific developer. Filters can be saved and reused across multiple gadgets.
+3. **Layout**: Dashboards can be customized with different layouts to display multiple gadgets on a single page. Users can create multiple dashboards for different purposes, such as a team dashboard or a project-specific dashboard.
+4. **Permissions**: Jira dashboards can be shared with team members or made public, depending on the level of access required. Permissions can be set at the individual gadget level or for the entire dashboard.
 
 ## Get all dashboards
 
 Returns a list of dashboards owned by or shared with the user. The list may be filtered to include only favorite or owned dashboards.
-
-* 🔒 **Permissions required**:  Anonymously
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"log"
 	"os"
 )
@@ -30,7 +34,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := v2.New(nil, host)
+	jiraCloud, err := v3.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -52,59 +56,21 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type DashboardPageScheme struct {
-	StartAt    int                `json:"startAt,omitempty"`
-	MaxResults int                `json:"maxResults,omitempty"`
-	Total      int                `json:"total,omitempty"`
-	Dashboards []*DashboardScheme `json:"dashboards,omitempty"`
-}
-
-type DashboardScheme struct {
-	ID               string                   `json:"id,omitempty"`
-	IsFavourite      bool                     `json:"isFavourite,omitempty"`
-	Name             string                   `json:"name,omitempty"`
-	Owner            *UserScheme              `json:"owner,omitempty"`
-	Popularity       int                      `json:"popularity,omitempty"`
-	Rank             int                      `json:"rank,omitempty"`
-	Self             string                   `json:"self,omitempty"`
-	SharePermissions []*SharePermissionScheme `json:"sharePermissions,omitempty"`
-	EditPermission   []*SharePermissionScheme `json:"editPermissions,omitempty"`
-	View             string                   `json:"view,omitempty"`
-}
-
-type SharePermissionScheme struct {
-	ID      int                `json:"id,omitempty"`
-	Type    string             `json:"type,omitempty"`
-	Project *ProjectScheme     `json:"project,omitempty"`
-	Role    *ProjectRoleScheme `json:"role,omitempty"`
-	Group   *GroupScheme       `json:"group,omitempty"`
-}
-
-type DashboardSearchPageScheme struct {
-	Self       string             `json:"self,omitempty"`
-	MaxResults int                `json:"maxResults,omitempty"`
-	StartAt    int                `json:"startAt,omitempty"`
-	Total      int                `json:"total,omitempty"`
-	IsLast     bool               `json:"isLast,omitempty"`
-	Values     []*DashboardScheme `json:"values,omitempty"`
-}
-```
-
 ## Create dashboard
 
-This method creates a dashboard on Jira Cloud.
+This method allows you to create a new dashboard in your Jira instance. The request body should contain a JSON object with the following properties:
+
+* **name**: The name of the dashboard.
+* **sharePermissions**: An array of objects representing the users and groups who have permission to view the dashboard.
+* **gadget**: An array of objects representing the gadgets that should be displayed on the dashboard.
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -118,7 +84,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := v2.New(nil, host)
+	jiraCloud, err := v3.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -159,35 +125,17 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type DashboardScheme struct {
-	ID               string                   `json:"id,omitempty"`
-	IsFavourite      bool                     `json:"isFavourite,omitempty"`
-	Name             string                   `json:"name,omitempty"`
-	Owner            *UserScheme              `json:"owner,omitempty"`
-	Popularity       int                      `json:"popularity,omitempty"`
-	Rank             int                      `json:"rank,omitempty"`
-	Self             string                   `json:"self,omitempty"`
-	SharePermissions []*SharePermissionScheme `json:"sharePermissions,omitempty"`
-	EditPermission   []*SharePermissionScheme `json:"editPermissions,omitempty"`
-	View             string                   `json:"view,omitempty"`
-}
-```
-
 ## Search for dashboards
 
-Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of dashboards. This operation is similar to [Get dashboards](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-dashboards/#api-rest-api-3-dashboard-get) except that the results can be refined to include dashboards that have specific attributes. For example, dashboards with a particular name. When multiple attributes are specified only filters matching all attributes are returned.
+Returns a _paginated_ list of dashboards. This operation is similar to **Get dashboards** except that the results can be refined to include dashboards that have specific attributes. For example, dashboards with a particular name. When multiple attributes are specified only filters matching all attributes are returned.
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -201,13 +149,13 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := v2.New(nil, host)
+	jira, err := v3.New(nil, host)
 	if err != nil {
 		return
 	}
 
-	jiraCloud.Auth.SetBasicAuth(mail, token)
-	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+	jira.Auth.SetBasicAuth(mail, token)
+	jira.Auth.SetUserAgent("curl/7.54.0")
 
 	searchOptions := models.DashboardSearchOptionsScheme{
 		DashboardName:       "Bug",
@@ -216,7 +164,7 @@ func main() {
 		Expand:              []string{"description", "favourite", "sharePermissions"},
 	}
 
-	dashboards, response, err := jiraCloud.Dashboard.Search(context.Background(), &searchOptions, 0, 50)
+	dashboards, response, err := jira.Dashboard.Search(context.Background(), &searchOptions, 0, 50)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -242,8 +190,6 @@ func main() {
 
 Returns a dashboard using the _dashboard-id_
 
-* 🔒 **Permissions required**:  Access to the application
-
 {% hint style="warning" %}
 &#x20;However, to get a dashboard, the dashboard must be shared with the user or the user must own it. Note, users with _**Administer Jira**_ [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users.
 {% endhint %}
@@ -253,7 +199,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"log"
 	"os"
 )
@@ -266,15 +213,15 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := v2.New(nil, host)
+	jira, err := v3.New(nil, host)
 	if err != nil {
 		return
 	}
 
-	jiraCloud.Auth.SetBasicAuth(mail, token)
-	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+	jira.Auth.SetBasicAuth(mail, token)
+	jira.Auth.SetUserAgent("curl/7.54.0")
 
-	dashboard, response, err := jiraCloud.Dashboard.Get(context.Background(), "10001")
+	dashboard, response, err := jira.Dashboard.Get(context.Background(), "10001")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -287,33 +234,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type DashboardScheme struct {
-	ID               string                   `json:"id,omitempty"`
-	IsFavourite      bool                     `json:"isFavourite,omitempty"`
-	Name             string                   `json:"name,omitempty"`
-	Owner            *UserScheme              `json:"owner,omitempty"`
-	Popularity       int                      `json:"popularity,omitempty"`
-	Rank             int                      `json:"rank,omitempty"`
-	Self             string                   `json:"self,omitempty"`
-	SharePermissions []*SharePermissionScheme `json:"sharePermissions,omitempty"`
-	EditPermission   []*SharePermissionScheme `json:"editPermissions,omitempty"`
-	View             string                   `json:"view,omitempty"`
-}
-
-type SharePermissionScheme struct {
-	ID      int                `json:"id,omitempty"`
-	Type    string             `json:"type,omitempty"`
-	Project *ProjectScheme     `json:"project,omitempty"`
-	Role    *ProjectRoleScheme `json:"role,omitempty"`
-	Group   *GroupScheme       `json:"group,omitempty"`
-}
-```
-
 ## Update dashboard
 
 Updates a dashboard, replacing all the dashboard details with those provided. **The dashboard to be updated must be owned by the user.**
@@ -323,7 +243,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -337,13 +258,13 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := v2.New(nil, host)
+	jira, err := v3.New(nil, host)
 	if err != nil {
 		return
 	}
 
-	jiraCloud.Auth.SetBasicAuth(mail, token)
-	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+	jira.Auth.SetBasicAuth(mail, token)
+	jira.Auth.SetUserAgent("curl/7.54.0")
 
 	var payload = &models.DashboardPayloadScheme{
 		Name:        "Team Tracking #1111",
@@ -364,7 +285,7 @@ func main() {
 		},
 	}
 
-	dashboard, response, err := jiraCloud.Dashboard.Update(context.Background(), "10001", payload)
+	dashboard, response, err := jira.Dashboard.Update(context.Background(), "10001", payload)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -375,19 +296,19 @@ func main() {
 	log.Printf("Dashboard ID: %v", dashboard.ID)
 	log.Printf("Dashboard View: %v", dashboard.View)
 }
-
 ```
 
 ## Delete dashboard
 
-Deletes a dashboard**, The dashboard to be deleted must be owned by the user.**
+Deletes a dashboard, t**he dashboard to be deleted must be owned by the user.**
 
 ```go
 package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"log"
 	"os"
 )
@@ -400,7 +321,7 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := v2.New(nil, host)
+	jiraCloud, err := v3.New(nil, host)
 	if err != nil {
 		return
 	}
@@ -427,7 +348,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -441,13 +363,13 @@ func main() {
 		token = os.Getenv("TOKEN")
 	)
 
-	jiraCloud, err := v2.New(nil, host)
+	jira, err := v3.New(nil, host)
 	if err != nil {
 		return
 	}
 
-	jiraCloud.Auth.SetBasicAuth(mail, token)
-	jiraCloud.Auth.SetUserAgent("curl/7.54.0")
+	jira.Auth.SetBasicAuth(mail, token)
+	jira.Auth.SetUserAgent("curl/7.54.0")
 
 	var payload = &models.DashboardPayloadScheme{
 		Name:        "Team Tracking #2 copy",
@@ -468,7 +390,7 @@ func main() {
 		},
 	}
 
-	dashboard, response, err := jiraCloud.Dashboard.Copy(context.Background(), "10001", payload)
+	dashboard, response, err := jira.Dashboard.Copy(context.Background(), "10001", payload)
 	if err != nil {
 		if response != nil {
 			log.Println("Response HTTP Response", response.Bytes.String())
