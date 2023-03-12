@@ -1,29 +1,24 @@
 # 👫 Groups
 
-A Jira group is a convenient way to manage a collection of users. You can use groups throughout Jira to:
+In Jira, a group is a collection of users who have similar roles, responsibilities, or permissions. Groups can be used to simplify user management by allowing you to grant permissions and roles to entire groups of users rather than individual users.
 
-* Allow application access.
-* Grant global permissions or project-specific access.
-* Receive email notifications.
-* Access issue filters and dashboards.
-* Reference workflow conditions.
-* Integrate with project roles.
+Here are some ways you can use groups in Jira:
 
-![](<../.gitbook/assets/image (6).png>)
-
-This resource represents groups of users. Use it to get, create, find, and delete groups as well as add and remove users from groups.
+1. **Assigning permissions:** You can assign permissions to a group of users instead of individual users. For example, you might create a group called "Developers" and grant them permissions to create and modify issues.
+2. **Sharing filters and dashboards:** You can share filters and dashboards with groups of users. For example, you might create a filter that shows all issues assigned to the "Developers" group and share it with all members of that group.
+3. **Managing notifications:** You can use groups to manage notifications in Jira. For example, you might create a group called "Product Owners" and add all product owners to that group. You can then set up notifications so that all members of the "Product Owners" group are notified when certain events occur in Jira.
+4. **Restricting access:** You can use groups to restrict access to certain parts of Jira. For example, you might create a group called "Administrators" and grant them access to sensitive parts of Jira such as user management and system settings.
 
 ## Create Group
 
 Creates a group
-
-* 🔒 **Permissions required**:  Site administration
 
 ```go
 package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -59,13 +54,12 @@ func main() {
 
 Deletes a group
 
-* 🔒 **Permissions required**:  Site administration
-
 ```go
 package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -106,6 +100,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -147,23 +142,6 @@ func main() {
 
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type BulkGroupScheme struct {
-	MaxResults int  `json:"maxResults,omitempty"`
-	StartAt    int  `json:"startAt,omitempty"`
-	Total      int  `json:"total,omitempty"`
-	IsLast     bool `json:"isLast,omitempty"`
-	Values     []struct {
-		Name    string `json:"name,omitempty"`
-		GroupID string `json:"groupId,omitempty"`
-	} `json:"values,omitempty"`
-}
-```
-
 ## Get users from groups
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all users in a group, the method returns the following information:
@@ -173,6 +151,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -209,34 +188,6 @@ func main() {
 
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type GroupMemberPageScheme struct {
-	Self       string                   `json:"self,omitempty"`
-	NextPage   string                   `json:"nextPage,omitempty"`
-	MaxResults int                      `json:"maxResults,omitempty"`
-	StartAt    int                      `json:"startAt,omitempty"`
-	Total      int                      `json:"total,omitempty"`
-	IsLast     bool                     `json:"isLast,omitempty"`
-	Values     []*GroupUserDetailScheme `json:"values,omitempty"`
-}
-
-type GroupUserDetailScheme struct {
-	Self         string `json:"self"`
-	Name         string `json:"name"`
-	Key          string `json:"key"`
-	AccountID    string `json:"accountId"`
-	EmailAddress string `json:"emailAddress"`
-	DisplayName  string `json:"displayName"`
-	Active       bool   `json:"active"`
-	TimeZone     string `json:"timeZone"`
-	AccountType  string `json:"accountType"`
-}
-```
-
 ## Add user to group
 
 Adds a user to a group
@@ -246,6 +197,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -285,6 +237,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"

@@ -10,15 +10,12 @@ description: >-
 
 Returns the list of features for a project.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-project-features#api-group-project-features" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -65,15 +62,12 @@ func main()  {
 
 Sets the state of a project feature.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-project-features#api-rest-api-2-project-projectidorkey-features-featurekey-put" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"

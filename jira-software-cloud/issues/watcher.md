@@ -59,37 +59,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueWatcherScheme struct {
-	Self       string               `json:"self,omitempty"`
-	IsWatching bool                 `json:"isWatching,omitempty"`
-	WatchCount int                  `json:"watchCount,omitempty"`
-	Watchers   []*IssueDetailScheme `json:"watchers,omitempty"`
-}
-
-type IssueDetailScheme struct {
-	Self         string `json:"self,omitempty"`
-	Name         string `json:"name,omitempty"`
-	Key          string `json:"key,omitempty"`
-	AccountID    string `json:"accountId,omitempty"`
-	EmailAddress string `json:"emailAddress,omitempty"`
-	AvatarUrls   struct {
-		One6X16   string `json:"16x16,omitempty"`
-		Two4X24   string `json:"24x24,omitempty"`
-		Three2X32 string `json:"32x32,omitempty"`
-		Four8X48  string `json:"48x48,omitempty"`
-	} `json:"avatarUrls,omitempty"`
-	DisplayName string `json:"displayName,omitempty"`
-	Active      bool   `json:"active,omitempty"`
-	TimeZone    string `json:"timeZone,omitempty"`
-	AccountType string `json:"accountType,omitempty"`
-}
-```
-
 ## Add watcher
 
 Adds a user as a watcher of an issue by passing the account ID of the user. For example, `"5b10ac8d82e05b22cc7d4ef5"`. If no user is specified the calling user is added.

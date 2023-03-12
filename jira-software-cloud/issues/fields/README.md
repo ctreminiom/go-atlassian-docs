@@ -1,10 +1,4 @@
----
-description: >-
-  This resource represents issue fields, both system and custom fields. Use it
-  to get fields, field configurations, and create custom fields.
----
-
-# 💬 Fields
+# 🃏 Fields
 
 ## Get fields
 
@@ -156,8 +150,45 @@ func main() {
 	for _, field := range fields.Values {
 		log.Println(field.ID, field.Description)
 	}
-
 }
 ```
 
 ## Delete Field
+
+Deletes a custom field. The custom field is deleted whether it is in the trash or not.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	task, response, err := atlassian.Issue.Field.Delete(context.Background(), "customfield_103034")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+	log.Println(task.Status, task.ID, task.Finished)
+}
+```

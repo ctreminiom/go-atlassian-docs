@@ -36,6 +36,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -106,6 +107,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -160,22 +162,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type ProjectSearchScheme struct {
-	Self       string           `json:"self,omitempty"`
-	NextPage   string           `json:"nextPage,omitempty"`
-	MaxResults int              `json:"maxResults,omitempty"`
-	StartAt    int              `json:"startAt,omitempty"`
-	Total      int              `json:"total,omitempty"`
-	IsLast     bool             `json:"isLast,omitempty"`
-	Values     []*ProjectScheme `json:"values,omitempty"`
-}
-```
-
 ## Get project
 
 &#x20;Returns the [project details](https://confluence.atlassian.com/x/ahLpNw)
@@ -185,6 +171,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -228,46 +215,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags  &#x20;
-{% endhint %}
-
-```go
-type ProjectScheme struct {
-	Expand            string                 `json:"expand,omitempty"`
-	Self              string                 `json:"self,omitempty"`
-	ID                string                 `json:"id,omitempty"`
-	Key               string                 `json:"key,omitempty"`
-	Description       string                 `json:"description,omitempty"`
-	URL               string                 `json:"url,omitempty"`
-	Email             string                 `json:"email,omitempty"`
-	AssigneeType      string                 `json:"assigneeType,omitempty"`
-	Name              string                 `json:"name,omitempty"`
-	ProjectTypeKey    string                 `json:"projectTypeKey,omitempty"`
-	Simplified        bool                   `json:"simplified,omitempty"`
-	Style             string                 `json:"style,omitempty"`
-	Favourite         bool                   `json:"favourite,omitempty"`
-	IsPrivate         bool                   `json:"isPrivate,omitempty"`
-	UUID              string                 `json:"uuid,omitempty"`
-	Lead              *UserScheme            `json:"lead,omitempty"`
-	Components        []*ComponentScheme     `json:"components,omitempty"`
-	IssueTypes        []*IssueTypeScheme     `json:"issueTypes,omitempty"`
-	Versions          []*VersionScheme       `json:"versions,omitempty"`
-	Roles             *ProjectRolesScheme    `json:"roles,omitempty"`
-	AvatarUrls        *AvatarURLScheme       `json:"avatarUrls,omitempty"`
-	ProjectKeys       []string               `json:"projectKeys,omitempty"`
-	Insight           *ProjectInsightScheme  `json:"insight,omitempty"`
-	Category          *ProjectCategoryScheme `json:"projectCategory,omitempty"`
-	Deleted           bool                   `json:"deleted,omitempty"`
-	RetentionTillDate string                 `json:"retentionTillDate,omitempty"`
-	DeletedDate       string                 `json:"deletedDate,omitempty"`
-	DeletedBy         *UserScheme            `json:"deletedBy,omitempty"`
-	Archived          bool                   `json:"archived,omitempty"`
-	ArchivedDate      string                 `json:"archivedDate,omitempty"`
-	ArchivedBy        *UserScheme            `json:"archivedBy,omitempty"`
-}
-```
-
 ## Update project
 
 &#x20;Updates the [project details](https://confluence.atlassian.com/x/ahLpNw) of a project.
@@ -277,6 +224,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -330,6 +278,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -369,6 +318,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -416,6 +366,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -448,27 +399,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags  &#x20;
-{% endhint %}
-
-```go
-type TaskScheme struct {
-   Self           string `json:"self"`
-   ID             string `json:"id"`
-   Description    string `json:"description"`
-   Status         string `json:"status"`
-   Result         string `json:"result"`
-   SubmittedBy    int    `json:"submittedBy"`
-   Progress       int    `json:"progress"`
-   ElapsedRuntime int    `json:"elapsedRuntime"`
-   Submitted      int64  `json:"submitted"`
-   Started        int64  `json:"started"`
-   Finished       int64  `json:"finished"`
-   LastUpdate     int64  `json:"lastUpdate"`
-}
-```
-
 ## Restore deleted project
 
 Restores a project from the Jira recycle bin.
@@ -478,6 +408,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -519,6 +450,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -570,6 +502,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -617,45 +550,5 @@ func main() {
 			log.Println(index, event.Event.Name, notification.ID, notification.NotificationType, notification.Parameter)
 		}
 	}
-}
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type NotificationSchemeScheme struct {
-   Expand                   string                                  `json:"expand,omitempty"`
-   ID                       int                                     `json:"id,omitempty"`
-   Self                     string                                  `json:"self,omitempty"`
-   Name                     string                                  `json:"name,omitempty"`
-   Description              string                                  `json:"description,omitempty"`
-   NotificationSchemeEvents []*ProjectNotificationSchemeEventScheme `json:"notificationSchemeEvents,omitempty"`
-   Scope                    *TeamManagedProjectScopeScheme          `json:"scope,omitempty"`
-}
-
-type ProjectNotificationSchemeEventScheme struct {
-   Event         *NotificationEventScheme   `json:"event,omitempty"`
-   Notifications []*EventNotificationScheme `json:"notifications,omitempty"`
-}
-
-type NotificationEventScheme struct {
-   ID            int                      `json:"id,omitempty"`
-   Name          string                   `json:"name,omitempty"`
-   Description   string                   `json:"description,omitempty"`
-   TemplateEvent *NotificationEventScheme `json:"templateEvent,omitempty"`
-}
-
-type EventNotificationScheme struct {
-   Expand           string             `json:"expand,omitempty"`
-   ID               int                `json:"id,omitempty"`
-   NotificationType string             `json:"notificationType,omitempty"`
-   Parameter        string             `json:"parameter,omitempty"`
-   EmailAddress     string             `json:"emailAddress,omitempty"`
-   Group            *GroupScheme       `json:"group,omitempty"`
-   Field            *IssueFieldScheme  `json:"field,omitempty"`
-   ProjectRole      *ProjectRoleScheme `json:"projectRole,omitempty"`
-   User             *UserScheme        `json:"user,omitempty"`
 }
 ```

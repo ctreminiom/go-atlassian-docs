@@ -16,6 +16,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -74,6 +75,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -113,28 +115,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type ComponentScheme struct {
-	Self                string      `json:"self,omitempty"`
-	ID                  string      `json:"id,omitempty"`
-	Name                string      `json:"name,omitempty"`
-	Description         string      `json:"description,omitempty"`
-	Lead                *UserScheme `json:"lead,omitempty"`
-	LeadUserName        string      `json:"leadUserName,omitempty"`
-	AssigneeType        string      `json:"assigneeType,omitempty"`
-	Assignee            *UserScheme `json:"assignee,omitempty"`
-	RealAssigneeType    string      `json:"realAssigneeType,omitempty"`
-	RealAssignee        *UserScheme `json:"realAssignee,omitempty"`
-	IsAssigneeTypeValid bool        `json:"isAssigneeTypeValid,omitempty"`
-	Project             string      `json:"project,omitempty"`
-	ProjectID           int         `json:"projectId,omitempty"`
-}
-```
-
 ## Update component
 
 Updates a component. Any fields included in the request are overwritten. If `leadAccountId` is an empty string ("") the component lead is removed.
@@ -144,6 +124,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -199,6 +180,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -246,6 +228,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -295,6 +278,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"

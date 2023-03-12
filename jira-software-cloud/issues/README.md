@@ -4,18 +4,6 @@ description: This resource represents Jira issues
 
 # 🐞 Issues
 
-{% hint style="danger" %}
-\---------------------------
-
-UPDATING THE DOCUMENTATION.....&#x20;
-
-If you need a specific example (extract changelogs, time-in-status report, custom-field extractor, ect), please create a new idea here: [https://github.com/ctreminiom/go-atlassian/discussions/categories/ideas](https://github.com/ctreminiom/go-atlassian/discussions/categories/ideas)
-
-Constructive or destructive feedback are welcome....
-
-\---------------------------
-{% endhint %}
-
 ## Overview
 
 Need help working with issues? In Jira Software, issues help you manage code, estimate workload, and keep track of your team. On this page, you'll find a quick overview of everything that you can do with an issue.

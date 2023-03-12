@@ -59,30 +59,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueTypeScheme struct {
-   Self           string                `json:"self,omitempty"`
-   ID             string                `json:"id,omitempty"`
-   Description    string                `json:"description,omitempty"`
-   IconURL        string                `json:"iconUrl,omitempty"`
-   Name           string                `json:"name,omitempty"`
-   Subtask        bool                  `json:"subtask,omitempty"`
-   AvatarID       int                   `json:"avatarId,omitempty"`
-   EntityID       string                `json:"entityId,omitempty"`
-   HierarchyLevel int                   `json:"hierarchyLevel,omitempty"`
-   Scope          *IssueTypeScopeScheme `json:"scope,omitempty"`
-}
-
-type IssueTypeScopeScheme struct {
-   Type    string         `json:"type,omitempty"`
-   Project *ProjectScheme `json:"project,omitempty"`
-}
-```
-
 ## Create issue type
 
 Creates an issue type and adds it to the default issue type scheme.
@@ -184,30 +160,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueType.Name)
-}
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueTypeScheme struct {
-   Self           string                `json:"self,omitempty"`
-   ID             string                `json:"id,omitempty"`
-   Description    string                `json:"description,omitempty"`
-   IconURL        string                `json:"iconUrl,omitempty"`
-   Name           string                `json:"name,omitempty"`
-   Subtask        bool                  `json:"subtask,omitempty"`
-   AvatarID       int                   `json:"avatarId,omitempty"`
-   EntityID       string                `json:"entityId,omitempty"`
-   HierarchyLevel int                   `json:"hierarchyLevel,omitempty"`
-   Scope          *IssueTypeScopeScheme `json:"scope,omitempty"`
-}
-
-type IssueTypeScopeScheme struct {
-   Type    string         `json:"type,omitempty"`
-   Project *ProjectScheme `json:"project,omitempty"`
 }
 ```
 

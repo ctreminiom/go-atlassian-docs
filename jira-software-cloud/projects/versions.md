@@ -17,6 +17,7 @@ package main
 import (
 	"context"
 	"fmt"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -72,6 +73,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -135,6 +137,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -187,6 +190,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -248,6 +252,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -303,6 +308,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"

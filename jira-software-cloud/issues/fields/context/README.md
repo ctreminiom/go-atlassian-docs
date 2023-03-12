@@ -1,19 +1,8 @@
 # 🍳 Context
 
-When you create a custom field as a Jira administrator, you automatically create what's called a custom field context or custom field configuration scheme.&#x20;
+The Jira Field Context Configurations define the scope of custom fields within Jira. They determine where and how a custom field can be used within Jira, such as in which projects, issue types, and screens the field should be available. Field Context Configurations are used to ensure that the right data is captured and displayed in Jira, and that users are not presented with irrelevant fields.
 
-This lets you select a custom field language and default value, as well as which issue types or projects the custom field appears in. If you're looking to simply edit the name or description of a custom field, or if you need to delete a custom field
-
-![](../../../../.gitbook/assets/Configure-Custom-Field-Alliance-Jira.png)
-
-This resource represents issue custom field contexts. Use it to:
-
-* get, create, update, and delete custom field contexts.
-* get context to issue types and project mappings.
-* get custom field contexts for projects and issue types.
-* assign custom field contexts to projects.
-* remove custom field contexts from projects.
-* add issue types to custom field contexts.
+<figure><img src="../../../../.gitbook/assets/image (14).png" alt=""><figcaption><p>Official Documentation</p></figcaption></figure>
 
 ## Get custom field contexts
 
@@ -76,30 +65,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type CustomFieldContextPageScheme struct {
-	MaxResults int                   `json:"maxResults,omitempty"`
-	StartAt    int                   `json:"startAt,omitempty"`
-	Total      int                   `json:"total,omitempty"`
-	IsLast     bool                  `json:"isLast,omitempty"`
-	Values     []*FieldContextScheme `json:"values,omitempty"`
-}
-
-type FieldContextScheme struct {
-	ID              string   `json:"id,omitempty"`
-	Name            string   `json:"name,omitempty"`
-	Description     string   `json:"description,omitempty"`
-	IsGlobalContext bool     `json:"isGlobalContext,omitempty"`
-	IsAnyIssueType  bool     `json:"isAnyIssueType,omitempty"`
-	ProjectIds      []string `json:"projectIds,omitempty"`
-	IssueTypeIds    []string `json:"issueTypeIds,omitempty"`
-}
-```
-
 ## Create custom field context
 
 Creates a custom field context. If `projectIds` is empty, a global context is created. A global context is one that applies to all project. If `issueTypeIds` is empty, the context applies to all issue types, the method returns the following information:
@@ -150,22 +115,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type FieldContextScheme struct {
-	ID              string   `json:"id,omitempty"`
-	Name            string   `json:"name,omitempty"`
-	Description     string   `json:"description,omitempty"`
-	IsGlobalContext bool     `json:"isGlobalContext,omitempty"`
-	IsAnyIssueType  bool     `json:"isAnyIssueType,omitempty"`
-	ProjectIds      []string `json:"projectIds,omitempty"`
-	IssueTypeIds    []string `json:"issueTypeIds,omitempty"`
-}
-```
-
 ## Get custom field contexts default values
 
 &#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of defaults for a custom field. The results can be filtered by `contextId`, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
@@ -213,28 +162,6 @@ func main() {
 		log.Println(value)
 	}
 
-}
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type CustomFieldDefaultValuePageScheme struct {
-	MaxResults int                              `json:"maxResults,omitempty"`
-	StartAt    int                              `json:"startAt,omitempty"`
-	Total      int                              `json:"total,omitempty"`
-	IsLast     bool                             `json:"isLast,omitempty"`
-	Values     []*CustomFieldDefaultValueScheme `json:"values,omitempty"`
-}
-
-type CustomFieldDefaultValueScheme struct {
-	ContextID         string   `json:"contextId,omitempty"`
-	OptionID          string   `json:"optionId,omitempty"`
-	CascadingOptionID string   `json:"cascadingOptionId,omitempty"`
-	OptionIDs         []string `json:"optionIds,omitempty"`
-	Type              string   `json:"type,omitempty"`
 }
 ```
 

@@ -13,6 +13,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -70,6 +71,7 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 package main
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -119,6 +121,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -167,6 +170,7 @@ Adds a field to the default tab of the default screen.
 package main
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -209,6 +213,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -258,6 +263,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -306,6 +312,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"

@@ -57,19 +57,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueVoteScheme struct {
-	Self     string        `json:"self,omitempty"`
-	Votes    int           `json:"votes,omitempty"`
-	HasVoted bool          `json:"hasVoted,omitempty"`
-	Voters   []*UserScheme `json:"voters,omitempty"`
-}
-```
-
 ## Add vote
 
 Adds the user's vote to an issue. This is the equivalent of the user clicking _Vote_ on an issue in Jira.

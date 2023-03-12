@@ -47,30 +47,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueTypeSchemePageScheme struct {
-   Self       string                   `json:"self,omitempty"`
-   NextPage   string                   `json:"nextPage,omitempty"`
-   MaxResults int                      `json:"maxResults,omitempty"`
-   StartAt    int                      `json:"startAt,omitempty"`
-   Total      int                      `json:"total,omitempty"`
-   IsLast     bool                     `json:"isLast,omitempty"`
-   Values     []*IssueTypeSchemeScheme `json:"values,omitempty"`
-}
-
-type IssueTypeSchemeScheme struct {
-   ID                 string `json:"id,omitempty"`
-   Name               string `json:"name,omitempty"`
-   Description        string `json:"description,omitempty"`
-   DefaultIssueTypeID string `json:"defaultIssueTypeId,omitempty"`
-   IsDefault          bool   `json:"isDefault,omitempty"`
-}
-```
-
 ## Create issue type scheme
 
 Creates an issue type scheme.
@@ -180,25 +156,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueTypeSchemeItemPageScheme struct {
-   MaxResults int  `json:"maxResults,omitempty"`
-   StartAt    int  `json:"startAt,omitempty"`
-   Total      int  `json:"total,omitempty"`
-   IsLast     bool `json:"isLast,omitempty"`
-   Values     []*IssueTypeSchemeMappingScheme `json:"values,omitempty"`
-}
-
-type IssueTypeSchemeMappingScheme struct {
-   IssueTypeSchemeID string `json:"issueTypeSchemeId,omitempty"`
-   IssueTypeID       string `json:"issueTypeId,omitempty"`
-}
-```
-
 ## Get issue type schemes for projects
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type schemes and, for each issue type scheme, a list of the projects that use it. Only issue type schemes used in classic projects are returned.
@@ -248,33 +205,6 @@ func main() {
 		log.Println(issueTypeScheme.IssueTypeScheme.Name, issueTypeScheme.ProjectIds)
 	}
 
-}
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type ProjectIssueTypeSchemePageScheme struct {
-   MaxResults int                              `json:"maxResults"`
-   StartAt    int                              `json:"startAt"`
-   Total      int                              `json:"total"`
-   IsLast     bool                             `json:"isLast"`
-   Values     []*IssueTypeSchemeProjectsScheme `json:"values"`
-}
-
-type IssueTypeSchemeProjectsScheme struct {
-   IssueTypeScheme *IssueTypeSchemeScheme `json:"issueTypeScheme,omitempty"`
-   ProjectIds      []string               `json:"projectIds,omitempty"`
-}
-
-type IssueTypeSchemeScheme struct {
-	ID                 string `json:"id,omitempty"`
-	Name               string `json:"name,omitempty"`
-	Description        string `json:"description,omitempty"`
-	DefaultIssueTypeID string `json:"defaultIssueTypeId,omitempty"`
-	IsDefault          bool   `json:"isDefault,omitempty"`
 }
 ```
 

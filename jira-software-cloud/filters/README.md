@@ -1,10 +1,11 @@
-# ✂ Filters
+# 🧺 Filters
 
-A filter is a saved issue search. Jira users can search for issues using different criteria in basic or advanced search, and then save their results as a filter, becoming the filter’s owner.&#x20;
+In Jira, a filter is a saved search query that you can use to retrieve a specific set of issues from your Jira instance. A filter can be based on various criteria such as issue type, priority, status, assignee, labels, and more.
 
-The owner can decide what to do with their filter—either make it private for personal use or share it with different entities, such as users, projects, or groups. If the filter is private, only the owner and Jira admin can view and modify it.
+Filters can be saved and shared with other users, allowing you to easily collaborate and work together on a specific set of issues. You can also use filters to create custom dashboards and reports to monitor the progress of your team's work.\
 
-> This resource represents filters. Use it to get, create, update, or delete filters. Also use it to configure the columns for a filter and set favorite filters.
+
+<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 ## Create Filter
 
@@ -72,49 +73,6 @@ func main() {
 
 ![Filter permissions on the UI interface](<../../.gitbook/assets/image (5).png>)
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type FilterScheme struct {
-	Self             string                    `json:"self,omitempty"`
-	ID               string                    `json:"id,omitempty"`
-	Name             string                    `json:"name,omitempty"`
-	Owner            *UserScheme               `json:"owner,omitempty"`
-	Jql              string                    `json:"jql,omitempty"`
-	ViewURL          string                    `json:"viewUrl,omitempty"`
-	SearchURL        string                    `json:"searchUrl,omitempty"`
-	Favourite        bool                      `json:"favourite,omitempty"`
-	FavouritedCount  int                       `json:"favouritedCount,omitempty"`
-	SharePermissions []*SharePermissionScheme  `json:"sharePermissions,omitempty"`
-	ShareUsers       *FilterUsersScheme        `json:"sharedUsers,omitempty"`
-	Subscriptions    *FilterSubscriptionScheme `json:"subscriptions,omitempty"`
-}
-
-type FilterSubscriptionPageScheme struct {
-	Size       int                         `json:"size,omitempty"`
-	Items      []*FilterSubscriptionScheme `json:"items,omitempty"`
-	MaxResults int                         `json:"max-results,omitempty"`
-	StartIndex int                         `json:"start-index,omitempty"`
-	EndIndex   int                         `json:"end-index,omitempty"`
-}
-
-type FilterSubscriptionScheme struct {
-	ID    int          `json:"id,omitempty"`
-	User  *UserScheme  `json:"user,omitempty"`
-	Group *GroupScheme `json:"group,omitempty"`
-}
-
-type FilterUsersScheme struct {
-	Size       int           `json:"size,omitempty"`
-	Items      []*UserScheme `json:"items,omitempty"`
-	MaxResults int           `json:"max-results,omitempty"`
-	StartIndex int           `json:"start-index,omitempty"`
-	EndIndex   int           `json:"end-index,omitempty"`
-}
-```
-
 ## Get Favorites
 
 This method returns the visible favorite filters of the user, the method returns the following information:
@@ -156,7 +114,6 @@ func main() {
 		log.Println(filter)
 	}
 
-}
 
 ```
 
@@ -210,7 +167,6 @@ func main() {
 		}
 
 	}
-
 }
 ```
 
@@ -234,7 +190,8 @@ package main
 
 import (
 	"context"
-		"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -288,6 +245,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -319,49 +277,6 @@ func main() {
 
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type FilterScheme struct {
-	Self             string                    `json:"self,omitempty"`
-	ID               string                    `json:"id,omitempty"`
-	Name             string                    `json:"name,omitempty"`
-	Owner            *UserScheme               `json:"owner,omitempty"`
-	Jql              string                    `json:"jql,omitempty"`
-	ViewURL          string                    `json:"viewUrl,omitempty"`
-	SearchURL        string                    `json:"searchUrl,omitempty"`
-	Favourite        bool                      `json:"favourite,omitempty"`
-	FavouritedCount  int                       `json:"favouritedCount,omitempty"`
-	SharePermissions []*SharePermissionScheme  `json:"sharePermissions,omitempty"`
-	ShareUsers       *FilterUsersScheme        `json:"sharedUsers,omitempty"`
-	Subscriptions    *FilterSubscriptionScheme `json:"subscriptions,omitempty"`
-}
-
-type FilterSubscriptionPageScheme struct {
-	Size       int                         `json:"size,omitempty"`
-	Items      []*FilterSubscriptionScheme `json:"items,omitempty"`
-	MaxResults int                         `json:"max-results,omitempty"`
-	StartIndex int                         `json:"start-index,omitempty"`
-	EndIndex   int                         `json:"end-index,omitempty"`
-}
-
-type FilterSubscriptionScheme struct {
-	ID    int          `json:"id,omitempty"`
-	User  *UserScheme  `json:"user,omitempty"`
-	Group *GroupScheme `json:"group,omitempty"`
-}
-
-type FilterUsersScheme struct {
-	Size       int           `json:"size,omitempty"`
-	Items      []*UserScheme `json:"items,omitempty"`
-	MaxResults int           `json:"max-results,omitempty"`
-	StartIndex int           `json:"start-index,omitempty"`
-	EndIndex   int           `json:"end-index,omitempty"`
-}
-```
-
 ## Update Filter
 
 This method updates a filter. Use this operation to update a filter's name, description, JQL, or sharing, the method returns the following information:
@@ -371,6 +286,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -414,6 +330,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -445,10 +362,6 @@ func main() {
 
 ## Change filter owner
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filters#api-rest-api-3-filter-id-owner-put" %}
-Official Documentation
-{% endembed %}
-
 Changes the owner of the filter.
 
 ```go
@@ -456,6 +369,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -482,5 +396,5 @@ func main() {
 	}
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-}gg
+}
 ```

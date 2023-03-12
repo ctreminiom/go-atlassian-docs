@@ -107,5 +107,4 @@ func main()  {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```

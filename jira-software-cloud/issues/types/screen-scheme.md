@@ -56,28 +56,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueTypeScreenSchemePageScheme struct {
-   Self       string                         `json:"self,omitempty"`
-   NextPage   string                         `json:"nextPage,omitempty"`
-   MaxResults int                            `json:"maxResults,omitempty"`
-   StartAt    int                            `json:"startAt,omitempty"`
-   Total      int                            `json:"total,omitempty"`
-   IsLast     bool                           `json:"isLast,omitempty"`
-   Values     []*IssueTypeScreenSchemeScheme `json:"values,omitempty"`
-}
-
-type IssueTypeScreenSchemeScheme struct {
-   ID          string `json:"id,omitempty"`
-   Name        string `json:"name,omitempty"`
-   Description string `json:"description,omitempty"`
-}
-```
-
 ## Create issue type screen scheme
 
 Creates an issue-type screen scheme.
@@ -184,28 +162,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueTypeScreenSchemeMappingScheme struct {
-	Self       string                             `json:"self,omitempty"`
-	NextPage   string                             `json:"nextPage,omitempty"`
-	MaxResults int                                `json:"maxResults,omitempty"`
-	StartAt    int                                `json:"startAt,omitempty"`
-	Total      int                                `json:"total,omitempty"`
-	IsLast     bool                               `json:"isLast,omitempty"`
-	Values     []*IssueTypeScreenSchemeItemScheme `json:"values,omitempty"`
-}
-
-type IssueTypeScreenSchemeItemScheme struct {
-	IssueTypeScreenSchemeID string `json:"issueTypeScreenSchemeId,omitempty"`
-	IssueTypeID             string `json:"issueTypeId,omitempty"`
-	ScreenSchemeID          string `json:"screenSchemeId,omitempty"`
-}
-```
-
 ## Assign issue type screen scheme to project
 
 Assigns an issue-type screen scheme to a project.
@@ -261,81 +217,6 @@ func main() {
 ## Get issue type screen schemes for projects
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type screen schemes and, for each issue type screen scheme, a list of the projects that use it. Only issue type screen schemes used in classic projects are returned.
-
-```go
-package main
-
-import (
-	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
-	"log"
-	"os"
-)
-
-func main() {
-
-	/*
-		----------- Set an environment variable in git bash -----------
-		export HOST="https://ctreminiom.atlassian.net/"
-		export MAIL="MAIL_ADDRESS"
-		export TOKEN="TOKEN_API"
-
-		Docs: https://stackoverflow.com/questions/34169721/set-an-environment-variable-in-git-bash
-	*/
-
-	var (
-		host  = os.Getenv("HOST")
-		mail  = os.Getenv("MAIL")
-		token = os.Getenv("TOKEN")
-	)
-
-	atlassian, err := v2.New(nil, host)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-	issueTypeScreenSchemes, response, err := atlassian.Issue.Type.ScreenScheme.Projects(context.Background(), []int{10001}, 0, 50)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	log.Println("HTTP Endpoint Used", response.Endpoint)
-
-	for _, issueTypeScreenScheme := range issueTypeScreenSchemes.Values {
-		log.Println(issueTypeScreenScheme.ProjectIds, issueTypeScreenScheme.IssueTypeScreenScheme.ID)
-	}
-}
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueTypeProjectScreenSchemePageScheme struct {
-	Self       string                                 `json:"self,omitempty"`
-	NextPage   string                                 `json:"nextPage,omitempty"`
-	MaxResults int                                    `json:"maxResults,omitempty"`
-	StartAt    int                                    `json:"startAt,omitempty"`
-	Total      int                                    `json:"total,omitempty"`
-	IsLast     bool                                   `json:"isLast,omitempty"`
-	Values     []*IssueTypeScreenSchemesProjectScheme `json:"values,omitempty"`
-}
-
-
-type IssueTypeScreenSchemesProjectScheme struct {
-	IssueTypeScreenScheme *IssueTypeScreenSchemeScheme `json:"issueTypeScreenScheme,omitempty"`
-	ProjectIds            []string                     `json:"projectIds,omitempty"`
-}
-
-type IssueTypeScreenSchemeScheme struct {
-	ID          string `json:"id,omitempty"`
-	Name        string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
-}
-```
 
 ## Update issue type screen scheme
 
@@ -612,4 +493,46 @@ func main() {
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of projects associated with an issue-type screen scheme. Only company-managed projects associated with an issue-type screen scheme are returned.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-type-screen-schemes#api-rest-api-3-issuetypescreenscheme-issuetypescreenschemeid-project-get" %}
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	schemes, response, err := atlassian.Issue.Type.ScreenScheme.Projects(context.Background(), []int{10000}, 0, 50)
+	if err != nil {
+
+		if response != nil {
+			log.Println(response.Bytes.String())
+		}
+
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	for _, scheme := range schemes.Values {
+		fmt.Print(scheme)
+	}
+}
+```

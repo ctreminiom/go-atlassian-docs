@@ -45,24 +45,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueLinkTypeSearchScheme struct {
-	IssueLinkTypes []*LinkTypeScheme `json:"issueLinkTypes,omitempty"`
-}
-
-type LinkTypeScheme struct {
-	Self    string `json:"self,omitempty"`
-	ID      string `json:"id,omitempty"`
-	Name    string `json:"name,omitempty"`
-	Inward  string `json:"inward,omitempty"`
-	Outward string `json:"outward,omitempty"`
-}
-```
-
 ## Create issue link type
 
 Creates an issue link type. Use this operation to create descriptions of the reasons why issues are linked. The issue link type consists of a name and descriptions for a link's inward and outward relationships, the method returns the following information:
@@ -109,20 +91,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type LinkTypeScheme struct {
-	Self    string `json:"self,omitempty"`
-	ID      string `json:"id,omitempty"`
-	Name    string `json:"name,omitempty"`
-	Inward  string `json:"inward,omitempty"`
-	Outward string `json:"outward,omitempty"`
-}
-```
-
 ## Get issue link type
 
 Returns an issue link type, the method returns the following information:
@@ -159,20 +127,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueLinkType)
-}
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type LinkTypeScheme struct {
-	Self    string `json:"self,omitempty"`
-	ID      string `json:"id,omitempty"`
-	Name    string `json:"name,omitempty"`
-	Inward  string `json:"inward,omitempty"`
-	Outward string `json:"outward,omitempty"`
 }
 ```
 
@@ -219,20 +173,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(issueLinkType)
-}
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type LinkTypeScheme struct {
-	Self    string `json:"self,omitempty"`
-	ID      string `json:"id,omitempty"`
-	Name    string `json:"name,omitempty"`
-	Inward  string `json:"inward,omitempty"`
-	Outward string `json:"outward,omitempty"`
 }
 ```
 

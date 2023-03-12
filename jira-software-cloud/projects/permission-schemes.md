@@ -13,6 +13,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -52,32 +53,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type PermissionSchemeScheme struct {
-   Expand      string                       `json:"expand,omitempty"`
-   ID          int                          `json:"id,omitempty"`
-   Self        string                       `json:"self,omitempty"`
-   Name        string                       `json:"name,omitempty"`
-   Description string                       `json:"description,omitempty"`
-   Permissions []*PermissionGrantScheme     `json:"permissions,omitempty"`
-   Scope       *TeamManagedProjectScopeScheme `json:"scope,omitempty"`
-}
-
-type PermissionScopeItemScheme struct {
-   Self            string                 `json:"self,omitempty"`
-   ID              string                 `json:"id,omitempty"`
-   Key             string                 `json:"key,omitempty"`
-   Name            string                 `json:"name,omitempty"`
-   ProjectTypeKey  string                 `json:"projectTypeKey,omitempty"`
-   Simplified      bool                   `json:"simplified,omitempty"`
-   ProjectCategory *ProjectCategoryScheme `json:"projectCategory,omitempty"`
-}
-```
-
 ## Assign permission scheme
 
 Assigns a permission scheme with a project
@@ -87,6 +62,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -140,6 +116,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"

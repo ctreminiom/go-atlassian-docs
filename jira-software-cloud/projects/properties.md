@@ -4,15 +4,12 @@
 
 Returns all keys for the project.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-project-properties#api-rest-api-3-project-projectidorkey-properties-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -59,15 +56,12 @@ func main()  {
 
 Returns the value of a [project property](https://developer.atlassian.com/cloud/jira/platform/storing-data-without-a-database/#a-id-jira-entity-properties-a-jira-entity-properties).
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-project-properties#api-rest-api-3-project-projectidorkey-properties-propertykey-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -112,15 +106,12 @@ func main()  {
 
 Sets the value of the [project property](https://developer.atlassian.com/cloud/jira/platform/storing-data-without-a-database/#a-id-jira-entity-properties-a-jira-entity-properties). You can use project properties to store custom data against the project.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-project-properties#api-rest-api-3-project-projectidorkey-properties-propertykey-put" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -169,15 +160,12 @@ func main()  {
 
 Deletes the [property](https://developer.atlassian.com/cloud/jira/platform/storing-data-without-a-database/#a-id-jira-entity-properties-a-jira-entity-properties) from a project.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-project-properties#api-rest-api-3-project-projectidorkey-properties-propertykey-delete" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"

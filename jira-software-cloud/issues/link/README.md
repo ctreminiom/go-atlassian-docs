@@ -165,44 +165,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueLinkPageScheme struct {
-	Expand string `json:"expand,omitempty"`
-	ID     string `json:"id,omitempty"`
-	Self   string `json:"self,omitempty"`
-	Key    string `json:"key,omitempty"`
-	Fields struct {
-		IssueLinks []*IssueLinkScheme `json:"issuelinks,omitempty"`
-	} `json:"fields,omitempty"`
-}
-
-type IssueLinkScheme struct {
-	ID           string             `json:"id,omitempty"`
-	Type         *LinkTypeScheme    `json:"type,omitempty"`
-	InwardIssue  *LinkedIssueScheme `json:"inwardIssue,omitempty"`
-	OutwardIssue *LinkedIssueScheme `json:"outwardIssue,omitempty"`
-}
-
-type LinkTypeScheme struct {
-	Self    string `json:"self,omitempty"`
-	ID      string `json:"id,omitempty"`
-	Name    string `json:"name,omitempty"`
-	Inward  string `json:"inward,omitempty"`
-	Outward string `json:"outward,omitempty"`
-}
-
-type LinkedIssueScheme struct {
-	ID     string             `json:"id,omitempty"`
-	Key    string             `json:"key,omitempty"`
-	Self   string             `json:"self,omitempty"`
-	Fields *IssueFieldsScheme `json:"fields,omitempty"`
-}
-```
-
 ## Get issue link
 
 Returns an issue link, the method returns the following information:
@@ -250,34 +212,6 @@ func main() {
 	log.Println(issueLink.InwardIssue)
 	log.Println(issueLink.OutwardIssue)
 }
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueLinkScheme struct {
-	ID           string             `json:"id,omitempty"`
-	Type         *LinkTypeScheme    `json:"type,omitempty"`
-	InwardIssue  *LinkedIssueScheme `json:"inwardIssue,omitempty"`
-	OutwardIssue *LinkedIssueScheme `json:"outwardIssue,omitempty"`
-}
-
-type LinkTypeScheme struct {
-	Self    string `json:"self,omitempty"`
-	ID      string `json:"id,omitempty"`
-	Name    string `json:"name,omitempty"`
-	Inward  string `json:"inward,omitempty"`
-	Outward string `json:"outward,omitempty"`
-}
-
-type LinkedIssueScheme struct {
-	ID     string             `json:"id,omitempty"`
-	Key    string             `json:"key,omitempty"`
-	Self   string             `json:"self,omitempty"`
-	Fields *IssueFieldsScheme `json:"fields,omitempty"`
-}	
 ```
 
 ## Delete issue link

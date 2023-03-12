@@ -16,6 +16,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -57,6 +58,8 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
+	"github.com/davecgh/go-spew/spew"
 	"log"
 	"os"
 )
@@ -76,15 +79,15 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	metadata, response, err := atlassian.Issue.Attachment.Metadata(context.Background(), "attachmentID")
+	metadata, response, err := atlassian.Issue.Attachment.Metadata(context.Background(), "10016")
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 
 	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(metadata)
+
+	spew.Dump(metadata)
 }
 ```
 
@@ -98,6 +101,8 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
+	"github.com/davecgh/go-spew/spew"
 	"log"
 	"os"
 )
@@ -117,14 +122,14 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	humanMetadata, response, err := atlassian.Issue.Attachment.Human(context.Background(), "attachmentID")
+	humanMetadata, response, err := atlassian.Issue.Attachment.Human(context.Background(), "10016")
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-	log.Println(humanMetadata)
+	spew.Dump(humanMetadata)
 }
 ```
 
@@ -137,6 +142,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -184,6 +190,7 @@ package main
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"log"
 	"os"
 	"path/filepath"
@@ -241,3 +248,52 @@ func main() {
 ```
 
 ## Download Attachment
+
+This endpoint returns the contents of an attachment. A `Range` header can be set to define a range of bytes within the attachment to download.&#x20;
+
+If successful, Jira will return a response with the attachment file. You can save the file to your local filesystem or process it in your application as needed.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	attachmentMetadata, response, err := atlassian.Issue.Attachment.Metadata(context.Background(), "10016")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	response, err = atlassian.Issue.Attachment.Download(context.Background(), "10016", false)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	if err := os.WriteFile(attachmentMetadata.Filename, response.Bytes.Bytes(), 0666); err != nil {
+		log.Fatal(err)
+	}
+}
+```

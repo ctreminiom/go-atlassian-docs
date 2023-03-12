@@ -6,11 +6,7 @@ description: >-
 
 # 🖼 Configuration
 
-As a Jira administrator, you can configure the default field configuration to make specific fields required or hidden based on the needs of your team. You can create additional field configurations to manage fields across multiple projects, issue types, and screens. A field configuration can be associated with an issue type within a field configuration scheme, which can then be associated with a project.
-
-
-
-![](../../../../.gitbook/assets/View-Field-Configurations-Jira.png)
+The Jira Issue Field Configurations define the behavior of fields within Jira issues. A field configuration is a set of rules that determines which fields are available for a particular issue type or project, and whether those fields are required, read-only, or hidden. Field configurations can be customized to meet the specific needs of your organization.
 
 ## Get all Field Configurations
 
@@ -24,12 +20,17 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 Only field configurations used in company-managed (classic) projects are returned
 {% endhint %}
 
+This method uses the following parameters:
+
+<table data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><code>startAt</code></td><td>The index of the first item to return in a page of results (page offset).</td></tr><tr><td><code>maxResults</code></td><td>The maximum number of items to return per page.</td></tr><tr><td><code>id's</code></td><td>The list of field configuration IDs.</td></tr><tr><td><code>isDefault</code></td><td>If <em>true</em> returns default field configurations only.</td></tr><tr><td><code>query</code></td><td>The query string used to match against field configuration names and descriptions.</td></tr></tbody></table>
+
 ```go
 package main
 
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"log"
 	"os"
 )
@@ -68,6 +69,7 @@ func main() {
 	}
 
 }
+
 ```
 
 ## Create Field Configuration
@@ -78,6 +80,10 @@ Creates a field configuration. The field configuration is created with the same 
 Only field configurations used in company-managed (classic) projects are returned
 {% endhint %}
 
+This method uses the following parameters:
+
+<table data-view="cards"><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><code>description</code></td><td>The description of the field configuration.</td></tr><tr><td><code>name</code></td><td>The name of the field configuration. Must be unique.</td></tr></tbody></table>
+
 ```go
 package main
 
@@ -85,6 +91,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"log"
 	"os"
 )

@@ -1,11 +1,4 @@
----
-description: >-
-  This resource represents permission schemes. Use it to get, create, update,
-  and delete permission schemes as well as get, create, update, and delete
-  details of the permissions granted in those schemes
----
-
-# 🚪 Scheme
+# 📜 Scheme
 
 ## Overview
 
@@ -43,6 +36,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -94,6 +88,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -146,6 +141,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -209,50 +205,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type PermissionSchemeScheme struct {
-   Expand      string                       `json:"expand,omitempty"`
-   ID          int                          `json:"id,omitempty"`
-   Self        string                       `json:"self,omitempty"`
-   Name        string                       `json:"name,omitempty"`
-   Description string                       `json:"description,omitempty"`
-   Permissions []*PermissionGrantScheme     `json:"permissions,omitempty"`
-   Scope       *PermissionSchemeScopeScheme `json:"scope,omitempty"`
-}
-
-type PermissionSchemeScopeScheme struct {
-   Type    string                     `json:"type,omitempty"`
-   Project *PermissionScopeItemScheme `json:"project,omitempty"`
-}
-
-type PermissionScopeItemScheme struct {
-   Self            string                 `json:"self,omitempty"`
-   ID              string                 `json:"id,omitempty"`
-   Key             string                 `json:"key,omitempty"`
-   Name            string                 `json:"name,omitempty"`
-   ProjectTypeKey  string                 `json:"projectTypeKey,omitempty"`
-   Simplified      bool                   `json:"simplified,omitempty"`
-   ProjectCategory *ProjectCategoryScheme `json:"projectCategory,omitempty"`
-}
-
-type PermissionGrantScheme struct {
-	ID         int                          `json:"id,omitempty"`
-	Self       string                       `json:"self,omitempty"`
-	Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
-	Permission string                       `json:"permission,omitempty"`
-}
-
-type PermissionGrantHolderScheme struct {
-	Type      string `json:"type,omitempty"`
-	Parameter string `json:"parameter,omitempty"`
-	Expand    string `json:"expand,omitempty"`
-}
-```
-
 
 
 ## Delete permission scheme
@@ -264,6 +216,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -312,6 +265,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -375,4 +329,3 @@ func main() {
 	}
 }
 ```
-

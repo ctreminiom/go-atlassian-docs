@@ -9,6 +9,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -53,35 +54,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type PermissionSchemeGrantsScheme struct {
-	Permissions []*PermissionGrantScheme `json:"permissions,omitempty"`
-	Expand      string                   `json:"expand,omitempty"`
-}
-
-type PermissionGrantScheme struct {
-	ID         int                          `json:"id,omitempty"`
-	Self       string                       `json:"self,omitempty"`
-	Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
-	Permission string                       `json:"permission,omitempty"`
-}
-
-type PermissionGrantHolderScheme struct {
-	Type      string `json:"type,omitempty"`
-	Parameter string `json:"parameter,omitempty"`
-	Expand    string `json:"expand,omitempty"`
-}
-
-type PermissionGrantPayloadScheme struct {
-	Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
-	Permission string                       `json:"permission,omitempty"`
-}
-```
-
 ## Create permission grant
 
 Creates a permission grant in a permission scheme.
@@ -91,6 +63,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
@@ -141,30 +114,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type PermissionGrantScheme struct {
-   ID         int                          `json:"id,omitempty"`
-   Self       string                       `json:"self,omitempty"`
-   Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
-   Permission string                       `json:"permission,omitempty"`
-}
-
-type PermissionGrantHolderScheme struct {
-   Type      string `json:"type,omitempty"`
-   Parameter string `json:"parameter,omitempty"`
-   Expand    string `json:"expand,omitempty"`
-}
-
-type PermissionGrantPayloadScheme struct {
-   Holder     *PermissionGrantHolderScheme `json:"holder,omitempty"`
-   Permission string                       `json:"permission,omitempty"`
-}
-```
-
 ## Get permission scheme grant
 
 Returns a permission grant.
@@ -174,6 +123,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
@@ -227,6 +177,7 @@ package main
 
 import (
 	"context"
+	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
 	"log"
 	"os"
