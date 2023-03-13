@@ -54,30 +54,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationPageScheme struct {
-	Size       int                         `json:"size,omitempty"`
-	Start      int                         `json:"start,omitempty"`
-	Limit      int                         `json:"limit,omitempty"`
-	IsLastPage bool                        `json:"isLastPage,omitempty"`
-	Values     []*OrganizationScheme       `json:"values,omitempty"`
-	Expands    []string                    `json:"_expands,omitempty"`
-	Links      *OrganizationPageLinkScheme `json:"_links,omitempty"`
-}
-
-type OrganizationPageLinkScheme struct {
-	Self    string `json:"self,omitempty"`
-	Base    string `json:"base,omitempty"`
-	Context string `json:"context,omitempty"`
-	Next    string `json:"next,omitempty"`
-	Prev    string `json:"prev,omitempty"`
-}
-```
-
 ## Create organization
 
 This method creates an organization by passing the name of the organization.
@@ -127,6 +103,8 @@ func main() {
 
 ## Get organization
 
+Get returns details of an organization. Use this method to get organization details whenever your application component is passed an organization ID but needs to display other organization details.
+
 ```go
 package main
 
@@ -169,6 +147,45 @@ func main()  {
 ```
 
 ## Delete Organization
+
+This method deletes an organization. Note that the organization is deleted regardless of other associations it may have. For example, associations with service desks.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := sm.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+	atlassian.Auth.SetUserAgent("curl/7.54.0")
+
+	response, err := atlassian.Organization.Delete(context.Background(), 2)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+			log.Println("HTTP Endpoint Used", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
+}
+```
 
 ## Get organizations
 
@@ -319,10 +336,9 @@ func main() {
 
 ## Get users in organization
 
-This method returns all the users associated with an organization. Use this method where you want to provide a list of users for an organization or determine if a user is associated with an organization.w
+This method returns all the users associated with an organization. Use this method where you want to provide a list of users for an organization or determine if a user is associated with an organization.
 
 ```go
-package main
 package main
 
 import (
@@ -369,7 +385,6 @@ func main() {
 	for _, user := range users.Values {
 		log.Printf(user.DisplayName, user.EmailAddress)
 	}
-
 }
 ```
 

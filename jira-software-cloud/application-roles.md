@@ -2,7 +2,7 @@
 
 Jira application roles are a way of managing user permissions and access in Jira. Jira comes with a set of predefined roles that define common types of users, such as administrators, developers, and project managers.&#x20;
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Each Jira application role has a set of permissions associated with it, which determine what actions a user in that role is allowed to perform. For example, the "Admin" role has permission to manage Jira system settings and users, while the "Developer" role has permission to create and edit issues and view source code.
 

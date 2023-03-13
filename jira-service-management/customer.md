@@ -63,23 +63,6 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type CustomerScheme struct {
-	AccountID    string              `json:"accountId,omitempty"`
-	Name         string              `json:"name,omitempty"`
-	Key          string              `json:"key,omitempty"`
-	EmailAddress string              `json:"emailAddress,omitempty"`
-	DisplayName  string              `json:"displayName,omitempty"`
-	Active       bool                `json:"active,omitempty"`
-	TimeZone     string              `json:"timeZone,omitempty"`
-	Links        *CustomerLinkScheme `json:"_links,omitempty"`
-}
-```
-
 ## Add customers
 
 Adds one or more customers to a service desk. If any of the passed customers are associated with the service desk, no changes will be made for those customers and the resource returns a 204 success code.
