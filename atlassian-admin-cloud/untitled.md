@@ -22,4 +22,4 @@ You have full control over managed accounts. You can update their email address 
 
 With an Atlassian Access subscription, we offer more advanced features, like syncing users from a directory outside your organization. When you sync users to your managed accounts, your Access settings impact how those accounts log into your sites and products, as shown in the illustration.
 
-![](<../.gitbook/assets/image (14) (1).png>)
+![](<../.gitbook/assets/image (14).png>)
