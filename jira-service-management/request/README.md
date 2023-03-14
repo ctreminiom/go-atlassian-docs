@@ -11,6 +11,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -31,12 +32,12 @@ func main() {
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-	options := &sm.RequestGetOptionsScheme{
+	options := &models.ServiceRequestOptionScheme{
 		SearchTerm:        "",
 		RequestOwnerships: []string{"OWNED_REQUESTS"},
 		RequestStatus:     "ALL_REQUESTS",
 		ApprovalStatus:    "",
-		OrganizationId:    0,
+		OrganizationID:    0,
 		ServiceDeskID:     0,
 		RequestTypeID:     0,
 		Expand:            []string{"serviceDesk", "requestType", "status", "action"},
@@ -63,7 +64,6 @@ func main() {
 
 		log.Println(string(dataAsJson))
 	}
-
 }
 ```
 
@@ -256,7 +256,6 @@ func main() {
 		log.Println(transition.ID, transition.Name)
 	}
 }
-
 ```
 
 ## Perform customer transition
@@ -307,7 +306,6 @@ func main() {
 	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
 
 ## Create Customer Request

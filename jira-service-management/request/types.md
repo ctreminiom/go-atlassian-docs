@@ -105,48 +105,12 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type ProjectRequestTypePageScheme struct {
-	Expands    []string                          `json:"_expands,omitempty"`
-	Size       int                               `json:"size,omitempty"`
-	Start      int                               `json:"start,omitempty"`
-	Limit      int                               `json:"limit,omitempty"`
-	IsLastPage bool                              `json:"isLastPage,omitempty"`
-	Values     []*RequestTypeScheme              `json:"values,omitempty"`
-	Links      *ProjectRequestTypePageLinkScheme `json:"_links,omitempty"`
-}
-
-type ProjectRequestTypePageLinkScheme struct {
-	Base    string `json:"base,omitempty"`
-	Context string `json:"context,omitempty"`
-	Next    string `json:"next,omitempty"`
-	Prev    string `json:"prev,omitempty"`
-}
-
-type RequestTypeScheme struct {
-	ID            string   `json:"id,omitempty"`
-	Name          string   `json:"name,omitempty"`
-	Description   string   `json:"description,omitempty"`
-	HelpText      string   `json:"helpText,omitempty"`
-	IssueTypeID   string   `json:"issueTypeId,omitempty"`
-	ServiceDeskID string   `json:"serviceDeskId,omitempty"`
-	GroupIds      []string `json:"groupIds,omitempty"`
-	Expands       []string `json:"_expands,omitempty"`
-}
-```
-
 ## Create request type
 
 This method enables a customer request type to be added to a service desk based on an issue type. Note that not all customer request type fields can be specified in the request and these fields are given the following default values:
 
 * Request type icon is given the headset icon.
 * Request type groups is left empty, which means this customer request type will not be visible on the [customer portal](https://confluence.atlassian.com/servicedeskcloud/configuring-the-customer-portal-732528918.html)
-
-.
 
 Request type status mapping is left empty, so the request type has no custom status mapping but inherits the status map from the issue type upon which it is based.
 
