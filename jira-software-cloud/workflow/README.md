@@ -34,6 +34,43 @@ A condition that blocks issue transition if there is a pending approval.
 }
 ```
 {% endtab %}
+
+{% tab title="Compare number custom field condition" %}
+A condition that allows transition if a comparison between a number custom field and a value is true.
+
+```go
+{
+	Type: "CompareNumberCFCondition",
+	Configuration: map[string]interface{}{
+		"comparator": "=",
+		"fieldId":    "customfield_10029",
+		"fieldValue": 2,
+	},
+}
+```
+{% endtab %}
+
+{% tab title="Hide from user condition" %}
+A condition that hides a transition from users. The transition can only be triggered from a workflow function or REST API operation.
+
+```go
+{
+    Type: "RemoteOnlyCondition",
+}
+```
+
+
+{% endtab %}
+
+{% tab title="Only assignee condition" %}
+A condition that allows only the assignee to execute a transition.
+
+```go
+{
+    Type: "RemoteOnlyCondition",
+}
+```
+{% endtab %}
 {% endtabs %}
 
 ```go
