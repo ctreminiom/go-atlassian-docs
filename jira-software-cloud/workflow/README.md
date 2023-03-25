@@ -12,8 +12,8 @@ Create creates a workflow. You can define transition rules using the shapes deta
 
 Conditions enable workflow rules that govern whether a transition can execute.
 
-{% tabs %}
-{% tab title="Always false conditions" %}
+#### Always false conditions
+
 A condition that always fails.
 
 {% code overflow="wrap" %}
@@ -23,9 +23,9 @@ A condition that always fails.
 },
 ```
 {% endcode %}
-{% endtab %}
 
-{% tab title="Block transition until approval" %}
+#### Block transition until approval
+
 A condition that blocks issue transition if there is a pending approval.
 
 ```go
@@ -33,6 +33,14 @@ A condition that blocks issue transition if there is a pending approval.
     Type: "BlockInProgressApprovalCondition",
 }
 ```
+
+{% tabs %}
+{% tab title="Always false conditions" %}
+A condition that always fails.
+{% endtab %}
+
+{% tab title="Block transition until approval" %}
+A condition that blocks issue transition if there is a pending approval.
 {% endtab %}
 
 {% tab title="Compare number custom field condition" %}
