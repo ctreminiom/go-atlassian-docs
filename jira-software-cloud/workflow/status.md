@@ -5,7 +5,7 @@ description: >-
   templates. The statuses are recommended starting points
 ---
 
-# 🔄 Status
+# 🗺 Status
 
 {% embed url="https://github.com/ctreminiom/go-atlassian/issues/140" %}
 Tracking Issue
@@ -13,9 +13,8 @@ Tracking Issue
 
 ## Search Workflow Statuses
 
-Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of statuses that match a search on name or project.
+Search returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of statuses that match a search on name or project.
 
-{% code title="Extract the IN_PROGRESS workflow status from the project 10000" lineNumbers="true" %}
 ```go
 package main
 
@@ -89,13 +88,11 @@ func main() {
 	}
 }
 ```
-{% endcode %}
 
 ## Gets Workflow Statuses
 
-Returns a list of the statuses specified by one or more status IDs.
+Get returns a list of the statuses specified by one or more status IDs.
 
-{% code lineNumbers="true" %}
 ```go
 package main
 
@@ -146,15 +143,12 @@ func main() {
 		fmt.Println("--------------------------------")
 	}
 }
-
 ```
-{% endcode %}
 
 ## Create Workflow Statuses
 
-Creates statuses for a global or project scope.&#x20;
+Create creates statuses for a global or project scope.&#x20;
 
-{% code lineNumbers="true" %}
 ```go
 package main
 
@@ -219,13 +213,11 @@ func main() {
 	}
 }
 ```
-{% endcode %}
 
 ## Update Workflow Statuses
 
-Updates statuses by ID.
+Update updates statuses by ID.
 
-{% code lineNumbers="true" %}
 ```go
 package main
 
@@ -278,15 +270,11 @@ func main() {
 	}
 }
 ```
-{% endcode %}
-
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Delete Workflow Statuses
 
-Deletes statuses by ID.
+Delete deletes statuses by ID.
 
-{% code lineNumbers="true" %}
 ```go
 package main
 
@@ -321,8 +309,98 @@ func main() {
 	}
 }
 ```
-{% endcode %}
 
 ## Bulk Workflow Statuses
 
+Bulk returns a list of all statuses associated with active workflows.
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	v3 "github.com/ctreminiom/go-atlassian/jira/v3"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	instance, err := v3.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
+
+	activeStatuses, response, err := instance.Workflow.Status.Bulk(context.Background())
+	if err != nil {
+		if response != nil {
+			log.Println(response.Bytes.String())
+			log.Println(response.Code)
+		}
+
+		log.Fatal(err)
+	}
+
+	for _, status := range activeStatuses {
+		fmt.Println(status.Name, status.ID)
+	}
+}
+```
+
 ## Get Workflow Status
+
+Get returns a status.&#x20;
+
+* The status must be associated with an active workflow to be returned.
+* If a name is used on more than one status, only the status found first is returned. Therefore, identifying the status by its ID may be preferable.
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	v3 "github.com/ctreminiom/go-atlassian/jira/v3"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	instance, err := v3.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
+
+	status, response, err := instance.Workflow.Status.Get(context.Background(), "Open")
+	if err != nil {
+		if response != nil {
+			log.Println(response.Bytes.String())
+			log.Println(response.Code)
+		}
+
+		log.Fatal(err)
+	}
+
+	fmt.Println(status.Name, status.ID)
+}
+```

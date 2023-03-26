@@ -19,10 +19,6 @@ Note, if the user does not have permission to view the board, no issues will be 
 
 Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/software/rest/api-group-board#api-agile-1-0-board-boardid-backlog-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -84,10 +80,6 @@ func main() {
 
 Get the board configuration.&#x20;
 
-{% embed url="https://developer.atlassian.com/cloud/jira/software/rest/api-group-board#api-agile-1-0-board-boardid-configuration-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -131,10 +123,6 @@ func main() {
 ## Create board
 
 Creates a new board. Board name, type ,and filter ID is required
-
-{% embed url="https://developer.atlassian.com/cloud/jira/software/rest/api-group-board#api-agile-1-0-board-post" %}
-Official Documentation
-{% endembed %}
 
 ```go
 package main
