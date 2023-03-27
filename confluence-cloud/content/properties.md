@@ -42,7 +42,7 @@ func main() {
    if err != nil {
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Fatal(err)
@@ -100,7 +100,7 @@ func main() {
 	if err != nil {
 		if response != nil {
 			if response.Code == http.StatusBadRequest {
-				log.Println(response.API)
+				log.Println(response.Code)
 			}
 		}
 		log.Fatal(err)
@@ -149,7 +149,7 @@ func main() {
    if err != nil {
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Fatal(err)
@@ -196,7 +196,7 @@ func main() {
    if err != nil {
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Fatal(err)

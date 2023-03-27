@@ -150,9 +150,3 @@ func main()  {
 
 }
 ```
-
-## Remove label from content using query parameter
-
-{% hint style="info" %}
-TODO&#x20;
-{% endhint %}

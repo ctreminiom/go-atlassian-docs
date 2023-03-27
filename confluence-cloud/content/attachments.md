@@ -43,7 +43,7 @@ func main()  {
 
 		if response != nil {
 			if response.Code == http.StatusBadRequest {
-				log.Println(response.API)
+				log.Println(response.CodeCode)
 			}
 		}
 		log.Fatal(err)
@@ -118,7 +118,7 @@ func main()  {
 
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Println(response.Endpoint)
@@ -190,7 +190,7 @@ func main()  {
 
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Println(response.Endpoint)
@@ -206,21 +206,3 @@ func main()  {
 
 }
 ```
-
-## Update attachment properties
-
-{% hint style="info" %}
-In Development = TODO
-{% endhint %}
-
-## Update attachment data
-
-{% hint style="info" %}
-In Development = TODO
-{% endhint %}
-
-## Get URI to download attachment
-
-{% hint style="info" %}
-In Development = TODO
-{% endhint %}

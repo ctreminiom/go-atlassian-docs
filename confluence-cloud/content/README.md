@@ -41,7 +41,7 @@ func main()  {
    if err != nil {
 
       if response != nil {
-         log.Println(response.API)
+         log.Println(response.Code)
       }
 
       log.Fatal(err)
@@ -105,7 +105,7 @@ func main() {
 	if err != nil {
 
 		if response != nil {
-			log.Fatal(response.API)
+			log.Fatal(response.Code)
 		}
 		log.Fatal(err)
 	}
@@ -162,7 +162,7 @@ func main()  {
    if err != nil {
 
       if response != nil {
-         log.Println(response.API)
+         log.Println(response.Code)
       }
 
       log.Fatal(err)
@@ -225,7 +225,7 @@ func main()  {
 	if err != nil {
 
 		if response != nil {
-			log.Println(response.API)
+			log.Println(response.Code)
 		}
 
 		log.Fatal(err)
@@ -277,8 +277,7 @@ func main()  {
    if err != nil {
 
       if response != nil {
-         log.Println(response.API)
-         log.Println(response)
+         log.Println(response.Code)
       }
 
       log.Fatal(err)
@@ -328,7 +327,7 @@ func main()  {
    if err != nil {
 
       if response != nil {
-         log.Println(response.API)
+         log.Println(response.Code)
       }
 
       log.Fatal(err)
@@ -382,7 +381,7 @@ func main()  {
 	if err != nil {
 
 		if response.Code == http.StatusBadRequest {
-			log.Println(response.API)
+			log.Println(response.Code)
 		}
 		log.Fatal(err)
 	}
@@ -406,10 +405,6 @@ Archives a list of pages. The pages to be archived are specified as a list of co
 {% hint style="info" %}
 The archival process happens asynchronously. Use the **/longtask/** REST API to get the copy task status.
 {% endhint %}
-
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content#api-wiki-rest-api-content-archive-post" %}
-Official Documentation
-{% endembed %}
 
 ```go
 package main
