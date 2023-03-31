@@ -23,14 +23,6 @@ if err == nil {
 }
 ```
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-restrictions#api-wiki-rest-api-content-id-restriction-byoperation-operationkey-group-groupname-get" %}
-Official Documentation / Group Name
-{% endembed %}
-
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-restrictions#api-wiki-rest-api-content-id-restriction-byoperation-operationkey-bygroupid-groupid-get" %}
-Official Documentation / Group ID
-{% endembed %}
-
 ```go
 package main
 
@@ -82,10 +74,6 @@ func main()  {
 
 Adds a group to a content restriction. That is, grant read or update permission to the group for a piece of content.
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-restrictions#api-wiki-rest-api-content-id-restriction-byoperation-operationkey-group-groupname-put" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -136,10 +124,6 @@ e
 ## Remove group from content restriction
 
 Removes a group from a content restriction. That is, remove read or update permission for the group for a piece of content.
-
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-restrictions#api-wiki-rest-api-content-id-restriction-byoperation-operationkey-group-groupname-delete" %}
-Official Documentation
-{% endembed %}
 
 ```go
 package main

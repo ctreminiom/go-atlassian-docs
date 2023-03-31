@@ -4,10 +4,6 @@
 
 Returns the versions for a piece of content in descending order.
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-versions#api-wiki-rest-api-content-id-version-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -61,10 +57,6 @@ func main() {
 ## Restore content version
 
 Restores a historical version to be the latest version. That is, a new version is created with the content of the historical version.
-
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-versions#api-wiki-rest-api-content-id-version-post" %}
-Official Documentation
-{% endembed %}
 
 ```go
 package main
@@ -129,10 +121,6 @@ func main()  {
 
 Returns a version for a piece of content.
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-versions#api-wiki-rest-api-content-id-version-versionnumber-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -188,10 +176,6 @@ func main() {
 ## Delete content version
 
 Delete a historical version. This does not delete the changes made to the content in that version, rather the changes for the deleted version are rolled up into the next version. Note, you cannot delete the current version.
-
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-versions#api-wiki-rest-api-content-id-version-versionnumber-delete" %}
-Official Documentation
-{% endembed %}
 
 ```go
 package main

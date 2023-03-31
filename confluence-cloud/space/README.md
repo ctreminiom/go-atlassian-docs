@@ -44,7 +44,7 @@ func main()  {
 
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Println("Endpoint:", response.Endpoint)
@@ -105,7 +105,7 @@ func main()  {
 
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Println("Endpoint:", response.Endpoint)
@@ -173,7 +173,7 @@ func main()  {
 
 		if response != nil {
 			if response.Code == http.StatusBadRequest {
-				log.Println(response.API)
+				log.Println(response.Code)
 			}
 		}
 		log.Println("Endpoint:", response.Endpoint)
@@ -222,7 +222,7 @@ func main()  {
 
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Println("Endpoint:", response.Endpoint)
@@ -273,7 +273,7 @@ func main()  {
 
       if response != nil {
          if response.Code == http.StatusBadRequest {
-            log.Println(response.API)
+            log.Println(response.Code)
          }
       }
       log.Println("Endpoint:", response.Endpoint)
@@ -338,7 +338,7 @@ func main()  {
 
 		if response != nil {
 			if response.Code == http.StatusBadRequest {
-				log.Println(response.API)
+				log.Println(response.Code)
 			}
 		}
 		log.Println("Endpoint:", response.Endpoint)
@@ -408,7 +408,7 @@ func main()  {
 
 		if response != nil {
 			if response.Code == http.StatusBadRequest {
-				log.Println(response.API)
+				log.Println(response.Code)
 			}
 		}
 		log.Println("Endpoint:", response.Endpoint)
@@ -419,5 +419,4 @@ func main()  {
 	log.Println("Status Code:", response.Code)
 	log.Println(spaceUpdated)
 }
-
 ```

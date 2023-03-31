@@ -4,10 +4,6 @@
 
 Returns information about all active long-running tasks (e.g. space export), such as how long each task has been running and the percentage of each task that has completed.
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-long-running-task#api-wiki-rest-api-longtask-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -57,10 +53,6 @@ func main() {
 
 Returns information about an active long-running task (e.g. space export), such as how long it has been running and the percentage of the task that has completed.
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-long-running-task#api-wiki-rest-api-longtask-id-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -100,7 +92,4 @@ func main() {
 
 	log.Println(task)
 }
-
 ```
-
-\

@@ -97,7 +97,7 @@
   * [🎎 Children/Descendants](confluence-cloud/content/children-descendants.md)
   * [🛡 Permissions](confluence-cloud/content/permissions.md)
   * [🔞 Restrictions](confluence-cloud/content/restrictions/README.md)
-    * [🚧 Operations](confluence-cloud/content/restrictions/operations/README.md)
+    * [🎑 Operations](confluence-cloud/content/restrictions/operations/README.md)
       * [🫂 Group](confluence-cloud/content/restrictions/operations/group.md)
       * [👤 User](confluence-cloud/content/restrictions/operations/user.md)
   * [🔃 Versions](confluence-cloud/content/versions.md)

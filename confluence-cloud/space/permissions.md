@@ -8,10 +8,6 @@ Adds new permission to space. If the permission to be added is a group permissio
 **Note**: Apps cannot access this REST resource - including when utilizing user impersonation.
 {% endhint %}
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-space-permissions#api-wiki-rest-api-space-spacekey-permission-post" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -59,7 +55,7 @@ func main() {
 
 		if response != nil {
 			if response.Code == http.StatusBadRequest {
-				log.Println(response.API)
+				log.Println(response.Code)
 			}
 		}
 		log.Println("Endpoint:", response.Endpoint)
@@ -83,10 +79,6 @@ Adds new custom content permission to space. If the permission to be added is a 
 {% hint style="info" %}
 **Note**: Apps cannot access this REST resource - including when utilizing user impersonation.
 {% endhint %}
-
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-space-permissions#api-wiki-rest-api-space-spacekey-permission-custom-content-post" %}
-Official Documentation
-{% endembed %}
 
 ```go
 package main
@@ -143,7 +135,7 @@ func main() {
 
 		if response != nil {
 			if response.Code == http.StatusBadRequest {
-				log.Println(response.API)
+				log.Println(response.Code)
 			}
 		}
 		log.Println("Endpoint:", response.Endpoint)
@@ -163,10 +155,6 @@ Removes a space permission. Note that removing Read Space permission for a user 
 {% hint style="info" %}
 Note: Apps cannot access this REST resource - including when utilizing user impersonation.
 {% endhint %}
-
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-space-permissions#api-wiki-rest-api-space-spacekey-permission-id-delete" %}
-Official Documentation
-{% endembed %}
 
 ```go
 package main
@@ -205,7 +193,7 @@ func main() {
 
 		if response != nil {
 			if response.Code == http.StatusBadRequest {
-				log.Println(response.API)
+				log.Println(response.Code)
 			}
 		}
 		log.Println("Endpoint:", response.Endpoint)
@@ -215,5 +203,4 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 	log.Println("Status Code:", response.Code)
 }
-
 ```

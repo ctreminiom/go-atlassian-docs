@@ -4,10 +4,6 @@
 
 Searches for content using the [Confluence Query Language (CQL)](https://developer.atlassian.com/cloud/confluence/advanced-searching-using-cql/)
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-search#api-wiki-rest-api-search-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
@@ -95,10 +91,6 @@ func main() {
 Searches for users using user-specific queries from the [Confluence Query Language (CQL)](https://developer.atlassian.com/cloud/confluence/advanced-searching-using-cql/).
 
 Note that some user fields may be set to null depending on the user's privacy settings. These are: email, profilePicture, displayName, and timeZone.
-
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-search#api-wiki-rest-api-search-user-get" %}
-Official Documentation
-{% endembed %}
 
 ```go
 package main

@@ -4,10 +4,6 @@
 
 Returns whether the specified content restriction applies to a user.&#x20;
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-restrictions#api-wiki-rest-api-content-id-restriction-byoperation-operationkey-user-get" %}
-Official Documentation
-{% endembed %}
-
 ```go
 package main
 
