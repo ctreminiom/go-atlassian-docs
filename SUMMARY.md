@@ -89,7 +89,9 @@
 
 ## Confluence Cloud
 
-* [📃 Content](confluence-cloud/content/README.md)
+* [🔊 REST API V2](confluence-cloud/rest-api-v2/README.md)
+  * [📃 Page](confluence-cloud/rest-api-v2/page.md)
+* [📢 Content](confluence-cloud/content/README.md)
   * [🎮 Properties](confluence-cloud/content/properties.md)
   * [📂 Attachments](confluence-cloud/content/attachments.md)
   * [📬 Comments](confluence-cloud/content/comments.md)
