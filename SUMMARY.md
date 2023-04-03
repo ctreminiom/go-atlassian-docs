@@ -91,6 +91,7 @@
 
 * [🗞 REST API V2](confluence-cloud/v2/README.md)
   * [📃 Page](confluence-cloud/v2/page.md)
+* [📉 Analytics](confluence-cloud/analytics.md)
 * [📢 Content](confluence-cloud/content/README.md)
   * [🎮 Properties](confluence-cloud/content/properties.md)
   * [📂 Attachments](confluence-cloud/content/attachments.md)
