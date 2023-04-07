@@ -25,6 +25,7 @@
     * [🗑 Trash](jira-software-cloud/issues/fields/trash.md)
   * [🏷️ Labels](jira-software-cloud/issues/labels.md)
   * [🔗 Link](jira-software-cloud/issues/link/README.md)
+    * [🔃 Remote](jira-software-cloud/issues/link/remote.md)
     * [🖇 Types](jira-software-cloud/issues/link/types.md)
   * [🚛 Metadata](jira-software-cloud/issues/metadata.md)
   * [🏣 Priorities](jira-software-cloud/issues/priorities.md)
