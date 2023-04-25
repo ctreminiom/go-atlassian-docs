@@ -90,7 +90,7 @@
 
 ## Confluence Cloud
 
-* [🗞 REST API V2](confluence-cloud/v2/README.md)
+* [🌊 V2](confluence-cloud/v2/README.md)
   * [📃 Page](confluence-cloud/v2/page.md)
   * [🪟 Space](confluence-cloud/v2/space.md)
 * [📉 Analytics](confluence-cloud/analytics.md)
@@ -122,4 +122,4 @@
 * [🧰 SCIM](atlassian-admin-cloud/scim/README.md)
   * [🧙♂ Users](atlassian-admin-cloud/scim/users.md)
   * [⛹♂ Groups](atlassian-admin-cloud/scim/groups.md)
-  * [🔩 Schemes](atlassian-admin-cloud/scim/schemes.md)
+  * [🔩 Schemas](atlassian-admin-cloud/scim/schemes.md)

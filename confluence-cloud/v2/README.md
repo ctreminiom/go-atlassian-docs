@@ -1,4 +1,4 @@
-# 🗞 REST API V2
+# 🌊 V2
 
 {% embed url="https://blog.developer.atlassian.com/the-confluence-cloud-rest-api-v2-brings-major-performance-improvements/" %}
 
