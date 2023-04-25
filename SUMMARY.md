@@ -122,4 +122,4 @@
 * [🧰 SCIM](atlassian-admin-cloud/scim/README.md)
   * [🧙♂ Users](atlassian-admin-cloud/scim/users.md)
   * [⛹♂ Groups](atlassian-admin-cloud/scim/groups.md)
-  * [🔩 Schemas](atlassian-admin-cloud/scim/schemes.md)
+  * [🔩 Schemas](atlassian-admin-cloud/scim/schemas.md)
