@@ -52,6 +52,7 @@
   * [🪔 Validation](jira-software-cloud/projects/validation.md)
   * [🙌 Features](jira-software-cloud/projects/features.md)
   * [📤 Properties](jira-software-cloud/projects/properties.md)
+  * [📬 Notification Schemes](jira-software-cloud/projects/notification-schemes.md)
 * [📓 Screens](jira-software-cloud/screens/README.md)
   * [📂 Tabs](jira-software-cloud/screens/tabs/README.md)
     * [🧰 Fields](jira-software-cloud/screens/tabs/fields.md)
@@ -122,4 +123,4 @@
 * [🧰 SCIM](atlassian-admin-cloud/scim/README.md)
   * [🧙♂ Users](atlassian-admin-cloud/scim/users.md)
   * [⛹♂ Groups](atlassian-admin-cloud/scim/groups.md)
-  * [🔩 Schemas](atlassian-admin-cloud/scim/schemas.md)
+  * [🔩 Schemas](atlassian-admin-cloud/scim/schemes.md)
