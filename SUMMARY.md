@@ -37,7 +37,6 @@
   * [📠 Vote](jira-software-cloud/issues/vote.md)
   * [🎯 Watcher](jira-software-cloud/issues/watcher.md)
   * [🕰 Worklogs](jira-software-cloud/issues/worklogs.md)
-* [⚖ Myself](jira-software-cloud/myself.md)
 * [🔓 Permissions](jira-software-cloud/permissions/README.md)
   * [📜 Scheme](jira-software-cloud/permissions/scheme/README.md)
     * [🔑 Grant](jira-software-cloud/permissions/scheme/grant.md)
@@ -45,6 +44,7 @@
   * [🧩 Categories](jira-software-cloud/projects/categories.md)
   * [🔮 Components](jira-software-cloud/projects/components.md)
   * [🚧 Permission Schemes](jira-software-cloud/projects/permission-schemes.md)
+  * [📬 Notification Schemes](jira-software-cloud/projects/notification-schemes.md)
   * [💼 Roles](jira-software-cloud/projects/roles/README.md)
     * [👨👩👧👧 Actors](jira-software-cloud/projects/roles/actors.md)
   * [🧵 Types](jira-software-cloud/projects/types.md)
@@ -52,7 +52,6 @@
   * [🪔 Validation](jira-software-cloud/projects/validation.md)
   * [🙌 Features](jira-software-cloud/projects/features.md)
   * [📤 Properties](jira-software-cloud/projects/properties.md)
-  * [📬 Notification Schemes](jira-software-cloud/projects/notification-schemes.md)
 * [📓 Screens](jira-software-cloud/screens/README.md)
   * [📂 Tabs](jira-software-cloud/screens/tabs/README.md)
     * [🧰 Fields](jira-software-cloud/screens/tabs/fields.md)
@@ -65,6 +64,7 @@
 * [🖨 Workflow](jira-software-cloud/workflow/README.md)
   * [🚛 Scheme](jira-software-cloud/workflow/scheme.md)
   * [🗺 Status](jira-software-cloud/workflow/status.md)
+* [⚖ Myself](jira-software-cloud/myself.md)
 
 ## Jira Agile
 
