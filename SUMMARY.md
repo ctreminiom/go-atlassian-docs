@@ -62,7 +62,7 @@
 * [🤓 Users](jira-software-cloud/users/README.md)
   * [🔰 Search](jira-software-cloud/users/search.md)
 * [🖨 Workflow](jira-software-cloud/workflow/README.md)
-  * [🚛 Scheme](jira-software-cloud/workflow/scheme/README.md)
+  * [🚛 Scheme](jira-software-cloud/workflow/scheme.md)
     * [▶ Issue Type](jira-software-cloud/workflow/scheme/issue-type.md)
   * [🗺 Status](jira-software-cloud/workflow/status.md)
 * [⚖ Myself](jira-software-cloud/myself.md)
