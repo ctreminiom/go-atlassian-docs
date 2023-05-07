@@ -167,4 +167,4 @@ log.Println("Issue history saved to issue_history.csv")
 1. Save the `main.go` file.
 2. In the terminal, navigate to your project directory
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>

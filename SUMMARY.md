@@ -2,7 +2,8 @@
 
 * [📑 Introduction](README.md)
 * [🛠 Cookbooks](cookbooks/README.md)
-  * [⏱ Export Issue History](cookbooks/export-issue-history.md)
+  * [⏱ Export Issue History](cookbooks/todo.md)
+  * [👻 Create Jira Issue](cookbooks/create-jira-issue.md)
 
 ## Jira Software Cloud
 
