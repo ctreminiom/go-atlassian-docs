@@ -1,6 +1,15 @@
 # 📖 Directory
 
-## User’s last active dates
+## Overview
+
+Each organization contains two types of directories:
+
+* a local directory
+* an identity provider directory
+
+A local directory contains users you’re not managing in your identity provider. You invite these users or they sign up themselves. An identity provider directory contains users you sync or authenticate through your identity provider. You can add and move users between authentication policies in different directories.
+
+### User’s last active dates
 
 Activity returns a user’s last active date for each product listed in Atlassian Administration.t
 
@@ -57,7 +66,7 @@ func main() {
 }
 ```
 
-## Remove user access
+### Remove user access
 
 Remove removes user access to products listed in Atlassian Administration.&#x20;
 
@@ -104,7 +113,7 @@ func main() {
 }
 ```
 
-## Suspend user access
+### Suspend user access
 
 Suspend suspends user access to products listed in Atlassian Administration.
 
@@ -153,7 +162,7 @@ func main() {
 }
 ```
 
-## Restore user access
+### Restore user access
 
 Restore restores user access to products listed in Atlassian Administration.
 

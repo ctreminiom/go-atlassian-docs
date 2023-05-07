@@ -161,4 +161,4 @@ Despite these differences, _go-atlassian_ remains heavily inspired by _go-jira_,
 
 
 
-Copyright © 2021 [Carlos Treminio](https://github.com/ctreminiom). This project is [MIT](https://opensource.org/licenses/MIT) licensed.
+Copyright © 2023 [Carlos Treminio](https://github.com/ctreminiom). This project is [MIT](https://opensource.org/licenses/MIT) licensed.
