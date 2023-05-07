@@ -22,6 +22,7 @@
   * [🎭 Page Permission Helper](cookbooks/page-permission-helper.md)
   * [🤖 Atlassian SCIM Onboarding](cookbooks/atlassian-scim-onboarding.md)
   * [😃 Create User via SCIM](cookbooks/create-user-via-scim.md)
+  * [🛰 Issue Permission Helper](cookbooks/issue-permission-helper.md)
 
 ## Jira Software Cloud
 
