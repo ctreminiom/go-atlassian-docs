@@ -1,8 +1,27 @@
 # 👔 Policy
 
-## Get list of policies
+## Overview
 
-Returns information about org policies
+An authentication policy allows you to specify authentication settings for different sets of users and configurations in your organization. It verifies that users who access your Atlassian organization are who they claim to be.
+
+<figure><img src="https://images.ctfassets.net/zsv3d0ugroxu/4J2YuoHUe8n4FF9OsG1Cvi/fef56ff544f4825cea71c466848df277/screenshot_AuthenticationPolicyCard" alt=""><figcaption></figcaption></figure>
+
+1. **Default policy** – We automatically add new members to a default policy in your local or identity provider directory.
+2. **Non-billable** - Create a non-billable policy when you don’t want to pay for certain users. You can only set a non-billable policy as the default policy in the local directory.
+3. **Local directory** - Contains members you’re not managing in your identity provider. You invite them or they sign up themselves.
+4. **Two-step verification** – Require a second step when logging in or make it optional for members.
+5. **Third-party login** – Allow or block logins from third-party accounts.
+6. **Password requirements** – Track minimum password strength and expiration.
+7. **Idle session duration** – Track how long members can be inactive before logging them out.
+8. **Members** – Shows the number of members in a policy. Add or move members from one policy to another policy.
+9. **Single sign-on (SSO)** – Track when you enforce login to Atlassian through SAML or Google Workspace SSO. You can only enforce SSO in an identity provider directory.
+10. **Identity provider directory** - Contains members you sync or authenticate through your identity provider. You can add and move members between authentication policies.
+
+### Get list of policies
+
+Returns information about org policies.
+
+<table><thead><tr><th>Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to query</td><td></td></tr><tr><td><strong>cursor</strong></td><td>Sets the starting point for the page of results to return.</td><td></td></tr><tr><td><strong>type</strong></td><td>Sets the type for the page of policies to return.</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -75,44 +94,11 @@ func main() {
 }
 ```
 
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationPolicyPageScheme struct {
-   Data []*OrganizationPolicyData `json:"data"`
-   Links *LinkPageModelScheme `json:"links"`
-   Meta struct {
-      Next     string `json:"next"`
-      PageSize int    `json:"page_size"`
-   } `json:"meta"`
-}
-
-type OrganizationPolicyData struct {
-	ID         string                        `json:"id,omitempty"`
-	Type       string                        `json:"type,omitempty"`
-	Attributes *OrganizationPolicyAttributes `json:"attributes,omitempty"`
-}
-
-type OrganizationPolicyAttributes struct {
-	Type      string                        `json:"type,omitempty"`
-	Name      string                        `json:"name,omitempty"`
-	Status    string                        `json:"status,omitempty"`
-	Resources []*OrganizationPolicyResource `json:"resources,omitempty"`
-	CreatedAt time.Time                     `json:"createdAt,omitempty"`
-	UpdatedAt time.Time                     `json:"updatedAt,omitempty"`
-}
-
-type OrganizationPolicyResource struct {
-	ID                string `json:"id,omitempty"`
-	ApplicationStatus string `json:"applicationStatus,omitempty"`
-}
-```
-
-## Create a policy
+### Create a policy
 
 Create a policy for an org
+
+<table><thead><tr><th>Param</th><th>Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to query</td><td></td></tr><tr><td><strong>payload</strong></td><td>The new policy information</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -173,9 +159,11 @@ func main() {
 
 ```
 
-## Get a policy by ID
+### Get a policy by ID
 
 Returns information about a single policy by ID
+
+<table><thead><tr><th>Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to return</td><td></td></tr><tr><td><strong>policyId</strong> </td><td>ID of the policy to query</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -221,9 +209,11 @@ func main() {
 }
 ```
 
-## Update a policy
+### Update a policy
 
 Update a policy for an org
+
+<table><thead><tr><th>Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to update policy for</td><td></td></tr><tr><td><strong>policyId</strong> </td><td>ID of the policy to update</td><td></td></tr><tr><td><strong>payload</strong></td><td>A struct pointer with the policy attributes to edit.</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -281,12 +271,13 @@ func main() {
 
 	fmt.Printf("MarshalIndent Struct keys output\n %s\n", string(policyAsJSONKeys))
 }
-
 ```
 
-## Delete a policy
+### Delete a policy
 
 Delete a policy for an org
+
+<table><thead><tr><th>Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to update policy for</td><td></td></tr><tr><td><strong>policyId</strong> </td><td>ID of the policy to update</td><td></td></tr></tbody></table>
 
 ```go
 package main
