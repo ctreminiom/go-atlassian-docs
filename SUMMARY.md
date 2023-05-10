@@ -89,7 +89,8 @@
 
 ## Jira Agile
 
-* [📉 Boards](jira-agile/boards.md)
+* [📉 Boards](jira-agile/boards/README.md)
+  * [📃 Backlog](jira-agile/boards/backlog.md)
 * [🗓 Sprints](jira-agile/sprints.md)
 * [📈 Epics](jira-agile/epics.md)
 
