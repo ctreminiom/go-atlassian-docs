@@ -15,10 +15,100 @@ Move moves issues to the backlog.
 * This operation is equivalent to remove future and active sprints from a given set of issues.
 * At most 50 issues may be moved at once.
 
-### Move issues to backlog for board
+```go
+package main
+
+import (
+   "context"
+   "github.com/ctreminiom/go-atlassian/jira/agile"
+   "log"
+   "os"
+)
+
+func main() {
+
+   var (
+      host  = os.Getenv("HOST")
+      mail  = os.Getenv("MAIL")
+      token = os.Getenv("TOKEN")
+   )
+
+   agile, err := agile.New(nil, host)
+   if err != nil {
+      return
+   }
+
+   agile.Auth.SetBasicAuth(mail, token)
+   agile.Auth.SetUserAgent("curl/7.54.0")
+
+   response, err := agile.Backlog.Move(context.Background(), []string{"KP-23"})
+   if err != nil {
+      if response != nil {
+         log.Println("Response HTTP Response", response.Bytes.String())
+         log.Println("Status HTTP Response", response.Status)
+      }
+      log.Fatal(err)
+   }
+
+   log.Println("Response HTTP Code", response.Code)
+   log.Println("HTTP Endpoint Used", response.Endpoint)
+
+   return
+}
+```
 
 Move moves issues to the backlog of a particular board (if they are already on that board).
 
 * This operation is equivalent to remove future and active sprints from a given set of issues if the board has sprints.
 * If the board does not have sprints this will put the issues back into the backlog from the board.
 * At most 50 issues may be moved at once.
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/jira/agile"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	agile, err := agile.New(nil, host)
+	if err != nil {
+		return
+	}
+
+	agile.Auth.SetBasicAuth(mail, token)
+	agile.Auth.SetUserAgent("curl/7.54.0")
+
+	payload := &models.BoardBacklogPayloadScheme{
+		Issues:            []string{"KP-23"},
+		RankBeforeIssue:   "",
+		RankAfterIssue:    "",
+		RankCustomFieldId: 0,
+	}
+
+	response, err := agile.Backlog.MoveTo(context.Background(), 5, payload)
+	if err != nil {
+		if response != nil {
+			log.Println("Response HTTP Response", response.Bytes.String())
+			log.Println("Status HTTP Response", response.Status)
+		}
+		log.Fatal(err)
+	}
+
+	log.Println("Response HTTP Code", response.Code)
+	log.Println("HTTP Endpoint Used", response.Endpoint)
+
+	return
+}
+```
