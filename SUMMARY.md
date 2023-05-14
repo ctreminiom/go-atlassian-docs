@@ -116,6 +116,7 @@
 * [🌊 V2](confluence-cloud/v2/README.md)
   * [📃 Page](confluence-cloud/v2/page.md)
   * [🪟 Space](confluence-cloud/v2/space.md)
+  * [🧺 Attachments](confluence-cloud/v2/attachments.md)
 * [📉 Analytics](confluence-cloud/analytics.md)
 * [📢 Content](confluence-cloud/content/README.md)
   * [🎮 Properties](confluence-cloud/content/properties.md)
