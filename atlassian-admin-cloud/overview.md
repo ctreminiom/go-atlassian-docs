@@ -1,4 +1,4 @@
-# 📃 Overview
+# 🌌 Introduction
 
 The cloud admin REST APIs let you administer [Atlassian cloud](https://developer.atlassian.com/cloud/) products. To allow administrators to manage multiple Atlassian cloud products and sites centrally, we’ve created a global administration layer called an _organization_ that is a centralized place for managing your products and users. With an organization, you can manage the Atlassian accounts of all registered users at your company, based on the domains that you have verified. Managing a user's account allows you to change account and profile details, view product access and admin permissions, and deactivate or permanently delete a user.
 
