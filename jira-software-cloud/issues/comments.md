@@ -8,7 +8,7 @@ A comment is a piece of text that can be added to an issue to provide additional
 4. Acknowledging or responding to other comments or feedback.
 5. Notifying other users of relevant information or changes.
 
-![](<../../.gitbook/assets/image (9).png>)
+![](<../../.gitbook/assets/image (9) (1).png>)
 
 * **Mention your teammates:** If you need someone to know about a comment, you can mention them in it. Type @ followed by their name, then choose the right person from the list. The person you mention will be notified about your comment and can quickly jump to the issue to see what's happening.
 * **Apply comment permissions:** If your comment is only meant for a specific Jira group or project role, comment permissions let you restrict your comments to the appropriate audience. When writing your comment, click the lock icon under it and choose a Jira group or project role to restrict it to.

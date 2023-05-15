@@ -60,7 +60,7 @@ To create a new workflow, we need to the create the `models.WorkflowPayloadSchem
 
 Let's try to create a workflow with **directed** transitions and **all-to-all** transitions, something like this:
 
-<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 ### Step 5.1: Extract the status ID's
 
@@ -191,19 +191,102 @@ There're the conditional validations needed to create a valid workflow transitio
 * not have a 'from' status on _initial_ and _global_ transitions.
 * have a 'from' status on _directed_ transitions.
 
-{% tabs %}
-{% tab title="Transition" %}
-<figure><img src="../.gitbook/assets/image (7).png" alt="" width="245"><figcaption></figcaption></figure>
-{% endtab %}
-
-{% tab title="Code Sample" %}
 ```go
 var workflowTransitions []*models.WorkflowTransitionPayloadScheme
+
+// -----
+// The initial transition is required, it creates the relationship between the creation trigger with the
+// first status
+// -----
 workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayloadScheme{
-   Name: "Create",
-   To:   "1",
-   Type: "initial",
+	Name: "Create",
+	To:   "1",
+	Type: "initial",
+})
+
+// -----
+// Create the Escalated and Waiting for approval statuses because the relationship is all-to-all
+workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayloadScheme{
+	Name: "Escalated",
+	To:   statusesAsMap["Escalated"].ID,
+	Type: "global",
+})
+
+workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayloadScheme{
+	Name: "Waiting for approval",
+	To:   statusesAsMap["Waiting for approval"].ID,
+	Type: "global",
+})
+// -----
+
+// ----
+// Create the directed transitions, it's required to use the from and to statuses
+
+// Open -----------------------> In Progress
+workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayloadScheme{
+	Name: "In Progress",
+	From: []string{statusesAsMap["Open"].ID},
+	To:   statusesAsMap["In Progress"].ID,
+	Type: "directed",
+})
+
+// In Progress -----------------------> QA
+workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayloadScheme{
+	Name: "QA",
+	From: []string{statusesAsMap["In Progress"].ID},
+	To:   statusesAsMap["QA"].ID,
+	Type: "directed",
+})
+
+// QA -----------------------> In Progress
+workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayloadScheme{
+	Name: "QA",
+	From: []string{statusesAsMap["QA"].ID},
+	To:   statusesAsMap["In Progress"].ID,
+	Type: "directed",
+})
+
+// QA -----------------------> Closed
+workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayloadScheme{
+	Name: "Closed",
+	From: []string{statusesAsMap["QA"].ID},
+	To:   statusesAsMap["Closed"].ID,
+	Type: "directed",
+})
+
+// QA -----------------------> Resolved
+workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayloadScheme{
+	Name: "Resolved",
+	From: []string{statusesAsMap["QA"].ID},
+	To:   statusesAsMap["Resolved"].ID,
+	Type: "directed",
 })
 ```
-{% endtab %}
-{% endtabs %}
+
+### Step 5.3: Create the workflow&#x20;
+
+In conclusion, we can combine the statuses and transitions structs and create the workflow using the structs created on the previous steps.
+
+```go
+workflowPayload := &models.WorkflowPayloadScheme{
+	Name:        "Workflow Name - Sample",
+	Description: "Workflow Name - Description",
+	Statuses:    workflowStatuses,
+	Transitions: workflowTransitions,
+}
+
+newWorkflow, response, err := instance.Workflow.Create(context.Background(), workflowPayload)
+if err != nil {
+	if response != nil {
+		log.Println(response.Bytes.String())
+		log.Println(response.Code)
+	}
+
+	log.Fatal(err)
+}
+
+log.Println(newWorkflow.Name)
+log.Println(newWorkflow.EntityID)
+```
+
+<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
