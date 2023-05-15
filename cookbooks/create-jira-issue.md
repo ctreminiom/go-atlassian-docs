@@ -111,5 +111,5 @@ Make sure to replace **`YOUR_PROJECT_KEY`** with the actual project key, and set
 
 This will create a new issue in Jira with the specified custom field values. Please note that you may need to modify the code according to your specific Jira configuration and custom field types.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
