@@ -169,7 +169,7 @@ for _, scheme := range schemeMapping.Values {
 
 ## Step 7: Extract the screen IDs
 
-The next step is extract the screen ID's from the screen schemes, you this code to extract the screen IDs.
+The next step is extract the screen ID's from the screen schemes, you can use this code to extract the screen IDs.
 
 ```go
 // --------------------------------------------------
