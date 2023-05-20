@@ -333,7 +333,7 @@ The Atlassian Document Format (ADF) represents rich text stored in Atlassian pro
 
 ### Example 2
 
-![](<../../.gitbook/assets/image (1) (1).png>)
+![](<../../.gitbook/assets/image (1) (1) (1).png>)
 
 ```go
 	commentBody := jira.CommentNodeScheme{}

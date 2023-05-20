@@ -12,7 +12,7 @@ When you create a new instance of an Atlassian cloud product, you can manage it 
 
 These products that can be part of your organization include Jira products (Jira Software, Jira Service Management, and Jira Core), Confluence, Statuspage, and Opsgenie. Currently, Bitbucket and Trello can’t be associated with an organization.
 
-![](<../.gitbook/assets/image (13) (1) (1).png>)
+![](<../.gitbook/assets/image (13) (1) (1) (1).png>)
 
 ### Manage users
 
