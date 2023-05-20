@@ -27,6 +27,7 @@
 ## Jira Software Cloud
 
 * [🗃 Introduction](jira-software-cloud/introduction.md)
+* [💹 Announcement Banner](jira-software-cloud/announcement-banner.md)
 * [🔐 Application Roles](jira-software-cloud/application-roles.md)
 * [🛡️ Audit records](jira-software-cloud/audit-records.md)
 * [📈 Dashboards](jira-software-cloud/dashboards.md)
@@ -86,7 +87,6 @@
     * [▶ Issue Type](jira-software-cloud/workflow/scheme/issue-type.md)
   * [🗺 Status](jira-software-cloud/workflow/status.md)
 * [⚖ Myself](jira-software-cloud/myself.md)
-* [💹 Announcement Banner](jira-software-cloud/announcement-banner.md)
 
 ## Jira Agile
 
