@@ -60,7 +60,7 @@ func main() {
 
 ## Step 5: Extract the issue type screen scheme
 
-Before to add the _customfields_ on the project screens, we need to search the issue type screen scheme associated with a Jira project and iterates the mapping and extract the screen schemes linked. In this particular example, we're going to add the following customfields on the KP project:
+Before to add the _customfields_ on the project screens, we need to search the issue type screen scheme associated with a Jira project, then iterates the mapping to extract the screen schemes linked. In this particular example, we're going to add the following customfields on the **KP** project:
 
 * Start Date `customfield_10068`
 * Sprint `customfield_10020`
