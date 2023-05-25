@@ -87,6 +87,7 @@
     * [▶ Issue Type](jira-software-cloud/workflow/scheme/issue-type.md)
   * [🗺 Status](jira-software-cloud/workflow/status.md)
 * [⚖ Myself](jira-software-cloud/myself.md)
+* [🏓 Teams](jira-software-cloud/teams.md)
 
 ## Jira Agile
 

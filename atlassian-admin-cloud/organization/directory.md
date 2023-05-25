@@ -18,7 +18,7 @@ Activity returns a user’s last active date for each product listed in Atlassia
 * If the user has not accessed a product, the product\_access response field will be empty
 * The added\_to\_org date field is available only to customers using the new user management experience.
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select">Status</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td><td></td></tr><tr><td><strong>accountId</strong></td><td>Unique ID of the user's account</td><td></td><td></td></tr></tbody></table>
+<table><thead><tr><th width="135">Param</th><th width="456">Description</th><th width="112" data-type="select">Status</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td><td></td></tr><tr><td><strong>accountId</strong></td><td>Unique ID of the user's account</td><td></td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -73,7 +73,7 @@ Remove removes user access to products listed in Atlassian Administration.&#x20;
 * The API is available for customers using the new user management experience only.
 * Users with emails whose domain is claimed can still be found in Managed accounts in Directory
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td></tr><tr><td><strong>accountId</strong> </td><td>Unique ID of the user's account that you are deleting</td><td></td></tr></tbody></table>
+<table><thead><tr><th width="160.33333333333331">Param</th><th width="352">Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td></tr><tr><td><strong>accountId</strong> </td><td>Unique ID of the user's account that you are deleting</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -169,7 +169,7 @@ Restore restores user access to products listed in Atlassian Administration.
 * The API is available for customers using the new user management experience only.
 * Users with emails whose domain is claimed can still be found in Managed accounts in Directory.
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td></tr><tr><td><strong>accountId</strong> </td><td>Unique ID of the user's account that you are deleting</td><td></td></tr></tbody></table>
+<table><thead><tr><th width="147.33333333333331">Param</th><th width="399">Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td></tr><tr><td><strong>accountId</strong> </td><td>Unique ID of the user's account that you are deleting</td><td></td></tr></tbody></table>
 
 ```go
 package main

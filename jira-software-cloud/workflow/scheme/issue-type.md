@@ -4,7 +4,7 @@
 
 Get returns the issue type-workflow mapping for an issue type in a workflow scheme.
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select">Status</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>id</strong></td><td>The ID of the workflow scheme.</td><td></td><td></td></tr><tr><td><strong>issueType</strong></td><td>The ID of the issue type.</td><td></td><td></td></tr><tr><td><strong>returnDraftIfExists</strong></td><td>Returns the mapping from the workflow scheme's draft rather than the workflow scheme, if set to true. If no draft exists, the mapping from the workflow scheme is returned.</td><td></td><td></td></tr></tbody></table>
+<table><thead><tr><th width="209">Param</th><th width="254">Description</th><th width="120" data-type="select">Status</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>id</strong></td><td>The ID of the workflow scheme.</td><td></td><td></td></tr><tr><td><strong>issueType</strong></td><td>The ID of the issue type.</td><td></td><td></td></tr><tr><td><strong>returnDraftIfExists</strong></td><td>Returns the mapping from the workflow scheme's draft rather than the workflow scheme, if set to true. If no draft exists, the mapping from the workflow scheme is returned.</td><td></td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -123,7 +123,7 @@ Delete deletes the issue type-workflow mapping for an issue type in a workflow s
 
 Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` and a draft workflow scheme is created or updated with the issue type-workflow mapping deleted. The draft workflow scheme can be published in Jira.
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select">Status</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>id</strong></td><td>The ID of the workflow scheme.</td><td></td><td></td></tr><tr><td><strong>issueType</strong></td><td>The ID of the issue type.</td><td></td><td></td></tr><tr><td><strong>updateDraftIfNeeded</strong></td><td><p>Set to true to create or update the draft of a workflow scheme and update the mapping in the draft, when the workflow scheme cannot be edited. Defaults to <code>false</code>.</p><p><br></p></td><td></td><td></td></tr></tbody></table>
+<table><thead><tr><th width="235">Param</th><th>Description</th><th data-type="select">Status</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>id</strong></td><td>The ID of the workflow scheme.</td><td></td><td></td></tr><tr><td><strong>issueType</strong></td><td>The ID of the issue type.</td><td></td><td></td></tr><tr><td><strong>updateDraftIfNeeded</strong></td><td><p>Set to true to create or update the draft of a workflow scheme and update the mapping in the draft, when the workflow scheme cannot be edited. Defaults to <code>false</code>.</p><p><br></p></td><td></td><td></td></tr></tbody></table>
 
 ```go
 package main

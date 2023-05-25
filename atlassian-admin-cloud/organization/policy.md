@@ -21,7 +21,7 @@ An authentication policy allows you to specify authentication settings for diffe
 
 Returns information about org policies.
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to query</td><td></td></tr><tr><td><strong>cursor</strong></td><td>Sets the starting point for the page of results to return.</td><td></td></tr><tr><td><strong>type</strong></td><td>Sets the type for the page of policies to return.</td><td></td></tr></tbody></table>
+<table><thead><tr><th width="107.33333333333331">Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to query</td><td></td></tr><tr><td><strong>cursor</strong></td><td>Sets the starting point for the page of results to return.</td><td></td></tr><tr><td><strong>type</strong></td><td>Sets the type for the page of policies to return.</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -163,7 +163,7 @@ func main() {
 
 Returns information about a single policy by ID
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to return</td><td></td></tr><tr><td><strong>policyId</strong> </td><td>ID of the policy to query</td><td></td></tr></tbody></table>
+<table><thead><tr><th width="139.33333333333331">Param</th><th width="293">Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to return</td><td></td></tr><tr><td><strong>policyId</strong> </td><td>ID of the policy to query</td><td></td></tr></tbody></table>
 
 ```go
 package main

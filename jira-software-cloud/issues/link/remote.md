@@ -10,7 +10,7 @@ Gets returns the remote issue links for an issue. When a remote issue link globa
 Where a global ID includes reserved URL characters these must be escaped in the request.
 {% endhint %}
 
-<table><thead><tr><th>Param</th><th>Description</th><th>Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong></td><td>The ID or key of the issue.</td><td>String</td><td></td></tr><tr><td><strong>globalId</strong></td><td>The global ID of the remote issue link.</td><td>String</td><td></td></tr></tbody></table>
+<table><thead><tr><th>Param</th><th width="252">Description</th><th width="180">Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong></td><td>The ID or key of the issue.</td><td>String</td><td></td></tr><tr><td><strong>globalId</strong></td><td>The global ID of the remote issue link.</td><td>String</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -61,7 +61,7 @@ Create creates or updates a remote issue link for an issue.
 
 If a `globalId` is provided and a remote issue link with that global ID is found it is updated. Any fields without values in the request are set to null. Otherwise, the remote issue link is created.
 
-<table><thead><tr><th>Param</th><th>Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>string</td><td></td></tr><tr><td><strong>payload</strong></td><td>*models.RemoteLinkScheme</td><td></td></tr></tbody></table>
+<table><thead><tr><th>Param</th><th width="292.3333333333333">Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>string</td><td></td></tr><tr><td><strong>payload</strong></td><td>*models.RemoteLinkScheme</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -136,7 +136,7 @@ func main() {
 
 Delete deletes a remote issue link from an issue.
 
-<table><thead><tr><th>Param</th><th>Description</th><th>Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>The ID or key of the issue.</td><td>string</td><td></td></tr><tr><td><strong>linkId</strong> </td><td>The ID of a remote issue link.</td><td>string</td><td></td></tr></tbody></table>
+<table><thead><tr><th width="166">Param</th><th width="241">Description</th><th width="92">Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>The ID or key of the issue.</td><td>string</td><td></td></tr><tr><td><strong>linkId</strong> </td><td>The ID of a remote issue link.</td><td>string</td><td></td></tr></tbody></table>
 
 ```go
 package main
@@ -180,7 +180,7 @@ func main() {
 
 Get returns a remote issue link for an issue.
 
-<table><thead><tr><th>Param</th><th>Description</th><th>Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>The ID or key of the issue.</td><td>string</td><td></td></tr><tr><td><strong>linkId</strong> </td><td>The ID of the remote issue link.</td><td>string</td><td></td></tr></tbody></table>
+<table><thead><tr><th width="156.33333333333331">Param</th><th width="270">Description</th><th width="85">Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>The ID or key of the issue.</td><td>string</td><td></td></tr><tr><td><strong>linkId</strong> </td><td>The ID of the remote issue link.</td><td>string</td><td></td></tr></tbody></table>
 
 ```go
 package main
