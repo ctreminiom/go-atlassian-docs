@@ -57,7 +57,7 @@ func main() {
 }
 ```
 
-Move moves issues to the backlog of a particular board (if they are already on that board).
+### Move issues to a board backlog
 
 * This operation is equivalent to remove future and active sprints from a given set of issues if the board has sprints.
 * If the board does not have sprints this will put the issues back into the backlog from the board.
