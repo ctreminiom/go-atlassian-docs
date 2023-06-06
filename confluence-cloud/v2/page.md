@@ -724,3 +724,70 @@ func main() {
 	}
 }
 ```
+
+## Get pages by parent
+
+GetsByParent returns all direct descendent pages of a page. The number of results is limited by the `limit` parameter and additional results (if available) will be available through the `next` URL present in the `Link` response header.
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	confluence "github.com/ctreminiom/go-atlassian/confluence/v2"
+	"log"
+	"net/url"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
+
+	var cursor string
+	for {
+
+		pages, response, err := instance.Page.GetsByParent(context.Background(), 215646235, cursor, 20)
+		if err != nil {
+
+			if response != nil {
+				log.Println(response.Bytes.String())
+			}
+		}
+
+		for _, page := range pages.Results {
+			fmt.Println(page.Title, page.ID, page.Version.Number)
+		}
+
+		log.Println("Endpoint:", response.Endpoint)
+		log.Println("Status Code:", response.Code)
+
+		if pages.Links.Next == "" {
+			break
+		}
+
+		values, err := url.ParseQuery(pages.Links.Next)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		_, containsCursor := values["cursor"]
+		if containsCursor {
+			cursor = values["cursor"][0]
+		}
+	}
+}
+```
