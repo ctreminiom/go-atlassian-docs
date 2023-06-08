@@ -4,7 +4,7 @@ The Jira audit logs are a set of records that document all the activities and ch
 
 <table data-view="cards"><thead><tr><th></th></tr></thead><tbody><tr><td>User login and logout events</td></tr><tr><td>Issue creation, modification, and deletion events</td></tr><tr><td>Workflow transition events</td></tr><tr><td>Project creation, modification, and deletion events</td></tr><tr><td>User management events such as user creation, modification, and deletion</td></tr><tr><td>User management events such as user creation, modification, and deletion</td></tr></tbody></table>
 
-<figure><img src="../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (8) (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 The audit logs are useful for several reasons. For example, they can be used to track changes made to sensitive data, to identify who made specific changes to issues or projects, or to diagnose issues with Jira.
 

@@ -115,6 +115,11 @@
   * [⚙ Service Desk](jira-service-management/request/service-desk/README.md)
     * [🛎 Queue](jira-service-management/request/service-desk/queue.md)
 
+## Jira Assets&#x20;
+
+* [📠 Introduction](jira-assets/overview.md)
+* [⁉ Icons](jira-assets/icons.md)
+
 ## Confluence Cloud
 
 * [🎑 Introduction](confluence-cloud/introduction.md)
