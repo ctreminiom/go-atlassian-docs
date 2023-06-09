@@ -5,7 +5,7 @@ In Jira, a filter is a saved search query that you can use to retrieve a specifi
 Filters can be saved and shared with other users, allowing you to easily collaborate and work together on a specific set of issues. You can also use filters to create custom dashboards and reports to monitor the progress of your team's work.\
 
 
-<figure><img src="../../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Create Filter
 
@@ -71,7 +71,7 @@ func main() {
 
 ```
 
-![Filter permissions on the UI interface](<../../.gitbook/assets/image (5).png>)
+![Filter permissions on the UI interface](<../../.gitbook/assets/image (5) (1).png>)
 
 ## Get Favorites
 

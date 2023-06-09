@@ -2,7 +2,7 @@
 
 The _go-atlassian_ `sm` module provides a set of functions and types for interacting with the Jira Service Management REST API. It  provides a programmatic interface to interact with Jira Service Management, enabling developers to automate various aspects of service management.
 
-<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption><p>Request Sample</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (13) (1).png" alt=""><figcaption><p>Request Sample</p></figcaption></figure>
 
 Here are some key components and concepts related to the Jira Service Management REST API:
 

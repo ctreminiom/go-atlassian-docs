@@ -119,8 +119,11 @@
 
 * [📠 Introduction](jira-assets/overview.md)
 * [⁉ Icons](jira-assets/icons.md)
+* [🔎 Aql](jira-assets/aql.md)
 * [🦞 Object](jira-assets/object/README.md)
   * [📿 Schema](jira-assets/object/schema.md)
+  * [🏥 Type](jira-assets/object/type/README.md)
+    * [🧑🚀 Attribute](jira-assets/object/type/attribute.md)
 
 ## Confluence Cloud
 

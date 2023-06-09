@@ -310,6 +310,6 @@ for _, screenID := range screenIDsWithOutDuplicated {
 
 When you run the code, the custom-fields selected will be available on the project :thumbsup::tada:.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>

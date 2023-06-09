@@ -2,7 +2,7 @@
 
 The _go-atlassian_ `agile` module provides a set of functions and types for interacting with the Jira Agile REST API. It is designed to allows developers to interact with and automate various aspects of agile project management within Jira, such as boards, sprints, and issues.
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption><p>Kanban Board Sample</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Kanban Board Sample</p></figcaption></figure>
 
 Here's a brief introduction to some key concepts in Jira Agile Rest API:
 
