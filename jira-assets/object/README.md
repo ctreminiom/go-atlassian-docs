@@ -626,3 +626,69 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+
+## Filter objects <a href="#filter-objects" id="filter-objects"></a>
+
+The _**Filter**_ method returns Objects using an AQL query
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/ctreminiom/go-atlassian/assets"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"github.com/davecgh/go-spew/spew"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	serviceManagement, err := sm.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	serviceManagement.Auth.SetBasicAuth(mail, token)
+	serviceManagement.Auth.SetUserAgent("curl/7.54.0")
+
+	// Get the workspace ID
+	workspaces, response, err := serviceManagement.WorkSpace.Gets(context.Background())
+	if err != nil {
+		if response != nil {
+			log.Println(response.Bytes.String())
+			log.Println("Endpoint:", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
+
+	workSpaceID := workspaces.Values[0].WorkspaceId
+
+	// Instance the Assets Cloud client
+	asset, err := assets.New(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	asset.Auth.SetBasicAuth(mail, token)
+
+	objects, response, err := asset.Object.Filter(context.Background(), workSpaceID, "Name LIKE Test", true, 0, 50)
+	if err != nil {
+		if response != nil {
+			log.Println(response.Bytes.String())
+			log.Println("Endpoint:", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
+
+	spew.Dump(objects)
+
+}
+```
