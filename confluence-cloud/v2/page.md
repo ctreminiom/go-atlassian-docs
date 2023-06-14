@@ -584,10 +584,11 @@ func main() {
 	}
 
 	payload := &models.PageUpdatePayloadScheme{
-		ID:      215646235,
-		SpaceID: 203718658,
-		Status:  "current",
-		Title:   "Page create title test",
+		ID:       215646235,
+		SpaceID:  203718658,
+		Status:   "current",
+		Title:    "Page create title test",
+		ParentID: 215646235
 		Body: &models.PageBodyRepresentationScheme{
 			Representation: "atlas_doc_format",
 			Value:          string(bodyValue),
