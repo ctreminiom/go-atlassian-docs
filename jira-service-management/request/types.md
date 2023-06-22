@@ -121,7 +121,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
 )
@@ -146,21 +148,20 @@ func main() {
 	var (
 		ctx           = context.Background()
 		serviceDeskID = 1
-		issueTypeID   = "10001"
-		name          = "Request Type Sample Name"
-		description   = "Request Type Sample Description"
-		helpText      = "Request Type Sample HelpText"
 	)
 
-	newRequestType, response, err := atlassian.Request.Type.Create(ctx,
-		serviceDeskID,
-		issueTypeID,
-		name,
-		description,
-		helpText,
-	)
+	payload := &models.RequestTypePayloadScheme{
+		Description: "Request Type Sample Description",
+		HelpText:    "Request Type Sample HelpText",
+		IssueTypeId: "10001",
+		Name:        "Request Type Sample Name",
+	}
+
+	newRequestType, response, err := atlassian.Request.Type.Create(ctx, serviceDeskID, payload)
 
 	if err != nil {
+
+		fmt.Println(response.Status)
 		log.Fatal(err)
 	}
 

@@ -325,7 +325,7 @@ import (
 	"time"
 )
 
-func main()  {
+func main() {
 
 	var (
 		host  = os.Getenv("HOST")
@@ -341,7 +341,7 @@ func main()  {
 	atlassian.Auth.SetBasicAuth(mail, token)
 	atlassian.Auth.SetUserAgent("curl/7.54.0")
 
-	form := &models.CustomerRequestFields{}
+	form := &models.CustomerRequestFields{Fields: make(map[string]interface{})}
 
 	if err := form.Text("summary", "Summary Sample"); err != nil {
 		log.Fatal(err)
@@ -382,4 +382,5 @@ func main()  {
 		fmt.Println(field)
 	}
 }
+
 ```
