@@ -636,9 +636,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/ctreminiom/go-atlassian/assets"
 	"github.com/ctreminiom/go-atlassian/jira/sm"
-	"github.com/davecgh/go-spew/spew"
 	"log"
 	"os"
 )
@@ -685,9 +685,19 @@ func main() {
 			log.Println(response.Bytes.String())
 			log.Println("Endpoint:", response.Endpoint)
 		}
+
 		log.Fatal(err)
 	}
 
-	spew.Dump(objects)
+	log.Println(objects.Total)
+	log.Println(objects.IsLast)
+	log.Println(objects.MaxResults)
+	log.Println(objects.StartAt)
+	log.Println(len(objects.Values))
+
+	for _, object := range objects.Values {
+		fmt.Println(object.ID)
+	}
+
 }
 ```
