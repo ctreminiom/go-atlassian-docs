@@ -14,7 +14,11 @@ It’s also useful for change management because it allows you to see the bigger
 
 ### Get object by ID
 
-The Get method load one object
+The Get method load one object.
+
+{% hint style="info" %}
+It uses the endpoint `/object/{id} documented` [`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-get)
+{% endhint %}
 
 ```go
 package main
@@ -105,7 +109,11 @@ func main() {
 
 ### Update object by ID
 
-The _**Update**_ method updates an asset object
+The _**Update**_ method updates an asset object.
+
+{% hint style="info" %}
+It uses the endpoint `/object/{id} documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-put)
+{% endhint %}
 
 ```go
 package main
@@ -196,7 +204,11 @@ func main() {
 
 ### Delete object by ID
 
-The _**Delete**_ method deletes an asset object
+The _**Delete**_ method deletes an asset object.
+
+{% hint style="info" %}
+It uses the endpoint `/object/{id} documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-delete)
+{% endhint %}
 
 ```go
 package main
@@ -261,7 +273,11 @@ func main() {
 
 ### Get object attributes
 
-The _**Attributes**_ method returns the asset object attributes
+The _**Attributes**_ method returns the asset object attributes.
+
+{% hint style="info" %}
+It uses the endpoint `/object/{id}/attributes documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-attributes-get)
+{% endhint %}
 
 ```go
 package main
@@ -339,7 +355,11 @@ func main() {
 
 ### Get object changelogs
 
-The _**History**_ method returns the asset object changelogs
+The _**History**_ method returns the asset object changelogs.
+
+{% hint style="info" %}
+It uses the endpoint `/object/{id}/history documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-history-get)
+{% endhint %}
 
 ```go
 package main
@@ -409,7 +429,11 @@ func main() {
 
 ### Get object references
 
-The _**References**_ method returns the asset object references links
+The _**References**_ method returns the asset object references links.
+
+{% hint style="info" %}
+It uses the endpoint `/object/{id}/referenceinfo documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-referenceinfo-get)
+{% endhint %}
 
 ```go
 package main
@@ -479,6 +503,10 @@ func main() {
 ### Create object
 
 The _**Create**_ method creates an asset object
+
+{% hint style="info" %}
+It uses the endpoint `/object/create documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-create-post)
+{% endhint %}
 
 ```go
 package main
@@ -562,6 +590,10 @@ func main() {
 
 The _**Relation**_ method returns the relation between Jira issues and Assets objects
 
+{% hint style="info" %}
+It uses the endpoint `/objectconnectedtickets/{objectId}/tickets documented` [`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-objectconnectedtickets/#api-objectconnectedtickets-objectid-tickets-get)
+{% endhint %}
+
 ```go
 package main
 
@@ -630,6 +662,10 @@ func main() {
 ### Filter objects <a href="#filter-objects" id="filter-objects"></a>
 
 The _**Filter**_ method returns Objects using an AQL query
+
+{% hint style="info" %}
+It uses the endpoint `/object/aql documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-aql-post)
+{% endhint %}
 
 ```go
 package main
@@ -709,3 +745,89 @@ The _**Search**_ method retrieves a list of objects based on an AQL. Please **no
 {% hint style="info" %}
 It uses the endpoint `/object/navlist/aql documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-navlist-aql-post)
 {% endhint %}
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/assets"
+	"github.com/ctreminiom/go-atlassian/jira/sm"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	serviceManagement, err := sm.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	serviceManagement.Auth.SetBasicAuth(mail, token)
+	serviceManagement.Auth.SetUserAgent("curl/7.54.0")
+
+	// Get the workspace ID
+	workspaces, response, err := serviceManagement.WorkSpace.Gets(context.Background())
+	if err != nil {
+		if response != nil {
+			log.Println(response.Bytes.String())
+			log.Println("Endpoint:", response.Endpoint)
+		}
+		log.Fatal(err)
+	}
+
+	workSpaceID := workspaces.Values[0].WorkspaceId
+
+	// Instance the Assets Cloud client
+	asset, err := assets.New(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	asset.Auth.SetBasicAuth(mail, token)
+
+	payload := &models.ObjectSearchParamsScheme{
+		Query:                  "Name LIKE Test",
+		Iql:                    "",
+		ObjectTypeID:           "1",
+		Page:                   0,
+		ResultPerPage:          25,
+		OrderByTypeAttributeID: 0,
+		Asc:                    0,
+		ObjectID:               "",
+		ObjectSchemaID:         "1",
+		IncludeAttributes:      false,
+		AttributesToDisplay:    nil,
+	}
+
+	objects, response, err := asset.Object.Search(context.Background(), workSpaceID, payload)
+	if err != nil {
+		if response != nil {
+			log.Println(response.Bytes.String())
+			log.Println("Endpoint:", response.Endpoint)
+		}
+
+		log.Fatal(err)
+	}
+
+	for _, entry := range objects.ObjectEntries {
+		fmt.Println(entry.ID, entry.Updated)
+	}
+
+	for _, attribute := range objects.ObjectTypeAttributes {
+		fmt.Println(attribute.Name, attribute.ID, attribute.GlobalId)
+	}
+
+	fmt.Println(objects.OrderWay)
+	fmt.Println(objects.QlQuery)
+}
+```
