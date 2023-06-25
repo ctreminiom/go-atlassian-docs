@@ -4,6 +4,10 @@
 This document refers to Advanced Roadmaps API's, which is a cross-project planning tool only available as part of Jira Software Cloud Premium and Enterprise.
 {% endhint %}
 
+{% hint style="warning" %}
+This is an experimental API,
+{% endhint %}
+
 ## Overview
 
 Teams in Advanced Roadmaps are different from the teams found in the rest of Jira Software Cloud. In Advanced Roadmaps, they act as a label applied to issues that designates which team will eventually pick up the work on your timeline. By adding the Team field to your Jira issues, you can save this value back to your Jira issues, which makes sprint planning easier.

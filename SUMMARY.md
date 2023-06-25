@@ -118,7 +118,7 @@
 ## Jira Assets&#x20;
 
 * [📠 Introduction](jira-assets/overview.md)
-* [⁉ Icons](jira-assets/icons.md)
+* [👾 Icons](jira-assets/icons.md)
 * [🔎 Aql](jira-assets/aql.md)
 * [🦞 Object](jira-assets/object/README.md)
   * [📿 Schema](jira-assets/object/schema.md)

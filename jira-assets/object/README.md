@@ -627,7 +627,7 @@ func main() {
 }
 ```
 
-## Filter objects <a href="#filter-objects" id="filter-objects"></a>
+### Filter objects <a href="#filter-objects" id="filter-objects"></a>
 
 The _**Filter**_ method returns Objects using an AQL query
 
@@ -689,6 +689,5 @@ func main() {
 	}
 
 	spew.Dump(objects)
-
 }
 ```
