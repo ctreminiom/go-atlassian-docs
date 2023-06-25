@@ -99,6 +99,7 @@
 
 ## Jira Service Management
 
+* [📙 Workspaces](jira-service-management/workspaces.md)
 * [🗺 Introduction](jira-service-management/introduction.md)
 * [👨⚖ Customer](jira-service-management/customer.md)
 * [ℹ Info](jira-service-management/info.md)

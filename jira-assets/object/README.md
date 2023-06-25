@@ -701,3 +701,11 @@ func main() {
 
 }
 ```
+
+### Search objects
+
+The _**Search**_ method retrieves a list of objects based on an AQL. Please **note** that the preferred endpoint is `/aql`
+
+{% hint style="info" %}
+It uses the endpoint `/object/navlist/aql documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-navlist-aql-post)
+{% endhint %}
