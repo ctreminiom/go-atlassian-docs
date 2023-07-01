@@ -1,6 +1,11 @@
+---
+cover: ../../.gitbook/assets/f7d10368-eaf9-4640-9298-935babada43c-1560x760.jpeg
+coverY: 120
+---
+
 # 👥 User
 
-The [user management REST API](https://developer.atlassian.com/cloud/admin/user-management/rest/intro/) lets you manage users (managed accounts) in an organization. Only an organization admin can edit the details of a managed account. As an organization admin with verified domains, you can use the user management REST API to perform operations including:
+The user management REST API lets you manage users (managed accounts) in an organization. Only an organization admin can edit the details of a managed account. As an organization admin with verified domains, you can use the user management REST API to perform operations including:
 
 * Get a list of your permissions to manage a user
 * Get information about a user
@@ -11,8 +16,11 @@ The [user management REST API](https://developer.atlassian.com/cloud/admin/user-
 
 ## Get user management permissions
 
+`GET /users/{account_id}/manage`
+
 Returns the set of permissions you have for managing the specified Atlassian account
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -52,13 +60,16 @@ func main() {
 	log.Println(permissions.APITokenDelete.Allowed)
 	log.Println(permissions.EmailSet.Allowed)
 }
-
 ```
+{% endcode %}
 
 ## Get profile
 
+`GET /users/{account_id}/manage/profile`
+
 Returns information about a single Atlassian account by ID
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -97,51 +108,16 @@ func main() {
 
 	log.Println(user.Account.Name, user.Account.AccountType)
 }
-
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type UserScheme struct {
-	Account struct {
-		AccountID       string `json:"account_id"`
-		Name            string `json:"name"`
-		Nickname        string `json:"nickname"`
-		Zoneinfo        string `json:"zoneinfo"`
-		Locale          string `json:"locale"`
-		Email           string `json:"email"`
-		Picture         string `json:"picture"`
-		ExtendedProfile struct {
-			JobTitle string `json:"job_title"`
-			TeamType string `json:"team_type"`
-		} `json:"extended_profile"`
-		AccountType     string `json:"account_type"`
-		AccountStatus   string `json:"account_status"`
-		EmailVerified   bool   `json:"email_verified"`
-		PrivacySettings struct {
-			Name                        string `json:"name"`
-			Nickname                    string `json:"nickname"`
-			Picture                     string `json:"picture"`
-			ExtendedProfileJobTitle     string `json:"extended_profile.job_title"`
-			ExtendedProfileDepartment   string `json:"extended_profile.department"`
-			ExtendedProfileOrganization string `json:"extended_profile.organization"`
-			ExtendedProfileLocation     string `json:"extended_profile.location"`
-			ZoneInfo                    string `json:"zoneinfo"`
-			Email                       string `json:"email"`
-			ExtendedProfilePhoneNumber  string `json:"extended_profile.phone_number"`
-			ExtendedProfileTeamType     string `json:"extended_profile.team_type"`
-		} `json:"privacy_settings"`
-	} `json:"account"`
-}
-```
+{% endcode %}
 
 ## Update profile
 
+`PATCH /users/{account_id}/manage/profile`
+
 Updates fields in a user account. The `profile.write` privilege details which fields you can change.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -190,15 +166,19 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("New NickName, ", userUpdated.Account.Nickname)
-
 }
-
 ```
+{% endcode %}
 
 ## Disable a user
 
-Disables the specified user account. The permission to make use of this resource is exposed by the `lifecycle.enablement` privilege. You can optionally set a message associated with the block that will be shown to the user on attempted authentication. If none is supplied, a default message will be used.
+`POST /users/{account_id}/manage/lifecycle/disable`
 
+Disables the specified user account. The permission to make use of this resource is exposed by the `lifecycle.enablement` privilege.&#x20;
+
+You can optionally set a message associated with the block that will be shown to the user on attempted authentication. If none is supplied, a default message will be used.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -241,13 +221,18 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
+{% endcode %}
 
 ## Enable a user
 
-Enables the specified user account. The permission to make use of this resource is exposed by the `lifecycle.enablement` privilege. You can optionally set a message associated with the block that will be shown to the user on attempted authentication. If none is supplied, a default message will be used.
+`POST /users/{account_id}/manage/lifecycle/enable`
 
+Enables the specified user account. The permission to make use of this resource is exposed by the `lifecycle.enablement` privilege.&#x20;
+
+You can optionally set a message associated with the block that will be shown to the user on attempted authentication. If none is supplied, a default message will be used.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -289,7 +274,6 @@ func main() {
 
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
 }
-
 ```
+{% endcode %}

@@ -1,9 +1,19 @@
+---
+cover: ../../.gitbook/assets/image-20201119-174701-1560x760.png
+coverY: -101
+---
+
 # 🔓 Token
+
+API tokens allow a user to authenticate with cloud apps and bypass two-step verification and SSO, and retrieve data from the instance through REST APIs. Token controls allow admins to view and revoke the use of API tokens by their managed accounts.
 
 ## Get API tokens
 
+`GET /users/{account_id}/manage/api-tokens`
+
 Gets the API tokens owned by the specified user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -44,26 +54,16 @@ func main() {
 		log.Println(token.ID, token.Label, token.CreatedAt, token.LastAccess)
 	}
 }
-
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type UserTokensScheme []struct {
-	ID         string    `json:"id,omitempty"`
-	Label      string    `json:"label,omitempty"`
-	CreatedAt  time.Time `json:"createdAt,omitempty"`
-	LastAccess time.Time `json:"lastAccess,omitempty"`
-}
-```
+{% endcode %}
 
 ## Delete API token
 
+`DELETE /users/{account_id}/manage/api-tokens/{tokenId}`
+
 Deletes a specifid API token by ID.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -104,3 +104,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

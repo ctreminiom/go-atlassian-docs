@@ -1,15 +1,25 @@
-# 📖 Directory
+---
+cover: >-
+  ../../.gitbook/assets/csd-222-t1illustrationrefresh-5-signs-of-a-toxic-work-culture-v4a-1560x760.png
+coverY: 157
+---
 
-## Overview
+# 👨👩👧👦 Directory
 
-Each organization contains two types of directories:
+A user directory is a place where you store information about users and groups. User information includes the person's full name, username, email address and other personal information.&#x20;
+
+Group information includes the name of the group, the users that belong to the group, and possibly groups that belong to other groups. More specifically with Atlassian Cloud Admin, each organization contains two types of directories:
 
 * a local directory
 * an identity provider directory
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
 A local directory contains users you’re not managing in your identity provider. You invite these users or they sign up themselves. An identity provider directory contains users you sync or authenticate through your identity provider. You can add and move users between authentication policies in different directories.
 
 ### User’s last active dates
+
+`GET /admin/v1/orgs/{orgId}/directory/users/{accountId}/last-active-dates`
 
 Activity returns a user’s last active date for each product listed in Atlassian Administration.t
 
@@ -18,8 +28,7 @@ Activity returns a user’s last active date for each product listed in Atlassia
 * If the user has not accessed a product, the product\_access response field will be empty
 * The added\_to\_org date field is available only to customers using the new user management experience.
 
-<table><thead><tr><th width="135">Param</th><th width="456">Description</th><th width="112" data-type="select">Status</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td><td></td></tr><tr><td><strong>accountId</strong></td><td>Unique ID of the user's account</td><td></td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -65,16 +74,18 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ### Remove user access
+
+`DELETE /admin/v1/orgs/{orgId}/directory/users/{accountId}`
 
 Remove removes user access to products listed in Atlassian Administration.&#x20;
 
 * The API is available for customers using the new user management experience only.
 * Users with emails whose domain is claimed can still be found in Managed accounts in Directory
 
-<table><thead><tr><th width="160.33333333333331">Param</th><th width="352">Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td></tr><tr><td><strong>accountId</strong> </td><td>Unique ID of the user's account that you are deleting</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -112,16 +123,18 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Suspend user access
+
+`POST /admin/v1/orgs/{orgId}/directory/users/{accountId}/suspend-access`
 
 Suspend suspends user access to products listed in Atlassian Administration.
 
 * The API is available for customers using the new user management experience only.
 * Users with emails whose domain is claimed can still be found in Managed accounts in Directory.
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td></tr><tr><td><strong>accountId</strong> </td><td>Unique ID of the user's account that you are deleting</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -161,16 +174,22 @@ func main() {
 	fmt.Println(message.Message)
 }
 ```
+{% endcode %}
 
 ### Restore user access
+
+`POST /admin/v1/orgs/{orgId}/directory/users/{accountId}/restore-access`
+
+{% hint style="warning" %}
+This is an experimental endpoint.
+{% endhint %}
 
 Restore restores user access to products listed in Atlassian Administration.
 
 * The API is available for customers using the new user management experience only.
 * Users with emails whose domain is claimed can still be found in Managed accounts in Directory.
 
-<table><thead><tr><th width="147.33333333333331">Param</th><th width="399">Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>Your organization is identified by a Unique ID. You get your organization ID and Organization API key simultaneously.</td><td></td></tr><tr><td><strong>accountId</strong> </td><td>Unique ID of the user's account that you are deleting</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -210,3 +229,4 @@ func main() {
 	fmt.Println(message.Message)
 }
 ```
+{% endcode %}

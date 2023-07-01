@@ -1,6 +1,9 @@
-# 👔 Policy
+---
+cover: ../../.gitbook/assets/in-defense-of-meetings-2240x1090-1-1560x760.jpg
+coverY: 62
+---
 
-## Overview
+# 👔 Policy
 
 An authentication policy allows you to specify authentication settings for different sets of users and configurations in your organization. It verifies that users who access your Atlassian organization are who they claim to be.
 
@@ -19,10 +22,11 @@ An authentication policy allows you to specify authentication settings for diffe
 
 ### Get list of policies
 
+`GET /admin/v1/orgs/{orgId}/policies`
+
 Returns information about org policies.
 
-<table><thead><tr><th width="107.33333333333331">Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to query</td><td></td></tr><tr><td><strong>cursor</strong></td><td>Sets the starting point for the page of results to return.</td><td></td></tr><tr><td><strong>type</strong></td><td>Sets the type for the page of policies to return.</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -88,18 +92,18 @@ func main() {
 
 			log.Println(policy.ID, policy.Type, policy.Attributes.Status)
 		}
-
 	}
-
 }
 ```
+{% endcode %}
 
 ### Create a policy
 
+`POST /admin/v1/orgs/{orgId}/policies`
+
 Create a policy for an org
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select">Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to query</td><td></td></tr><tr><td><strong>payload</strong></td><td>The new policy information</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -158,13 +162,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ### Get a policy by ID
 
+`GET /admin/v1/orgs/{orgId}/policies/{policyId}`
+
 Returns information about a single policy by ID
 
-<table><thead><tr><th width="139.33333333333331">Param</th><th width="293">Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to return</td><td></td></tr><tr><td><strong>policyId</strong> </td><td>ID of the policy to query</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -208,13 +214,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ### Update a policy
 
+`PUT /admin/v1/orgs/{orgId}/policies/{policyId}`
+
 Update a policy for an org
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to update policy for</td><td></td></tr><tr><td><strong>policyId</strong> </td><td>ID of the policy to update</td><td></td></tr><tr><td><strong>payload</strong></td><td>A struct pointer with the policy attributes to edit.</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -272,13 +280,15 @@ func main() {
 	fmt.Printf("MarshalIndent Struct keys output\n %s\n", string(policyAsJSONKeys))
 }
 ```
+{% endcode %}
 
 ### Delete a policy
 
+`DELETE /admin/v1/orgs/{orgId}/policies/{policyId}`
+
 Delete a policy for an org
 
-<table><thead><tr><th>Param</th><th>Description</th><th data-type="select" data-multiple>Type</th></tr></thead><tbody><tr><td><strong>orgId</strong> </td><td>ID of the organization to update policy for</td><td></td></tr><tr><td><strong>policyId</strong> </td><td>ID of the policy to update</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -320,3 +330,4 @@ func main() {
 
 }
 ```
+{% endcode %}

@@ -1,9 +1,18 @@
+---
+cover: >-
+  ../../.gitbook/assets/vanessa_lovegrove_cognitive_overload_1120x545@2x-1560x760.jpeg
+coverY: 186
+---
+
 # 🔩 Schemas
 
 ## Get all schemas
 
+`GET /scim/directory/{directoryId}/Schemas`
+
 Get all SCIM features metadata. Filtering, pagination, and sorting are not supported.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -40,67 +49,17 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(schemas)
-
-}
-
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type SCIMSchemasScheme struct {
-	TotalResults int               `json:"totalResults,omitempty"`
-	ItemsPerPage int               `json:"itemsPerPage,omitempty"`
-	StartIndex   int               `json:"startIndex,omitempty"`
-	Schemas      []string          `json:"schemas,omitempty"`
-	Resources    []*ResourceScheme `json:"Resources,omitempty"`
-}
-
-type ResourceScheme struct {
-	ID          string              `json:"id,omitempty"`
-	Name        string              `json:"name,omitempty"`
-	Description string              `json:"description,omitempty"`
-	Attributes  []*AttributeScheme  `json:"attributes,omitempty"`
-	Meta        *ResourceMetaScheme `json:"meta,omitempty"`
-}
-
-type ResourceMetaScheme struct {
-	ResourceType string `json:"resourceType,omitempty"`
-	Location     string `json:"location,omitempty"`
-}
-
-type AttributeScheme struct {
-	Name          string                `json:"name,omitempty"`
-	Type          string                `json:"type,omitempty"`
-	MultiValued   bool                  `json:"multiValued,omitempty"`
-	Description   string                `json:"description,omitempty"`
-	Required      bool                  `json:"required,omitempty"`
-	CaseExact     bool                  `json:"caseExact,omitempty"`
-	Mutability    string                `json:"mutability,omitempty"`
-	Returned      string                `json:"returned,omitempty"`
-	Uniqueness    string                `json:"uniqueness,omitempty"`
-	SubAttributes []*SubAttributeScheme `json:"subAttributes,omitempty"`
-}
-
-type SubAttributeScheme struct {
-	Name        string `json:"name,omitempty"`
-	Type        string `json:"type,omitempty"`
-	MultiValued bool   `json:"multiValued,omitempty"`
-	Description string `json:"description,omitempty"`
-	Required    bool   `json:"required,omitempty"`
-	CaseExact   bool   `json:"caseExact,omitempty"`
-	Mutability  string `json:"mutability,omitempty"`
-	Returned    string `json:"returned,omitempty"`
-	Uniqueness  string `json:"uniqueness,omitempty"`
 }
 ```
+{% endcode %}
 
 ## Get user schemas
 
+`GET /scim/directory/{directoryId}/Schemas/urn:ietf:params:scim:schemas:core:2.0:User`
+
 Get the user schemas from the SCIM provider. Filtering, pagination and sorting are not supported.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -138,27 +97,16 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(schemas)
 }
-
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type SCIMSchemaScheme struct {
-	ID          string              `json:"id,omitempty"`
-	Name        string              `json:"name,omitempty"`
-	Description string              `json:"description,omitempty"`
-	Attributes  []*AttributeScheme  `json:"attributes,omitempty"`
-	Meta        *ResourceMetaScheme `json:"meta,omitempty"`
-}
-```
+{% endcode %}
 
 ## Get group schemas
 
+`GET /scim/directory/{directoryId}/Schemas/urn:ietf:params:scim:schemas:core:2.0:Group`
+
 Get the group schemas from the SCIM provider. Filtering, pagination and sorting are not supported.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -218,30 +166,18 @@ func main() {
 		}
 
 		log.Println("----------------------")
-
 	}
 }
-
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type SCIMSchemaScheme struct {
-	ID          string              `json:"id,omitempty"`
-	Name        string              `json:"name,omitempty"`
-	Description string              `json:"description,omitempty"`
-	Attributes  []*AttributeScheme  `json:"attributes,omitempty"`
-	Meta        *ResourceMetaScheme `json:"meta,omitempty"`
-}
-```
+{% endcode %}
 
 ## Get user enterprise extension schemas
 
+`GET /scim/directory/{directoryId}/Schemas/urn:ietf:params:scim:schemas:extension:enterprise:2.0:User`
+
 Get the user enterprise extension schemas from the SCIM provider. Filtering, pagination and sorting are not supported.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -281,14 +217,17 @@ func main() {
 	for _, schema := range enterpriseSchemas.Attributes {
 		log.Println(schema)
 	}
-
 }
 ```
+{% endcode %}
 
 ## Get feature metadata
 
+`GET /scim/directory/{directoryId}/ServiceProviderConfig`
+
 Get metadata about the supported SCIM features. This is a service provider configuration endpoint providing supported SCIM features. Filtering, pagination, and sorting are not supported.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -325,6 +264,6 @@ func main() {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(serviceProvider)
-
 }
 ```
+{% endcode %}

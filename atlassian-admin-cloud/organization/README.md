@@ -1,18 +1,34 @@
-# 📔 Organization
+---
+cover: ../../.gitbook/assets/header.png
+coverY: 212
+---
 
-The [organizations REST API](https://developer.atlassian.com/cloud/admin/organization/rest/intro/) lets you get information about your organizations, including:
+# ℹ Organization
 
-* A list of organizations
-* Information about an organization
-* Users or domains associated with an organization
-* An [audit log](https://confluence.atlassian.com/x/Ul-aOQ) of events from an organization
+When you create a new instance of an Atlassian cloud product, you can manage it from your organization. These products that can be part of your organization include Jira products (Jira Software, Jira Service Management, and Jira Work Management), Confluence, Statuspage, Trello, and Opsgenie.&#x20;
 
-![](../../.gitbook/assets/atlassian-admin-orgs.gif)
+This page will address you about the Organization REST-API that brings you the capability to the following actions:
+
+* A list of organizations.
+* Information about an organization.
+* Users or domains associated with an organization.
+* An audit log of events from an organization.
+
+<div data-full-width="true">
+
+<img src="../../.gitbook/assets/atlassian-admin-orgs.gif" alt="">
+
+</div>
+
+When you manage products from this central location, you have access to all administration settings and billing details. With an Atlassian.
 
 ## Get organizations
 
+`GET /admin/v1/orgs`
+
 Returns a list of your organizations (based on your API key).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -53,55 +69,15 @@ func main() {
 }
 
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationPageScheme struct {
-	 Data  []*OrganizationModelScheme       `json:"data,omitempty"`
-	 Links *OrganizationLinkPageModelScheme `json:"links,omitempty"`
-}
-
-type OrganizationLinkPageModelScheme struct {
-	 Self string `json:"self,omitempty"`
-	 Prev string `json:"prev,omitempty"`
-	 Next string `json:"next,omitempty"`
-}
-
-type OrganizationModelScheme struct {
-	 ID            string                           `json:"id,omitempty"`
-	 Type          string                           `json:"type,omitempty"`
-	 Attributes    *OrganizationModelAttribute      `json:"attributes,omitempty"`
-	 Relationships *OrganizationModelRelationships  `json:"relationships,omitempty"`
-	 Links         *OrganizationLinkSelfModelScheme `json:"links,omitempty"`
-}
-
-type OrganizationModelAttribute struct {
-	 Name string `json:"name,omitempty"`
-}
-
-type OrganizationModelRelationships struct {
-	 Domains *OrganizationModelSchemes `json:"domains,omitempty"`
-	 Users   *OrganizationModelSchemes `json:"users,omitempty"`
-}
-
-type OrganizationModelSchemes struct {
-	 Links struct {
-		 Related string `json:"related,omitempty"`
-	 } `json:"links,omitempty"`
-}
-
-type OrganizationLinkSelfModelScheme struct {
-	 Self string `json:"self,omitempty"`
-}
-```
+{% endcode %}
 
 ## Get an organization by ID
 
-Returns information about a single organization by ID
+`GET /admin/v1/orgs/{orgId}`
 
+Returns information about a single organization by ID.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -141,21 +117,15 @@ func main() {
 }
 
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationScheme struct {
-   Data *OrganizationModelScheme `json:"data,omitempty"`
-}
-```
+{% endcode %}
 
 ## Get users in an organization
 
+`GET /admin/v1/orgs/{orgId}/users`
+
 Returns a list of users in an organization.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -220,50 +190,18 @@ func main() {
 		for _, user := range chunk.Data {
 			log.Println(user.Email, user.Name)
 		}
-
 	}
-
 }
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationUserPageScheme struct {
-	Data  []*AdminOrganizationUserScheme `json:"data,omitempty"`
-	Links *LinkPageModelScheme           `json:"links,omitempty"`
-	Meta  struct {
-		Total int `json:"total,omitempty"`
-	} `json:"meta,omitempty"`
-}
-
-ttype AdminOrganizationUserScheme struct {
-	AccountID      string                           `json:"account_id,omitempty"`
-	AccountType    string                           `json:"account_type,omitempty"`
-	AccountStatus  string                           `json:"account_status,omitempty"`
-	Name           string                           `json:"name,omitempty"`
-	Picture        string                           `json:"picture,omitempty"`
-	Email          string                           `json:"email,omitempty"`
-	AccessBillable bool                             `json:"access_billable,omitempty"`
-	LastActive     string                           `json:"last_active,omitempty"`
-	ProductAccess  []*OrganizationUserProductScheme `json:"product_access,omitempty"`
-	Links          *LinkSelfModelScheme             `json:"links,omitempty"`
-}
-
-type OrganizationUserProductScheme struct {
-	Key        string `json:"key,omitempty"`
-	Name       string `json:"name,omitempty"`
-	URL        string `json:"url,omitempty"`
-	LastActive string `json:"last_active,omitempty"`
-}
-```
+{% endcode %}
 
 ## Get domains in an organization
 
+`GET /admin/v1/orgs/{orgId}/domains`
+
 Returns a list of domains in an organization one page at a time.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -327,40 +265,18 @@ func main() {
 		for _, domain := range chunk.Data {
 			log.Println(domain.ID, domain.Attributes.Name, domain.Attributes.Claim.Status)
 		}
-
 	}
-
 }
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationDomainPageScheme struct {
-	Data  []*OrganizationDomainModelScheme `json:"data,omitempty"`
-	Links *LinkPageModelScheme             `json:"links,omitempty"`
-}
-
-type OrganizationDomainModelScheme struct {
-	ID         string `json:"id,omitempty"`
-	Type       string `json:"type,omitempty"`
-	Attributes struct {
-		Name  string `json:"name,omitempty"`
-		Claim struct {
-			Type   string `json:"type,omitempty"`
-			Status string `json:"status,omitempty"`
-		} `json:"claim,omitempty"`
-	} `json:"attributes,omitempty"`
-	Links *LinkSelfModelScheme `json:"links,omitempty"`
-}
-```
+{% endcode %}
 
 ## Get domain by ID
 
+`GET /admin/v1/orgs/{orgId}/domains/{domainId}`
+
 Returns information about a single verified domain by ID.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -402,36 +318,15 @@ func main() {
 	log.Println(domain.Data.Attributes.Name, domain.Data.Attributes.Claim.Status)
 }
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationDomainScheme struct {
-	Data *OrganizationDomainDataScheme `json:"data"`
-}
-
-type OrganizationDomainDataScheme struct {
-	ID         string `json:"id"`
-	Type       string `json:"type"`
-	Attributes struct {
-		Name  string `json:"name"`
-		Claim struct {
-			Type   string `json:"type"`
-			Status string `json:"status"`
-		} `json:"claim"`
-	} `json:"attributes"`
-	Links struct {
-		Self string `json:"self"`
-	} `json:"links"`
-}
-```
+{% endcode %}
 
 ## Get an audit log of events
 
+`GET /admin/v1/orgs/{orgId}/events`
+
 Returns an audit log of events from an organization one page at a time.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -503,67 +398,18 @@ func main() {
 		for _, event := range chunk.Data {
 			log.Println(event.ID, event.Attributes.Action, event.Attributes.Time)
 		}
-
 	}
-
 }
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationEventPageScheme struct {
-	Data  []*OrganizationEventModelScheme `json:"data,omitempty"`
-	Links *LinkPageModelScheme            `json:"links,omitempty"`
-	Meta  struct {
-		Next     string `json:"next,omitempty"`
-		PageSize int    `json:"page_size,omitempty"`
-	} `json:"meta,omitempty"`
-}
-
-type OrganizationEventModelScheme struct {
-	ID         string                                  `json:"id,omitempty"`
-	Type       string                                  `json:"type,omitempty"`
-	Attributes *OrganizationEventModelAttributesScheme `json:"attributes,omitempty"`
-	Links      *LinkSelfModelScheme                    `json:"links,omitempty"`
-}
-
-type OrganizationEventModelAttributesScheme struct {
-	Time      string                          `json:"time,omitempty"`
-	Action    string                          `json:"action,omitempty"`
-	Actor     *OrganizationEventActorModel    `json:"actor,omitempty"`
-	Context   []*OrganizationEventObjectModel `json:"context,omitempty"`
-	Container []*OrganizationEventObjectModel `json:"container,omitempty"`
-	Location  *OrganizationEventLocationModel `json:"location,omitempty"`
-}
-
-type OrganizationEventActorModel struct {
-	ID    string               `json:"id,omitempty"`
-	Name  string               `json:"name,omitempty"`
-	Links *LinkSelfModelScheme `json:"links,omitempty"`
-}
-
-type OrganizationEventObjectModel struct {
-	ID    string `json:"id,omitempty"`
-	Type  string `json:"type,omitempty"`
-	Links struct {
-		Self string `json:"self,omitempty"`
-		Alt  string `json:"alt,omitempty"`
-	} `json:"links,omitempty"`
-}
-
-type OrganizationEventLocationModel struct {
-	IP  string `json:"ip,omitempty"`
-	Geo string `json:"geo,omitempty"`
-}
-```
+{% endcode %}
 
 ## Get an event by ID
 
+`GET /admin/v1/orgs/{orgId}/events/{eventId}`
+
 Returns information about a single event by ID.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -604,13 +450,16 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(event.Data.ID, event.Data.Attributes.Action, event.Data.Attributes.Time)
 }
-
 ```
+{% endcode %}
 
 ## Get list of event actions
 
+`GET /admin/v1/orgs/{orgId}/event-actions`
+
 Returns information localized event actions
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -653,26 +502,5 @@ func main() {
 		fmt.Printf("%# v\n", pretty.Formatter(action))
 	}
 }
-
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type OrganizationEventActionScheme struct {
-	Data []*OrganizationEventActionModelScheme `json:"data,omitempty"`
-}
-
-type OrganizationEventActionModelScheme struct {
-	ID         string                                        `json:"id,omitempty"`
-	Type       string                                        `json:"type,omitempty"`
-	Attributes *OrganizationEventActionModelAttributesScheme `json:"attributes,omitempty"`
-}
-
-type OrganizationEventActionModelAttributesScheme struct {
-	DisplayName      string `json:"displayName,omitempty"`
-	GroupDisplayName string `json:"groupDisplayName,omitempty"`
-}
-```
+{% endcode %}

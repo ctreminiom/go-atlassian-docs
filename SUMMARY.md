@@ -156,8 +156,8 @@
 ## Atlassian Admin Cloud
 
 * [🌌 Introduction](atlassian-admin-cloud/overview.md)
-* [📔 Organization](atlassian-admin-cloud/organization/README.md)
-  * [📖 Directory](atlassian-admin-cloud/organization/directory.md)
+* [ℹ Organization](atlassian-admin-cloud/organization/README.md)
+  * [👨👩👧👦 Directory](atlassian-admin-cloud/organization/directory.md)
   * [👔 Policy](atlassian-admin-cloud/organization/policy.md)
 * [👥 User](atlassian-admin-cloud/user/README.md)
   * [🔓 Token](atlassian-admin-cloud/user/token.md)

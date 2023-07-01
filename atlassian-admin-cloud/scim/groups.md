@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/artboard-2@3x-1560x760.png
+coverY: 0
+---
+
 # ⛹♂ Groups
 
 ## Get a group by ID
 
+`GET /scim/directory/{directoryId}/Groups/{id}`
+
 Get a group from a directory by group ID.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -46,44 +54,17 @@ func main() {
 	log.Println(group)
 
 	fmt.Println(string(response.BodyAsBytes))
-
-}
-
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type ScimGroupScheme struct {
-	Schemas     []string                 `json:"schemas,omitempty"`
-	ID          string                   `json:"id,omitempty"`
-	ExternalID  string                   `json:"externalId,omitempty"`
-	DisplayName string                   `json:"displayName,omitempty"`
-	Members     []*ScimGroupMemberScheme `json:"members,omitempty"`
-	Meta        *ScimMetadata            `json:"meta,omitempty"`
-}
-
-type ScimGroupMemberScheme struct {
-	Type    string `json:"type,omitempty"`
-	Value   string `json:"value,omitempty"`
-	Display string `json:"display,omitempty"`
-	Ref     string `json:"$ref,omitempty"`
-}
-
-type ScimMetadata struct {
-	ResourceType string `json:"resourceType,omitempty"`
-	Location     string `json:"location,omitempty"`
-	LastModified string `json:"lastModified,omitempty"`
-	Created      string `json:"created,omitempty"`
 }
 ```
+{% endcode %}
 
 ## Update a group by ID
 
+`PUT /scim/directory/{directoryId}/Groups/{id}`
+
 Update a group in a directory by group ID.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -126,11 +107,15 @@ func main() {
 	log.Println(group)
 }
 ```
+{% endcode %}
 
 ## Delete a group by ID
 
+`DELETE /scim/directory/{directoryId}/Groups/{id}`
+
 Delete a group from a directory. An attempt to delete a non-existent group fails with a 404 (Resource Not found) error.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -171,10 +156,12 @@ func main()  {
 	log.Println("Response HTTP Code", response.StatusCode)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
+{% endcode %}
 
 ## Update a group by ID (PATCH)
+
+`PATCH /scim/directory/{directoryId}/Groups/{id}`
 
 Update a group's information in a directory by `groupId` via `PATCH`. You can use this API to manage group membership.
 
@@ -182,6 +169,7 @@ Update a group's information in a directory by `groupId` via `PATCH`. You can us
 **Note:** Renaming groups after they've synced to your Atlassian organization isn't supported in this release of the User Provisioning API. To rename a group, create a new group with the desired name, update membership, and then delete the old group.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -244,43 +232,17 @@ func main() {
 	for _, member := range group.Members {
 		log.Println(member)
 	}
-
 }
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type ScimGroupScheme struct {
-	Schemas     []string                 `json:"schemas,omitempty"`
-	ID          string                   `json:"id,omitempty"`
-	ExternalID  string                   `json:"externalId,omitempty"`
-	DisplayName string                   `json:"displayName,omitempty"`
-	Members     []*ScimGroupMemberScheme `json:"members,omitempty"`
-	Meta        *ScimMetadata            `json:"meta,omitempty"`
-}
-
-type ScimGroupMemberScheme struct {
-	Type    string `json:"type,omitempty"`
-	Value   string `json:"value,omitempty"`
-	Display string `json:"display,omitempty"`
-	Ref     string `json:"$ref,omitempty"`
-}
-
-type ScimMetadata struct {
-	ResourceType string `json:"resourceType,omitempty"`
-	Location     string `json:"location,omitempty"`
-	LastModified string `json:"lastModified,omitempty"`
-	Created      string `json:"created,omitempty"`
-}
-```
+{% endcode %}
 
 ## Get groups
 
+`GET /scim/directory/{directoryId}/Groups`
+
 Get groups from a directory. Filtering is supported with a single exact match (`eq`) against the `displayName` attribute. Pagination is supported. Sorting is not supported.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -323,28 +285,16 @@ func main()  {
 
 }
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type ScimGroupPageScheme struct {
-   Schemas      []string           `json:"schemas,omitempty"`
-   TotalResults int                `json:"totalResults,omitempty"`
-   StartIndex   int                `json:"startIndex,omitempty"`
-   ItemsPerPage int                `json:"itemsPerPage,omitempty"`
-   Resources    []*ScimGroupScheme `json:"Resources,omitempty"`
-}
-```
+{% endcode %}
 
 ## Create a group
 
+`POST /scim/directory/{directoryId}/Groups`
+
 Create a group in a directory. An attempt to create a group with an existing name fails with a 409 (Conflict) error.
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/admin"
@@ -382,33 +332,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The group %v has been created and it contains the ID %v", group.DisplayName, group.ID)
 }
-```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type ScimGroupScheme struct {
-	Schemas     []string                 `json:"schemas,omitempty"`
-	ID          string                   `json:"id,omitempty"`
-	ExternalID  string                   `json:"externalId,omitempty"`
-	DisplayName string                   `json:"displayName,omitempty"`
-	Members     []*ScimGroupMemberScheme `json:"members,omitempty"`
-	Meta        *ScimMetadata            `json:"meta,omitempty"`
-}
-
-type ScimGroupMemberScheme struct {
-	Type    string `json:"type,omitempty"`
-	Value   string `json:"value,omitempty"`
-	Display string `json:"display,omitempty"`
-	Ref     string `json:"$ref,omitempty"`
-}
-
-type ScimMetadata struct {
-	ResourceType string `json:"resourceType,omitempty"`
-	Location     string `json:"location,omitempty"`
-	LastModified string `json:"lastModified,omitempty"`
-	Created      string `json:"created,omitempty"`
-}
-```
+</code></pre>

@@ -6,7 +6,7 @@ An object type represents a group of similar objects in an _object schema_. Thes
 
 Each object type can have a single parent object type and multiple child object types. You can configure inheritance so that child object types automatically receive the attributes of their parents and pass their own attributes to their children.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 Similarly you can set some object types as abstract, meaning that they can’t contain any objects of their own but can pass their attributes to their children, who can themselves contain objects. Inheritance and abstract object types can be used to create object schemas that are both simple and powerful.
 
