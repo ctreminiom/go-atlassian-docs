@@ -1,4 +1,4 @@
-# 👻 Create Jira Issue
+# 👾 Create Jira Issue
 
 In this article, I would be showing you how to create a Jira issue using the "go-atlassian" library.
 

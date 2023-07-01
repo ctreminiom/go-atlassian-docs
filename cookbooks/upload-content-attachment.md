@@ -1,4 +1,4 @@
-# 🛫 Upload Content Attachment
+# 🌄 Upload Content Attachment
 
 In this article, I would be showing you how to upload an attachment in a Confluence content using the "go-atlassian" library.
 

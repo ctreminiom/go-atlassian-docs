@@ -1,4 +1,4 @@
-# 🚦 Create Jira Workflow
+# 🚎 Create Jira Workflow
 
 In this article, I would be showing you how to create Jira workflow and append transitions using `go-atlassian`
 
