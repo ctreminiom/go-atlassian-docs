@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/2240x1090-1-1560x760.jpg
+coverY: 0
+---
+
 # 👫 Groups
 
 In Jira, a group is a collection of users who have similar roles, responsibilities, or permissions. Groups can be used to simplify user management by allowing you to grant permissions and roles to entire groups of users rather than individual users.

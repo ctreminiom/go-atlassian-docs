@@ -1,5 +1,5 @@
 ---
-cover: ../../.gitbook/assets/conways-law_1120x545@2x-1560x760.jpg
+cover: ../../.gitbook/assets/conways-law_1120x545@2x-1560x760 (1).jpg
 coverY: 101
 ---
 
