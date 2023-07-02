@@ -1,19 +1,24 @@
-# 💹 Announcement Banner
+---
+cover: ../.gitbook/assets/emailqa_1120x545@2x-1560x760.jpg
+coverY: 243
+---
 
-## Overview
+# 💹 Announcement Banner
 
 System Administrators can configure an announcement banner to display pertinent information on all Jira pages. The banner can be used to relate important information (e.g. scheduled server maintenance, approaching project deadlines, etc.) to all users. Further, the banner visibility level can be configured to display to all users or just logged-in users.
 
 ### Get announcement banner configuration
 
+`GET /rest/api/{2/3}/announcementBanner`
+
 Get returns the current announcement banner configuration.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
 import (
 	"context"
-	"fmt"
 	_ "github.com/ctreminiom/go-atlassian/jira/v2"
 	"github.com/ctreminiom/go-atlassian/jira/v3"
 	"log"
@@ -48,16 +53,22 @@ func main() {
 	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 
-	fmt.Print(banner)
-
-	return
+	log.Println(banner.Message)
+	log.Println(banner.IsDismissible)
+	log.Println(banner.HashId)
+	log.Println(banner.IsEnabled)
+	log.Println(banner.Visibility)
 }
 ```
+{% endcode %}
 
 ### Update announcement banner configuration
 
+`PUT /rest/api/{2-3}/announcementBanner`
+
 Update updates the announcement banner configuration.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -104,10 +115,13 @@ func main() {
 
 	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
-
-	return
 }
 
 ```
+{% endcode %}
+
+<div data-full-width="true">
 
 <figure><img src="../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
+
+</div>

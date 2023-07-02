@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/f7d10368-eaf9-4640-9298-935babada43c-1560x760.jpeg
+coverY: 209
+---
+
 # 🗃 Introduction
 
 ## Overview

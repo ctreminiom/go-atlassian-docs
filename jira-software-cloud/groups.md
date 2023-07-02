@@ -11,8 +11,11 @@ Here are some ways you can use groups in Jira:
 
 ## Create Group
 
+`POST /rest/api/{2-3}/group`
+
 Creates a group
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -47,13 +50,16 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("Group created", group.Name)
 }
-
 ```
+{% endcode %}
 
 ## Remove group
 
+`DELETE /rest/api/{2-3}/group`
+
 Deletes a group
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -90,11 +96,19 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Bulk Groups
 
+`GET /rest/api/{2-3}/group/bulk`
+
+{% hint style="warning" %}
+This is an experimental endpoint
+{% endhint %}
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of groups, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -139,13 +153,16 @@ func main() {
 		log.Printf("#%v, Group: %v", index, group.Name)
 	}
 }
-
 ```
+{% endcode %}
 
 ## Get users from groups
 
-Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all users in a group, the method returns the following information:
+`GET /rest/api/{2-3}/group/member`
 
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all users in a group
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -185,13 +202,16 @@ func main() {
 		log.Printf("#%v - Group %v - Member Mail %v - Member AccountID %v", index, "jira-users", member.EmailAddress, member.AccountID)
 	}
 }
-
 ```
+{% endcode %}
 
 ## Add user to group
 
+`POST /rest/api/{2-3}/group/user`
+
 Adds a user to a group
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -225,13 +245,16 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
+{% endcode %}
 
 ## Remove user from group
 
+`DELETE /rest/api/{2-3}/group/user`
+
 Removes a user from a group
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -266,3 +289,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

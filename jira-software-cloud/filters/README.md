@@ -1,4 +1,10 @@
-# 🧺 Filters
+---
+cover: >-
+  ../../.gitbook/assets/csd-222-t1illustrationrefresh-5-signs-of-a-toxic-work-culture-v4a-1560x760.png
+coverY: 0
+---
+
+# 🗄 Filters
 
 In Jira, a filter is a saved search query that you can use to retrieve a specific set of issues from your Jira instance. A filter can be based on various criteria such as issue type, priority, status, assignee, labels, and more.
 
@@ -9,8 +15,11 @@ Filters can be saved and shared with other users, allowing you to easily collabo
 
 ## Create Filter
 
+`POST /rest/api/{2-3}/filter`
+
 This method creates a new filter. The filter is shared according to the [default share scope](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-filters/#api-rest-api-3-filter-post). The filter is not selected as a favorite, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -68,15 +77,22 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The filter has been created: %v - %v", filter.ID, filter.Name)
 }
-
 ```
+{% endcode %}
 
-![Filter permissions on the UI interface](<../../.gitbook/assets/image (5) (1).png>)
+<div data-full-width="true">
+
+<img src="../../.gitbook/assets/image (5) (1).png" alt="Filter permissions on the UI interface">
+
+</div>
 
 ## Get Favorites
 
+`GET /rest/api/3/filter/favourite`
+
 This method returns the visible favorite filters of the user, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -112,15 +128,17 @@ func main() {
 
 	for _, filter := range filters {
 		log.Println(filter)
-	}
-
-
+}
 ```
+{% endcode %}
 
 ## Get My Filters
 
+`GET /rest/api/{2-3}/filter/my`
+
 Returns the filters owned by the user. If `includeFavourites` is `true`, the user's visible favorite filters are also returned, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -165,12 +183,14 @@ func main() {
 		for _, subscription := range filter.Subscriptions.Items {
 			log.Println(subscription.ID)
 		}
-
 	}
 }
 ```
+{% endcode %}
 
 ## Search Filters
+
+`GET /rest/api/{2-3}/filter/search`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of filters. Use this operation to get:
 
@@ -185,6 +205,7 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
   * filters shared with a public project.
   * filters shared with the public.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -233,13 +254,16 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("Filters found", len(filters.Values))
 }
-
 ```
+{% endcode %}
 
 ## Get Filter
 
+`GET /rest/api/{2-3}/filter/{id}`
+
 This method returns a filter using the ID as a parameter, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -274,13 +298,16 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("Get Filter result", filter.Name, filter.Name)
 }
-
 ```
+{% endcode %}
 
 ## Update Filter
 
+`PUT /rest/api/{2-3}/filter/{id}`
+
 This method updates a filter. Use this operation to update a filter's name, description, JQL, or sharing, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -320,11 +347,14 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("new JQL filter value", filter.Jql)
 }
-
 ```
+{% endcode %}
 
 ## Delete Filter
 
+`DELETE /rest/api/{2-3}/filter/{id}`
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -359,11 +389,19 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Change filter owner
 
+`PUT /rest/api/{2-3}/filter/{id}/owner`
+
+{% hint style="warning" %}
+This is an experimental endpoint
+{% endhint %}
+
 Changes the owner of the filter.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -398,3 +436,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

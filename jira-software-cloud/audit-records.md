@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/entm-588_blog_1120x545@2x-1560x760.png
+coverY: -146
+---
+
 # 🛡️ Audit records
 
 The Jira audit logs are a set of records that document all the activities and changes made in Jira. These logs provide a detailed record of who did what, when, and where within Jira. Here are a few examples of the type of activities that are logged in the Jira audit logs:
@@ -10,8 +15,11 @@ The audit logs are useful for several reasons. For example, they can be used to 
 
 ## Get audit records
 
+`GET /rest/api/{2-3}/auditing/record`
+
 This method allows you to retrieve the audit records for specific activities that have occurred within Jira.&#x20;
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -75,5 +83,5 @@ func main() {
 		log.Printf("\n")
 	}
 }
-
 ```
+{% endcode %}

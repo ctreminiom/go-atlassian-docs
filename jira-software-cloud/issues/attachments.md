@@ -1,16 +1,17 @@
 ---
-description: >-
-  This resource represents issue attachments and the attachment settings for
-  Jira. Use it to get the metadata for an attachment, delete an attachment, and
-  view the metadata for the contents of an attach
+cover: ../../.gitbook/assets/blog-cmpt-migrates-hero@2x-1560x760.png
+coverY: 0
 ---
 
 # 📎 Attachments
 
 ## Get Jira attachment settings
 
+`GET /rest/api/{2-3}/attachment/meta`
+
 Returns the attachment settings, that is, whether attachments are enabled and the maximum attachment size allowed, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -47,11 +48,15 @@ func main() {
 	log.Println("settings", settings.Enabled, settings.UploadLimit)
 }
 ```
+{% endcode %}
 
 ## Get attachment metadata
 
+`GET /rest/api/{2-3}/attachment/{id}`
+
 Returns the metadata for an attachment. Note that the attachment itself is not returned, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -90,11 +95,21 @@ func main() {
 	spew.Dump(metadata)
 }
 ```
+{% endcode %}
 
 ## Get all metadata for an expanded attachment
 
-Returns the metadata for the contents of an attachment, if it is an archive, and metadata for the attachment itself. For example, if the attachment is a ZIP archive, then information about the files in the archive is returned and metadata for the ZIP archive. Currently, only the ZIP archive format is supported, the method returns the following information:
+`GET /rest/api/{2-3}/attachment/{id}/expand/human`
 
+{% hint style="warning" %}
+This is an experimental endpoint
+{% endhint %}
+
+Returns the metadata for the contents of an attachment, if it is an archive, and metadata for the attachment itself.&#x20;
+
+For example, if the attachment is a ZIP archive, then information about the files in the archive is returned and metadata for the ZIP archive. Currently, only the ZIP archive format is supported, the method returns the following information:
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -132,11 +147,15 @@ func main() {
 	spew.Dump(humanMetadata)
 }
 ```
+{% endcode %}
 
 ## Delete attachment
 
+`DELETE /rest/api/{2-3}/attachment/{id}`
+
 Deletes an attachment from an issue, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -172,10 +191,13 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Add attachment
 
-&#x20;Adds one or more attachments to an issue. Attachments are posted as multipart/form-data ([RFC 1867](https://www.ietf.org/rfc/rfc1867.txt)).
+`POST /rest/api/{2-3}/issue/{issueIdOrKey}/attachments`&#x20;
+
+Adds one or more attachments to an issue. Attachments are posted as multipart/form-data ([RFC 1867](https://www.ietf.org/rfc/rfc1867.txt)).
 
 * The request must have a `X-Atlassian-Token: no-check` header, if not it is blocked. See [Special headers](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#special-request-headers) for more information.
 * The name of the multipart/form-data parameter that contains the attachments must be `file`.
@@ -184,6 +206,7 @@ func main() {
 It only accepts one attachment at once
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -246,13 +269,17 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Download Attachment
+
+`GET /rest/api/{2-3}/attachment/content/{id}`
 
 This endpoint returns the contents of an attachment. A `Range` header can be set to define a range of bytes within the attachment to download.&#x20;
 
 If successful, Jira will return a response with the attachment file. You can save the file to your local filesystem or process it in your application as needed.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -297,3 +324,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

@@ -1,11 +1,19 @@
+---
+cover: ../../.gitbook/assets/conways-law_1120x545@2x-1560x760.jpg
+coverY: 101
+---
+
 # 🤝 Sharing
 
 This resource represents options for sharing filters. Use it to get share scopes as well as add and remove share scopes from filters.
 
 ## Get default share scope
 
+`GET /rest/api/3/filter/defaultShareScope`
+
 Returns the default sharing settings for new filters and dashboards for a user, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -45,11 +53,15 @@ func main() {
 	log.Println("Scope", scope)
 }
 ```
+{% endcode %}
 
 ## Get share permissions
 
+`PUT /rest/api/3/filter/defaultShareScope`
+
 Returns the share permissions for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as global share permission, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -87,13 +99,16 @@ func main() {
 		log.Println(index, permission.Type, permission.Type)
 	}
 }
-
 ```
+{% endcode %}
 
 ## Add share permission
 
+`POST /rest/api/3/filter/{id}/permission`
+
 Add a share permissions to a filter. If you add global share permission (one for all logged-in users or the public) it will overwrite all share permissions for the filter, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -160,13 +175,18 @@ func main() {
 		log.Println(index, permission.ID, permission.Type)
 	}
 }
-
 ```
+{% endcode %}
 
 ## Get share permission
 
-Returns share permission for a filter. A filter can be shared with groups, projects, all logged-in users, or the public. Sharing with all logged-in users or the public is known as global share permission, the method returns the following information:
+`GET /rest/api/3/filter/{id}/permission`
 
+Returns share permission for a filter. A filter can be shared with groups, projects, all logged-in users, or the public.&#x20;
+
+Sharing with all logged-in users or the public is known as global share permission, the method returns the following information:
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -202,13 +222,16 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(permission)
 }
-
 ```
+{% endcode %}
 
 ## Delete share permission
 
+`DELETE /rest/api/3/filter/{id}/permission/{permissionId}`
+
 Deletes share permission from a filter.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -244,11 +267,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Set default share scope
 
+`PUT /rest/api/3/filter/defaultShareScope`
+
 Sets the default sharing for new filters and dashboards for a user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -283,3 +310,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

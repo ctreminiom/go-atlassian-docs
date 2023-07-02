@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/in-defense-of-meetings-2240x1090-1-1560x760.jpg
+coverY: 0
+---
+
 # 🔐 Application Roles
 
 Jira application roles are a way of managing user permissions and access in Jira. Jira comes with a set of predefined roles that define common types of users, such as administrators, developers, and project managers.&#x20;
@@ -8,41 +13,11 @@ Each Jira application role has a set of permissions associated with it, which de
 
 ## Get all application roles
 
-&#x20;This <mark style="color:blue;">**Jira API**</mark> endpoint is used to retrieve a list of all application roles that are defined in a Jira instance. This endpoint can be used to get information about the roles that are available in Jira, and to help manage user access and permissions.
+`GET /rest/api/{2-3}/applicationrole`
 
-The response from the API is a JSON object that contains information about all of the roles in Jira. The JSON object includes an array of roles, where each role is represented by an object with the following fields:
+This endpoint is used to retrieve a list of all application roles that are defined in a Jira instance. This endpoint can be used to get information about the roles that are available in Jira, and to help manage user access and permissions.
 
-* `id`: The unique identifier for the role.
-* `name`: The name of the role.
-* `description`: A description of the role.
-
-For example, the response might look something like this:
-
-<details>
-
-<summary>Response Example</summary>
-
-```json
-{
-  "size": 2,
-  "items": [
-    {
-      "id": 10002,
-      "name": "Administrators",
-      "description": "Jira administrators"
-    },
-    {
-      "id": 10001,
-      "name": "Users",
-      "description": "Jira users"
-    }
-  ]
-}
-```
-
-</details>
-
-{% code lineNumbers="true" %}
+{% code lineNumbers="true" fullWidth="true" %}
 ```go
 package main
 
@@ -84,17 +59,17 @@ func main() {
 	for _, role := range applicationRoles {
 		log.Println(role.Key, role.Name)
 	}
-
-	return
 }
-
 ```
 {% endcode %}
 
 ## Get application role
 
+`GET /rest/api/{2-3}/applicationrole/{key}`
+
 This method allows you to retrieve information about a specific application role in Jira using the key name as reference.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -137,7 +112,6 @@ func main() {
 	log.Printf("Application Role Name: %v", role.Name)
 	log.Printf("Application Role Key: %v", role.Key)
 	log.Printf("Application Role User Count: %v", role.UserCount)
-
-	return
 }
 ```
+{% endcode %}

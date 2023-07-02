@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/screenshot-2023-06-01-at-1.59.32-pm-1-1560x760.png
+coverY: 30
+---
+
 # 📈 Dashboards
 
 Jira dashboards are customizable, visual displays that provide an overview of project status and performance metrics in real-time. Dashboards are used to track progress and identify trends, enabling teams to make informed decisions and prioritize tasks.
@@ -13,8 +18,11 @@ Here are some key elements of Jira dashboards:
 
 ## Get all dashboards
 
+`GET /rest/api/{2-3}/dashboard`
+
 Returns a list of dashboards owned by or shared with the user. The list may be filtered to include only favorite or owned dashboards.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -55,8 +63,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create dashboard
+
+`POST /rest/api/{2-3}/dashboard`
+
+{% hint style="warning" %}
+This is an experimental endpoint
+{% endhint %}
 
 This method allows you to create a new dashboard in your Jira instance. The request body should contain a JSON object with the following properties:
 
@@ -64,6 +79,7 @@ This method allows you to create a new dashboard in your Jira instance. The requ
 * **sharePermissions**: An array of objects representing the users and groups who have permission to view the dashboard.
 * **gadget**: An array of objects representing the gadgets that should be displayed on the dashboard.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -124,11 +140,17 @@ func main() {
 	log.Printf("Dashboard View: %v", dashboard.View)
 }
 ```
+{% endcode %}
 
 ## Search for dashboards
 
-Returns a _paginated_ list of dashboards. This operation is similar to **Get dashboards** except that the results can be refined to include dashboards that have specific attributes. For example, dashboards with a particular name. When multiple attributes are specified only filters matching all attributes are returned.
+`GET /rest/api/{2-3}/dashboard/search`
 
+Returns a _paginated_ list of dashboards. This operation is similar to **Get dashboards** except that the results can be refined to include dashboards that have specific attributes.&#x20;
+
+For example, dashboards with a particular name. When multiple attributes are specified only filters matching all attributes are returned.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -182,11 +204,13 @@ func main() {
 			}
 		}
 	}
-
 }
 ```
+{% endcode %}
 
 ## Get dashboard
+
+`GET /rest/api/{2-3}/dashboard/{id}`
 
 Returns a dashboard using the _dashboard-id_
 
@@ -194,6 +218,7 @@ Returns a dashboard using the _dashboard-id_
 &#x20;However, to get a dashboard, the dashboard must be shared with the user or the user must own it. Note, users with _**Administer Jira**_ [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -233,11 +258,19 @@ func main() {
 	log.Printf("Dashboard View: %v", dashboard.View)
 }
 ```
+{% endcode %}
 
 ## Update dashboard
 
+`PUT /rest/api/{2-3}/dashboard/{id}`
+
+{% hint style="warning" %}
+This is an experimental endpoint
+{% endhint %}
+
 Updates a dashboard, replacing all the dashboard details with those provided. **The dashboard to be updated must be owned by the user.**
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -297,11 +330,19 @@ func main() {
 	log.Printf("Dashboard View: %v", dashboard.View)
 }
 ```
+{% endcode %}
 
 ## Delete dashboard
 
+`DELETE /rest/api/{2-3}/dashboard/{id}`
+
+{% hint style="warning" %}
+This is an experimental endpoint
+{% endhint %}
+
 Deletes a dashboard, t**he dashboard to be deleted must be owned by the user.**
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -338,11 +379,19 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Copy dashboard
 
+`POST /rest/api/{2-3}/dashboard/{id}/copy`
+
+{% hint style="warning" %}
+This is an experimental endpoint
+{% endhint %}
+
 Copies a dashboard. Any values provided in the `dashboard` parameter replace those in the copied dashboard.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -406,3 +455,4 @@ func main() {
 	log.Printf("Dashboard View: %v", dashboard.View)
 }
 ```
+{% endcode %}
