@@ -1,16 +1,14 @@
 ---
 description: This resource represents Jira issues
+cover: ../../.gitbook/assets/fy22-shareholder-letter_1120x545@2x-1560x760.png
+coverY: -275
 ---
 
 # 🐞 Issues
 
-## Overview
-
 Need help working with issues? In Jira Software, issues help you manage code, estimate workload, and keep track of your team. On this page, you'll find a quick overview of everything that you can do with an issue.
 
 ![Issue View](<../../.gitbook/assets/image (8) (1).png>)
-
-{% embed url="https://support.atlassian.com/jira-software-cloud/docs/what-is-an-issue/" %}
 
 This resource represents Jira issues. Use it to:
 
@@ -50,6 +48,7 @@ We support the following custom field types.
 
 The examples below show how to set the values for different types of custom fields in the input data.
 
+{% code fullWidth="true" %}
 ```go
 // The CustomFields struct is used on the Create(s), Edit methods
 var customFields = jira.CustomFields{}
@@ -138,11 +137,15 @@ if err != nil {
 	log.Fatal(err)
 }
 ```
+{% endcode %}
 
 ## Create Issue
 
+`POST /rest/api/{2-3}/issue`
+
 Creates an issue or, where the option to create subtasks is enabled in Jira, a subtask
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -197,13 +200,16 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Printf("The new issue %v has been created with the ID %v", newIssue.Key, newIssue.ID)
 }
-
 ```
+{% endcode %}
 
 ## Bulk create issue
 
+`POST /rest/api/{2-3}/issue/bulk`
+
 Creates issues and, where the option to create subtasks is enabled in Jira, subtasks.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -294,11 +300,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get issue
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}`
+
 Returns the details for an issue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -346,8 +356,11 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Edit issue
+
+`PUT /rest/api/{2-3}/issue/{issueIdOrKey}`
 
 Edits an issue. The edits to the issue's fields are defined using `update` and `fields`. There're two ways to edit an issue on Jira, **implicit** and **explicit**.
 
@@ -381,6 +394,7 @@ The basic operations are defined below (but custom fields can define their own).
 
 The general shape of an update is field, array of verb-value pairs, for example:
 
+{% code fullWidth="true" %}
 ```go
 //Issue Update Operations
 var operations = &jira.UpdateOperations{}
@@ -396,12 +410,14 @@ if err != nil {
 	log.Fatal(err)
 }
 ```
+{% endcode %}
 
 * **SET:** Sets the value of the field. The incoming value must be the same shape as the value of the field from a GET. For example, a string for "summary", and array of strings for "labels".
 * **ADD:** Adds an element to a field that is an array. The incoming value must be the same shape as the items of the array in a GET. For example, to add a label:
 * **REMOVE:** Removes an element from a field that is an array. The incoming value must be the same shape as the items of the array in a GET (although you can remove parts of the object that are not needed to uniquely identify the object).
 * **EDIT:** Edits an element in a field that is an array. The element is indexed/identified by the value itself (usually by id/name/key).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -472,13 +488,16 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-
 ```
+{% endcode %}
 
 ## Delete issue
 
+`DELETE /rest/api/{2-3}/issue/{issueIdOrKey}`
+
 Deletes an issue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -512,11 +531,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Assign issue
 
+`PUT /rest/api/{2-3}/issue/{issueIdOrKey}/assignee`
+
 Assigns an issue to a user. Use this operation when the calling user does not have the _Edit Issues_ permission but has the _Assign issue_ permission for the project that the issue is in.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -550,11 +573,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Send notification for issue
 
+`POST /rest/api/{2-3}/issue/{issueIdOrKey}/notify`
+
 Creates an email notification for an issue and adds it to the mail queue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -623,11 +650,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get transitions
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/transitions`
+
 Returns either all transitions or a transition that can be performed by the user on an issue, based on the issue's status.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -665,51 +696,15 @@ func main() {
 	}
 }
 ```
-
-{% hint style="info" %}
-🧚‍♀️ **Tips:** You can extract the following struct tags
-{% endhint %}
-
-```go
-type IssueTransitionsScheme struct {
-	Expand      string                   `json:"expand,omitempty"`
-	Transitions []*IssueTransitionScheme `json:"transitions,omitempty"`
-}
-
-type IssueTransitionScheme struct {
-	ID            string              `json:"id,omitempty"`
-	Name          string              `json:"name,omitempty"`
-	To            *TransitionToScheme `json:"to,omitempty"`
-	HasScreen     bool                `json:"hasScreen,omitempty"`
-	IsGlobal      bool                `json:"isGlobal,omitempty"`
-	IsInitial     bool                `json:"isInitial,omitempty"`
-	IsAvailable   bool                `json:"isAvailable,omitempty"`
-	IsConditional bool                `json:"isConditional,omitempty"`
-	IsLooped      bool                `json:"isLooped,omitempty"`
-}
-
-type TransitionToScheme struct {
-	Self           string                `json:"self,omitempty"`
-	Description    string                `json:"description,omitempty"`
-	IconURL        string                `json:"iconUrl,omitempty"`
-	Name           string                `json:"name,omitempty"`
-	ID             string                `json:"id,omitempty"`
-	StatusCategory *StatusCategoryScheme `json:"statusCategory,omitempty"`
-}
-
-type StatusCategoryScheme struct {
-	Self      string `json:"self,omitempty"`
-	ID        int    `json:"id,omitempty"`
-	Key       string `json:"key,omitempty"`
-	ColorName string `json:"colorName,omitempty"`
-	Name      string `json:"name,omitempty"`
-}
-```
+{% endcode %}
 
 ## Transition issue
 
+`POST /rest/api/{2-3}/issue/{issueIdOrKey}/transitions`
+
 Performs an issue transition.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -777,3 +772,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
