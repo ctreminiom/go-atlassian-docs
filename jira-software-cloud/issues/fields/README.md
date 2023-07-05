@@ -1,6 +1,13 @@
+---
+cover: ../../../.gitbook/assets/ai-trends_1120x545@2x-1560x760.jpg
+coverY: 265
+---
+
 # 🃏 Fields
 
 ## Get fields
+
+`GET /rest/api/{2-3}/field`
 
 Returns system and custom issue fields according to the following rules:
 
@@ -8,6 +15,7 @@ Returns system and custom issue fields according to the following rules:
 * Fields that cannot be placed on an issue screen are always returned.
 * Fields that depend on global Jira settings are only returned if the setting is enabled. That is, timetracking fields, subtasks, votes, and watches.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -44,14 +52,17 @@ func main() {
 	for _, field := range fields {
 		log.Println(field)
 	}
-
 }
 ```
+{% endcode %}
 
 ## Create custom field
 
+`POST /rest/api/{2-3}/field`
+
 Creates a custom field, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -94,8 +105,11 @@ func main() {
 	log.Println("field", field)
 }
 ```
+{% endcode %}
 
 ## Get fields paginated
+
+`GET /rest/api/{2-3}/field/search`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of fields for Classic Jira projects. The list can include:
 
@@ -106,6 +120,7 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 
 Only custom fields can be queried, `type` must be set to `custom`. the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -152,11 +167,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Delete Field
 
+`DELETE /rest/api/{2-3}/field/{id}`
+
 Deletes a custom field. The custom field is deleted whether it is in the trash or not.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -192,3 +211,4 @@ func main() {
 	log.Println(task.Status, task.ID, task.Finished)
 }
 ```
+{% endcode %}

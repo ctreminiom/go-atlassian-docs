@@ -15,8 +15,11 @@ A comment is a piece of text that can be added to an issue to provide additional
 
 ## Get comments
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/comment`
+
 Returns all comments for an issue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -73,11 +76,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get comment
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/comment/{id}`
+
 Returns a comment.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -112,11 +119,15 @@ func main() {
 	log.Println(comment.ID, comment.Created)
 }
 ```
+{% endcode %}
 
 ## Delete comment
 
+`DELETE /rest/api/{2-3}/issue/{issueIdOrKey}/comment/{id}`
+
 Deletes a comment.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -150,11 +161,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Add comment
 
+`POST /rest/api/{2-3}/issue/{issueIdOrKey}/comment`
+
 Adds a comment to an issue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -195,17 +210,17 @@ func main() {
 	log.Println(newComment.ID)
 }
 ```
+{% endcode %}
 
 ## Atlassian Document Format <a href="#atlassian-document-format" id="atlassian-document-format"></a>
 
 The Atlassian Document Format (ADF) represents rich text stored in Atlassian products. For example, in Jira Cloud platform, the text in issue comments and in `textarea` custom fields is stored as ADF, here's a bundle of examples you can use in order to create custom body messages.
 
-
-
 ### Example 1
 
 ![](<../../.gitbook/assets/image (1) (2) (1).png>)
 
+{% code fullWidth="true" %}
 ```go
 	commentBody := jira.CommentNodeScheme{}
 	commentBody.Version = 1
@@ -330,11 +345,13 @@ The Atlassian Document Format (ADF) represents rich text stored in Atlassian pro
 		},
 	})
 ```
+{% endcode %}
 
 ### Example 2
 
 ![](<../../.gitbook/assets/image (1) (1) (1) (1).png>)
 
+{% code fullWidth="true" %}
 ```go
 	commentBody := jira.CommentNodeScheme{}
 	commentBody.Version = 1
@@ -504,4 +521,4 @@ The Atlassian Document Format (ADF) represents rich text stored in Atlassian pro
 		Content: []*jira.CommentNodeScheme{tableHeaders, row1, row2},
 	})
 ```
-
+{% endcode %}
