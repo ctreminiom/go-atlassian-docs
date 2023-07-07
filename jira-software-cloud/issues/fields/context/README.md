@@ -6,7 +6,9 @@ The Jira Field Context Configurations define the scope of custom fields within J
 
 ## Get custom field contexts
 
-&#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of [contexts](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html)
+`GET /rest/api/{2-3}/field/{fieldId}/context`&#x20;
+
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of [contexts](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html)
 
 &#x20;for a custom field. Contexts can be returned as follows:
 
@@ -15,6 +17,7 @@ The Jira Field Context Configurations define the scope of custom fields within J
 * By defining `isAnyIssueType`, limit the list of contexts returned to either those that apply to all issue types (true) or those that apply to only a subset of issue types (false)
 * By defining `isGlobalContext`, limit the list of contexts return to either those that apply to all projects (global contexts) (true) or those that apply to only a subset of projects (false)
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -64,11 +67,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Create custom field context
 
+`POST /rest/api/{2-3}/field/{fieldId}/context`
+
 Creates a custom field context. If `projectIds` is empty, a global context is created. A global context is one that applies to all project. If `issueTypeIds` is empty, the context applies to all issue types, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -114,11 +121,15 @@ func main() {
 	log.Println(contextCreated)
 }
 ```
+{% endcode %}
 
 ## Get custom field contexts default values
 
-&#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of defaults for a custom field. The results can be filtered by `contextId`, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
+`GET /rest/api/{2-3}/field/{fieldId}/context/defaultValue`
 
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of defaults for a custom field. The results can be filtered by `contextId`, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -164,21 +175,21 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Set custom field contexts default values
 
+`PUT /rest/api/{2-3}/field/{fieldId}/context/defaultValue`
+
 Sets default for contexts of a custom field. Default is defined using these objects:
 
-| Name                                                                     | Type                                        | Description                                                     |
-| ------------------------------------------------------------------------ | ------------------------------------------- | --------------------------------------------------------------- |
-| <p></p><p><code>CustomFieldContextDefaultValueSingleOption</code></p>    | <p></p><p><code>option.single</code></p>    | <p></p><p>For single choice select lists and radio buttons.</p> |
-| <p></p><p><code>CustomFieldContextDefaultValueMultipleOption</code></p>  | <p></p><p><code>option.multiple</code></p>  | <p></p><p>For multiple-choice select lists and checkboxes.</p>  |
-| <p></p><p><code>CustomFieldContextDefaultValueCascadingOption</code></p> | <p></p><p><code>option.cascading</code></p> | <p></p><p>For cascading select lists.</p>                       |
+<table data-full-width="true"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><p></p><p><code>CustomFieldContextDefaultValueSingleOption</code></p></td><td><p></p><p><code>option.single</code></p></td><td><p></p><p>For single choice select lists and radio buttons.</p></td></tr><tr><td><p></p><p><code>CustomFieldContextDefaultValueMultipleOption</code></p></td><td><p></p><p><code>option.multiple</code></p></td><td><p></p><p>For multiple-choice select lists and checkboxes.</p></td></tr><tr><td><p></p><p><code>CustomFieldContextDefaultValueCascadingOption</code></p></td><td><p></p><p><code>option.cascading</code></p></td><td><p></p><p>For cascading select lists.</p></td></tr></tbody></table>
 
 {% hint style="info" %}
 Only one type of default object can be included in a request. To remove a default for a context, set the default parameter to `null`.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -225,11 +236,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Update custom field context
 
-&#x20;Updates a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
+`PUT /rest/api/{2-3}/field/{fieldId}/context/{contextId}`&#x20;
 
+Updates a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -270,11 +285,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Delete custom field context
 
-&#x20;Deletes a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
+`DELETE /rest/api/{2-3}/field/{fieldId}/context/{contextId}`&#x20;
 
+Deletes a [custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -314,11 +333,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Add issue types to context
 
+`PUT /rest/api/{2-3}/field/{fieldId}/context/{contextId}/issuetype`
+
 Adds issue types to a custom field context, appending the issue types to the issue types list.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -359,11 +382,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Remove issue types from context
 
+`POST /rest/api/{2-3}/field/{fieldId}/context/{contextId}/issuetype/remove`
+
 Removes issue types from a custom field context.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -403,11 +430,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Assign custom field context to projects
 
+`PUT /rest/api/{2-3}/field/{fieldId}/context/{contextId}/project`
+
 Assigns a custom field context to projects.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -447,11 +478,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Remove custom field context from projects
 
+`POST /rest/api/{2-3}/field/{fieldId}/context/{contextId}/project/remove`
+
 Removes a custom field context from projects.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -491,11 +526,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get project mappings for custom field context
 
-&#x20;Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of context to project mappings for a custom field. The result can be filtered by `contextId`. Otherwise, all mappings are returned. Invalid IDs are ignored.
+`GET /rest/api/{2-3}/field/{fieldId}/context/projectmapping`
 
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of context to project mappings for a custom field. The result can be filtered by `contextId`. Otherwise, all mappings are returned. Invalid IDs are ignored.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -530,6 +569,6 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(mapping.Total)
-
 }
 ```
+{% endcode %}
