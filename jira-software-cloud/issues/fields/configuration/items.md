@@ -1,6 +1,14 @@
+---
+cover: >-
+  ../../../../.gitbook/assets/nonverbal-communication-skills_1140x545@2x-1560x760.jpg
+coverY: 199
+---
+
 # 🍤 Items
 
 ## Get Field Configuration Items
+
+`GET /rest/api/{2-3}/fieldconfiguration/{id}/fields`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all fields for a configuration.
 
@@ -8,6 +16,7 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 Only field configurations used in company-managed (classic) projects are returned
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -53,8 +62,11 @@ func main()  {
 	}
 }
 ```
+{% endcode %}
 
 ## Update Field Configuration Items
+
+`PUT /rest/api/{2-3}/fieldconfiguration/{id}/fields`
 
 Updates fields in a field configuration. The properties of the field configuration fields provided override the existing values.
 
@@ -64,6 +76,7 @@ Updates fields in a field configuration. The properties of the field configurati
 Only field configurations used in company-managed (classic) projects are returned
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -108,3 +121,4 @@ func main()  {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
