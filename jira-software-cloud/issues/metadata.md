@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/fy22-shareholder-letter_1120x545@2x-1560x760.png
+coverY: 0
+---
+
 # 🚛 Metadata
 
 ## Get Edit Issue Metadata
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/editmeta`
+
 Returns the edit screen fields for an issue that are visible to and editable by the user. Use the information to populate the requests in [Edit issue](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-issueidorkey-put).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -52,14 +60,17 @@ func main() {
 			fmt.Println("Field Name:", field.Name, "Required?:", value.String())
 		}
 	}
-
 }
 ```
+{% endcode %}
 
 ## Get Create Issue Metadata
 
+`GET /rest/api/{2-3}/issue/createmeta`
+
 Returns details of projects, issue types within projects, and, when requested, the create screen fields for each issue type for the user. Use the information to populate the requests in [Create issue](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-post) and [Create issues](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-bulk-post).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -104,5 +115,4 @@ func main() {
 	fmt.Println(metadata)
 }
 ```
-
-\
+{% endcode %}

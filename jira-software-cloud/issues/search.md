@@ -2,14 +2,20 @@
 description: >-
   This resource represents various ways to search for issues. Use it to search
   for issues with a JQL query and find issues to populate an issue picker.
+cover: >-
+  ../../.gitbook/assets/the-keystroke-that-changed-how-i-worked-forever-compressed-1560x760.gif
+coverY: 0
 ---
 
 # 📌 Search
 
 ## Search for issues using JQL (GET)
 
-&#x20;Searches for issues using [JQL](https://confluence.atlassian.com/x/egORLQ). If the JQL query expression is too large to be encoded as a query parameter, use the [POST](https://docs.go-atlassian.io/jira-software-cloud/issues/search#search-for-issues-using-jql-post) version of this resource.
+`GET /rest/api/{2-3}/search`
 
+Searches for issues using [JQL](https://confluence.atlassian.com/x/egORLQ). If the JQL query expression is too large to be encoded as a query parameter, use the [POST](https://docs.go-atlassian.io/jira-software-cloud/issues/search#search-for-issues-using-jql-post) version of this resource.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -66,11 +72,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Search for issues using JQL (POST)
 
-&#x20;Searches for issues using [JQL](https://confluence.atlassian.com/x/egORLQ). There is a [GET](https://docs.go-atlassian.io/jira-software-cloud/issues/search#search-for-issues-using-jql-get) version of this resource that can be used for smaller JQL query expressions.
+`POST /rest/api/{2-3}/search`
 
+Searches for issues using [JQL](https://confluence.atlassian.com/x/egORLQ). There is a [GET](https://docs.go-atlassian.io/jira-software-cloud/issues/search#search-for-issues-using-jql-get) version of this resource that can be used for smaller JQL query expressions.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -120,15 +130,15 @@ func main() {
 	log.Println(issues.Total)
 }
 ```
+{% endcode %}
 
 ## Check issues against JQL
 
+`POST /rest/api/{2-3}/jql/match`
+
 Checks whether one or more issues would be returned by one or more JQL queries.
 
-{% embed url="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search#api-rest-api-3-jql-match-post" %}
-Official V3 Documentation
-{% endembed %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -174,3 +184,4 @@ func main() {
 }
 
 ```
+{% endcode %}

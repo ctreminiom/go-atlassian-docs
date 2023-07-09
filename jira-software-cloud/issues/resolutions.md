@@ -2,14 +2,19 @@
 description: >-
   This resource represents issue resolution values. Use it to obtain a list of
   all issue resolution values and the details of individual resolution values.
+cover: ../../.gitbook/assets/new-rules-of-productivity_1120x545@2x-1560x760.png
+coverY: 0
 ---
 
 # 🍀 Resolutions
 
 ## Get resolutions
 
+`GET /rest/api/{2-3}/resolution`
+
 Returns a list of all issue resolution values, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -47,11 +52,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get resolution
 
-Returns an issue resolution value, the method returns the following information:
+`GET /rest/api/{2-3}/resolution/{id}`
 
+Returns an issue resolution value
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -87,3 +96,28 @@ func main() {
 	log.Println(resolution)
 }
 ```
+{% endcode %}
+
+## Create resolution
+
+> No implemented, yet, feel free to open a PR or issue
+
+## Set default resolution
+
+> No implemented, yet, feel free to open a PR or issue
+
+## Move resolutions
+
+> No implemented, yet, feel free to open a PR or issue
+
+## Search resolutions
+
+> No implemented, yet, feel free to open a PR or issue
+
+## Update resolution
+
+> No implemented, yet, feel free to open a PR or issue
+
+## Delete resolution
+
+> No implemented, yet, feel free to open a PR or issue

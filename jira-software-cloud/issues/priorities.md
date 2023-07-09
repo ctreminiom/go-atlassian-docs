@@ -1,15 +1,21 @@
+---
+cover: ../../.gitbook/assets/strategic-planning-vs-cognitive-biases-1560x760.jpg
+coverY: 0
+---
+
 # 🏣 Priorities
 
 An issue's priority defines its importance in relation to other issues, so it helps your users determine which issues should be tackled first. Jira comes with a set of default priorities, which you can modify or add to. You can also choose different priorities for your projects.
 
 ![](<../../.gitbook/assets/image (12).png>)
 
-This resource represents issue priorities. Use it to obtain a list of issue priorities and details for individual issue priorities.
-
 ## Get priorities
+
+`GET /rest/api/{2-3}/priority`
 
 Returns the list of all issue priorities, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -47,11 +53,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get priority
 
+`GET /rest/api/{2-3}/priority/{id}`
+
 Returns an issue priority, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -87,5 +97,60 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(priority)
 }
-
 ```
+{% endcode %}
+
+## Create priority
+
+`POST /rest/api/3/priority`
+
+Creates an issue priority.
+
+> No implemented,  yet. Feel free to open a new PR or issue
+
+## Set default priority
+
+`PUT /rest/api/3/priority/default`
+
+Sets default issue priority.
+
+> No implemented,  yet. Feel free to open a new PR or issue
+
+## Move priorities
+
+`PUT /rest/api/3/priority/move`
+
+Changes the order of issue priorities.
+
+> No implemented,  yet. Feel free to open a new PR or issue
+
+## Search priorities
+
+`GET /rest/api/3/priority/search`
+
+Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of priorities. The list can contain all priorities or a subset determined by any combination of these criteria:
+
+* a list of priority IDs. Any invalid priority IDs are ignored.
+* whether the field configuration is a default. This returns priorities from company-managed (classic) projects only, as there is no concept of default priorities in team-managed projects.
+
+> No implemented,  yet. Feel free to open a new PR or issue
+
+## Update priority
+
+`PUT /rest/api/3/priority/{id}`
+
+Updates an issue priority.
+
+> No implemented,  yet. Feel free to open a new PR or issue
+
+## Delete priority
+
+`DELETE /rest/api/3/priority/{id}`
+
+Deletes an issue priority.
+
+{% hint style="info" %}
+This operation is [asynchronous](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#async). Follow the `location` link in the response to determine the status of the task and use [Get task](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-tasks/#api-rest-api-3-task-taskid-get) to obtain subsequent updates.
+{% endhint %}
+
+> No implemented,  yet. Feel free to open a new PR or issue
