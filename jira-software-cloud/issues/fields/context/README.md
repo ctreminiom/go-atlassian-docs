@@ -1,3 +1,8 @@
+---
+cover: ../../../../.gitbook/assets/emailqa_1120x545@2x-1560x760.jpg
+coverY: -177
+---
+
 # 🍳 Context
 
 The Jira Field Context Configurations define the scope of custom fields within Jira. They determine where and how a custom field can be used within Jira, such as in which projects, issue types, and screens the field should be available. Field Context Configurations are used to ensure that the right data is captured and displayed in Jira, and that users are not presented with irrelevant fields.

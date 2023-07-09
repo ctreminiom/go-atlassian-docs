@@ -1,3 +1,8 @@
+---
+cover: ../../../../.gitbook/assets/f7d10368-eaf9-4640-9298-935babada43c-1560x760.jpeg
+coverY: 153
+---
+
 # 🕧 Option
 
 This resource represents custom issue field select list options created in Jira or using the REST API. This resource supports the following field types:
@@ -10,8 +15,11 @@ This resource represents custom issue field select list options created in Jira 
 
 ## Get custom field options
 
+`GET /rest/api/3/field/{fieldId}/context/{contextId}/option`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all custom field option for a context. Options are returned first then cascading options, in the order they display in Jira, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -52,19 +60,20 @@ func main() {
 	for _, option := range fieldOptions.Values {
 		log.Println(option)
 	}
-
 }
 ```
+{% endcode %}
 
 ## Create custom field options&#x20;
+
+`POST /rest/api/3/field/{fieldId}/context/{contextId}/option`
 
 Creates options and, where the custom select field is of the type Select List (cascading), cascading options for a custom select field. The options are added to a context of the field.&#x20;
 
 The maximum number of options that can be created per request is 1000 and each field can have a maximum of **10000** options, the method returns the following information:
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
@@ -92,7 +101,7 @@ func main() {
 		fieldID   = "customfield_10038"
 		contextID = 10180
 
-		payload = &models.FieldContextOptionListScheme{
+		payload = &#x26;models.FieldContextOptionListScheme{
 			Options: []*models.CustomFieldContextOptionScheme{
 
 				// Single/Multiple Choice example
@@ -134,9 +143,11 @@ func main() {
 		log.Println(option)
 	}
 }
-```
+</code></pre>
 
 ## Update custom field options
+
+`PUT /rest/api/3/field/{fieldId}/context/{contextId}/option`
 
 Updates the options of a custom field. If any of the options are not found, no options are updated. Options where the values in the request match the current values aren't updated and aren't reported in the response.
 
@@ -144,6 +155,7 @@ Updates the options of a custom field. If any of the options are not found, no o
 Note that this operation **only works for issue field select list options created in Jira or using operations from the** [**Issue custom field options**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-options/#api-group-issue-custom-field-options) **resource**, it cannot be used with issue field select list options created by Connect apps.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -217,11 +229,13 @@ func main() {
 	for _, option := range fieldOptions.Options {
 		log.Println(option)
 	}
-
 }
 ```
+{% endcode %}
 
 ## Delete custom field options
+
+`DELETE /rest/api/3/field/{fieldId}/context/{contextId}/option/{optionId}`
 
 Deletes a custom field option. Options with cascading options cannot be deleted without deleting the cascading options first.
 
@@ -229,6 +243,7 @@ Deletes a custom field option. Options with cascading options cannot be deleted 
 &#x20;This operation works for custom field options created in Jira or the operations from this resource. **To work with issue field select list options created for Connect apps use the** [**Issue custom field options (apps)**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-options/#api-rest-api-3-field-fieldid-context-contextid-option-optionid-delete) **operations.**
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -267,11 +282,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Reorder custom field options
 
+`PUT /rest/api/3/field/{fieldId}/context/{contextId}/option/move`
+
 Changes the order of custom field options or cascading options in a context.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -345,7 +364,7 @@ func main() {
 		}
 		return
 	}
-
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
