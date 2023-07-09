@@ -1,8 +1,16 @@
+---
+cover: >-
+  ../../../.gitbook/assets/csd-222-t1illustrationrefresh-5-signs-of-a-toxic-work-culture-v4a-1560x760.png
+coverY: 0
+---
+
 # 🔃 Remote
 
 This resource represents remote issue links, a way of linking Jira to information in other systems. Use it to get, create, update, and delete remote issue links either by ID or global ID. The global ID provides a way of accessing remote issue links using information about the item's remote system host and remote system identifier.
 
 ## Get remote issue links <a href="#get-remote-issue-links" id="get-remote-issue-links"></a>
+
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/remotelink`
 
 Gets returns the remote issue links for an issue. When a remote issue link global ID is provided the record with that global ID is returned, otherwise all remote issue links are returned.
 
@@ -10,8 +18,7 @@ Gets returns the remote issue links for an issue. When a remote issue link globa
 Where a global ID includes reserved URL characters these must be escaped in the request.
 {% endhint %}
 
-<table><thead><tr><th>Param</th><th width="252">Description</th><th width="180">Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong></td><td>The ID or key of the issue.</td><td>String</td><td></td></tr><tr><td><strong>globalId</strong></td><td>The global ID of the remote issue link.</td><td>String</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -54,15 +61,17 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create remote issue link <a href="#create-remote-issue-link" id="create-remote-issue-link"></a>
+
+`POST /rest/api/{2-3}/issue/{issueIdOrKey}/remotelink`
 
 Create creates or updates a remote issue link for an issue.
 
 If a `globalId` is provided and a remote issue link with that global ID is found it is updated. Any fields without values in the request are set to null. Otherwise, the remote issue link is created.
 
-<table><thead><tr><th>Param</th><th width="292.3333333333333">Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>string</td><td></td></tr><tr><td><strong>payload</strong></td><td>*models.RemoteLinkScheme</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -131,13 +140,15 @@ func main() {
 	fmt.Print(remoteLink.Self, remoteLink.ID)
 }
 ```
+{% endcode %}
 
 ## Delete remote issue link by ID <a href="#delete-remote-issue-link-by-id" id="delete-remote-issue-link-by-id"></a>
 
+`DELETE /rest/api/{2-3}/issue/{issueIdOrKey}/remotelink/{linkId}`
+
 Delete deletes a remote issue link from an issue.
 
-<table><thead><tr><th width="166">Param</th><th width="241">Description</th><th width="92">Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>The ID or key of the issue.</td><td>string</td><td></td></tr><tr><td><strong>linkId</strong> </td><td>The ID of a remote issue link.</td><td>string</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -175,13 +186,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get remote issue link <a href="#get-remote-issue-link" id="get-remote-issue-link"></a>
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/remotelink/{linkId}`
+
 Get returns a remote issue link for an issue.
 
-<table><thead><tr><th width="156.33333333333331">Param</th><th width="270">Description</th><th width="85">Type</th><th data-type="select">Required</th></tr></thead><tbody><tr><td><strong>issueIdOrKey</strong> </td><td>The ID or key of the issue.</td><td>string</td><td></td></tr><tr><td><strong>linkId</strong> </td><td>The ID of the remote issue link.</td><td>string</td><td></td></tr></tbody></table>
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -222,8 +235,11 @@ func main() {
 	fmt.Println(remoteLink.ID, remoteLink.GlobalID)
 }
 ```
+{% endcode %}
 
 ## Update remote issue link
+
+`PUT /rest/api/{2-3}/issue/{issueIdOrKey}/remotelink/{linkId}`
 
 Update updates a remote issue link for an issue.
 
@@ -231,6 +247,7 @@ Update updates a remote issue link for an issue.
 Fields without values in the request are set to null.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -295,11 +312,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Delete remote issue link by Global ID
 
+`DELETE /rest/api/{2-3}/issue/{issueIdOrKey}/remotelink`
+
 DeleteByGlobalId deletes the remote issue link from the issue using the link's global ID where the global ID includes reserved URL characters these must be escaped in the request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -332,8 +353,9 @@ func main() {
 		if response != nil {
 			log.Println(response.Bytes.String())
 		}
-
+		
 		log.Fatal(err)
 	}
 }
 ```
+{% endcode %}

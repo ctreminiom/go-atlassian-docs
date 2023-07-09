@@ -1,11 +1,19 @@
+---
+cover: ../../../.gitbook/assets/in-defense-of-meetings-2240x1090-1-1560x760.jpg
+coverY: 0
+---
+
 # 🖇 Types
 
 This resource represents issue link types. Use it to get, create, update, and delete link issue types as well as get lists of all link issue types.
 
 ## Get issue link types
 
+`GET /rest/api/{2-3}/issueLinkType`
+
 Returns a list of all issue link types, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -44,11 +52,17 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Create issue link type
 
-Creates an issue link type. Use this operation to create descriptions of the reasons why issues are linked. The issue link type consists of a name and descriptions for a link's inward and outward relationships, the method returns the following information:
+`POST /rest/api/{2-3}/issueLinkType`
 
+Creates an issue link type. Use this operation to create descriptions of the reasons why issues are linked.&#x20;
+
+The issue link type consists of a name and descriptions for a link's inward and outward relationships, the method returns the following information:
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -90,11 +104,15 @@ func main() {
 	log.Println(issueLinkType)
 }
 ```
+{% endcode %}
 
 ## Get issue link type
 
+`GET /rest/api/{2-3}/issueLinkType/{issueLinkTypeId}`
+
 Returns an issue link type, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -129,11 +147,15 @@ func main() {
 	log.Println(issueLinkType)
 }
 ```
+{% endcode %}
 
 ## Update issue link type
 
+`PUT /rest/api/{2-3}/issueLinkType/{issueLinkTypeId}`
+
 Updates an issue link type, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -175,11 +197,15 @@ func main() {
 	log.Println(issueLinkType)
 }
 ```
+{% endcode %}
 
 ## Delete issue link type
 
+`DELETE /rest/api/{2-3}/issueLinkType/{issueLinkTypeId}`
+
 Deletes an issue link type, the method returns the following information:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -213,3 +239,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

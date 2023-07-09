@@ -15,7 +15,7 @@ This resource represents custom issue field select list options created in Jira 
 
 ## Get custom field options
 
-`GET /rest/api/3/field/{fieldId}/context/{contextId}/option`
+`GET /rest/api/{2-3}/field/{fieldId}/context/{contextId}/option`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all custom field option for a context. Options are returned first then cascading options, in the order they display in Jira, the method returns the following information:
 
@@ -66,7 +66,7 @@ func main() {
 
 ## Create custom field options&#x20;
 
-`POST /rest/api/3/field/{fieldId}/context/{contextId}/option`
+`POST /rest/api/{2-3}/field/{fieldId}/context/{contextId}/option`
 
 Creates options and, where the custom select field is of the type Select List (cascading), cascading options for a custom select field. The options are added to a context of the field.&#x20;
 
@@ -147,7 +147,7 @@ func main() {
 
 ## Update custom field options
 
-`PUT /rest/api/3/field/{fieldId}/context/{contextId}/option`
+`PUT /rest/api/{2-3}/field/{fieldId}/context/{contextId}/option`
 
 Updates the options of a custom field. If any of the options are not found, no options are updated. Options where the values in the request match the current values aren't updated and aren't reported in the response.
 
@@ -235,7 +235,7 @@ func main() {
 
 ## Delete custom field options
 
-`DELETE /rest/api/3/field/{fieldId}/context/{contextId}/option/{optionId}`
+`DELETE /rest/api/{2-3}/field/{fieldId}/context/{contextId}/option/{optionId}`
 
 Deletes a custom field option. Options with cascading options cannot be deleted without deleting the cascading options first.
 
@@ -286,7 +286,7 @@ func main() {
 
 ## Reorder custom field options
 
-`PUT /rest/api/3/field/{fieldId}/context/{contextId}/option/move`
+`PUT /rest/api/{2-3}/field/{fieldId}/context/{contextId}/option/move`
 
 Changes the order of custom field options or cascading options in a context.
 

@@ -1,11 +1,19 @@
+---
+cover: ../../../.gitbook/assets/adaptive_leadership_1120x545px@2x_ok-1560x760.jpg
+coverY: 0
+---
+
 # 🗑 Trash
 
 ## Search Fields In Trash
+
+`GET /rest/api/{2-3}/field/search/trashed`
 
 Search returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of fields in the trash. The list may be restricted to fields whose field name or description partially match a string.&#x20;
 
 Only custom fields can be queried, `type` must be set to `custom`.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -51,11 +59,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Move Field To Trash
 
+`POST /rest/api/{2-3}/field/{id}/trash`
+
 Move moves a custom field to trash
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -90,11 +102,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Restore Field
 
-Restore restores a custom field from trash
+`POST /rest/api/{2-3}/field/{id}/restore`
 
+POST /rest/api/3/field/{id}/restoreRestore restores a custom field from trash
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -128,3 +144,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

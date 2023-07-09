@@ -8,8 +8,11 @@ description: >-
 
 ## Get all labels
 
+`GET /rest/api/{2-3}/label`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of labels.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -56,3 +59,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}
