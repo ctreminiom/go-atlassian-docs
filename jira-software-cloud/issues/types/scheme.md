@@ -8,7 +8,7 @@ coverY: 89
 
 ## Get all issue type schemes
 
-`GET /rest/api/3/issuetypescheme`
+`GET /rest/api/{2-3}/issuetypescheme`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type schemes.
 
@@ -54,7 +54,7 @@ func main() {
 
 ## Create issue type scheme
 
-`POST /rest/api/3/issuetypescheme`
+`POST /rest/api/{2-3}/issuetypescheme`
 
 Creates an issue type scheme.
 
@@ -115,7 +115,7 @@ func main() {
 
 ## Get issue type scheme items
 
-`GET /rest/api/3/issuetypescheme/mapping`
+`GET /rest/api/{2-3}/issuetypescheme/mapping`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue-type scheme items. Only issue type scheme items used in classic projects are returned.
 
@@ -170,7 +170,7 @@ func main() {
 
 ## Get issue type schemes for projects
 
-`GET /rest/api/3/issuetypescheme/project`
+`GET /rest/api/{2-3}/issuetypescheme/project`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type schemes and, for each issue type scheme, a list of the projects that use it. Only issue type schemes used in classic projects are returned.
 
@@ -227,7 +227,7 @@ func main() {
 
 ## Assign issue type scheme to project
 
-`PUT /rest/api/3/issuetypescheme/project`
+`PUT /rest/api/{2-3}/issuetypescheme/project`
 
 Assigns an issue type scheme to a project. If any issues in the project are assigned issue types not present in the new scheme, the operation will fail.&#x20;
 
@@ -280,7 +280,7 @@ func main() {
 
 ## Update issue type scheme
 
-`PUT /rest/api/3/issuetypescheme/{issueTypeSchemeId}`
+`PUT /rest/api/{2-3}/issuetypescheme/{issueTypeSchemeId}`
 
 Updates an issue type scheme.
 
@@ -337,7 +337,7 @@ func main() {
 
 ## Delete issue type scheme
 
-`DELETE /rest/api/3/issuetypescheme/{issueTypeSchemeId}`
+`DELETE /rest/api/{2-3}/issuetypescheme/{issueTypeSchemeId}`
 
 Deletes an issue type scheme. Only issue type schemes used in classic projects can be deleted. Any projects assigned to the scheme are reassigned to the default issue type scheme.
 
@@ -388,7 +388,7 @@ func main() {
 
 ## Add issue types to issue type scheme
 
-`PUT /rest/api/3/issuetypescheme/{issueTypeSchemeId}/issuetype`
+`PUT /rest/api/{2-3}/issuetypescheme/{issueTypeSchemeId}/issuetype`
 
 Adds issue types to an issue type scheme. The added issue types are appended to the issue types list. If any of the issue types exist in the issue type scheme, the operation fails and no issue types are added.
 
@@ -439,7 +439,7 @@ func main() {
 
 ## Remove issue type from issue type scheme
 
-`DELETE /rest/api/3/issuetypescheme/{issueTypeScheme}/issuetype/{issueType}`
+`DELETE /rest/api/{2-3}/issuetypescheme/{issueTypeSche}/issuetype/{issueType}`
 
 Removes an issue type from an issue type scheme.
 

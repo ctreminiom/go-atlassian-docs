@@ -2,14 +2,20 @@
 description: >-
   This resource represents votes cast by users on an issue. Use it to get
   details of votes on an issue as well as cast and withdrawal votes.
+cover: >-
+  ../../.gitbook/assets/csd-222-t1illustrationrefresh-5-signs-of-a-toxic-work-culture-v4a-1560x760.png
+coverY: 0
 ---
 
 # 📠 Vote
 
 ## Get votes
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/votes`
+
 Returns details about the votes on an issue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -56,11 +62,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Add vote
 
+`POST /rest/api/{2-3}/issue/{issueIdOrKey}/votes`
+
 Adds the user's vote to an issue. This is the equivalent of the user clicking _Vote_ on an issue in Jira.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -103,11 +113,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Delete vote
 
+`DELETE /rest/api/{2-3}/issue/{issueIdOrKey}/votes`
+
 Deletes a user's vote from an issue. This is the equivalent of the user clicking _Unvote_ on an issue in Jira.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -150,3 +164,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

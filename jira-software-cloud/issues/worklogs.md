@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/2240x1090-1-1560x760.jpg
+coverY: 0
+---
+
 # 🕰 Worklogs
 
 ## Get Issue Worklogs
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/worklog`
+
 Returns worklogs for an issue, starting from the oldest worklog or from the worklog started on or after a date and time.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -49,11 +57,15 @@ func main()  {
 	}
 }
 ```
+{% endcode %}
 
 ## Add Worklog
 
+`POST /rest/api/{2-3}/issue/{issueIdOrKey}/worklog`
+
 Adds a worklog to an issue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -300,11 +312,15 @@ func main() {
 	log.Println(worklog.ID, worklog.IssueID)
 }
 ```
+{% endcode %}
 
 ## Get Worklog
 
+`GET /rest/api/{2-3}/issue/{issueIdOrKey}/worklog/{id}`
+
 Returns a worklog.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -346,11 +362,15 @@ func main()  {
 	log.Println(worklog.ID, worklog.Self)
 }
 ```
+{% endcode %}
 
 ## Update Worklog
 
+`PUT /rest/api/{2-3}/issue/{issueIdOrKey}/worklog/{id}`
+
 Updates a worklog.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -594,11 +614,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Delete Worklog
 
+`DELETE /rest/api/{2-3}/issue/{issueIdOrKey}/worklog/{id}`
+
 Deletes a worklog from an issue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -634,11 +658,15 @@ func main()  {
 }
 
 ```
+{% endcode %}
 
 ## Get ID's of deleted worklogs
 
+`GET /rest/api/{2-3}/worklog/deleted`
+
 Returns a list of IDs and delete timestamps for worklogs deleted after a date and time.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -675,11 +703,15 @@ func main()  {
 }
 
 ```
+{% endcode %}
 
 ## Get Worklogs
 
+`POST /rest/api/{2-3}/worklog/list`
+
 Returns worklog details for a list of worklog IDs.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -723,13 +755,17 @@ func main()  {
 }
 
 ```
+{% endcode %}
 
 ## Get ID's of updated worklogs
+
+`GET /rest/api/{2-3}/worklog/updated`
 
 Returns a list of IDs and update timestamps for worklogs updated after a date and time.
 
 This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, `until` indicates the timestamp of the youngest item on the page. Also, `nextPage` provides the URL for the next page of worklogs. The `lastPage` parameter is set to true on the last page of worklogs.c
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -765,3 +801,4 @@ func main()  {
 	log.Println(result)
 }
 ```
+{% endcode %}

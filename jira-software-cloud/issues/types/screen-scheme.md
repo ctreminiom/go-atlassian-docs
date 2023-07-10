@@ -8,7 +8,7 @@ coverY: 0
 
 ## Get issue type screen schemes
 
-`GET /rest/api/3/issuetypescreenscheme`
+`GET /rest/api/{2-3}/issuetypescreenscheme`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type screen schemes. Only issue type screen schemes used in classic projects are returned.
 
@@ -64,7 +64,7 @@ func main() {
 
 ## Create issue type screen scheme
 
-`POST /rest/api/3/issuetypescreenscheme`
+`POST /rest/api/{2-3}/issuetypescreenscheme`
 
 Creates an issue-type screen scheme.
 
@@ -131,7 +131,7 @@ func main() {
 
 ## Get issue type screen scheme items
 
-`GET /rest/api/3/issuetypescreenscheme/mapping`
+`GET /rest/api/{2-3}/issuetypescreenscheme/mapping`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue-type screen scheme items. Only issue type screen schemes used in classic projects are returned.
 
@@ -178,7 +178,7 @@ func main() {
 
 ## Assign issue type screen scheme to project
 
-`PUT /rest/api/3/issuetypescreenscheme/project`
+`PUT /rest/api/{2-3}/issuetypescreenscheme/project`
 
 Assigns an issue-type screen scheme to a project.
 
@@ -234,7 +234,7 @@ func main() {
 
 ## Get issue type screen schemes for projects
 
-`GET /rest/api/3/issuetypescreenscheme/project`
+`GET /rest/api/{2-3}/issuetypescreenscheme/project`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type screen schemes and, for each issue type screen scheme, a list of the projects that use it. Only issue type screen schemes used in classic projects are returned.
 
@@ -244,7 +244,7 @@ CREATE THE CODE SAMPLE
 
 ## Update issue type screen scheme
 
-`PUT /rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}`
+`PUT /rest/api/{2-3}/issuetypescreenscheme/{issueTypeScreenSchemeId}`
 
 Updates an issue type screen scheme.
 
@@ -298,7 +298,7 @@ func main() {
 
 ## Delete issue type screen scheme
 
-`DELETE /rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}`
+`DELETE /rest/api/{2-3}/issuetypescreenscheme/{issueTypeScreenSchemeId}`
 
 Deletes an issue type screen scheme.
 
@@ -353,7 +353,7 @@ func main() {
 
 ## Append mappings to issue type screen scheme
 
-`PUT /rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}/mapping`
+`PUT /rest/api/{2-3}/issuetypescreenscheme/{issueTypeScreenSchemeId}/mapping`
 
 Appends issue type to screen scheme mappings to an issue type screen scheme.
 
@@ -420,7 +420,7 @@ func main() {
 
 ## Update issue type screen scheme default screen scheme
 
-`PUT /rest/api/3/issuetypescreenscheme/{issueTypeScreenScheme}/mapping/default`
+`PUT /rest/api/{2-3}/issuetypescreenscheme/{issueTypeScreenSc}/mapping/default`
 
 Updates the default screen scheme of an issue-type screen scheme. The default screen scheme is used for all unmapped issue types.
 
@@ -476,7 +476,7 @@ func main() {
 
 ## Remove mappings from issue type screen scheme
 
-`POST /rest/api/3/issuetypescreenscheme/{issueTypeScreenScheme}/mapping/remove`
+`POST /rest/api/{2-3}/issuetypescreenscheme/{issueTypeScreenSc}/mapping/remove`
 
 Removes issue type to screen scheme mappings from an issue type screen scheme.
 
@@ -532,7 +532,7 @@ func main() {
 
 ## Get issue type screen scheme projects
 
-`GET /rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}/project`
+`GET /rest/api/{2-3}/issuetypescreenscheme/{issueTypeScreenSchemeId}/project`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of projects associated with an issue-type screen scheme. Only company-managed projects associated with an issue-type screen scheme are returned.
 
