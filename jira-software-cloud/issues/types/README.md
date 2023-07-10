@@ -1,5 +1,7 @@
 ---
 description: This resource represents issues types
+cover: ../../../.gitbook/assets/screenshot-2023-06-01-at-1.59.32-pm-1-1560x760.png
+coverY: 0
 ---
 
 # 📦 Type
@@ -10,9 +12,13 @@ Just as a project can have many different types of work, Jira uses different iss
 
 ## Get all issue types for user
 
+`GET /rest/api/{2-3}/issuetype`
+
 Returns all issue types.
 
+{% code fullWidth="true" %}
 ```go
+
 package main
 
 import (
@@ -58,11 +64,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create issue type
 
+`POST /rest/api/{2-3}/issuetype`
+
 Creates an issue type and adds it to the default issue type scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -113,11 +123,15 @@ func main() {
 	log.Println(issueType.Name)
 }
 ```
+{% endcode %}
 
 ## Get issue type
 
+`GET /rest/api/{2-3}/issuetype/{id}`
+
 Returns an issue type.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -162,11 +176,15 @@ func main() {
 	log.Println(issueType.Name)
 }
 ```
+{% endcode %}
 
 ## Update issue type
 
+`PUT /rest/api/{2-3}/issuetype/{id}`
+
 Updates the issue type.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -216,11 +234,15 @@ func main() {
 	log.Println(issueType.Name)
 }
 ```
+{% endcode %}
 
 ## Delete issue type
 
+`DELETE /rest/api/{2-3}/issuetype/{id}`
+
 Deletes the issue type. If the issue type is in use, all uses are updated with the alternative issue type (`alternativeIssueTypeId`).&#x20;
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -263,11 +285,17 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get alternative issue types
 
-Returns a list of issue types that can be used to replace the issue type. The alternative issue types are those assigned to the same workflow scheme, field configuration scheme, and screen scheme.
+`GET /rest/api/{2-3}/issuetype/{id}/alternatives`
 
+Returns a list of issue types that can be used to replace the issue type.&#x20;
+
+The alternative issue types are those assigned to the same workflow scheme, field configuration scheme, and screen scheme.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -314,3 +342,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

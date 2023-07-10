@@ -1,13 +1,18 @@
 ---
 description: This resource represents issue type screen schemes.
+cover: ../../../.gitbook/assets/2240x1090-1-1560x760.jpg
+coverY: 0
 ---
 
 # 🛅 Screen Scheme
 
 ## Get issue type screen schemes
 
+`GET /rest/api/3/issuetypescreenscheme`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type screen schemes. Only issue type screen schemes used in classic projects are returned.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -55,11 +60,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create issue type screen scheme
 
+`POST /rest/api/3/issuetypescreenscheme`
+
 Creates an issue-type screen scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -118,11 +127,15 @@ func main() {
 	log.Println(issueTypeScreenSchemeID)
 }
 ```
+{% endcode %}
 
 ## Get issue type screen scheme items
 
+`GET /rest/api/3/issuetypescreenscheme/mapping`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue-type screen scheme items. Only issue type screen schemes used in classic projects are returned.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -161,11 +174,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Assign issue type screen scheme to project
 
+`PUT /rest/api/3/issuetypescreenscheme/project`
+
 Assigns an issue-type screen scheme to a project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -213,18 +230,26 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get issue type screen schemes for projects
 
+`GET /rest/api/3/issuetypescreenscheme/project`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of issue type screen schemes and, for each issue type screen scheme, a list of the projects that use it. Only issue type screen schemes used in classic projects are returned.
+
+{% hint style="warning" %}
+CREATE THE CODE SAMPLE
+{% endhint %}
 
 ## Update issue type screen scheme
 
+`PUT /rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}`
+
 Updates an issue type screen scheme.
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
@@ -269,12 +294,15 @@ func main() {
 
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-```
+</code></pre>
 
 ## Delete issue type screen scheme
 
+`DELETE /rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}`
+
 Deletes an issue type screen scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -321,11 +349,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Append mappings to issue type screen scheme
 
+`PUT /rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}/mapping`
+
 Appends issue type to screen scheme mappings to an issue type screen scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -384,11 +416,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Update issue type screen scheme default screen scheme
 
+`PUT /rest/api/3/issuetypescreenscheme/{issueTypeScreenScheme}/mapping/default`
+
 Updates the default screen scheme of an issue-type screen scheme. The default screen scheme is used for all unmapped issue types.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -436,11 +472,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Remove mappings from issue type screen scheme
 
+`POST /rest/api/3/issuetypescreenscheme/{issueTypeScreenScheme}/mapping/remove`
+
 Removes issue type to screen scheme mappings from an issue type screen scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -488,51 +528,14 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get issue type screen scheme projects
 
+`GET /rest/api/3/issuetypescreenscheme/{issueTypeScreenSchemeId}/project`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of projects associated with an issue-type screen scheme. Only company-managed projects associated with an issue-type screen scheme are returned.
 
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
-	"log"
-	"os"
-)
-
-func main() {
-
-	var (
-		host  = os.Getenv("HOST")
-		mail  = os.Getenv("MAIL")
-		token = os.Getenv("TOKEN")
-	)
-
-	atlassian, err := v2.New(nil, host)
-	if err != nil {
-		return
-	}
-
-	atlassian.Auth.SetBasicAuth(mail, token)
-
-	schemes, response, err := atlassian.Issue.Type.ScreenScheme.Projects(context.Background(), []int{10000}, 0, 50)
-	if err != nil {
-
-		if response != nil {
-			log.Println(response.Bytes.String())
-		}
-
-		log.Fatal(err)
-	}
-
-	log.Println("HTTP Endpoint Used", response.Endpoint)
-
-	for _, scheme := range schemes.Values {
-		fmt.Print(scheme)
-	}
-}
-```
+{% hint style="warning" %}
+CREATE THE CODE SAMPLE
+{% endhint %}
