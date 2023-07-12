@@ -2,14 +2,19 @@
 description: >-
   This resource represents permissions. Use it to obtain details of all
   permissions and determine whether the user has certain permissions.
+cover: ../../.gitbook/assets/change-management_1120x545@2x-1560x760.png
+coverY: 0
 ---
 
 # 🔓 Permissions
 
 ## Get my permissions
 
+`GET /rest/api/{2-3}/mypermissions`
+
 Returns a list of permissions indicating which permissions the user has. Details of the user's permissions can be obtained in a global, project, or issue context.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -48,14 +53,18 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Check permissions
+
+`POST /rest/api/{2-3}/permissions/check`
 
 * for a list of global permissions, the global permissions are granted to a user.
 * for a list of project permissions and lists of projects and issues, for each project permission a list of the projects and issues a user can access or manipulate.
 
 If no account ID is provided, the operation returns details for the logged-in user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -114,6 +123,18 @@ func main() {
 	for _, permission := range grants.ProjectPermissions {
 		log.Println(permission.Permission, permission.Issues)
 	}
-
 }
 ```
+{% endcode %}
+
+## Get permitted projects
+
+`POST /rest/api/{2-3}/permissions/project`
+
+Returns all the projects where the user is granted a list of project permissions.
+
+This operation can be accessed anonymously.
+
+{% hint style="warning" %}
+CREATE THE CODE SAMPLE
+{% endhint %}
