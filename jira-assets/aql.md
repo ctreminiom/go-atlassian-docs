@@ -1,17 +1,21 @@
-# 🔎 Aql
+---
+cover: ../.gitbook/assets/growthgauntletcoverillo.jpg
+coverY: 0
+---
 
-## Overview
+# 🔎 Aql
 
 Assets Query Language (AQL) is a language format used in Assets in Jira Service Management to create search queries for one or more objects. Using AQL, you can return any object or group of objects in Assets in a search, filter objects, modify objects, create custom fields, automation, and more.
 
 <figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption><p>AQL Sample</p></figcaption></figure>
 
-{% embed url="https://support.atlassian.com/jira-service-management-cloud/docs/use-assets-query-language-aql/" %}
-
 ### Filter objects
 
-The _**Filter**_ method retrieves a list of objects based on an AQL. Note that the preferred endpoint is /aql
+`GET /jsm/assets/workspace/{workspaceId}/v1/aql/objects`
 
+Deprecated. Please use [Object.Search()](object/#search-objects) instead. Find objects based on Assets Query Language (AQL)
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -62,26 +66,37 @@ func main() {
 	asset.Auth.SetBasicAuth(mail, token)
 
 	payload := &models.AQLSearchParamsScheme{
-		Query:          "objectType = Office AND Name LIKE SYD",
-		ObjectSchemaID: "2",
-		ObjectTypeID:   "2",
-		ResultsPerPage: 50,
+		Query:                 "Name LIKE Test",
+		Page:                  0,
+		ResultPerPage:         25,
+		IncludeAttributes:     false,
+		IncludeAttributesDeep: false,
+		IncludeTypeAttributes: false,
+		IncludeExtendedInfo:   false,
 	}
 
-	page, response, err := asset.AQL.Filter(context.Background(), workSpaceID, payload)
+	objects, response, err := asset.AQL.Filter(context.Background(), workSpaceID, payload)
 	if err != nil {
 		if response != nil {
 			log.Println(response.Bytes.String())
 			log.Println("Endpoint:", response.Endpoint)
 		}
+
 		log.Fatal(err)
 	}
 
-	fmt.Println(page)
-	for _, object := range page.ObjectEntries {
-		fmt.Println(object)
+	for _, entry := range objects.ObjectEntries {
+		fmt.Println(entry.ID, entry.Updated)
 	}
+
+	for _, attribute := range objects.ObjectTypeAttributes {
+		fmt.Println(attribute.Name, attribute.ID, attribute.GlobalId)
+	}
+
+	fmt.Println(objects.OrderWay)
+	fmt.Println(objects.QlQuery)
 }
 ```
+{% endcode %}
 
 \

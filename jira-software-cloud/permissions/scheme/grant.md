@@ -1,9 +1,17 @@
+---
+cover: ../../../.gitbook/assets/homegrown-innovation_1120x545@2x-1560x760.png
+coverY: -38
+---
+
 # 🔑 Grant
 
 ## Get permission scheme grants
 
+`GET /rest/api/{2-3}/permissionscheme/{schemeId}/permission`
+
 Returns all permission grants for a permission scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -53,11 +61,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create permission grant
 
+`POST /rest/api/{2-3}/permissionscheme/{schemeId}/permission`
+
 Creates a permission grant in a permission scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -113,11 +125,15 @@ func main() {
 	log.Println(permissionGrant)
 }
 ```
+{% endcode %}
 
 ## Get permission scheme grant
 
+`GET /rest/api/{2-3}/permissionscheme/{schemeId}/permission/{permissionId}`
+
 Returns a permission grant.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -167,11 +183,15 @@ func main() {
 	log.Println(grant)
 }
 ```
+{% endcode %}
 
 ## Delete permission scheme grant
 
+`DELETE /rest/api/{2-3}/permissionscheme/{schemeId}/permission/{permissionId}`
+
 Deletes a permission grant from a permission scheme
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -220,3 +240,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

@@ -1,3 +1,9 @@
+---
+cover: >-
+  ../.gitbook/assets/the-keystroke-that-changed-how-i-worked-forever-compressed-1560x760.gif
+coverY: 0
+---
+
 # 📠 Introduction
 
 **Assets** is Jira Service Management’s native asset and configuration management tool. It gives teams a flexible and dynamic way to track all kinds of assets and configuration items (CIs), enabling teams to easily link them to service requests, incidents, problems, changes, and workloads.

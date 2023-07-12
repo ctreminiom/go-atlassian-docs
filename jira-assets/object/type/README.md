@@ -1,6 +1,9 @@
-# 🏥 Type
+---
+cover: ../../../.gitbook/assets/homegrown-innovation_1120x545@2x-1560x760.png
+coverY: 0
+---
 
-## Overview
+# 🧰 Type
 
 An object type represents a group of similar objects in an _object schema_. These objects share _attributes_, and other characteristics that make them useful to hold information about a certain type of asset or service.
 
@@ -12,8 +15,11 @@ Similarly you can set some object types as abstract, meaning that they can’t c
 
 ### Get object type
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/objecttype/{id}`
+
 The _**Get**_ method finds an object type by id
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -86,11 +92,15 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Update object type
 
+`PUT /jsm/assets/workspace/{workspaceId}/v1/objecttype/{id}`
+
 The _**Update**_ method updates an existing object type
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -152,11 +162,15 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Delete object type
 
+`DELETE /jsm/assets/workspace/{workspaceId}/v1/objecttype/{id}`
+
 The _**Delete**_ method deletes an object type
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -218,11 +232,15 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Get object type attributes
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/objecttype/{id}/attributes`
+
 The _**Attributes**_ method finds all attributes for this object type
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -299,11 +317,15 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Update object type position
 
+`POST /jsm/assets/workspace/{workspaceId}/v1/objecttype/{id}/position`
+
 The _**Position**_ method changes position of this object type.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -371,11 +393,15 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Create object type
 
+`POST /jsm/assets/workspace/{workspaceId}/v1/objecttype/create`
+
 The _**Create**_ method creates a new object type
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -447,3 +473,4 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}

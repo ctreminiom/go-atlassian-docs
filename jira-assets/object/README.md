@@ -1,6 +1,9 @@
-# 🦞 Object
+---
+cover: ../../.gitbook/assets/strategic-planning-vs-cognitive-biases-1560x760.jpg
+coverY: 0
+---
 
-## Overview
+# 🛍 Object
 
 Creating a custom Assets objects field allows your team to access Assets objects directly from the issue view. This is a powerful feature of Assets in Jira Service Management that can help your agents get the context they need to resolve an issue or request quickly and effectively.
 
@@ -14,12 +17,11 @@ It’s also useful for change management because it allows you to see the bigger
 
 ### Get object by ID
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/object/{id}`
+
 The Get method load one object.
 
-{% hint style="info" %}
-It uses the endpoint `/object/{id} documented` [`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-get)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -103,18 +105,17 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 
 	spew.Dump(object)
-
 }
 ```
+{% endcode %}
 
 ### Update object by ID
 
+`PUT /jsm/assets/workspace/{workspaceId}/v1/object/{id}`
+
 The _**Update**_ method updates an asset object.
 
-{% hint style="info" %}
-It uses the endpoint `/object/{id} documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-put)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -201,15 +202,15 @@ func main() {
 	fmt.Println("--------")
 }
 ```
+{% endcode %}
 
 ### Delete object by ID
 
+`DELETE /jsm/assets/workspace/{workspaceId}/v1/object/{id}`
+
 The _**Delete**_ method deletes an asset object.
 
-{% hint style="info" %}
-It uses the endpoint `/object/{id} documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-delete)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -267,18 +268,17 @@ func main() {
 	}
 
 	log.Println("Endpoint:", response.Endpoint)
-
 }
 ```
+{% endcode %}
 
 ### Get object attributes
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/object/{id}/attributes`
+
 The _**Attributes**_ method returns the asset object attributes.
 
-{% hint style="info" %}
-It uses the endpoint `/object/{id}/attributes documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-attributes-get)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -352,15 +352,15 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Get object changelogs
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/object/{id}/history`
+
 The _**History**_ method returns the asset object changelogs.
 
-{% hint style="info" %}
-It uses the endpoint `/object/{id}/history documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-history-get)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -426,15 +426,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ### Get object references
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/object/{id}/referenceinfo`
+
 The _**References**_ method returns the asset object references links.
 
-{% hint style="info" %}
-It uses the endpoint `/object/{id}/referenceinfo documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-id-referenceinfo-get)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -499,15 +499,15 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Create object
 
+`POST /jsm/assets/workspace/{workspaceId}/v1/object/create`
+
 The _**Create**_ method creates an asset object
 
-{% hint style="info" %}
-It uses the endpoint `/object/create documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-create-post)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -585,15 +585,15 @@ func main() {
 	spew.Dump(object)
 }
 ```
+{% endcode %}
 
 ### Get object tickets
 
+`GET /jsm/assets/workspace/{workspace}/v1/objectconnectedtickets/{object}/tickets`
+
 The _**Relation**_ method returns the relation between Jira issues and Assets objects
 
-{% hint style="info" %}
-It uses the endpoint `/objectconnectedtickets/{objectId}/tickets documented` [`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-objectconnectedtickets/#api-objectconnectedtickets-objectid-tickets-get)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -658,15 +658,15 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ### Filter objects <a href="#filter-objects" id="filter-objects"></a>
 
+`POST /jsm/assets/workspace/{workspaceId}/v1/object/aql`
+
 The _**Filter**_ method returns Objects using an AQL query
 
-{% hint style="info" %}
-It uses the endpoint `/object/aql documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-aql-post)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -737,15 +737,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ### Search objects
 
+`POST /jsm/assets/workspace/{workspaceId}/v1/object/navlist/aql`
+
 The _**Search**_ method retrieves a list of objects based on an AQL. Please **note** that the preferred endpoint is `/aql`
 
-{% hint style="info" %}
-It uses the endpoint `/object/navlist/aql documented`[`here.`](https://developer.atlassian.com/cloud/assets/rest/api-group-object/#api-object-navlist-aql-post)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -831,3 +831,4 @@ func main() {
 	fmt.Println(objects.QlQuery)
 }
 ```
+{% endcode %}

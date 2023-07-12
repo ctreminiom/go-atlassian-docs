@@ -1,9 +1,17 @@
-# 📿 Schema
+---
+cover: ../../.gitbook/assets/artboard-2@3x-1560x760.png
+coverY: 0
+---
+
+# 📠 Schema
 
 ## Get object schema list
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/objectschema/list`
+
 The `List` method return all the object schemas available on Assets.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -80,11 +88,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create object schema
 
+`POST /jsm/assets/workspace/{workspaceId}/v1/objectschema/create`
+
 The `Create` method creates a new object schema
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -165,11 +177,15 @@ func main() {
 	fmt.Println("--------")
 }
 ```
+{% endcode %}
 
 ## Get object schema
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/objectschema/{id}`
+
 The `Get` method returns an object schema by ID
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -243,11 +259,15 @@ func main() {
 	fmt.Println("--------")
 }
 ```
+{% endcode %}
 
 ## Update object schema
 
+`PUT /jsm/assets/workspace/{workspaceId}/v1/objectschema/{id}`
+
 The `Update` method updates an object schema
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -328,11 +348,15 @@ func main() {
 	fmt.Println("--------")
 }
 ```
+{% endcode %}
 
 ## Delete object schema
 
+`DELETE /jsm/assets/workspace/{workspaceId}/v1/objectschema/{id}`
+
 The `Delete` method deletes a schema
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -406,11 +430,15 @@ func main() {
 	fmt.Println("--------")
 }
 ```
+{% endcode %}
 
 ## Get object schema attributes
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/objectschema/{id}/attributes`
+
 The `Attributes` method finds all the object type attributes for this object schema
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -489,11 +517,15 @@ func main() {
 	}
 }	
 ```
+{% endcode %}
 
 ## Get object schema types
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/objectschema/{id}/objecttypes`
+
 The `ObjectTypes` method returns all the object types for this object schema
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -556,3 +588,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

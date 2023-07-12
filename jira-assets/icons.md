@@ -1,9 +1,17 @@
+---
+cover: ../.gitbook/assets/conways-law_1120x545@2x-1560x760.jpg
+coverY: 0
+---
+
 # 👾 Icons
 
 ## Get icon
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/icon/{id}`
+
 The `Get` method loads a single asset icon by id.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -64,11 +72,15 @@ func main() {
 	fmt.Println(icon.ID, icon.Name)
 }
 ```
+{% endcode %}
 
 ## Get global icons
 
+`GET /jsm/assets/workspace/{workspaceId}/v1/icon/global`
+
 The `Gets`method returns all global icons i.e. icons not associated with a particular object schema.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -131,3 +143,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}
