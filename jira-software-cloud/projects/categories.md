@@ -1,20 +1,19 @@
 ---
-description: >-
-  This resource represents project categories. Use it to create, update, and
-  delete project categories as well as obtain a list of all project categories
-  and details of individual categories.
+cover: ../../.gitbook/assets/team_personality_tests_1120x545@2x-1560x760.jpeg
+coverY: 0
 ---
 
 # 🧩 Categories
 
 ## Get all project categories
 
+`GET /rest/api/{2-3}/projectCategory`
+
 Returns all project categories.
 
-```go
-package main
-
-import (
+<pre class="language-go" data-full-width="true"><code class="lang-go">package main
+<strong>
+</strong>import (
 	"context"
 	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
@@ -58,12 +57,15 @@ func main() {
 		log.Println("----------------")
 	}
 }
-```
+</code></pre>
 
 ## Create project category
 
+`POST /rest/api/{2-3}/projectCategory`
+
 Creates a project category.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -121,11 +123,15 @@ func main() {
 	log.Printf("The new category %v has been created with the ID %v", newCategory.Name, newCategory.ID)
 }
 ```
+{% endcode %}
 
 ## Get project category by ID
 
+`GET /rest/api/{2-3}/projectCategory/{id}`
+
 Returns a project category.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -174,11 +180,15 @@ func main() {
 	log.Println(category)
 }
 ```
+{% endcode %}
 
 ## Update project category
 
+`PUT /rest/api/{2-3}/projectCategory/{id}`
+
 Updates a project category.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -237,11 +247,15 @@ func main() {
 	log.Printf("The project category %v has been updated", categoryUpdated.ID)
 }
 ```
+{% endcode %}
 
 ## Delete project category
 
+`DELETE /rest/api/{2-3}/projectCategory/{id}`
+
 Deletes a project category.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -290,3 +304,4 @@ func main() {
 	log.Println("HTTP Endpoint Bytes", response.Bytes.String())
 }
 ```
+{% endcode %}

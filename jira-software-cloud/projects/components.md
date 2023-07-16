@@ -3,14 +3,19 @@ description: >-
   This resource represents project components. Uses to get, create, update, and
   delete project components. Also get components for project and get a count of
   issues by component.
+cover: ../../.gitbook/assets/whats-your-chronotype-1560x760.jpg
+coverY: 0
 ---
 
 # 🔮 Components
 
 ## Create component
 
+`POST /rest/api/{2-3}/component`
+
 Creates a component. Use components to provide containers for issues within a project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -65,11 +70,15 @@ func main() {
 	log.Printf("The new component has been created with the ID %v", newComponent.ID)
 }
 ```
+{% endcode %}
 
 ## Get component
 
+`GET /rest/api/{2-3}/component/{id}`
+
 Returns a component.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -114,11 +123,15 @@ func main() {
 	log.Println(response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Update component
 
+`PUT /rest/api/{2-3}/component/{id}`
+
 Updates a component. Any fields included in the request are overwritten. If `leadAccountId` is an empty string ("") the component lead is removed.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -170,11 +183,15 @@ func main() {
 	log.Println(componentUpdated)
 }
 ```
+{% endcode %}
 
 ## Delete component
 
+`DELETE /rest/api/{2-3}/component/{id}`
+
 Deletes a component.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -218,11 +235,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get component issues count
 
+`GET /rest/api/{2-3}/component/{id}/relatedIssueCounts`
+
 Returns the counts of issues assigned to the component.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -267,12 +288,15 @@ func main() {
 	log.Println(response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get project components <a href="#get-project-components" id="get-project-components"></a>
 
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/components`
+
 Returns all components in a project.
 
-{% code overflow="wrap" lineNumbers="true" %}
+{% code overflow="wrap" lineNumbers="true" fullWidth="true" %}
 ```go
 package main
 

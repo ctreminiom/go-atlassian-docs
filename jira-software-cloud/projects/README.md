@@ -1,16 +1,18 @@
 ---
-description: >-
-  This resource represents projects. Use this resource to get, create, update,
-  and delete projects. Also get statuses available to a project, a project's
-  notification schemes, and update a project's typ
+cover: >-
+  ../../.gitbook/assets/hero_1120x545_csd-5489-tier-1-illo-interpersonal-skills-1-9-in-series@2x-1560x760.png
+coverY: 0
 ---
 
 # 📚 Projects
 
 ## Create project
 
+`POST /rest/api/{2-3}/project`
+
 Creates a project based on a project type template
 
+{% code fullWidth="true" %}
 ```go
 const (
 	BusinessContentManagement    = "com.atlassian.jira-core-project-templates:jira-core-simplified-content-management"
@@ -30,7 +32,9 @@ const (
 	SoftwareCompanyManagedScrum  = "com.pyxis.greenhopper.jira:gh-simplified-scrum-classic"
 )
 ```
+{% endcode %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -97,11 +101,15 @@ func main() {
 	log.Println("-------------------")
 }
 ```
+{% endcode %}
 
 ## Get projects paginated
 
+`GET /rest/api/{2-3}/project/search`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of projects visible to the user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -161,11 +169,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get project
 
-&#x20;Returns the [project details](https://confluence.atlassian.com/x/ahLpNw)
+`GET /rest/api/{2-3}/project/{projectIdOrKey}`&#x20;
 
+Returns the [project details](https://confluence.atlassian.com/x/ahLpNw)
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -214,11 +226,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Update project
 
-&#x20;Updates the [project details](https://confluence.atlassian.com/x/ahLpNw) of a project.
+`PUT /rest/api/{2-3}/project/{projectIdOrKey}`
 
+Updates the [project details](https://confluence.atlassian.com/x/ahLpNw) of a project.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -268,12 +284,17 @@ func main() {
 	log.Println(projectUpdated)
 }
 ```
+{% endcode %}
 
 ## Delete project
 
+`DELETE /rest/api/{2-3}/project/{projectIdOrKey}`
+
 Deletes a project.
 
+{% code fullWidth="true" %}
 ```go
+
 package main
 
 import (
@@ -308,11 +329,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Archive project
 
+`POST /rest/api/{2-3}/project/{projectIdOrKey}/archive`
+
 Archives a project. Archived projects cannot be deleted. To delete an archived project, restore the project and then delete it. To restore a project, use the Jira UI.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -356,11 +381,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Delete project asynchronously
 
+`POST /rest/api/{2-3}/project/{projectIdOrKey}/delete`
+
 Deletes a project asynchronously.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -398,11 +427,15 @@ func main() {
 	log.Println(task)
 }
 ```
+{% endcode %}
 
 ## Restore deleted project
 
+`POST /rest/api/{2-3}/project/{projectIdOrKey}/restore`
+
 Restores a project from the Jira recycle bin.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -440,11 +473,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Get all statuses for project
 
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/statuses`
+
 Returns the valid statuses for a project. The statuses are grouped by issue type, as each project has a set of valid issue types and each issue type has a set of valid statuses.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -492,11 +529,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get project notification scheme
 
-&#x20;Gets a [notification scheme](https://confluence.atlassian.com/x/8YdKLg) associated with the project.&#x20;
+`GET /rest/api/{2-3}/project/{projectKeyOrId}/notificationscheme`
 
+Gets a [notification scheme](https://confluence.atlassian.com/x/8YdKLg) associated with the project.&#x20;
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -552,3 +593,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}
