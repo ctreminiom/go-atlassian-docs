@@ -1,13 +1,18 @@
 ---
 description: This resource represents permission schemes for a project.
+cover: ../../.gitbook/assets/mb-personalities_1120x545-@2xcompressed-1560x760.png
+coverY: 0
 ---
 
 # 🚧 Permission Schemes
 
 ## Get assigned permission scheme
 
-&#x20;Gets the [permission scheme](https://confluence.atlassian.com/x/yodKLg) associated with the project.
+`GET /rest/api/{2-3}/project/{projectKeyOrId}/permissionscheme`&#x20;
 
+Gets the [permission scheme](https://confluence.atlassian.com/x/yodKLg) associated with the project.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -52,11 +57,15 @@ func main() {
 	log.Println(scheme)
 }
 ```
+{% endcode %}
 
 ## Assign permission scheme
 
+`PUT /rest/api/{2-3}/project/{projectKeyOrId}/permissionscheme`
+
 Assigns a permission scheme with a project
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -106,11 +115,15 @@ func main() {
 	log.Println(scheme)
 }
 ```
+{% endcode %}
 
 ## Get project issue security levels
 
-&#x20;Returns all [issue security](https://confluence.atlassian.com/x/J4lKLg) levels for the project that the user has access to.
+`GET /rest/api/{2-3}/project/{projectKeyOrId}/securitylevel`
 
+Returns all [issue security](https://confluence.atlassian.com/x/J4lKLg) levels for the project that the user has access to.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -158,3 +171,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}
