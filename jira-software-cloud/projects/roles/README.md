@@ -1,15 +1,17 @@
 ---
-description: >-
-  This resource represents the roles that users can play in projects. Use this
-  resource to get, create, update, and delete project roles.
+cover: ../../../.gitbook/assets/leadership-principles_1120x545@2x-1560x760.png
+coverY: 0
 ---
 
 # 💼 Roles
 
 ## Get project roles for project
 
-&#x20;Returns a list of [project roles](https://confluence.atlassian.com/x/3odKLg) for the project returning the name and self URL for each role.
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/role`
 
+Returns a list of [project roles](https://confluence.atlassian.com/x/3odKLg) for the project returning the name and self URL for each role.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -58,11 +60,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get project role for project
 
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/role/{id}`
+
 Returns a project role's details and actors associated with the project. The list of actors is sorted by display name.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -112,11 +118,15 @@ func main() {
 	log.Println(role.Self)
 }
 ```
+{% endcode %}
 
 ## Get project role details
 
-&#x20;Returns all [project roles](https://confluence.atlassian.com/x/3odKLg) and the details for each role. Note that the list of project roles is common to all projects.
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/roledetails`
 
+Returns all [project roles](https://confluence.atlassian.com/x/3odKLg) and the details for each role. Note that the list of project roles is common to all projects.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -168,11 +178,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get all project roles
 
+`GET /rest/api/{2-3}/role`
+
 Gets a list of all project roles, complete with project role details and default actors.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -220,11 +234,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create project role
 
+`POST /rest/api/{2-3}/role`
+
 Creates a new project role with no [default actors](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-resolutions/#api-rest-api-3-resolution-get).&#x20;
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -275,3 +293,4 @@ func main() {
 	log.Println(newRole)
 }
 ```
+{% endcode %}

@@ -1,9 +1,18 @@
+---
+cover: >-
+  ../../.gitbook/assets/csd-222-t1illustrationrefresh-5-signs-of-a-toxic-work-culture-v4a-1560x760.png
+coverY: 0
+---
+
 # 📤 Properties
 
 ## Get project properties keys
 
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/properties`
+
 Returns all keys for the project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -51,15 +60,17 @@ func main()  {
 	}
 }
 ```
+{% endcode %}
 
 ## Get project property
 
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/properties/{propertyKey}`
+
 Returns the value of a [project property](https://developer.atlassian.com/cloud/jira/platform/storing-data-without-a-database/#a-id-jira-entity-properties-a-jira-entity-properties).
 
-```go
-package main
-
-import (
+<pre class="language-go" data-full-width="true"><code class="lang-go">package main
+<strong>
+</strong>import (
 	"context"
 	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
@@ -100,12 +111,15 @@ func main()  {
 	log.Printf("Key: %v -- Value: %v", property.Key, property.Value)
 }
 
-```
+</code></pre>
 
 ## Set project property
 
+`PUT /rest/api/{2-3}/project/{projectIdOrKey}/properties/{propertyKey}`
+
 Sets the value of the [project property](https://developer.atlassian.com/cloud/jira/platform/storing-data-without-a-database/#a-id-jira-entity-properties-a-jira-entity-properties). You can use project properties to store custom data against the project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -155,11 +169,15 @@ func main()  {
 }
 
 ```
+{% endcode %}
 
 ## Delete project property
 
+`DELETE /rest/api/{2-3}/project/{projectIdOrKey}/properties/{propertyKey}`
+
 Deletes the [property](https://developer.atlassian.com/cloud/jira/platform/storing-data-without-a-database/#a-id-jira-entity-properties-a-jira-entity-properties) from a project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -203,3 +221,4 @@ func main()  {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

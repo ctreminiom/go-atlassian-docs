@@ -1,15 +1,17 @@
 ---
-description: >-
-  This resource represents project features. Use it to get the list of features
-  for a project and modify the state of a feature
+cover: ../../.gitbook/assets/change-management_1120x545@2x-1560x760.png
+coverY: 0
 ---
 
 # 🙌 Features
 
 ## Get project features
 
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/features`
+
 Returns the list of features for a project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -57,11 +59,15 @@ func main()  {
 }
 
 ```
+{% endcode %}
 
 ## Set project feature state
 
+`PUT /rest/api/{2-3}/project/{projectIdOrKey}/features/{featureKey}`
+
 Sets the state of a project feature.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -112,3 +118,4 @@ func main()  {
 	}
 }
 ```
+{% endcode %}

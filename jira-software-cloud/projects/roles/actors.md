@@ -3,14 +3,19 @@ description: >-
   This resource represents the users assigned to project roles. Use this
   resource to get, add, and remove default users from project roles. Also use
   this resource to add and remove users from a project
+cover: ../../../.gitbook/assets/growthgauntletcoverillo.jpg
+coverY: 0
 ---
 
 # 👨👩👧👧 Actors
 
 ## Add actors to project role
 
+`POST /rest/api/{2-3}/project/{projectIdOrKey}/role/{id}`
+
 Adds actors to a project role for the project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -71,11 +76,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Delete actors from project role
 
+`DELETE /rest/api/{2-3}/project/{projectIdOrKey}/role/{id}`
+
 Deletes actors from a project role for the project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -136,3 +145,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

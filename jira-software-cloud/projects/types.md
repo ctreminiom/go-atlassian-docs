@@ -1,16 +1,17 @@
 ---
-description: >-
-  This resource represents project types. Use it to obtain a list of all project
-  types, a list of project types accessible to the calling user, and details of
-  a project type.
+cover: ../../.gitbook/assets/emailqa_1120x545@2x-1560x760.jpg
+coverY: 0
 ---
 
 # 🧵 Types
 
 ## Get all project types
 
-&#x20;Returns all [project types](https://confluence.atlassian.com/x/Var1Nw)
+`GET /rest/api/{2-3}/project/type`&#x20;
 
+Returns all [project types](https://confluence.atlassian.com/x/Var1Nw)
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -63,11 +64,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get licensed project types
 
-&#x20;Returns all [project types](https://confluence.atlassian.com/x/Var1Nw)
+`GET /rest/api/{2-3}/project/type/accessible`&#x20;
 
+Returns all [project types](https://confluence.atlassian.com/x/Var1Nw)
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -119,11 +124,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get project type by key
 
-&#x20;Returns a [project type](https://confluence.atlassian.com/x/Var1Nw)
+`GET /rest/api/{2-3}/project/type/{projectTypeKey}`&#x20;
 
+Returns a [project type](https://confluence.atlassian.com/x/Var1Nw)
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -172,11 +181,15 @@ func main() {
 	log.Println(projectType)
 }
 ```
+{% endcode %}
 
 ## Get accessible project type by key
 
-&#x20;Returns a [project type](https://confluence.atlassian.com/x/Var1Nw)
+`GET /rest/api/{2-3}/project/type/{projectTypeKey}/accessible`
 
+Returns a [project type](https://confluence.atlassian.com/x/Var1Nw)
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -225,3 +238,4 @@ func main() {
 	log.Println(projectType)
 }
 ```
+{% endcode %}

@@ -1,16 +1,17 @@
 ---
-description: >-
-  This resource represents project versions. Use it to get, get lists of,
-  create, update, move, merge, and delete project versions. This resource also
-  provides counts of issues by version.
+cover: ../../.gitbook/assets/homegrown-innovation_1120x545@2x-1560x760.png
+coverY: 0
 ---
 
 # 🧱 Versions
 
 ## Get project versions
 
+`GET /rest/api/{2-3}/project/{projectIdOrKey}/versions`
+
 Returns all versions in a project. The response is not paginated.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -63,11 +64,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create version
 
+`POST /rest/api/{2-3}/version`
+
 Creates a project version.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -127,11 +132,15 @@ func main() {
 	log.Printf("The new version has been created with the ID %v", newVersion.ID)
 }
 ```
+{% endcode %}
 
 ## Get version
 
+`GET /rest/api/{2-3}/version/{id}`
+
 Returns a project version.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -180,14 +189,16 @@ func main() {
 	log.Println(version)
 }
 ```
+{% endcode %}
 
 ## Update version
 
+`PUT /rest/api/{2-3}/version/{id}`
+
 Updates a project version.
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
 	"context"
 	_ "github.com/ctreminiom/go-atlassian/jira/v3"
@@ -221,7 +232,7 @@ func main() {
 
 	atlassian.Auth.SetBasicAuth(mail, token)
 
-	payload := &models.VersionPayloadScheme{
+	payload := &#x26;models.VersionPayloadScheme{
 		Archived:    false,
 		Name:        "Version Sandbox - UPDATED",
 		Description: "Version Sandbox description - UPDATED",
@@ -241,12 +252,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(versionUpdated)
 }
-```
+</code></pre>
 
 ## Merge versions
 
+`PUT /rest/api/{2-3}/version/{id}/mergeto/{moveIssuesTo}`
+
 Merges two project versions. The merge is completed by deleting the version specified in `id` and replacing any occurrences of its ID in `fixVersion` with the version ID specified in `moveIssuesTo`.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -294,8 +308,11 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get version's related issues count
+
+`GET /rest/api/{2-3}/version/{id}/relatedIssueCounts`
 
 Returns the following counts for a version:
 
@@ -303,6 +320,7 @@ Returns the following counts for a version:
 * Number of issues where the `affectedVersion` is set to the version.
 * Number of issues where a version custom field is set to the version.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -348,11 +366,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Get version's unresolved issues count
 
+`GET /rest/api/{2-3}/version/{id}/unresolvedIssueCount`
+
 Returns counts of the issues and unresolved issues for the project version.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -400,3 +422,4 @@ func main() {
 	log.Println(count)
 }
 ```
+{% endcode %}
