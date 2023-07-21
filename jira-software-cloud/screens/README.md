@@ -1,13 +1,19 @@
 ---
 description: This resource represents the screens used to record issue details
+cover: >-
+  ../../.gitbook/assets/the-keystroke-that-changed-how-i-worked-forever-compressed-1560x760.gif
+coverY: 0
 ---
 
 # 📓 Screens
 
 ## Get screens for a field
 
+`GET /rest/api/{2-3}/field/{fieldId}/screens`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of the screens a field is used in.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -62,11 +68,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get screens
 
+`GET /rest/api/{2-3}/screens`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all screens or those specified by one or more screen IDs.
 
+{% code fullWidth="true" %}
 ```go
 package main
 import (
@@ -111,11 +121,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create screen
 
+`POST /rest/api/{2-3}/screens`
+
 Creates a screen with a default field tab.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -161,14 +175,16 @@ func main() {
 	log.Printf("The new screen has been created with the ID %v", newScreen.ID)
 }
 ```
+{% endcode %}
 
 ## Add field to default screen
 
+`POST /rest/api/{2-3}/screens/addToDefault/{fieldId}`
+
 Adds a field to the default tab of the default screen.
 
-```go
-package main
-import (
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>import (
 	"context"
 	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
@@ -202,12 +218,15 @@ func main() {
 	log.Println("Response HTTP Code", response.Code)
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
-```
+</code></pre>
 
 ## Update screen
 
+`PUT /rest/api/{2-3}/screens/{screenId}`
+
 Updates a screen. Only screens used in classic projects can be updated.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -253,11 +272,15 @@ func main() {
 	log.Println(screenUpdated)
 }
 ```
+{% endcode %}
 
 ## Delete screen
 
+`DELETE /rest/api/{2-3}/screens/{screenId}`
+
 Deletes a screen. A screen cannot be deleted if it is used in a screen scheme, workflow, or workflow draft. Only screens used in classic projects can be deleted.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -302,11 +325,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get available screen fields
 
+`GET /rest/api/{2-3}/screens/{screenId}/availableFields`
+
 Returns the fields that can be added to a tab on a screen.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -355,3 +382,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}
