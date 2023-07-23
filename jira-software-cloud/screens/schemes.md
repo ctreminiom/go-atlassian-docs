@@ -1,15 +1,17 @@
 ---
-description: >-
-  This resource represents screen schemes in classic projects. Use it to get,
-  create, update, and delete screen schemes.
+cover: ../../.gitbook/assets/2240x1090-1-1560x760.jpg
+coverY: 0
 ---
 
 # 📠 Schemes
 
 ## Get screen schemes
 
+`GET /rest/api/{2-3}/screenscheme`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of screen schemes. Only screen schemes used in classic projects are returned.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -58,11 +60,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create screen scheme
 
+`POST /rest/api/{2-3}/screenscheme`
+
 Creates a screen scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -119,11 +125,15 @@ func main() {
 	log.Printf("The new screen scheme has been created with the ID %v", newScreenScheme.ID)
 }
 ```
+{% endcode %}
 
-## Update screen scheme
+## Update      een scheme
+
+`PUT /rest/api/{2-3}/screenscheme/{screenSchemeId}`
 
 Updates a screen scheme. Only screen schemes used in classic projects can be updated.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -179,11 +189,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Delete screen scheme
 
+`DELETE /rest/api/{2-3}/screenscheme/{screenSchemeId}`
+
 Deletes a screen scheme. A screen scheme cannot be deleted if it is used in an issue type screen scheme. Only screens schemes used in classic projects can be deleted.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -228,3 +242,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

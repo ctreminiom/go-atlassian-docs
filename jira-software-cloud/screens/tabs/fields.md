@@ -1,15 +1,17 @@
 ---
-description: >-
-  This resource represents the screen tab fields used to record issue details.
-  Use this resource to get, add, move, and remove fields from screen tabs.
+cover: ../../../.gitbook/assets/strategic-planning-vs-cognitive-biases-1560x760.jpg
+coverY: 0
 ---
 
 # 🧰 Fields
 
 ## Get all screen tab fields
 
+`GET /rest/api/{2-3}/screens/{screenId}/tabs/{tabId}/fields`
+
 Returns all fields for a screen tab.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -63,14 +65,16 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Add screen tab field
 
+`POST /rest/api/{2-3}/screens/{screenId}/tabs/{tabId}/fields`
+
 Adds a field to a screen tab.
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
 	"context"
 	_ "github.com/ctreminiom/go-atlassian/jira/v3"
@@ -119,12 +123,15 @@ func main() {
 	log.Println(tab)
 }
 
-```
+</code></pre>
 
 ## Remove screen tab field
 
+`DELETE /rest/api/{2-3}/screens/{screenId}/tabs/{tabId}/fields/{id}`
+
 Removes a field from a screen tab.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -175,3 +182,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

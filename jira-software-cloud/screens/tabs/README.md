@@ -1,19 +1,19 @@
 ---
-description: >-
-  This resource represents the screen tabs used to record issue details. Use
-  this resource to get, create, update, move, and delete screen tabs.
+cover: ../../../.gitbook/assets/screenshot-2023-06-01-at-1.59.32-pm-1-1560x760.png
+coverY: 0
 ---
 
 # 📂 Tabs
 
 ## Get all screen tabs
 
+`GET /rest/api/{2-3}/screens/{screenId}/tabs`
+
 Returns the list of tabs for a screen.
 
-```go
-package main
-
-import (
+<pre class="language-go" data-full-width="true"><code class="lang-go">package main
+<strong>
+</strong>import (
 	"context"
 	_ "github.com/ctreminiom/go-atlassian/jira/v3"
 	"github.com/ctreminiom/go-atlassian/jira/v2"
@@ -63,12 +63,15 @@ func main() {
 	}
 	
 }
-```
+</code></pre>
 
 ## Create screen tab
 
+`POST /rest/api/{2-3}/screens/{screenId}/tabs`
+
 Creates a tab for a screen.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -120,11 +123,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Update screen tab
 
+`PUT /rest/api/{2-3}/screens/{screenId}/tabs/{tabId}`
+
 Updates the name of a screen tab.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -177,11 +184,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Delete screen tab
 
+`DELETE /rest/api/{2-3}/screens/{screenId}/tabs/{tabId}`
+
 Deletes a screen tab.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -231,11 +242,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Move screen tab
 
+`POST /rest/api/{2-3}/screens/{screenId}/tabs/{tabId}/move/{pos}`
+
 Moves a screen tab.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -286,3 +301,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
