@@ -99,7 +99,6 @@
 
 ## Jira Service Management
 
-* [📙 Workspaces](jira-service-management/workspaces.md)
 * [🗺 Introduction](jira-service-management/introduction.md)
 * [👨⚖ Customer](jira-service-management/customer.md)
 * [ℹ Info](jira-service-management/info.md)
@@ -115,6 +114,7 @@
   * [💾 Types](jira-service-management/request/types.md)
   * [⚙ Service Desk](jira-service-management/request/service-desk/README.md)
     * [🛎 Queue](jira-service-management/request/service-desk/queue.md)
+* [📙 Workspaces](jira-service-management/workspaces.md)
 
 ## Jira Assets&#x20;
 

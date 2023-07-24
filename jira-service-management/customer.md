@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/leadership-principles_1120x545@2x-1560x760.png
+coverY: 0
+---
+
 # 👨⚖ Customer
 
 {% embed url="https://github.com/ctreminiom/go-atlassian/blob/main/pkg/infra/models/sm_customer.go" %}
@@ -6,8 +11,11 @@ SM Customer Models
 
 ## Create customer
 
+`POST /rest/servicedeskapi/customer`
+
 This method adds a customer to the Jira Service Management instance by passing a JSON file including an email address and display name. The display name does not need to be unique. The record's identifiers, `name` and `key`, are automatically generated from the request details.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -62,11 +70,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Add customers
 
+`POST /rest/servicedeskapi/servicedesk/{serviceDeskId}/customer`
+
 Adds one or more customers to a service desk. If any of the passed customers are associated with the service desk, no changes will be made for those customers and the resource returns a 204 success code.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -109,11 +121,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get customers
 
+`GET /rest/servicedeskapi/servicedesk/{serviceDeskId}/customer`
+
 This method returns a list of the customers on a service desk.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -165,11 +181,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Remove customers
 
+`DELETE /rest/servicedeskapi/servicedesk/{serviceDeskId}/customer`
+
 This method removes one or more customers from a service desk. The service desk must have closed access. If any of the passed customers are not associated with the service desk, no changes will be made for those customers and the resource returns a 204 success code.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -213,3 +233,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

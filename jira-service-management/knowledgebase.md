@@ -1,9 +1,17 @@
+---
+cover: ../.gitbook/assets/blog-cmpt-migrates-hero@2x-1560x760.png
+coverY: 0
+---
+
 # 📚 Knowledgebase
 
 ## Search articles
 
+`GET /rest/servicedeskapi/knowledgebase/article`
+
 Returns articles that match the given query string across all service desks.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -60,11 +68,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Get articles
 
+`GET /rest/servicedeskapi/servicedesk/{serviceDeskId}/knowledgebase/article`
+
 Returns articles that match the given query and belong to the knowledge base linked to the service desk.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -120,6 +132,6 @@ func main() {
 	for _, article := range articles.Values {
 		log.Println(article)
 	}
-
 }
 ```
+{% endcode %}

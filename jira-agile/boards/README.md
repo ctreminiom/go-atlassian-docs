@@ -2,11 +2,15 @@
 description: >-
   A board displays issues from one or more projects, giving you a flexible way
   of viewing, managing, and reporting on work in progress.
+cover: ../../.gitbook/assets/team_personality_tests_1120x545@2x-1560x760.jpeg
+coverY: 0
 ---
 
 # 📉 Boards
 
 ## Get issues for backlog
+
+`GET /rest/agile/1.0/board/{boardId}/backlog`
 
 Returns all issues from the board's backlog, for the given board ID.&#x20;
 
@@ -19,6 +23,7 @@ Note, if the user does not have permission to view the board, no issues will be 
 
 Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -75,11 +80,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get configuration
 
+`GET /rest/agile/1.0/board/{boardId}/configuration`
+
 Get the board configuration.&#x20;
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -119,11 +128,15 @@ func main() {
 	log.Println(boardConfig)
 }
 ```
+{% endcode %}
 
 ## Create board
 
+`POST /rest/agile/1.0/board`
+
 Creates a new board. Board name, type ,and filter ID is required
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -177,11 +190,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Get epics
 
+`GET /rest/agile/1.0/board/{boardId}/epic`
+
 Returns all epics from the board, for the given board ID. This only includes epics that the user has permission to view. Note, if the user does not have permission to view the board, no epics will be returned at all.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -225,11 +242,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Get board by filter id
 
+`GET /rest/agile/1.0/board/filter/{filterId}`
+
 Returns any boards which use the provided filter id. This method can be executed by users without a valid software license in order to find which boards are using a particular filter.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -279,11 +300,18 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Get board
 
-Returns the board for the given board ID. This board will only be returned if the user has permission to view it. Admins without the view permission will see the board as a private one, so will see only a subset of the board's data (board location for instance).
+`GET /rest/agile/1.0/board/{boardId}`
 
+Returns the board for the given board ID.&#x20;
+
+* This board will only be returned if the user has permission to view it.&#x20;
+* Admins without the view permission will see the board as a private one, so will see only a subset of the board's data (board location for instance).
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -329,12 +357,24 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Get issues for board
 
-Returns all issues from a board, for a given board ID. This only includes issues that the user has permission to view. An issue belongs to the board if its status is mapped to the board's column. Epic issues do not belongs to the scrum boards. Note, if the user does not have permission to view the board, no issues will be returned at all. Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.\
+`GET /rest/agile/1.0/board/{boardId}/issue`
 
+Returns all issues from a board, for a given board ID.&#x20;
 
+* This only includes issues that the user has permission to view.&#x20;
+* An issue belongs to the board if its status is mapped to the board's column.&#x20;
+* Epic issues do not belongs to the scrum boards.&#x20;
+* Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
+
+{% hint style="info" %}
+**Note**, if the user does not have permission to view the board, no issues will be returned at all.&#x20;
+{% endhint %}
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -391,11 +431,18 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get board issues for epic
 
-Returns all issues that belong to an epic on the board, for the given epic ID and the board ID. This only includes issues that the user has permission to view. Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
+`GET /rest/agile/1.0/board/{boardId}/epic/{epicId}/issue`
 
+Returns all issues that belong to an epic on the board, for the given epic ID and the board ID.&#x20;
+
+* This only includes issues that the user has permission to view.&#x20;
+* Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -453,11 +500,17 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get board issues for sprint
 
-Get all issues you have access to that belong to the sprint from the board. Issue returned from this resource contains additional fields like: sprint, closedSprints, flagged and epic. Issues are returned ordered by rank. JQL order has higher priority than default rank.
+`GET /rest/agile/1.0/board/{boardId}/sprint/{sprintId}/issue`
 
+Get all issues you have access to that belong to the sprint from the board.&#x20;
+
+* Issue returned from this resource contains additional fields like: sprint, closedSprints, flagged and epic. Issues are returned ordered by rank. JQL order has higher priority than default rank.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -515,11 +568,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get issues without epic for board
 
+`GET /rest/agile/1.0/board/{boardId}/epic/none/issue`
+
 Returns all issues that do not belong to any epic on a board, for a given board ID. This only includes issues that the user has permission to view. Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -576,11 +633,17 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Move issues to backlog for board
 
-Move issues to the backlog of a particular board (if they are already on that board). This operation is equivalent to remove future and active sprints from a given set of issues if the board has sprints If the board does not have sprints this will put the issues back into the backlog from the board. At most 50 issues may be moved at once.
+`POST /rest/agile/1.0/board/{boardId}/issue`
 
+Move issues to the backlog of a particular board (if they are already on that board).&#x20;
+
+This operation is equivalent to remove future and active sprints from a given set of issues if the board has sprints If the board does not have sprints this will put the issues back into the backlog from the board. At most 50 issues may be moved at once.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -629,11 +692,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get projects
 
+`GET /rest/agile/1.0/board/{boardId}/project`
+
 Returns all projects that are associated with the board, for the given board ID. If the user does not have permission to view the board, no projects will be returned at all. Returned projects are ordered by the name.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -676,11 +743,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get all sprints
 
+`GET /rest/agile/1.0/board/{boardId}/sprint`
+
 Returns all sprints from a board, for a given board ID. This only includes sprints that the user has permission to view.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -733,11 +804,15 @@ func main() {
 	fmt.Println(response.Bytes.String())
 }
 ```
+{% endcode %}
 
 ## Get all versions
 
+`GET /rest/agile/1.0/board/{boardId}/version`
+
 Returns all versions from a board, for a given board ID. This only includes versions that the user has permission to view. Note, if the user does not have permission to view the board, no versions will be returned at all. Returned versions are ordered by the name of the project from which they belong and then by sequence defined by user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -790,11 +865,15 @@ func main() {
 	fmt.Println(response.Bytes.String())
 }
 ```
+{% endcode %}
 
 ## Delete Board
 
+`DELETE /rest/agile/1.0/board/{boardId}`
+
 Delete deletes the board. Admin without the view permission can still remove the board.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -833,11 +912,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get Boards
 
+`GET /rest/agile/1.0/board`
+
 Gets returns all boards. This only includes boards that the user has permission to view.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -894,3 +977,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

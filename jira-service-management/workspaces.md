@@ -1,15 +1,17 @@
+---
+cover: ../.gitbook/assets/strategic-planning-vs-cognitive-biases-1560x760.jpg
+coverY: 0
+---
+
 # 📙 Workspaces
 
 ### Get workspaces
 
+`GET /rest/servicedeskapi/assets/workspace`
+
 The **Gets** method returns a list of Assets workspace IDs
 
-{% hint style="info" %}
-It uses the endpoint `/rest/servicedeskapi/assets/workspace documented`&#x20;
-
-[`here.`](https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-assets/#api-rest-servicedeskapi-assets-workspace-get)
-{% endhint %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -52,3 +54,4 @@ func main() {
 }
 
 ```
+{% endcode %}

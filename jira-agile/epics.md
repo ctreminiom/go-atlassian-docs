@@ -1,12 +1,13 @@
 ---
-description: >-
-  An agile epic is a body of work that can be broken down into specific tasks
-  (called user stories) based on the needs/requests of customers or end-users.
+cover: ../.gitbook/assets/whats-your-chronotype-1560x760.jpg
+coverY: 0
 ---
 
 # 📈 Epics
 
 ## Get Epic
+
+`GET /rest/agile/1.0/epic/{epicIdOrKey}`
 
 Returns the epic for a given epic ID. This epic will only be returned if the user has permission to view it.
 
@@ -14,6 +15,7 @@ Returns the epic for a given epic ID. This epic will only be returned if the use
 **Note:** This operation does not work for epics in next-gen projects.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -53,8 +55,11 @@ func main() {
 	log.Println(epic)
 }
 ```
+{% endcode %}
 
 ## Get Issues for epic
+
+`GET /rest/agile/1.0/epic/{epicIdOrKey}/issue`
 
 Returns all issues that belong to the epic, for the given epic ID. This only includes issues that the user has permission to view. Issues returned from this resource include Agile fields, like sprint, closedSprints, flagged, and epic. By default, the returned issues are ordered by rank.
 
@@ -66,6 +71,7 @@ Returns all issues that belong to the epic, for the given epic ID. This only inc
 Build your JQL query using the parent clause. For more information on the parent JQL field, see Advanced searching.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -122,8 +128,11 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Move issues to Epic
+
+`POST /rest/agile/1.0/epic/{epicIdOrKey}/issue`
 
 Move moves issues to an epic, for a given epic id. Issues can be only in a single epic at the same time. That means that already assigned issues to an epic, will not be assigned to the previous epic anymore. The user needs to have the edit issue permission for all issue they want to move and to the epic. The maximum number of issues that can be moved in one operation is 50.&#x20;
 
@@ -131,6 +140,7 @@ Move moves issues to an epic, for a given epic id. Issues can be only in a singl
 This operation does not work for epics in next-gen projects.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -169,3 +179,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

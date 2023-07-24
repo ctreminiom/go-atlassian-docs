@@ -1,6 +1,9 @@
-# 📃 Backlog
+---
+cover: ../../.gitbook/assets/bb7f24ad-a935-415f-a11f-c1b2ffec7cb8-1560x760.jpeg
+coverY: 0
+---
 
-## Overview
+# 📃 Backlog
 
 In <mark style="color:blue;">Jira</mark>, a backlog is a prioritized list of work items that need to be completed. It serves as a repository for all the tasks, user stories, bugs, and other work items that are yet to be worked on or are in the planning stage. Backlogs are typically associated with agile project management methodologies such as Scrum and Kanban.
 
@@ -10,14 +13,15 @@ Backlogs are visualized as lists of items that can be sorted, filtered, and prio
 
 ### Move issues to backlog
 
+`POST /rest/agile/1.0/backlog/issue`
+
 Move moves issues to the backlog.
 
 * This operation is equivalent to remove future and active sprints from a given set of issues.
 * At most 50 issues may be moved at once.
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
    "context"
    "github.com/ctreminiom/go-atlassian/jira/agile"
@@ -55,14 +59,17 @@ func main() {
 
    return
 }
-```
+</code></pre>
 
 ### Move issues to a board backlog
+
+`POST /rest/agile/1.0/backlog/{boardId}/issue`
 
 * This operation is equivalent to remove future and active sprints from a given set of issues if the board has sprints.
 * If the board does not have sprints this will put the issues back into the backlog from the board.
 * At most 50 issues may be moved at once.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -112,3 +119,4 @@ func main() {
 	return
 }
 ```
+{% endcode %}

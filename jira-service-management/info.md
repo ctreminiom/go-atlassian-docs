@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/growthgauntletcoverillo.jpg
+coverY: 0
+---
+
 # ℹ Info
 
 {% embed url="https://github.com/ctreminiom/go-atlassian/blob/main/pkg/infra/models/sm_info.go" %}
@@ -6,8 +11,11 @@ SM Info Models
 
 ## Get info
 
+`GET /rest/servicedeskapi/info`
+
 This method retrieves information about the Jira Service Management instance such as software version, builds, and related links.
 
+{% code fullWidth="true" %}
 ```go
 ppackage main
 
@@ -59,6 +67,6 @@ func main() {
 	log.Println(newCustomer.Links)
 	log.Println(newCustomer)
 	log.Println("-------------------------")
-
 }
 ```
+{% endcode %}
