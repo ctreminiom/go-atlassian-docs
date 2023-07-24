@@ -1,13 +1,18 @@
 ---
-description: This resource represent users.
+cover: >-
+  ../../.gitbook/assets/hero_1120x545_csd-5489-tier-1-illo-interpersonal-skills-1-9-in-series@2x-1560x760.png
+coverY: 100
 ---
 
 # 🤓 Users
 
 ## Get user
 
+`GET /rest/api/{2-3}/user`
+
 Returns a user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -58,11 +63,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Create user
 
+`POST /rest/api/{2-3}/user`
+
 Creates a user. This resource is retained for legacy compatibility. As soon as a more suitable alternative is available this resource will be deprecated.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -114,11 +123,15 @@ func main() {
 	log.Println("The new user has been created", newUser.AccountID)
 }
 ```
+{% endcode %}
 
 ## Delete user
 
+`DELETE /rest/api/{2-3}/user`
+
 Deletes a user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -162,11 +175,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Bulk get users
 
+`GET /rest/api/{2-3}/user/bulk`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of the users specified by one or more account IDs.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -220,11 +237,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get user groups
 
+`GET /rest/api/{2-3}/user/groups`
+
 Returns the groups to which a user belongs.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -275,11 +296,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Get all users
 
+`GET /rest/api/{2-3}/users/search`
+
 Returns a list of all (active and inactive) users.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -332,3 +357,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

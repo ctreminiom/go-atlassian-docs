@@ -1,8 +1,6 @@
 ---
-description: >-
-  An issue's status indicates its current place in the project's workflow.
-  Default statuses are created when you create a project from one of our
-  templates. The statuses are recommended starting points
+cover: ../../.gitbook/assets/blog-cmpt-migrates-hero@2x-1560x760.png
+coverY: 0
 ---
 
 # 🗺 Status
@@ -13,8 +11,11 @@ Tracking Issue
 
 ## Search Workflow Statuses
 
+`GET /rest/api/{2-3}/statuses/search`
+
 Search returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of statuses that match a search on name or project.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -88,11 +89,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Gets Workflow Statuses
 
+`GET /rest/api/{2-3}/statuses`
+
 Get returns a list of the statuses specified by one or more status IDs.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -144,11 +149,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create Workflow Statuses
 
+`POST /rest/api/{2-3}/statuses`
+
 Create creates statuses for a global or project scope.&#x20;
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -213,11 +222,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Update Workflow Statuses
 
+`PUT /rest/api/{2-3}/statuses`
+
 Update updates statuses by ID.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -270,11 +283,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Delete Workflow Statuses
 
+`DELETE /rest/api/{2-3}/statuses`
+
 Delete deletes statuses by ID.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -309,11 +326,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Bulk Workflow Statuses
 
+`GET /rest/api/{2-3}/status`
+
 Bulk returns a list of all statuses associated with active workflows.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -356,14 +377,18 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get Workflow Status
+
+`GET /rest/api/{2-3}/status/{idOrName}`
 
 Get returns a status.&#x20;
 
 * The status must be associated with an active workflow to be returned.
 * If a name is used on more than one status, only the status found first is returned. Therefore, identifying the status by its ID may be preferable.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -404,3 +429,4 @@ func main() {
 	fmt.Println(status.Name, status.ID)
 }
 ```
+{% endcode %}

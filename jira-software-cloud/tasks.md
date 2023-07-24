@@ -3,11 +3,15 @@ description: >-
   This resource represents a long-running asynchronous tasks. Use it to obtain
   details about the progress of a long-running task or cancel a long-running
   task.
+cover: ../.gitbook/assets/team_personality_tests_1120x545@2x-1560x760.jpeg
+coverY: 0
 ---
 
 # ⚗ Tasks
 
 ## Get task
+
+`GET /rest/api/{2-3}/task/{taskId}`
 
 Returns the status of a [long-running asynchronous task](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#async).
 
@@ -15,6 +19,7 @@ Returns the status of a [long-running asynchronous task](https://developer.atlas
 When a task has finished, this operation returns the JSON blob applicable to the task. See the documentation of the operation that created the task for details. Task details are not permanently retained. As of September 2019, details are retained for 14 days although this period may change without notice.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -61,11 +66,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Cancel task
 
+`POST /rest/api/{2-3}/task/{taskId}/cancel`
+
 Cancels a task.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -111,3 +120,4 @@ func main() {
 
 }
 ```
+{% endcode %}

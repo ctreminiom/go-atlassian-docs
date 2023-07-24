@@ -1,5 +1,6 @@
 ---
-description: This resource represents JQL search auto-complete details.
+cover: ../.gitbook/assets/f7d10368-eaf9-4640-9298-935babada43c-1560x760.jpeg
+coverY: 0
 ---
 
 # 🔩 JQL
@@ -11,8 +12,11 @@ Use it to obtain JQL search auto-complete data and suggestions for use in progra
 
 ## Parse JQL Query
 
+`POST /rest/api/{2-3}/jql/parse`
+
 Parses and validates JQL queries. The validation is performed in context of the current user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -54,3 +58,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

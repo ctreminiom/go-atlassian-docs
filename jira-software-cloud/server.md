@@ -1,13 +1,18 @@
 ---
 description: This resource provides information about the Jira instance.
+cover: ../.gitbook/assets/mb-personalities_1120x545-@2xcompressed-1560x760.png
+coverY: 0
 ---
 
 # ⚙ Server
 
 ## Get Jira instance info
 
+`GET /rest/api/{2-3}/serverInfo`
+
 Returns information about the Jira instance.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -53,3 +58,4 @@ func main() {
 	log.Println(info)
 }
 ```
+{% endcode %}

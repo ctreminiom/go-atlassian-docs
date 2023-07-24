@@ -1,3 +1,8 @@
+---
+cover: ../../.gitbook/assets/jiraautomation_bloghero.jpg
+coverY: 27
+---
+
 # 🖨 Workflow
 
 A Jira workflow is a set of _statuses_ and _transitions_ that an issue moves through during its lifecycle, and typically represents a process within your organization. Workflows can be associated with particular projects and, optionally, specific issue types by using a [workflow scheme](https://confluence.atlassian.com/adminjiracloud/issue-workflow-schemes-844500788.html).
@@ -5,6 +10,8 @@ A Jira workflow is a set of _statuses_ and _transitions_ that an issue moves thr
 Workflows can be customized to fit the needs of a particular team or project. Customization options include adding new stages or statuses, defining new transitions between statuses, and setting rules and conditions that determine when an issue can move from one stage to another. With a well-designed Jira workflow, teams can track the progress of their work more effectively and ensure that all team members are on the same page about the status of each task or issue.
 
 ## Create Workflow
+
+`POST /rest/api/{2-3}/workflow`
 
 Create creates a workflow. You can define transition rules using the shapes detailed in the following sections. If no transitional rules are specified the default system transition rules are used.
 
@@ -576,6 +583,7 @@ A post function that updates a simple issue field.
 },
 ```
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -666,8 +674,11 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Search Workflows
+
+`GET /rest/api/{2-3}/workflow/search`
 
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of published classic workflows. When workflow names are specified, details of those workflows are returned. Otherwise, all published classic workflows are returned.
 
@@ -675,6 +686,7 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 This operation does not return next-gen workflows
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -724,11 +736,13 @@ func main() {
 	for _, workflow := range workflows.Values {
 		fmt.Println(workflow.ID, workflow.Description, len(workflow.Statuses))
 	}
-
 }
 ```
+{% endcode %}
 
 ## Delete Workflow
+
+`DELETE /rest/api/{2-3}/workflow/{entityId}`
 
 Deletes a workflow, the workflow cannot be deleted if it is:
 
@@ -737,6 +751,7 @@ Deletes a workflow, the workflow cannot be deleted if it is:
 * associated with any workflow scheme.
 * associated with any draft workflow scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -772,6 +787,6 @@ func main() {
 
 		log.Fatal(err)
 	}
-
 }
 ```
+{% endcode %}

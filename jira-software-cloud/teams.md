@@ -20,11 +20,14 @@ You can also use Advanced Roadmaps' view settings to focus on work assigned to a
 
 ### Get Teams
 
+`POST /rest/teams/1.0/teams/find`
+
 Gets returns the Teams information from the _Jira Advanced Roadmaps_ application.&#x20;
 
 * Teams in Advanced Roadmaps are different from the teams found in the rest of Jira Software Cloud. In Advanced Roadmaps, they act as a label applied to issues that designates which team will eventually pick up the work on your timeline.
 * By adding the Team field to your Jira issues, you can save this value back to your Jira issues, which makes sprint planning easier
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -72,11 +75,15 @@ func main() {
    }
 }
 ```
+{% endcode %}
 
 ### Create Team
 
+`POST /rest/teams/1.0/teams/create`
+
 Create create creates a team on the Advanced Roadmaps.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -125,3 +132,4 @@ func main() {
    spew.Dump(team)
 }
 ```
+{% endcode %}

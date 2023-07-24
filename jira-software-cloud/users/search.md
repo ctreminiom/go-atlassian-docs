@@ -1,16 +1,17 @@
 ---
-description: >-
-  This resource represents various ways to search for and find users. Use it to
-  obtain list of users including users assignable to projects and issues, users
-  with permissions, user lists for pickup fiel
+cover: ../../.gitbook/assets/growthgauntletcoverillo.jpg
+coverY: 0
 ---
 
-# 🔰 Search
+# 📠 Search
 
 ## Find users assignable to projects
 
+`GET /rest/api/{2-3}/user/assignable/multiProjectSearch`
+
 Returns a list of users who can be assigned issues in one or more projects. The list may be restricted to users whose attributes match a string.
 
+{% code fullWidth="true" %}
 ```go
 package main
 import (
@@ -56,11 +57,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Find users
 
+`GET /rest/api/{2-3}/user/search`
+
 Returns a list of users that match the search string and property.
 
+{% code fullWidth="true" %}
 ```go
 package main
 import (
@@ -105,14 +110,18 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Find users with permissions
+
+`GET /rest/api/{2-3}/user/viewissue/search`
 
 Returns a list of users who fulfill these criteria:
 
 * their user attributes match a search string.
 * they have a set of permissions for a project or issue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -162,3 +171,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

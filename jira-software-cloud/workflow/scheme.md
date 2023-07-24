@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/mb-personalities_1120x545-@2xcompressed-1560x760.png
+coverY: 0
+---
+
 # 🚛 Scheme
 
 ## Gets Workflows Schemes
 
+`GET /rest/api/{2-3}/workflowscheme`
+
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of all workflow schemes, not including draft workflow schemes.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -52,15 +60,17 @@ func main() {
 	fmt.Println(workflowSchemes.IsLast)
 }
 ```
+{% endcode %}
 
 ## Create Workflows Scheme
 
+`POST /rest/api/{2-3}/workflowscheme`
+
 Creates a workflow scheme.
 
-```go
-package main
-
-import (
+<pre class="language-go" data-full-width="true"><code class="lang-go">package main
+<strong>
+</strong>import (
 	"context"
 	"fmt"
 	v3 "github.com/ctreminiom/go-atlassian/jira/v3"
@@ -85,7 +95,7 @@ func main() {
 	instance.Auth.SetBasicAuth(mail, token)
 	instance.Auth.SetUserAgent("curl/7.54.0")
 
-	payload := &models.WorkflowSchemePayloadScheme{
+	payload := &#x26;models.WorkflowSchemePayloadScheme{
 		DefaultWorkflow: "jira",
 		Name:            "Example workflow scheme",
 		Description:     "The description of the example workflow scheme.",
@@ -111,12 +121,15 @@ func main() {
 	fmt.Println(newWorkflowScheme.Self)
 	fmt.Println(newWorkflowScheme.DefaultWorkflow)
 }
-```
+</code></pre>
 
 ## Get Workflow Scheme
 
+`GET /rest/api/{2-3}/workflowscheme/{id}`
+
 Returns a workflow scheme.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -162,11 +175,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Update Workflow Scheme
 
+`PUT /rest/api/{2-3}/workflowscheme/{id}`
+
 Updates a workflow scheme, including the name, default workflow, issue type to project mappings, and more. If the workflow scheme is active (that is, being used by at least one project), then a draft workflow scheme is created or updated instead, provided that `updateDraftIfNeeded` is set to `true`.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -222,11 +239,15 @@ func main() {
 	fmt.Println(workflowSchemeUpdated.DefaultWorkflow)
 }
 ```
+{% endcode %}
 
 ## Delete Workflow Scheme
 
+`DELETE /rest/api/{2-3}/workflowscheme/{id}`
+
 Delete deletes a workflow scheme. Please note that a workflow scheme **cannot** be deleted if it is active (that is, being used by at least one project).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -264,8 +285,11 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get Workflow Schemes Associations
+
+`GET /rest/api/{2-3}/workflowscheme/project`
 
 Associations returns a list of the workflow schemes associated with a list of projects.&#x20;
 
@@ -276,6 +300,7 @@ Associations returns a list of the workflow schemes associated with a list of pr
 If the project is associated with the `Default Workflow Scheme` no ID is returned. This is because the way the `Default Workflow Scheme` is stored means it has no ID.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -319,11 +344,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Assign Workflow Scheme
 
+`PUT /rest/api/{2-3}/workflowscheme/project`
+
 Assign assigns a workflow scheme to a project. This operation is performed only when there are no issues in the project. The workflow schemes can only be assigned to classic projects.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -361,3 +390,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

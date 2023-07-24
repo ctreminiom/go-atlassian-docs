@@ -1,16 +1,18 @@
 ---
-description: >-
-  This resource represents information about the current user, such as basic
-  details, group membership, application roles, preferences, and locale. Use it
-  to get, create, update, and delete.
+cover: >-
+  ../.gitbook/assets/vanessa_lovegrove_cognitive_overload_1120x545@2x-1560x760.jpeg
+coverY: 186
 ---
 
 # ⚖ Myself
 
 ## Get Current User
 
+`GET /rest/api/{2-3}/myself`
+
 Returns details for the current user.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -46,4 +48,5 @@ func main() {
 	log.Println(currentUser.DisplayName, currentUser.Active, currentUser.AccountID)
 }
 ```
+{% endcode %}
 
