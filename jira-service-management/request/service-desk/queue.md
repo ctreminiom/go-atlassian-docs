@@ -1,9 +1,17 @@
+---
+cover: ../../../.gitbook/assets/blog-cmpt-migrates-hero@2x-1560x760.png
+coverY: 0
+---
+
 # 🛎 Queue
 
 ## Get queues
 
+`GET /rest/servicedeskapi/servicedesk/{serviceDeskId}/queue`
+
 This method returns the queues in a service desk. To include a customer request count for each queue (in the `issueCount` field) in the response, set the query parameter `includeCount` to true (its default is false).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -50,14 +58,17 @@ func main() {
 		log.Printf("Queue Fields #%v: %v", pos+1, queue.Fields)
 		log.Println("------------------------------------")
 	}
-
 }
 ```
+{% endcode %}
 
 ## Get queue
 
+`GET /rest/servicedeskapi/servicedesk/{serviceDeskId}/queue/{queueId}`
+
 This method returns a specific queues in a service desk. To include a customer request count for the queue (in the `issueCount` field) in the response, set the query parameter `includeCount` to true (its default is false).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -102,14 +113,17 @@ func main() {
 	log.Printf("Queue Issue Count: %v", queue.IssueCount)
 	log.Printf("Queue Fields: %v", queue.Fields)
 	log.Println("------------------------------------")
-
 }
 ```
+{% endcode %}
 
 ## Get issues in queue
 
+`GET /rest/servicedeskapi/servicedesk/{serviceDeskId}/queue/{queueId}/issue`
+
 This method returns the customer requests in a queue. Only fields that the queue is configured to show are returned. For example, if a queue is configured to show description and due date, then only those two fields are returned for each customer request in the queue.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -153,3 +167,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

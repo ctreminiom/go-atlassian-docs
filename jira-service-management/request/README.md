@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/how-to-survive-your-next-work-trip@2x-100-1-1560x760.jpg
+coverY: 448
+---
+
 # 📙 Request
 
 ## Get customer requests
 
+`GET /rest/servicedeskapi/request`
+
 This method returns all customer requests for the user executing the query.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -66,11 +74,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get customer request by id or key
 
+`GET /rest/servicedeskapi/request/{issueIdOrKey}`
+
 This method returns a customer request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -121,14 +133,17 @@ func main() {
 	}
 
 	log.Println(string(dataAsJson))
-
 }
 ```
+{% endcode %}
 
 ## Subscribe
 
+`PUT /rest/servicedeskapi/request/{issueIdOrKey}/notification`
+
 This method subscribes the user to receiving notifications from a customer request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -163,11 +178,15 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Unsubscribe
 
+`DELETE /rest/servicedeskapi/request/{issueIdOrKey}/notification`
+
 This method unsubscribes the user from notifications from a customer request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -203,11 +222,17 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Get customer transitions
 
-This method returns a list of transitions, the workflow processes that moves a customer request from one status to another, that the user can perform on a request. Use this method to provide a user with a list if the actions they can take on a customer request.
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/transition`
 
+This method returns a list of transitions, the workflow processes that moves a customer request from one status to another, that the user can perform on a request.&#x20;
+
+* Use this method to provide a user with a list if the actions they can take on a customer request.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -257,11 +282,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Perform customer transition
 
+`POST /rest/servicedeskapi/request/{issueIdOrKey}/transition`
+
 This method performs a customer transition for a given request and transition. An optional comment can be included to provide a reason for the transition.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -307,11 +336,18 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Create Customer Request
 
-This method creates a customer request at a service desk. The payload must include the service desk and customer request type, as well as any fields that are required for the request type. A list of the fields required by a customer request type can be obtained using the `sm.RequestType.Fields` method.
+`POST /rest/servicedeskapi/request`
 
+This method creates a customer request at a service desk.&#x20;
+
+* The payload must include the service desk and customer request type, as well as any fields that are required for the request type.&#x20;
+* A list of the fields required by a customer request type can be obtained using the `sm.RequestType.Fields` method.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -382,5 +418,5 @@ func main() {
 		fmt.Println(field)
 	}
 }
-
 ```
+{% endcode %}

@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/conways-law_1120x545@2x-1560x760 (1).jpg
+coverY: 0
+---
+
 # 💾 Types
 
 ## Get all request types
 
+`GET /rest/servicedeskapi/requesttype`
+
 This method returns all customer request types used in the Jira Service Management instance, optionally filtered by a query string.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -51,14 +59,18 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Get request types
+
+`GET /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype`
 
 This method returns all customer request types from a service desk. There are two parameters for filtering the returned list:
 
 * `groupId` which filters the results to items in the customer request type group.
 * `searchQuery` which is matched against request types' `name` or `description`. For example, the strings "Install", "Inst", "Equi", or "Equipment" will match a request type with the _name_ "Equipment Installation Request".
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -104,8 +116,11 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create request type
+
+`POST /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype`
 
 This method enables a customer request type to be added to a service desk based on an issue type. Note that not all customer request type fields can be specified in the request and these fields are given the following default values:
 
@@ -116,6 +131,7 @@ Request type status mapping is left empty, so the request type has no custom sta
 
 Request type field mapping is set to show the required fields as specified by the issue type used to create the customer request type.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -170,11 +186,15 @@ func main() {
 	log.Println("newRequestType", newRequestType.ID, newRequestType.Name)
 }
 ```
+{% endcode %}
 
 ## Get request type by id
 
+`GET /rest/servicedeskapi/servicedesk/{serviceDesk}/requesttype/{requestType}`
+
 This method returns a customer request type from a service desk.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -216,11 +236,15 @@ func main() {
 	log.Println("newRequestType", requestType.ID, requestType.Name)
 }
 ```
+{% endcode %}
 
 ## Delete request type
 
+`DELETE /rest/servicedeskapi/servicedesk/{desk_id}/requesttype/{requestType}`
+
 This method deletes a customer request type from a service desk, and removes it from all customer requests.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -262,8 +286,11 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}
 
 ## Get request type fields
+
+`GET /rest/servicedeskapi/servicedesk/{DeskId}/requesttype/{TypeId}/field`
 
 This method returns the fields for a service desk's customer request type.
 
@@ -272,6 +299,7 @@ Also, the following information about the user's permissions for the request typ
 * `canRaiseOnBehalfOf` returns `true` if the user has permission to raise customer requests on behalf of other customers. Otherwise, returns `false`.
 * `canAddRequestParticipants` returns `true` if the user can add customer request participants. Otherwise, returns `false`.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -316,3 +344,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

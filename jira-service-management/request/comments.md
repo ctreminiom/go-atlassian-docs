@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/growthgauntletcoverillo.jpg
+coverY: 0
+---
+
 # 📬 Comments
 
 ## Get comment attachments
 
+`GET /rest/servicedeskapi/request/{issueId}/comment/{commentId}/attachment`
+
 This method returns the attachments referenced in a comment.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -47,14 +55,17 @@ func main() {
 	for _, attachment := range attachments.Values {
 		log.Println(attachment.Filename, attachment.MimeType, attachment.Size)
 	}
-
 }
 ```
+{% endcode %}
 
 ## Create request comment
 
+`POST /rest/servicedeskapi/request/{issueIdOrKey}/comment`
+
 This method creates a public or private (internal) comment on a customer request, with the comment visibility set by `public`. The user recorded as the author of the comment.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -103,13 +114,16 @@ func main() {
 	log.Println("----------------------------------")
 
 }
-
 ```
+{% endcode %}
 
 ## Get request comment by id
 
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/comment/{commentId}`
+
 This method returns details of a customer request's comment.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -157,14 +171,17 @@ func main() {
 	log.Printf("Comment, # of attachments: %v", comment.Attachments.Size)
 	log.Printf("Comment, is public?: %v", comment.Public)
 	log.Println("----------------------------------")
-
 }
 ```
+{% endcode %}
 
 ## Get request comments
 
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/comment`
+
 This method returns all comments on a customer request. No permissions error is provided if, for example, the user doesn't have access to the service desk or request, the method simply returns an empty response.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -217,6 +234,6 @@ func main() {
 	for _, comment := range comments.Values {
 		log.Println(comment.ID, comment.Created.Jira, comment.Body)
 	}
-
 }
 ```
+{% endcode %}

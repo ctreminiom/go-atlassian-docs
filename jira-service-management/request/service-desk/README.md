@@ -1,9 +1,17 @@
+---
+cover: ../../../.gitbook/assets/team_personality_tests_1120x545@2x-1560x760.jpeg
+coverY: 0
+---
+
 # ⚙ Service Desk
 
 ## Get service desks
 
+`GET /rest/servicedeskapi/servicedesk`
+
 This method returns all the service desks in the Jira Service Management instance that the user has permission to access. Use this method where you need a list of service desks or need to locate a service desk by name or keyword.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -46,14 +54,17 @@ func main() {
 	for _, serviceDesk := range serviceDesks.Values {
 		log.Println(serviceDesk.ID, serviceDesk.ProjectName, serviceDesk.ProjectKey)
 	}
-
 }
 ```
+{% endcode %}
 
 ## Get service desk by id
 
+`GET /rest/servicedeskapi/servicedesk/{serviceDeskId}`
+
 This method returns a service desk. Use this method to get service desk details whenever your application component is passed a service desk ID but needs to display other service desk details.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -95,11 +106,15 @@ func main() {
 	log.Println(serviceDesk.ID, serviceDesk.ProjectName, serviceDesk.ProjectKey)
 }
 ```
+{% endcode %}
 
 ## Attach temporary file
 
-&#x20;This method adds one or more temporary attachments to a service desk, which can then be permanently attached to a customer request using [servicedeskapi/request/{issueIdOrKey}/attachment](https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/#api-rest-servicedeskapi-servicedesk-servicedeskid-attachtemporaryfile-post).
+`POST /rest/servicedeskapi/servicedesk/{serviceDeskId}/attachTemporaryFile`
 
+This method adds one or more temporary attachments to a service desk, which can then be permanently attached to a customer request using [servicedeskapi/request/{issueIdOrKey}/attachment](https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/#api-rest-servicedeskapi-servicedesk-servicedeskid-attachtemporaryfile-post).
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -154,3 +169,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

@@ -1,16 +1,17 @@
 ---
-description: >-
-  Jira Service Management allows you to add an approval step to a status in a
-  workflow, which allows you to specify if an approval is needed for issue types
-  (and their associated request types)
+cover: ../../.gitbook/assets/leadership-principles_1120x545@2x-1560x760.png
+coverY: 0
 ---
 
 # 🚫 Approval
 
 ## Get approvals
 
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/approval`
+
 This method returns all approvals on a customer request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -61,11 +62,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get approval by id
 
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/approval/{approvalId}`
+
 This method returns an approval. Use this method to determine the status of an approval and the list of approvers.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -116,13 +121,16 @@ func main() {
 	}
 	log.Println(string(dataAsJson))
 }
-
 ```
+{% endcode %}
 
 ## Answer approval
 
+`POST /rest/servicedeskapi/request/{issueIdOrKey}/approval/{approvalId}`
+
 This method enables a user to **Approve** or **Decline** an approval on a customer request. The approval is assumed to be owned by the user making the call.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -174,3 +182,4 @@ func main() {
 	log.Println(string(dataAsJson))
 }
 ```
+{% endcode %}

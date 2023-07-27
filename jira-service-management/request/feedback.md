@@ -1,12 +1,18 @@
+---
+cover: ../../.gitbook/assets/new-rules-of-productivity_1120x545@2x-1560x760.png
+coverY: 138
+---
+
 # 📮 Feedback
 
 ## Get feedback
 
+`GET /rest/servicedeskapi/request/{requestIdOrKey}/feedback`
+
 This method retrieves a feedback of a request using it's `requestKey` or `requestId`
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/jira/sm"
@@ -46,12 +52,15 @@ func main() {
 	log.Println("Feedback Rating: ", feedback.Rating)
 	log.Println("Feedback Comment: ", feedback.Comment.Body)
 }
-```
+</code></pre>
 
 ## Post feedback
 
+`POST /rest/servicedeskapi/request/{requestIdOrKey}/feedback`
+
 This method adds a feedback on an request using it's `requestKey` or `requestId`
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -97,11 +106,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Delete feedback
 
+`DELETE /rest/servicedeskapi/request/{requestIdOrKey}/feedback`
+
 This method deletes the feedback of request using it's `requestKey` or `requestId`
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -142,3 +155,4 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 }
 ```
+{% endcode %}

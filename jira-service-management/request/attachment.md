@@ -1,9 +1,18 @@
+---
+cover: >-
+  ../../.gitbook/assets/hero_1120x545_csd-5489-tier-1-illo-interpersonal-skills-1-9-in-series@2x-1560x760.png
+coverY: 0
+---
+
 # 📂 Attachments
 
 ## Create attachment
 
-&#x20;This method adds one or more temporary files (attached to the request's service desk using [servicedesk/{serviceDeskId}/attachTemporaryFile](https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/#api-rest-servicedeskapi-request-issueidorkey-attachment-post)) as attachments to a customer request and set the attachment visibility using the `public` flag.
+`POST /rest/servicedeskapi/request/{issueIdOrKey}/attachment`
 
+This method adds one or more temporary files (attached to the request's service desk using [servicedesk/{serviceDeskId}/attachTemporaryFile](https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/#api-rest-servicedeskapi-request-issueidorkey-attachment-post)) as attachments to a customer request and set the attachment visibility using the `public` flag.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -48,13 +57,16 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println(attachments)
 }
-
 ```
+{% endcode %}
 
 ## Get attachments for request
 
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/attachment`
+
 This method returns all the attachments for a customer requests.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -104,3 +116,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

@@ -1,9 +1,20 @@
+---
+cover: ../../.gitbook/assets/artboard-2@3x-1560x760.png
+coverY: 0
+---
+
 # ⏰ SLA
 
 ## Get SLA information
 
-This method returns all the SLA records on a customer request. A customer request can have zero or more SLAs. Each SLA can have recordings for zero or more "completed cycles" and zero or 1 "ongoing cycle". Each cycle includes information on when it started and stopped, and whether it breached the SLA goal.
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/sla`
 
+This method returns all the SLA records on a customer request.
+
+* A customer request can have zero or more SLAs. Each SLA can have recordings for zero or more "completed cycles" and zero or 1 "ongoing cycle".&#x20;
+* Each cycle includes information on when it started and stopped, and whether it breached the SLA goal.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -49,11 +60,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get SLA information by id
 
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/sla/{slaMetricId}`
+
 This method returns the details for an SLA on a customer request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -94,6 +109,6 @@ func main() {
 	log.Println("HTTP Endpoint Used", response.Endpoint)
 	log.Println("SLA ID", sla.ID)
 	log.Println("SLA Name", sla.Name)
-
 }
 ```
+{% endcode %}

@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/mb-personalities_1120x545-@2xcompressed-1560x760.png
+coverY: 0
+---
+
 # 👥 Participants
 
 ## Get request participants
 
+`GET /rest/servicedeskapi/request/{issueIdOrKey}/participant`
+
 This method returns a list of all the participants on a customer request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -49,11 +57,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Add request participants
 
+`POST /rest/servicedeskapi/request/{issueIdOrKey}/participant`
+
 This method adds participants to a customer request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -96,14 +108,17 @@ func main() {
 	for _, participant := range participants.Values {
 		log.Println(participant.DisplayName, participant.EmailAddress)
 	}
-
 }
 ```
+{% endcode %}
 
 ## Remove request participants
 
+`DELETE /rest/servicedeskapi/request/{issueIdOrKey}/participant`
+
 This method removes participants from a customer request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -146,6 +161,6 @@ func main() {
 	for _, participant := range participants.Values {
 		log.Println(participant.DisplayName, participant.EmailAddress)
 	}
-
 }
 ```
+{% endcode %}
