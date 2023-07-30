@@ -1,9 +1,22 @@
+---
+cover: >-
+  ../../.gitbook/assets/the-keystroke-that-changed-how-i-worked-forever-compressed-1560x760.gif
+coverY: 0
+---
+
 # 🔃 Versions
 
 ## Get content versions
 
+`GET /wiki/rest/api/content/{id}/version`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns the versions for a piece of content in descending order.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -53,11 +66,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Restore content version
 
+`POST /wiki/rest/api/content/{id}/version`
+
 Restores a historical version to be the latest version. That is, a new version is created with the content of the historical version.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -116,11 +133,19 @@ func main()  {
 	fmt.Println(version.Collaborators.UserKeys)
 }
 ```
+{% endcode %}
 
 ## Get content version
 
+`GET /wiki/rest/api/content/{id}/version/{versionNumber}`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns a version for a piece of content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -172,11 +197,15 @@ func main() {
 	fmt.Println(version.Collaborators.UserKeys)
 }
 ```
+{% endcode %}
 
 ## Delete content version
 
+`DELETE /wiki/rest/api/content/{id}/version/{versionNumber}`
+
 Delete a historical version. This does not delete the changes made to the content in that version, rather the changes for the deleted version are rolled up into the next version. Note, you cannot delete the current version.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -219,3 +248,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

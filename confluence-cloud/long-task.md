@@ -1,9 +1,17 @@
+---
+cover: ../.gitbook/assets/new-rules-of-productivity_1120x545@2x-1560x760.png
+coverY: 0
+---
+
 # 🖼 Long Task
 
 ## Get long-running tasks
 
+`GET /wiki/rest/api/longtask`
+
 Returns information about all active long-running tasks (e.g. space export), such as how long each task has been running and the percentage of each task that has completed.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -48,11 +56,15 @@ func main() {
 }
 
 ```
+{% endcode %}
 
 ## Get long-running task
 
+`GET /wiki/rest/api/longtask/{id}`
+
 Returns information about an active long-running task (e.g. space export), such as how long it has been running and the percentage of the task that has completed.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -93,3 +105,4 @@ func main() {
 	log.Println(task)
 }
 ```
+{% endcode %}

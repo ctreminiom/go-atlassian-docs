@@ -1,9 +1,17 @@
+---
+cover: ../.gitbook/assets/leadership-principles_1120x545@2x-1560x760.png
+coverY: 0
+---
+
 # 🔰 Label
 
 ## Get label information
 
+`GET /wiki/rest/api/label`
+
 Returns label information and a list of contents associated with the label.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -52,5 +60,6 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 \

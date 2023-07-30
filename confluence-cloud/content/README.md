@@ -1,9 +1,21 @@
+---
+cover: ../../.gitbook/assets/new-rules-of-productivity_1120x545@2x-1560x760.png
+coverY: 0
+---
+
 # 📢 Content
 
 ## Get content
 
+`GET /wiki/rest/api/content`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns all content in a Confluence instance. By default, the following objects are expanded: `space`, `history`, `version`.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -52,11 +64,23 @@ func main()  {
    log.Println(content)
 }
 ```
+{% endcode %}
 
 ## Create content
 
-Creates a new piece of content or publishes an existing draft. To publish a draft, add the `id` and `status` properties to the body of the request. Set the `id` to the ID of the draft and set the `status` to 'current'. When the request is sent, a new piece of content will be created and the metadata from the draft will be transferred into it. By default, the following objects are expanded: `space`, `history`, `version`.
+`POST /wiki/rest/api/content`
 
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
+Creates a new piece of content or publishes an existing draft. To publish a draft, add the `id` and `status` properties to the body of the request.&#x20;
+
+* Set the `id` to the ID of the draft and set the `status` to 'current'.&#x20;
+* When the request is sent, a new piece of content will be created and the metadata from the draft will be transferred into it.&#x20;
+* By default, the following objects are expanded: `space`, `history`, `version`.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -120,11 +144,19 @@ func main() {
 	log.Println(newConfluence.Space.Name)
 }
 ```
+{% endcode %}
 
 ## Get content by ID
 
+`GET /wiki/rest/api/content/{id}`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns a single piece of content, like a page or a blog post. By default, the following objects are expanded: `space`, `history`, `version`.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -173,15 +205,19 @@ func main()  {
    log.Println(content)
 }
 ```
+{% endcode %}
 
 ## Update content
 
-Updates a piece of content. Use this method to update the title or body of a piece of content, change the status, change the parent page, and more.
+`PUT /wiki/rest/api/content/{id}`
 
-{% hint style="warning" %}
-**Note**, updating draft content is currently not supported.
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
 {% endhint %}
 
+Updates a piece of content. Use this method to update the title or body of a piece of content, change the status, change the parent page, and more.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -236,8 +272,15 @@ func main()  {
 	log.Println(content)
 }
 ```
+{% endcode %}
 
 ## Delete content
+
+`DELETE /wiki/rest/api/content/{id}`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
 
 Moves a piece of content to the space's trash or purges it from the trash, depending on the content's type and status:
 
@@ -245,6 +288,7 @@ Moves a piece of content to the space's trash or purges it from the trash, depen
 * If the content's type is `page` or `blogpost` and its status is `trashed`, the content will be purged from the trash and deleted permanently. Note, you must also set the `status` query parameter to `trashed` in your request.
 * If the content's type is `comment` or `attachment`, it will be deleted permanently without being trashed.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -287,11 +331,19 @@ func main()  {
 
 }
 ```
+{% endcode %}
 
 ## Get content history
 
+`GET /wiki/rest/api/content/{id}/history`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns the most recent update for a piece of content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -338,11 +390,15 @@ func main()  {
    log.Println(contentHistory)
 }
 ```
+{% endcode %}
 
 ## Search Contents by CQL
 
+`GET /wiki/rest/api/content/search`
+
 Returns the list of content that matches a Confluence Query Language (CQL) query. For information on CQL, see: [Advanced searching using CQL](https://developer.atlassian.com/cloud/confluence/advanced-searching-using-cql/).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -395,10 +451,12 @@ func main()  {
 		log.Println(content.Title, content.ID)
 	}
 }
-
 ```
+{% endcode %}
 
 ## Archive Pages
+
+`POST /wiki/rest/api/content/archive`
 
 Archives a list of pages. The pages to be archived are specified as a list of content IDs. This API accepts the archival request and returns a task ID.&#x20;
 
@@ -406,6 +464,7 @@ Archives a list of pages. The pages to be archived are specified as a list of co
 The archival process happens asynchronously. Use the **/longtask/** REST API to get the copy task status.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -453,5 +512,5 @@ func main() {
 	log.Println("Status Code:", response.Code)
 	log.Println(task.ID, task.Links.Status)
 }
-
 ```
+{% endcode %}

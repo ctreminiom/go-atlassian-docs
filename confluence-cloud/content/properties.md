@@ -1,9 +1,17 @@
+---
+cover: ../../.gitbook/assets/emailqa_1120x545@2x-1560x760.jpg
+coverY: 0
+---
+
 # 🎮 Properties
 
 ## Get content properties
 
+`GET /wiki/rest/api/content/{id}/property`
+
 Returns the properties for a piece of content. For more information about content properties, see [Confluence entity properties](https://developer.atlassian.com/cloud/confluence/confluence-entity-properties/).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -57,11 +65,18 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Create content property
 
-Creates a property for an existing piece of content. For more information about content properties, see [Confluence entity properties](https://developer.atlassian.com/cloud/confluence/confluence-entity-properties/). This is the same as [Create content property for key](https://developer.atlassian.com/cloud/confluence/rest/api-group-content-properties/) except that the key is specified in the request body instead of as a path parameter. Content properties can also be added when creating a new piece of content by including them in the `metadata.properties` of the request.
+`POST /wiki/rest/api/content/{id}/property`
 
+Creates a property for an existing piece of content. For more information about content properties, see [Confluence entity properties](https://developer.atlassian.com/cloud/confluence/confluence-entity-properties/).&#x20;
+
+* This is the same as [Create content property for key](https://developer.atlassian.com/cloud/confluence/rest/api-group-content-properties/) except that the key is specified in the request body instead of as a path parameter.&#x20;
+* Content properties can also be added when creating a new piece of content by including them in the `metadata.properties` of the request.
+
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -109,14 +124,17 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 	log.Println("Status Code:", response.Code)
 	fmt.Println(property)
-
 }
 ```
+{% endcode %}
 
 ## Get content property
 
+`GET /wiki/rest/api/content/{id}/property/{key}`
+
 Returns a content property for a piece of content. For more information, see [Confluence entity properties](https://developer.atlassian.com/cloud/confluence/confluence-entity-properties/).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -160,11 +178,15 @@ func main() {
    fmt.Println(property)
 }
 ```
+{% endcode %}
 
 ## Delete content property
 
+`DELETE /wiki/rest/api/content/{id}/property/{key}`
+
 Deletes a content property. For more information about content properties, see [Confluence entity properties](https://developer.atlassian.com/cloud/confluence/confluence-entity-properties/).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -206,3 +228,4 @@ func main() {
    log.Println("Status Code:", response.Code)
 }
 ```
+{% endcode %}

@@ -1,6 +1,17 @@
+---
+cover: ../../.gitbook/assets/blog-cmpt-migrates-hero@2x-1560x760.png
+coverY: 0
+---
+
 # 🎎 Children/Descendants
 
 ## Get Content Children
+
+`GET /wiki/rest/api/content/{id}/child`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
 
 Children returns a map of the direct children of a piece of content. A piece of content has different types of child content, depending on its type. These are the default parent-child content type relationships:
 
@@ -13,6 +24,7 @@ Children returns a map of the direct children of a piece of content. A piece of 
 The map will always include all child content types that are valid for the content. However, if the content has no instances of a child content type, the map will contain an empty array for that child content type.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -61,8 +73,15 @@ func main() {
 	log.Println(children)
 }
 ```
+{% endcode %}
 
 ## Get Content Children By Type
+
+`GET /wiki/rest/api/content/{id}/child/{type}`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
 
 ChildrenByType returns all children of a given type, for a piece of content. A piece of content has different types of child content, depending on its type:
 
@@ -71,6 +90,7 @@ ChildrenByType returns all children of a given type, for a piece of content. A p
 * `attachment`: child content is `comment`
 * `comment`: child content is `attachment`
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -121,11 +141,13 @@ func main() {
 	for _, page := range children.Results {
 		fmt.Print(page)
 	}
-
 }
 ```
+{% endcode %}
 
 ## Get Content Descendants
+
+`GET /wiki/rest/api/content/{id}/descendant`
 
 Returns a map of the descendants of a piece of content. This is similar to Get content children, except that this method returns child pages at all levels, rather than just the direct child pages.
 
@@ -138,6 +160,7 @@ A piece of content has different types of descendants, depending on its type:
 
 The map will always include all descendant types that are valid for the content. However, if the content has no instances of a descendant type, the map will contain an empty array for that descendant type.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -187,8 +210,11 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get Content Descendants By Type
+
+`GET /wiki/rest/api/content/{id}/descendant/{type}`
 
 Returns all descendants of a given type, for a piece of content. This is similar to Get content children by type, except that this method returns child pages at all levels, rather than just the direct child pages.
 
@@ -201,6 +227,7 @@ A piece of content has different types of descendants, depending on its type:
 
 Custom content types that are provided by apps can also be returned.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -259,13 +286,17 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Copy Page Hierarchy
+
+`POST /wiki/rest/api/content/{id}/pagehierarchy/copy`
 
 CopyHierarchy allows the copying of an entire hierarchy of pages and their associated properties, permissions and attachments.&#x20;
 
 The id path parameter refers to the content id of the page to copy, and the new parent of this copied page is defined using the destinationPageId in the request body. The titleOptions object defines the rules of renaming page titles during the copy; for example, search and replace can be used in conjunction to rewrite the copied page titles.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -327,8 +358,11 @@ func main() {
 	fmt.Println(task.ID)
 }
 ```
+{% endcode %}
 
 ## Copy Single Page
+
+`POST /wiki/rest/api/content/{id}/copy`
 
 CopyPage copies a single page and its associated properties, permissions, attachments, and custom contents. The `id` path parameter refers to the content ID of the page to copy. The target of the page to be copied is defined using the `destination` in the request body and can be one of the following types.
 
@@ -338,6 +372,7 @@ CopyPage copies a single page and its associated properties, permissions, attach
 
 By default, the following objects are expanded: `space`, `history`, `version`.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -400,3 +435,4 @@ func main() {
 	fmt.Print(contentCloned.ID)
 }
 ```
+{% endcode %}

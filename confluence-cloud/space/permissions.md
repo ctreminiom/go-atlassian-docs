@@ -1,6 +1,13 @@
+---
+cover: ../../.gitbook/assets/team_personality_tests_1120x545@2x-1560x760.jpeg
+coverY: 0
+---
+
 # 🛡 Permissions
 
 ## Add new permission to space
+
+`POST /wiki/rest/api/space/{spaceKey}/permission`
 
 Adds new permission to space. If the permission to be added is a group permission, the group can be identified by its group name or group id.
 
@@ -8,6 +15,7 @@ Adds new permission to space. If the permission to be added is a group permissio
 **Note**: Apps cannot access this REST resource - including when utilizing user impersonation.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -67,12 +75,13 @@ func main() {
 
 	log.Println(permission.Operation)
 	log.Println(permission.Subject)
-
 }
-
 ```
+{% endcode %}
 
 ## Add new custom content permission to space
+
+`POST /wiki/rest/api/space/{spaceKey}/permission/custom-content`
 
 Adds new custom content permission to space. If the permission to be added is a group permission, the group can be identified by its group name or group id.
 
@@ -80,6 +89,7 @@ Adds new custom content permission to space. If the permission to be added is a 
 **Note**: Apps cannot access this REST resource - including when utilizing user impersonation.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -145,10 +155,12 @@ func main() {
 	log.Println("Endpoint:", response.Endpoint)
 	log.Println("Status Code:", response.Code)
 }
-
 ```
+{% endcode %}
 
 ## Remove a space permission
+
+`DELETE /wiki/rest/api/space/{spaceKey}/permission/{id}`
 
 Removes a space permission. Note that removing Read Space permission for a user or group will remove all the space permissions for that user or group.
 
@@ -156,6 +168,7 @@ Removes a space permission. Note that removing Read Space permission for a user 
 Note: Apps cannot access this REST resource - including when utilizing user impersonation.
 {% endhint %}
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -204,3 +217,4 @@ func main() {
 	log.Println("Status Code:", response.Code)
 }
 ```
+{% endcode %}

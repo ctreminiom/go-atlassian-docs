@@ -1,9 +1,17 @@
+---
+cover: ../../../../.gitbook/assets/whats-your-chronotype-1560x760.jpg
+coverY: 0
+---
+
 # 👤 User
 
 ## Get content restriction status for user
 
+`GET /wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}/user`
+
 Returns whether the specified content restriction applies to a user.&#x20;
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -48,15 +56,15 @@ func main()  {
 	log.Println("Status Code:", response.Code)
 }
 ```
+{% endcode %}
 
 ## Add user to content restriction
 
+`PUT /wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}/user`
+
 Adds a user to a content restriction. That is, grant read or update permission to the user for a piece of content.
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-restrictions#api-wiki-rest-api-content-id-restriction-byoperation-operationkey-user-put" %}
-Official Documentation
-{% endembed %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -100,17 +108,16 @@ func main()  {
 	log.Println("Endpoint:", response.Endpoint)
 	log.Println("Status Code:", response.Code)
 }
-
 ```
+{% endcode %}
 
 ## Remove user from content restriction
 
+`DELETE /wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}/user`
+
 Removes a group from a content restriction. That is, remove read or update permission for the group for a piece of content.
 
-{% embed url="https://developer.atlassian.com/cloud/confluence/rest/api-group-content-restrictions#api-wiki-rest-api-content-id-restriction-byoperation-operationkey-user-delete" %}
-Official Documentation
-{% endembed %}
-
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -154,5 +161,5 @@ func main()  {
 	log.Println("Endpoint:", response.Endpoint)
 	log.Println("Status Code:", response.Code)
 }
-
 ```
+{% endcode %}

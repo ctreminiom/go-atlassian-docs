@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/artboard-2@3x-1560x760.png
+coverY: 0
+---
+
 # 🎑 Introduction
 
 The _go-atlassian_ `confluence` module provides a set of functions and types for interacting with the Jira Service Management REST API. It  enables you to create, retrieve, update, and delete various types of content within Confluence, manage spaces, access version information, and perform searches.

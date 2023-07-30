@@ -1,9 +1,17 @@
+---
+cover: ../.gitbook/assets/how-to-survive-your-next-work-trip@2x-100-1-1560x760.jpg
+coverY: 0
+---
+
 # 🔎 Search
 
 ## Search Content
 
+`GET /wiki/rest/api/search`
+
 Searches for content using the [Confluence Query Language (CQL)](https://developer.atlassian.com/cloud/confluence/advanced-searching-using-cql/)
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -85,13 +93,17 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Search Users
+
+`GET /wiki/rest/api/search/user`
 
 Searches for users using user-specific queries from the [Confluence Query Language (CQL)](https://developer.atlassian.com/cloud/confluence/advanced-searching-using-cql/).
 
 Note that some user fields may be set to null depending on the user's privacy settings. These are: email, profilePicture, displayName, and timeZone.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -137,3 +149,4 @@ func main()  {
 	}
 }
 ```
+{% endcode %}

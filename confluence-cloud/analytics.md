@@ -1,9 +1,18 @@
+---
+cover: >-
+  ../.gitbook/assets/csd-222-t1illustrationrefresh-5-signs-of-a-toxic-work-culture-v4a-1560x760.png
+coverY: 0
+---
+
 # 📉 Analytics
 
 ## Get views
 
+`GET /wiki/rest/api/analytics/content/{contentId}/views`
+
 Views get the total number of views a piece of content has.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -42,14 +51,16 @@ func main() {
 	fmt.Print(views)
 }
 ```
+{% endcode %}
 
 ## Get viewers
 
+`GET /wiki/rest/api/analytics/content/{contentId}/viewers`
+
 Viewers get the total number of distinct viewers a piece of content has.
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
 	"context"
 	"fmt"
@@ -84,4 +95,4 @@ func main() {
 
 	fmt.Print(views)
 }
-```
+</code></pre>

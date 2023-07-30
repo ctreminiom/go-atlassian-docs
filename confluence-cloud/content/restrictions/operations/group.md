@@ -1,6 +1,14 @@
+---
+cover: >-
+  ../../../../.gitbook/assets/vanessa_lovegrove_cognitive_overload_1120x545@2x-1560x760.jpeg
+coverY: 0
+---
+
 # 🫂 Group
 
 ## Get content restriction status for group
+
+`GET /wiki/rest/api/content/{id}/restriction/byOperation/{operation}/group/{group}`
 
 Returns whether the specified content restriction applies to a group.&#x20;
 
@@ -23,6 +31,7 @@ if err == nil {
 }
 ```
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -65,15 +74,17 @@ func main()  {
 
 	log.Println("Endpoint:", response.Endpoint)
 	log.Println("Status Code:", response.Code)
-
 }
-
 ```
+{% endcode %}
 
 ## Add group to content restriction
 
+`PUT /wiki/rest/api/content/{id}/restriction/byOperation/{operation}/group/{grou[}`
+
 Adds a group to a content restriction. That is, grant read or update permission to the group for a piece of content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -116,15 +127,17 @@ func main()  {
 
 	log.Println("Endpoint:", response.Endpoint)
 	log.Println("Status Code:", response.Code)
-
 }
-e
 ```
+{% endcode %}
 
 ## Remove group from content restriction
 
+`DELETE /wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}/group/{groupName}`
+
 Removes a group from a content restriction. That is, remove read or update permission for the group for a piece of content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -170,3 +183,4 @@ func main()  {
 
 }
 ```
+{% endcode %}

@@ -1,6 +1,13 @@
+---
+cover: ../../.gitbook/assets/change-management_1120x545@2x-1560x760.png
+coverY: 0
+---
+
 # 🛡 Permissions
 
 ## Check content permissions
+
+`POST /wiki/rest/api/content/{id}/permission/check`
 
 Check if a user or a group can perform an operation to the specified content. The `operation` to check must be provided. The user’s account ID or the ID of the group can be provided in the `subject` to check permissions against a specified user or group. The following permission checks are done to make sure that the user or group has the proper access:
 
@@ -8,6 +15,7 @@ Check if a user or a group can perform an operation to the specified content. Th
 * space permissions
 * content restrictions
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -63,5 +71,5 @@ func main()  {
 
 	log.Println(check.HasPermission)
 }
-
 ```
+{% endcode %}

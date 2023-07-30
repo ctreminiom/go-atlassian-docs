@@ -1,3 +1,8 @@
+---
+cover: ../../.gitbook/assets/screenshot-2023-06-01-at-1.59.32-pm-1-1560x760.png
+coverY: 0
+---
+
 # 📃 Page
 
 The Confluence Cloud V2 API includes a set of page endpoints that allow developers to manage and interact with pages in Confluence Cloud. These endpoints provide a range of features that make it easier to create, read, update, and delete pages, as well as retrieve information about them.
@@ -13,8 +18,11 @@ The page endpoints in the Confluence Cloud V2 API provide a range of features th
 
 ## Get pages for label
 
+`GET /wiki/api/v2/labels/{id}/pages`
+
 GetsByLabel returns the pages of specified label. The number of results is limited by the `limit` parameter and additional results (if available) will be available through the `next` URL present in the `Link` response header.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -77,11 +85,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Get pages
 
+`GET /wiki/api/v2/pages`
+
 Bulk returns all pages. The number of results is limited by the `limit` parameter and additional results (if available) will be available through the `next` URL present in the `Link` response header.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -144,11 +156,15 @@ func main() {
 	}
 }
 ```
+{% endcode %}
 
 ## Create page
 
+`POST /wiki/api/v2/pages`
+
 Create creates a page in the space. Pages are created as published by default unless specified as a draft in the status field. If creating a published page, the title must be specified.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -400,11 +416,15 @@ func main() {
 	fmt.Println(page.ID)
 }
 ```
+{% endcode %}
 
 ## Get page by id
 
+`GET /wiki/api/v2/pages/{id}`
+
 Get returns a specific page.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -465,11 +485,15 @@ func main() {
 	*/
 }
 ```
+{% endcode %}
 
 ## Update page
 
+`PUT /wiki/api/v2/pages/{id}`
+
 Update update a page by id.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -614,11 +638,15 @@ func main() {
 	fmt.Println(pageUpdated.Version)
 }
 ```
+{% endcode %}
 
 ## Delete page
 
+`DELETE /wiki/api/v2/pages/{id}`
+
 Delete delete a page by id.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -657,11 +685,15 @@ func main() {
 	log.Println("Status Code:", response.Code)
 }
 ```
+{% endcode %}
 
 ## Get pages in space
 
+`GET /wiki/api/v2/spaces/{id}/pages`
+
 GetsBySpage returns all pages in a space. The number of results is limited by the `limit` parameter and additional results (if available) will be available through the `next` URL present in the `Link` response header.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -724,3 +756,4 @@ func main() {
 	}
 }
 ```
+{% endcode %}

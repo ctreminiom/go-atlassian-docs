@@ -1,9 +1,21 @@
+---
+cover: ../../.gitbook/assets/mb-personalities_1120x545-@2xcompressed-1560x760.png
+coverY: 0
+---
+
 # 📂 Attachments
 
 ## Get attachments
 
+`GET /wiki/rest/api/content/{id}/child/attachment`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns the attachments for a piece of content. By default, the following objects are expanded: `metadata`.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -58,11 +70,15 @@ func main()  {
 }
 
 ```
+{% endcode %}
 
 ## Create or update attachment
 
+`PUT /wiki/rest/api/content/{id}/child/attachment`
+
 Adds an attachment to a piece of content. If the attachment already exists for the content, then the attachment is updated (i.e. a new version of the attachment is created).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -133,12 +149,16 @@ func main()  {
    }
 }
 ```
+{% endcode %}
 
 ## Create attachment
+
+`POST /wiki/rest/api/content/{id}/child/attachment`
 
 Adds an attachment to a piece of content. This method only adds a new attachment. If you want to update an existing attachment, use [Create or update attachments](https://developer.atlassian.com/cloud/confluence/rest/api-group-content---attachments/).\
 package main
 
+{% code fullWidth="true" %}
 ```go
 
 import (
@@ -203,6 +223,6 @@ func main()  {
    for _, attachment := range attachmentsPage.Results {
       log.Println(attachment.ID, attachment.Title)
    }
-
 }
 ```
+{% endcode %}

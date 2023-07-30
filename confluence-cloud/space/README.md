@@ -1,9 +1,21 @@
+---
+cover: ../../.gitbook/assets/artboard-2@3x-1560x760.png
+coverY: 0
+---
+
 # 💾 Space
 
 ## Get content for space
 
+`GET /wiki/rest/api/space/{spaceKey}/content`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns all content in a space. The returned content is grouped by type (pages then blogposts), then ordered by content ID in ascending order.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -59,11 +71,19 @@ func main()  {
    log.Println(contents.Page)
 }
 ```
+{% endcode %}
 
 ## Get content by type for space
 
+`GET /wiki/rest/api/space/{spaceKey}/content/{type}`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns all content of a given type, in a space. The returned content is ordered by content ID in ascending order.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -119,14 +139,17 @@ func main()  {
    for _, content := range contents.Results {
       log.Println(content.ID, content.Title)
    }
-
 }
 ```
+{% endcode %}
 
 ## Create space
 
+`POST /wiki/rest/api/space`
+
 Creates a new space. Note, currently you cannot set space labels when creating a space.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -185,11 +208,15 @@ func main()  {
 	log.Println(space)
 }
 ```
+{% endcode %}
 
 ## Delete space
 
+`DELETE /wiki/rest/api/space/{spaceKey}`
+
 Deletes a space. Note, the space will be deleted in a long running task. Therefore, the space may not be deleted yet when this method has returned. Clients should poll the status link that is returned in the response until the task completes.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -236,11 +263,19 @@ func main()  {
    log.Println(task.Links.Status)
 }
 ```
+{% endcode %}
 
 ## Get space
 
+`GET /wiki/rest/api/space/{spaceKey}`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns a space. This includes information like the name, description, and permissions, but not the content in the space.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -285,11 +320,19 @@ func main()  {
    log.Println(space)
 }
 ```
+{% endcode %}
 
 ## Get Spaces
 
+`GET /wiki/rest/api/space`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns all spaces. The returned spaces are ordered alphabetically in ascending order by space key.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -353,17 +396,19 @@ func main()  {
 	}
 }
 ```
+{% endcode %}
 
 ## Update space
+
+`PUT /wiki/rest/api/space/{spaceKey}`
 
 Updates the name, description, or homepage of a space.
 
 * For security reasons, permissions cannot be updated via the API and must be changed via the user interface instead.
 * Currently, you cannot set space labels when updating a space.
 
-```go
-package main
-
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
+</strong>
 import (
 	"context"
 	"github.com/ctreminiom/go-atlassian/confluence"
@@ -391,15 +436,15 @@ func main()  {
 
 	var (
 		spaceKey = "DUMMY"
-		payload = &models.UpdateSpaceScheme{
+		payload = &#x26;models.UpdateSpaceScheme{
 			Name:        "DUMMY Space - Updated",
-			Description: &models.CreateSpaceDescriptionScheme{
-				Plain: &models.CreateSpaceDescriptionPlainScheme{
+			Description: &#x26;models.CreateSpaceDescriptionScheme{
+				Plain: &#x26;models.CreateSpaceDescriptionPlainScheme{
 					Value:          "Dummy Space - Description - Updated",
 					Representation: "plain",
 				},
 			},
-			Homepage:    &models.UpdateSpaceHomepageScheme{ID: "65798145"},
+			Homepage:    &#x26;models.UpdateSpaceHomepageScheme{ID: "65798145"},
 		}
 	)
 
@@ -419,4 +464,4 @@ func main()  {
 	log.Println("Status Code:", response.Code)
 	log.Println(spaceUpdated)
 }
-```
+</code></pre>

@@ -1,9 +1,22 @@
+---
+cover: >-
+  ../../.gitbook/assets/hero_1120x545_csd-5489-tier-1-illo-interpersonal-skills-1-9-in-series@2x-1560x760.png
+coverY: 0
+---
+
 # 📬 Comments
 
 ## Get content comments
 
+`GET /wiki/rest/api/content/{id}/child/comment`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns the comments on a piece of content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -56,7 +69,6 @@ func main()  {
    for _, comment := range comments.Results {
       log.Println(comment.Title, comment.ID, comment.Type)
    }
-
 }
 ```
-
+{% endcode %}

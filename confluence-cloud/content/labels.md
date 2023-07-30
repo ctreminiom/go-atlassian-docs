@@ -1,9 +1,21 @@
+---
+cover: ../../.gitbook/assets/growthgauntletcoverillo.jpg
+coverY: 0
+---
+
 # 🚩 Labels
 
 ## Get labels for content
 
+`GET /wiki/rest/api/content/{id}/label`
+
+{% hint style="info" %}
+Deprecated, use [Confluence's v2 API](../v2/).
+{% endhint %}
+
 Returns the labels on a piece of content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -50,14 +62,18 @@ func main()  {
    }
 }
 ```
+{% endcode %}
 
 ## Add labels to content
+
+`POST /wiki/rest/api/content/{id}/label`
 
 Adds labels to a piece of content. It does not modify the existing labels.
 
 * Labels can also be added when creating content ([Create content](https://developer.atlassian.com/cloud/confluence/rest/api-group-content-labels/)).
 * Labels can be updated when updating content ([Update content](https://developer.atlassian.com/cloud/confluence/rest/api-group-content-labels/)). This will delete the existing labels and replace them with the labels in the request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -105,15 +121,17 @@ func main()  {
 	for _, label := range labels.Results {
 		log.Println(label)
 	}
-
 }
-
 ```
+{% endcode %}
 
 ## Remove label from content
 
+`DELETE /wiki/rest/api/content/{id}/label/{label}`
+
 Removes a label from a piece of content. This is similar to [Remove label from content using query parameter](https://developer.atlassian.com/cloud/confluence/rest/api-group-content-labels/) except that the label name is specified via a path parameter.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -147,6 +165,6 @@ func main()  {
       log.Println(response.Bytes.String())
       log.Fatal(err)
    }
-
 }
 ```
+{% endcode %}

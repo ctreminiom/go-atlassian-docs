@@ -1,9 +1,17 @@
+---
+cover: ../../../.gitbook/assets/artboard-2@3x-1560x760.png
+coverY: 0
+---
+
 # 🔞 Restrictions
 
 ## Get restrictions
 
+`GET /wiki/rest/api/content/{id}/restriction`
+
 Returns the restrictions on a piece of content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -62,11 +70,15 @@ func main() {
 
 }
 ```
+{% endcode %}
 
 ## Add Restrictions
 
+`POST /wiki/rest/api/content/{id}/restriction`
+
 Adds restrictions to a piece of content. Note, this does not change any existing restrictions on the content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -146,16 +158,17 @@ func main()  {
 			}
 		}
 	}
-
-
 }
-
 ```
+{% endcode %}
 
 ## Update Restrictions
 
+`PUT /wiki/rest/api/content/{id}/restriction`
+
 Updates restrictions for a piece of content. This removes the existing restrictions and replaces them with the restrictions in the request.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -230,14 +243,17 @@ func main()  {
 			}
 		}
 	}
-
 }
 ```
+{% endcode %}
 
 ## Delete Restrictions
 
+`DELETE /wiki/rest/api/content/{id}/restriction`
+
 Removes all restrictions (read and update) on a piece of content.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -295,6 +311,6 @@ func main()  {
 			}
 		}
 	}
-
 }
 ```
+{% endcode %}

@@ -1,9 +1,17 @@
+---
+cover: ../../../../.gitbook/assets/bb7f24ad-a935-415f-a11f-c1b2ffec7cb8-1560x760.jpeg
+coverY: 0
+---
+
 # 🎑 Operations
 
 ## Get Restrictions by Operation
 
+`GET /wiki/rest/api/content/{id}/restriction/byOperation`
+
 Returns restrictions on a piece of content by operation. This method is similar to [Get restrictions](https://developer.atlassian.com/cloud/confluence/rest/api-group-content-restrictions/) except that the operations are properties of the return object, rather than items in a results array.
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -51,11 +59,15 @@ func main()  {
 	
 }
 ```
+{% endcode %}
 
 ## Get Restrictions for Operation
 
+`GET /wiki/rest/api/content/{id}/restriction/byOperation/{operationKey}`
+
 Returns the restictions on a piece of content for a given operation (read or update).
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -103,3 +115,4 @@ func main()  {
 	fmt.Println(restrictions)
 }
 ```
+{% endcode %}
