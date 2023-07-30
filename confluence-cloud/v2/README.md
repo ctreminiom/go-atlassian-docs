@@ -4,7 +4,7 @@
 
 Last October, we released [the first REST API V2 endpoints for Confluence Cloud](https://community.developer.atlassian.com/t/release-of-v2-confluence-rest-api-for-pages-and-blogposts-experimental/62164), which enabled developers to fetch pages and blogposts. We’ve continued to expand the surface area of the V2 API, and we are now happy to announce the release of V2 endpoints related to the following data types:
 
-<table><thead><tr><th></th><th data-type="content-ref"></th></tr></thead><tbody><tr><td>pages</td><td><a href="page.md">page.md</a></td></tr><tr><td>spaces</td><td></td></tr><tr><td>attachments</td><td></td></tr><tr><td>blogposts</td><td></td></tr><tr><td>comments</td><td></td></tr><tr><td>custom-content</td><td></td></tr><tr><td>labels</td><td></td></tr><tr><td>spaces</td><td></td></tr><tr><td>space properties</td><td></td></tr><tr><td>versions</td><td></td></tr></tbody></table>
+<table><thead><tr><th></th><th data-type="content-ref"></th></tr></thead><tbody><tr><td>pages</td><td><a href="page.md">page.md</a></td></tr><tr><td>spaces</td><td><a href="space.md">space.md</a></td></tr><tr><td>attachments</td><td><a href="attachments.md">attachments.md</a></td></tr><tr><td>blogposts</td><td></td></tr><tr><td>comments</td><td></td></tr><tr><td>custom-content</td><td></td></tr><tr><td>labels</td><td></td></tr><tr><td>spaces</td><td></td></tr><tr><td>space properties</td><td></td></tr><tr><td>versions</td><td></td></tr></tbody></table>
 
 These endpoints support Connect scopes and granular OAuth 2.0 scopes.
 

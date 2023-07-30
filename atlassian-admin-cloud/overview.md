@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/mindful-leadership_1120x545@2x-1560x760.png
+coverY: 0
+---
+
 # 🌌 Introduction
 
 The cloud admin REST APIs let you administer [Atlassian cloud](https://developer.atlassian.com/cloud/) products. To allow administrators to manage multiple Atlassian cloud products and sites centrally, we’ve created a global administration layer called an _organization_ that is a centralized place for managing your products and users. With an organization, you can manage the Atlassian accounts of all registered users at your company, based on the domains that you have verified. Managing a user's account allows you to change account and profile details, view product access and admin permissions, and deactivate or permanently delete a user.
@@ -23,3 +28,4 @@ You have full control over managed accounts. You can update their email address 
 With an Atlassian Access subscription, we offer more advanced features, like syncing users from a directory outside your organization. When you sync users to your managed accounts, your Access settings impact how those accounts log into your sites and products, as shown in the illustration.
 
 ![](<../.gitbook/assets/image (14).png>)
+
