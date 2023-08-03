@@ -1,3 +1,22 @@
+---
+cover: ../.gitbook/assets/fy22-shareholder-letter_1120x545@2x-1560x760.png
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 🗃 Add CustomField to Screen
 
 In this article, I would be showing you how to add custom-fields on a Jira project screens using `go-atlassian.` Before we get started, let's first understand the Jira entities involved in this process: screens, screen tabs, and screen tab fields.
@@ -31,6 +50,7 @@ go get github.com/ctreminiom/go-atlassian
 
 Create a new Go file, e.g., `main.go`, and import the necessary packages:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -41,11 +61,13 @@ import (
 	jira "github.com/ctreminiom/go-atlassian/jira/v2"
 )
 ```
+{% endcode %}
 
 ## Step 4: Set up Jira API client&#x20;
 
 Initialize the Jira API client with your Jira base URL and API token:
 
+{% code fullWidth="true" %}
 ```go
 func main() {
 	client, err := jira.New(nil, "https://your-jira-instance.atlassian.net")
@@ -57,6 +79,7 @@ func main() {
 	client.Auth.SetBasicAuth(mail, token)
 }
 ```
+{% endcode %}
 
 ## Step 5: Extract the issue type screen scheme
 
@@ -72,6 +95,7 @@ Before to add the _customfields_ on the project screens, we need to search the i
 
 Use the following code to extract the issue type screen scheme linked to the KP project.
 
+{% code fullWidth="true" %}
 ```go
 var projectKey = "KP"
 
@@ -121,11 +145,13 @@ for _, scheme := range projectMapping.Values {
 	}
 }
 ```
+{% endcode %}
 
 ## Step 6: Extract the screen schemes
 
 With the Issue Type Screen Scheme ID extracted from the previous step, we can proceed with the screen scheme extraction, use the following code to extract the screen schemes
 
+{% code fullWidth="true" %}
 ```go
 // --------------------------------------------------
 // Transform the project id string to integer
@@ -166,11 +192,13 @@ for _, scheme := range schemeMapping.Values {
 	screenSchemesIDs = append(screenSchemesIDs, screenSchemeIDAsInt)
 }
 ```
+{% endcode %}
 
 ## Step 7: Extract the screen IDs
 
 The next step is extract the screen ID's from the screen schemes, you can use this code to extract the screen IDs.
 
+{% code fullWidth="true" %}
 ```go
 // --------------------------------------------------
 // Extract the screens from the screen schemes IDs
@@ -206,6 +234,7 @@ for _, screenScheme := range screenSchemes.Values {
 // --------------------------------------------------
 screenIDsWithOutDuplicated := removeDuplicateInt(screenIDs)
 ```
+{% endcode %}
 
 ## Step 8: Add the fields on the project screens
 
@@ -213,6 +242,7 @@ The final step is add the custom-fields on the screen default tabs, it's require
 
 We can use the following code below:
 
+{% code fullWidth="true" %}
 ```go
 var customFieldsIDs = []string{
 	"customfield_10068",
@@ -307,9 +337,18 @@ for _, screenID := range screenIDsWithOutDuplicated {
 		log.Println("The field", fieldID, "has been added on the screen ", screenID)
 	}
 ```
+{% endcode %}
 
 When you run the code, the custom-fields selected will be available on the project :thumbsup::tada:.
 
+<div data-full-width="true">
+
 <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+</div>
+
+<div data-full-width="true">
+
 <figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+
+</div>

@@ -1,3 +1,22 @@
+---
+cover: ../.gitbook/assets/atla0623_rb_vs_lb_web_2240x1080-1560x760.jpg
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 👾 Create Jira Issue
 
 In this article, I would be showing you how to create a Jira issue using the "go-atlassian" library.
@@ -25,6 +44,7 @@ go get -v github.com/ctreminiom/go-atlassian
 1. Create a new Go file (e.g., `main.go`) in your project directory.
 2. Open the file and import the required packages:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -36,6 +56,7 @@ import (
 	jira "github.com/ctreminiom/go-atlassian/jira/v2"
 )
 ```
+{% endcode %}
 
 {% hint style="warning" %}
 You can use the V2 and V3 Jira endpoint versions.
@@ -45,6 +66,7 @@ You can use the V2 and V3 Jira endpoint versions.
 
 In the `main` function, create a new Jira client and authenticate using your Jira URL, username, and API token:
 
+{% code fullWidth="true" %}
 ```go
 func main() {
 
@@ -60,6 +82,7 @@ func main() {
 	client.Auth.SetBasicAuth(mailAddress, apiToken)
 }
 ```
+{% endcode %}
 
 ## Step 5: Custom fields definition
 
@@ -67,6 +90,7 @@ func main() {
 
 <table><thead><tr><th data-type="select" data-multiple>Custom-field Types</th><th data-type="select" data-multiple>Custom-field Types</th></tr></thead><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table>
 
+{% code fullWidth="true" %}
 ```go
 var customFields = models.CustomFields{}
 err = customFields.Groups("customfield_10052", []string{"jira-administrators", "jira-administrators-system"})
@@ -79,11 +103,13 @@ if err != nil {
 	log.Fatal(err)
 }
 ```
+{% endcode %}
 
 ## Step 6: Create an issue
 
 Create a new issue using the `Create` method and set the custom fields:
 
+{% code fullWidth="true" %}
 ```go
 payload := &models.IssueSchemeV2{
 	Fields: &models.IssueFieldsSchemeV2{
@@ -98,6 +124,7 @@ if err != nil {
 	log.Fatal(err)
 }
 ```
+{% endcode %}
 
 {% hint style="info" %}
 Make sure to replace **`YOUR_PROJECT_KEY`** with the actual project key, and set the appropriate values for the other required fields like `Summary`, `Type`, `Assignee`, `Reporter`, etc.

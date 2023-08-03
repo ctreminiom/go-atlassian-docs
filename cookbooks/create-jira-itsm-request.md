@@ -1,3 +1,22 @@
+---
+cover: ../.gitbook/assets/ai-trends_1120x545@2x-1560x760.jpg
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 🚮 Create Jira ITSM Request
 
 In this article, I would be showing you how to create a Service Management customer request with custom-fields.
@@ -25,6 +44,7 @@ go get -v github.com/ctreminiom/go-atlassian
 1. Create a new Go file (e.g., `main.go`) in your project directory.
 2. Open the file and import the required packages:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -34,11 +54,13 @@ import (
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 )
 ```
+{% endcode %}
 
 ## Step 4: Authenticate with Jira
 
 In the `main` function, create a new Jira client and authenticate using your Jira URL, username, and API token:
 
+{% code fullWidth="true" %}
 ```go
 func main() {
 
@@ -54,12 +76,13 @@ func main() {
 	client.Auth.SetBasicAuth(mailAddress, apiToken)
 }
 ```
+{% endcode %}
 
 ## Step 5: Create an ITSM customer request with custom fields
 
 Define the fields you want to set:
 
-<pre class="language-go"><code class="lang-go"><strong>form := &#x26;models.CustomerRequestFields{}
+<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>form := &#x26;models.CustomerRequestFields{}
 </strong>
 if err := form.Text("summary", "Summary Sample"); err != nil {
 	log.Fatal(err)
@@ -84,6 +107,7 @@ A list of the fields required by a customer request type can be obtained using t
 
 * Create a new issue using the `Create` method and set the custom fields:
 
+{% code fullWidth="true" %}
 ```go
 payload := &models.CreateCustomerRequestPayloadScheme{
 	RequestParticipants: nil,
@@ -96,6 +120,7 @@ if err != nil {
 	log.Fatal(err)
 }
 ```
+{% endcode %}
 
 ## Step 6: Run the program
 

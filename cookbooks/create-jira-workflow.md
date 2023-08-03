@@ -1,3 +1,22 @@
+---
+cover: ../.gitbook/assets/leadership-principles_1120x545@2x-1560x760.png
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 🚎 Create Jira Workflow
 
 In this article, I would be showing you how to create Jira workflow and append transitions using `go-atlassian`
@@ -22,6 +41,7 @@ go get github.com/ctreminiom/go-atlassian
 
 Create a new Go file, e.g., `main.go`, and import the necessary packages:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -32,11 +52,13 @@ import (
 	jira "github.com/ctreminiom/go-atlassian/jira/v2"
 )
 ```
+{% endcode %}
 
 ## Step 4: Set up Jira API client&#x20;
 
 Initialize the Jira API client with your Jira base URL and API token:
 
+{% code fullWidth="true" %}
 ```go
 func main() {
 	jiraClient, err := jira.New(nil, "https://your-jira-instance.atlassian.net")
@@ -48,6 +70,7 @@ func main() {
 	jiraClient.Auth.SetBasicAuth(mail, token)
 }
 ```
+{% endcode %}
 
 ## Step 5: Create a workflow&#x20;
 
@@ -60,7 +83,11 @@ To create a new workflow, we need to the create the `models.WorkflowPayloadSchem
 
 Let's try to create a workflow with **directed** transitions and **all-to-all** transitions, something like this:
 
+<div data-full-width="true">
+
 <figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 ### Step 5.1: Extract the status ID's
 
@@ -80,6 +107,7 @@ In this particular example, we're needed to use the following statuses:
 * Closed
 * Resolved
 
+{% code fullWidth="true" %}
 ```go
 var statusesNamesAsSlice = []string{
 	"Open", "In Progress", "QA",
@@ -153,10 +181,11 @@ for name, data := range statusesAsMap {
 	fmt.Println(name, data.ID)
 }
 ```
+{% endcode %}
 
 &#x20;The previously code extracts the status ID's from the Jira instance and if one status is not available on the instance, it'll automatically create the statuses and append the information on the `statusesAsMap` variable.
 
-<div align="left">
+<div align="left" data-full-width="false">
 
 <figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -164,6 +193,7 @@ for name, data := range statusesAsMap {
 
 With the status ID's, we can proceed with the creation of the workflow statuses payload
 
+{% code fullWidth="true" %}
 ```go
 var workflowStatuses []*models.WorkflowTransitionScreenScheme
 for _, status := range statusesAsMap {
@@ -174,6 +204,7 @@ for _, status := range statusesAsMap {
 	})
 }
 ```
+{% endcode %}
 
 ### Step 5.2: Create the workflow transitions
 
@@ -191,6 +222,7 @@ There're the conditional validations needed to create a valid workflow transitio
 * not have a 'from' status on _initial_ and _global_ transitions.
 * have a 'from' status on _directed_ transitions.
 
+{% code fullWidth="true" %}
 ```go
 var workflowTransitions []*models.WorkflowTransitionPayloadScheme
 
@@ -262,11 +294,13 @@ workflowTransitions = append(workflowTransitions, &models.WorkflowTransitionPayl
 	Type: "directed",
 })
 ```
+{% endcode %}
 
 ### Step 5.3: Create the workflow&#x20;
 
 In conclusion, we can combine the statuses and transitions structs and create the workflow using the structs created on the previous steps.
 
+{% code fullWidth="true" %}
 ```go
 workflowPayload := &models.WorkflowPayloadScheme{
 	Name:        "Workflow Name - Sample",
@@ -288,5 +322,14 @@ if err != nil {
 log.Println(newWorkflow.Name)
 log.Println(newWorkflow.EntityID)
 ```
+{% endcode %}
+
+<div data-full-width="true">
 
 <figure><img src="../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+## Git Gist File
+
+{% embed url="https://gist.github.com/ctreminiom/9b2f06be03ebf71278373bbbb5b06aee" fullWidth="false" %}

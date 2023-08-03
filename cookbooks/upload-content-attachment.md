@@ -1,3 +1,22 @@
+---
+cover: ../.gitbook/assets/homegrown-innovation_1120x545@2x-1560x760.png
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 🌄 Upload Content Attachment
 
 In this article, I would be showing you how to upload an attachment in a Confluence content using the "go-atlassian" library.
@@ -25,6 +44,7 @@ go get -v github.com/ctreminiom/go-atlassian
 1. Create a new Go file (e.g., `main.go`) in your project directory.
 2. Open the file and import the required packages:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -34,11 +54,13 @@ import (
 	"os"
 )
 ```
+{% endcode %}
 
 ## Step 4: Authenticate with Confluence
 
 In the `main` function, create a new Confluence client and authenticate using your Atlassian URL, username, and API token:
 
+{% code fullWidth="true" %}
 ```go
 func main() {
 
@@ -54,19 +76,23 @@ func main() {
 	client.Auth.SetBasicAuth(mailAddress, apiToken)
 }
 ```
+{% endcode %}
 
 ## Step 5: Upload an attachment to a Confluence page
 
 * Define the necessary variables for the page ID, file path, and file name:
 
+{% code fullWidth="true" %}
 ```go
 pageID := "76513281"
 filePath := "confluence/mocks/mock.png"
 fileName := "mock-00.png"
 ```
+{% endcode %}
 
 * Open the file using the provided file path:
 
+{% code fullWidth="true" %}
 ```go
 absolutePath, err := filepath.Abs(filePath)
 if err != nil {
@@ -82,9 +108,11 @@ if err != nil {
 
 defer reader.Close()
 ```
+{% endcode %}
 
 * Upload the attachment using the `Content.Attachment.Create()`method and provide the page ID, file name, and file content:
 
+{% code fullWidth="true" %}
 ```go
 attachmentsPage, response, err := client.Content.Attachment.Create(context.Background(), pageID, "current", fileName, reader)
 if err != nil {
@@ -105,6 +133,7 @@ for _, attachment := range attachmentsPage.Results {
 	log.Println(attachment.ID, attachment.Title)
 }
 ```
+{% endcode %}
 
 {% hint style="info" %}
 Make sure to replace `<CONFLUENCE_PAGE_ID>`, `<FILE_PATH>`, and `<FILE_NAME>` with the actual values for your use case.

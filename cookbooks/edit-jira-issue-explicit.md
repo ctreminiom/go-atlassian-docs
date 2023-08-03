@@ -1,3 +1,22 @@
+---
+cover: ../.gitbook/assets/2240x1090-1-1560x760.jpg
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 🚜 Edit Jira Issue (Explicit)
 
 In this article, I would be showing you how to edit a Jira issue using the "go-atlassian" library.
@@ -25,6 +44,7 @@ go get -v github.com/ctreminiom/go-atlassian
 1. Create a new Go file (e.g., `main.go`) in your project directory.
 2. Open the file and import the required packages:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -36,6 +56,7 @@ import (
 	jira "github.com/ctreminiom/go-atlassian/jira/v2"
 )
 ```
+{% endcode %}
 
 {% hint style="warning" %}
 You can use the V2 and V3 Jira endpoint versions.
@@ -45,6 +66,7 @@ You can use the V2 and V3 Jira endpoint versions.
 
 In the `main` function, create a new Jira client and authenticate using your Jira URL, username, and API token:
 
+{% code fullWidth="true" %}
 ```go
 func main() {
 
@@ -60,6 +82,7 @@ func main() {
 	client.Auth.SetBasicAuth(mailAddress, apiToken)
 }
 ```
+{% endcode %}
 
 ## Step 5: Create Issue Payload
 
@@ -67,6 +90,7 @@ You do not need to send all the fields inside "fields". You can just send the fi
 
 * For system-fields, you can use the \&models.IssueSchemeV2 struct, something like this:
 
+{% code fullWidth="true" %}
 ```go
 var payload = models.IssueSchemeV2{
 	Fields: &models.IssueFieldsSchemeV2{
@@ -75,9 +99,11 @@ var payload = models.IssueSchemeV2{
 	},
 }
 ```
+{% endcode %}
 
 * For custom-fields, you can use the \&models.CustomFields struct to inyect the customfield's by type, something like this:
 
+{% code fullWidth="true" %}
 ```go
 var customFields = models.CustomFields{}
 err = customFields.Groups("customfield_10052", []string{"jira-administrators", "jira-administrators-system"})
@@ -90,15 +116,18 @@ if err != nil {
 	log.Fatal(err)
 }
 ```
+{% endcode %}
 
 * Finally, call the Issue.Update() method and update the issue
 
+{% code fullWidth="true" %}
 ```go
 _, err = atlassian.Issue.Update(context.Background(), "KP-2", false, &payload, &customFields, nil)
 if err != nil {
 	log.Fatal(err)
 }
 ```
+{% endcode %}
 
 ## Step 6: Run the program
 

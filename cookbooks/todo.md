@@ -1,3 +1,22 @@
+---
+cover: ../.gitbook/assets/jql-functions-history-and-sorting0d@3x-1560x760.png
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # ⏱ Export Issue History
 
 In this article, I would be showing you how to extract the Jira history information using a JQL query and saves it into a .csv file.
@@ -25,6 +44,7 @@ go get -v github.com/ctreminiom/go-atlassian
 1. Create a new Go file (e.g., `main.go`) in your project directory.
 2. Open the file and import the required packages:
 
+{% code fullWidth="true" %}
 ```go
 package main
 
@@ -37,11 +57,13 @@ import (
 	jira "github.com/ctreminiom/go-atlassian/jira/v2"
 )
 ```
+{% endcode %}
 
 ## Step 4: Authenticate with Jira
 
 In the `main` function, create a new Jira client and authenticate using your Jira URL, username, and API token:
 
+{% code fullWidth="true" %}
 ```go
 func main() {
 
@@ -57,11 +79,13 @@ func main() {
 	client.Auth.SetBasicAuth(mailAddress, apiToken)
 }
 ```
+{% endcode %}
 
 ## Step 5: Execute the JQL query
 
 Add the following code inside the `main` function to execute the JQL query and retrieve the issues:
 
+{% code fullWidth="true" %}
 ```go
 jql := "order by created DESC"
 
@@ -93,11 +117,13 @@ for {
 	startAt += 50
 }
 ```
+{% endcode %}
 
 ## Step 6: Extract the issue history
 
 Iterate over the retrieved issues and extract the changelog information.
 
+{% code fullWidth="true" %}
 ```go
 var changelogs [][]string
 for _, issue := range issues {
@@ -134,11 +160,13 @@ for _, issue := range issues {
 	}
 }
 ```
+{% endcode %}
 
 ## Step 7: Save the issue history to a CSV file
 
 Create a new CSV file and write the issue history data to it:
 
+{% code fullWidth="true" %}
 ```go
 file, err := os.Create("issue_history.csv")
 if err != nil {
@@ -161,6 +189,7 @@ if err := writer.WriteAll(changelogs); err != nil {
 
 log.Println("Issue history saved to issue_history.csv")
 ```
+{% endcode %}
 
 ## Step 8: Run the program
 
