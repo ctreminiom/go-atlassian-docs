@@ -101,6 +101,7 @@ import (
 	"context"
 	"fmt"
 	confluence "github.com/ctreminiom/go-atlassian/confluence/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"net/url"
 	"os"
@@ -122,29 +123,37 @@ func main() {
 	instance.Auth.SetBasicAuth(mail, token)
 	instance.Auth.SetUserAgent("curl/7.54.0")
 
+	options := &models.PageOptionsScheme{
+		PageIDs:    nil,
+		SpaceIDs:   nil,
+		Sort:       "created-date",
+		Status:     []string{"current"},
+		Title:      "",
+		BodyFormat: "atlas_doc_format",
+	}
+
 	var cursor string
 	for {
 
-		pages, response, err := instance.Page.Bulk(context.Background(), cursor, 20)
+		chunk, response, err := instance.Page.Gets(context.Background(), options, cursor, 20)
 		if err != nil {
 
 			if response != nil {
-				log.Println(response.Bytes.String())
+				log.Println(response.Code)
 			}
+
+			log.Fatal(err)
 		}
 
-		for _, page := range pages.Results {
-			fmt.Println(page.Title, page.ID, page.Version.Number)
+		for _, page := range chunk.Results {
+			fmt.Println(page.Title, page.ID)
 		}
 
-		log.Println("Endpoint:", response.Endpoint)
-		log.Println("Status Code:", response.Code)
-
-		if pages.Links.Next == "" {
+		if chunk.Links != nil && chunk.Links.Next == "" {
 			break
 		}
 
-		values, err := url.ParseQuery(pages.Links.Next)
+		values, err := url.ParseQuery(chunk.Links.Next)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -745,6 +754,74 @@ func main() {
 		}
 
 		values, err := url.ParseQuery(pages.Links.Next)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		_, containsCursor := values["cursor"]
+		if containsCursor {
+			cursor = values["cursor"][0]
+		}
+	}
+}
+```
+{% endcode %}
+
+## Get space permissions
+
+`GET /wiki/api/v2/spaces/{id}/permissions`
+
+Returns space permissions for a specific space.
+
+{% code fullWidth="true" %}
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	confluence "github.com/ctreminiom/go-atlassian/confluence/v2"
+	"log"
+	"net/url"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
+
+	var cursor string
+	for {
+
+		permissions, _, err := instance.Space.Permissions(context.Background(), 196613, cursor, 20)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		for _, permission := range permissions.Results {
+
+			fmt.Println(permission.ID)
+			fmt.Println(permission.Principal)
+			fmt.Println(permission.Operation)
+		}
+
+		if permissions.Links.Next == "" {
+			break
+		}
+
+		values, err := url.ParseQuery(permissions.Links.Next)
 		if err != nil {
 			log.Fatal(err)
 		}

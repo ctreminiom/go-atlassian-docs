@@ -1,5 +1,5 @@
 ---
-cover: ../../.gitbook/assets/growthgauntletcoverillo.jpg
+cover: ../../../.gitbook/assets/growthgauntletcoverillo.jpg
 coverY: 0
 ---
 
@@ -115,6 +115,53 @@ func main() {
 
 	for _, attachment := range attachments.Results {
 		fmt.Println(attachment.ID, attachment.Title)
+	}
+}
+```
+{% endcode %}
+
+## Delete attachment
+
+`DELETE /wiki/api/v2/attachments/{id}`
+
+Delete an attachment by id.
+
+{% code fullWidth="true" %}
+```go
+package main
+
+import (
+	"context"
+	confluence "github.com/ctreminiom/go-atlassian/confluence/v2"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("HOST")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	instance, err := confluence.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	instance.Auth.SetBasicAuth(mail, token)
+	instance.Auth.SetUserAgent("curl/7.54.0")
+
+	response, err := instance.Attachment.Delete(context.Background(), "att219152391")
+	if err != nil {
+		if response != nil {
+			log.Println(response.Endpoint)
+			log.Println(response.Code)
+			log.Println(response.Bytes.String())
+		}
+
+		log.Fatal(err)
 	}
 }
 ```

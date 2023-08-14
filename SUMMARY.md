@@ -149,9 +149,11 @@
 * [🖼 Long Task](confluence-cloud/long-task.md)
 * [🌊 V2](confluence-cloud/v2/README.md)
   * [🏔 Introduction](confluence-cloud/v2/introduction.md)
-  * [🧺 Attachments](confluence-cloud/v2/attachments.md)
+  * [🧺 Attachments](confluence-cloud/v2/attachments/README.md)
+    * [💻 Versions](confluence-cloud/v2/attachments/versions.md)
   * [📃 Page](confluence-cloud/v2/page.md)
   * [🪟 Space](confluence-cloud/v2/space.md)
+  * [🗃 Custom Content](confluence-cloud/v2/custom-content.md)
 
 ## Atlassian Admin Cloud
 
