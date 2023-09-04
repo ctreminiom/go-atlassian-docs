@@ -20,3 +20,6 @@ layout:
 
 # 👨💻 Introduction
 
+The _go-atlassian_ `bitbucket` module provides a set of functions and types for interacting with the Bitbucket Cloud V2 REST API.&#x20;
+
+1. **Workspaces**: The workspace API allows you to manage the workspaces in your bitbucket application
