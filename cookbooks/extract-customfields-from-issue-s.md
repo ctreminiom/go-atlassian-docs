@@ -34,7 +34,7 @@ The following methods can be used to extract the customfield information from **
 
 This method parses a multi-select custom field from the given buffer data associated with the specified custom field ID and returns a slice of pointers to `CustomFieldContextOptionSchema` structs.&#x20;
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -56,15 +56,27 @@ for _, option := range options {
 
 ParseSelectCustomField parses a select custom field from the given buffer data associated with the specified custom field ID and returns a **CustomFieldContextOptionScheme** struct
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
+if err != nil {
+	log.Fatal(err)
+}
+
+option, err := models.ParseSelectCustomField(response.Bytes, "customfield_10047")
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(option.ID, option.Value)
 ```
-// Some code
-```
+{% endcode %}
 
 ### ParseCascadingSelectCustomField <a href="#parse-cascading-customfield" id="parse-cascading-customfield"></a>
 
 This method parses a cascading custom field from the given buffer data associated with the specified custom field ID and returns a **CascadingSelectScheme** struct pointer.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -84,23 +96,47 @@ fmt.Println(cascading.Value, cascading.Child.Value)
 
 ParseDatePickerCustomField parses the datepicker customfield from the given buffer data associated with the specified custom field ID and returns a struct time.Time value
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Get(context.Background(), "KP-24", nil, []string{"transitions"})
+if err != nil {
+	log.Fatal(err)
+}
+
+datePicker, err := models.ParseDatePickerCustomField(response.Bytes, "customfield_10040")
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(datePicker.String())
 ```
-// Some code
-```
+{% endcode %}
 
 ### ParseDateTimeCustomField  <a href="#parse-datetime-customfield" id="parse-datetime-customfield"></a>
 
 ParseDateTimeCustomField parses the datetime customfield from the given buffer data associated with the specified custom field ID and returns a struct time.Time value.
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Get(context.Background(), "KP-24", nil, []string{"transitions"})
+if err != nil {
+	log.Fatal(err)
+}
+
+datePicker, err := models.ParseDateTimeCustomField(response.Bytes, "customfield_10041")
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(datePicker.String())
 ```
-// Some code
-```
+{% endcode %}
 
 ### ParseMultiUserPickerCustomField <a href="#parse-multi-userpicker-customfield" id="parse-multi-userpicker-customfield"></a>
 
 This method parses a group-picker custom field from the given buffer data associated with the specified custom field ID and returns a slice of pointers to **UserDetailScheme** structs.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -122,7 +158,7 @@ for _, user := range users {
 
 This method parses a group-picker custom field from the given buffer data associated with the specified custom field ID and returns a slice of pointers to **GroupDetailScheme** structs.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -144,7 +180,7 @@ for _, group := range groups {
 
 ParseFloatCustomField parses a float custom field from the given buffer data associated with the specified custom field ID and returns string.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -164,7 +200,7 @@ fmt.Println(number)
 
 ParseSprintCustomField parses a sprints custom field from the given buffer data associated with the specified custom field ID and returns a slice of the **SprintDetailScheme** struct.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -186,7 +222,7 @@ for _, sprint := range sprints {
 
 ParseLabelCustomField parses a textfield slice custom field from the given buffer data associated with the specified custom field ID and returns string slice.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -208,7 +244,7 @@ for _, label := range labels {
 
 ParseMultiVersionCustomField parses a version-picker custom field from the given buffer data associated with the specified custom field ID and returns a slice of pointers to **VersionDetailScheme** structs.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -230,11 +266,30 @@ for _, version := range versions {
 
 ParseUserPickerCustomField parses a user custom field from the given buffer data associated with the specified custom field ID and returns a struct of UserDetailScheme.
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Get(context.Background(), "KP-24", nil, []string{"transitions"})
+if err != nil {
+	log.Fatal(err)
+}
+
+user, err := models.ParseUserPickerCustomField(response.Bytes, "customfield_10051")
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(user.EmailAddress)
+fmt.Println(user.DisplayName)
+fmt.Println(user.AccountID)
+fmt.Println(user.AccountType)
+```
+{% endcode %}
+
 ### ParseAssetCustomField <a href="#parse-assets-customfield" id="parse-assets-customfield"></a>
 
 ParseAssetCustomField parses the Jira assets elements from the given buffer data associated with the specified custom field ID and returns a struct **CustomFieldAssetScheme** slice.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 issue, response, err := client.Issue.Get(context.Background(), "KP-23", nil, []string{"transitions"})
 if err != nil {
@@ -254,11 +309,23 @@ for _, asset := range assets {
 
 ### ParseStringCustomField  <a href="#parse-textfield-customfield" id="parse-textfield-customfield"></a>
 
-ParseStringCustomField parses a textfield custom field from the given buffer data associated with the specified custom field ID and returns string
+ParseStringCustomField parses a textfield custom field from the given buffer data associated with the specified custom field ID and returns string.
 
+{% code fullWidth="true" %}
+```go
+_, response, err := client.Issue.Get(context.Background(), "KP-24", nil, []string{"transitions"})
+if err != nil {
+	log.Fatal(err)
+}
+
+textField, err := models.ParseStringCustomField(response.Bytes, "customfield_10049")
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(textField)
 ```
-// Some code
-```
+{% endcode %}
 
 ## Extract from multiple issues
 
@@ -274,7 +341,7 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.
 * If the custom field data cannot be parsed successfully, an error is returned.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10046"}, nil, 0, 50, "")
 if err != nil {
@@ -300,9 +367,23 @@ ParseSelectCustomFields extracts and parses select custom field data from a give
 
 This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a **CustomFieldContextOptionScheme** struct, representing the parsed select custom field value.
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10047"}, nil, 0, 50, "")
+if err != nil {
+	log.Fatal(err)
+}
+
+customfields, err := models.ParseSelectCustomFields(response.Bytes, "customfield_10047")
+if err != nil {
+	log.Fatal(err)
+}
+
+for issue, option := range customfields {
+	fmt.Println(issue, option.ID, option.Value)
+}
 ```
-// Some code
-```
+{% endcode %}
 
 ### ParseCascadingCustomFields  <a href="#parse-cascading-customfields" id="parse-cascading-customfields"></a>
 
@@ -310,7 +391,7 @@ ParseCascadingCustomFields extracts and parses a cascading custom field data fro
 
 This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a **CascadingSelectScheme** struct pointer, representing the parsed cascading custom field value.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10045"}, nil, 0, 50, "")
 if err != nil {
@@ -338,7 +419,7 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10055"}, nil, 0, 50, "")
 if err != nil {
@@ -369,9 +450,23 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10040"}, nil, 0, 50, "")
+if err != nil {
+	log.Fatal(err)
+}
+
+customfields, err := models.ParseDatePickerCustomFields(response.Bytes, "customfield_10040")
+if err != nil {
+	log.Fatal(err)
+}
+
+for issue, datepicker := range customfields {
+	fmt.Println(issue, datepicker.String())
+}
 ```
-// Some code
-```
+{% endcode %}
 
 ### ParseDateTimeCustomFields  <a href="#parse-datetime-customfields" id="parse-datetime-customfields"></a>
 
@@ -383,9 +478,23 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10041"}, nil, 0, 50, "")
+if err != nil {
+	log.Fatal(err)
+}
+
+customfields, err := models.ParseDateTimeCustomFields(response.Bytes, "customfield_10041")
+if err != nil {
+	log.Fatal(err)
+}
+
+for issue, datetime := range customfields {
+	fmt.Println(issue, datetime.String())
+}
 ```
-// Some code
-```
+{% endcode %}
 
 ### ParseMultiGroupPickerCustomFields  <a href="#parse-grouppicker-customfields" id="parse-grouppicker-customfields"></a>
 
@@ -397,7 +506,7 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10052"}, nil, 0, 50, "")
 if err != nil {
@@ -427,7 +536,7 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10043"}, nil, 0, 50, "")
 if err != nil {
@@ -455,9 +564,23 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10049"}, nil, 0, 50, "")
+if err != nil {
+	log.Fatal(err)
+}
+
+customfields, err := models.ParseStringCustomFields(response.Bytes, "customfield_10049")
+if err != nil {
+	log.Fatal(err)
+}
+
+for issue, textField := range customfields {
+	fmt.Println(issue, textField)
+}
 ```
-// Some code
-```
+{% endcode %}
 
 ### ParseUserPickerCustomFields <a href="#parse-userpicker-customfields" id="parse-userpicker-customfields"></a>
 
@@ -469,9 +592,23 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
+{% code overflow="wrap" fullWidth="true" %}
+```go
+_, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10051"}, nil, 0, 50, "")
+if err != nil {
+	log.Fatal(err)
+}
+
+customfields, err := models.ParseUserPickerCustomFields(response.Bytes, "customfield_10051")
+if err != nil {
+	log.Fatal(err)
+}
+
+for issue, user := range customfields {
+	fmt.Println(issue, user.AccountID)
+}
 ```
-// Some code
-```
+{% endcode %}
 
 ### ParseSprintCustomFields  <a href="#parse-sprints-customfields" id="parse-sprints-customfields"></a>
 
@@ -483,7 +620,7 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10020"}, nil, 0, 50, "")
 if err != nil {
@@ -514,7 +651,7 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10042"}, nil, 0, 50, "")
 if err != nil {
@@ -542,7 +679,7 @@ This function takes the name of the custom field to parse and a bytes.Buffer con
 * The function parses this structure to extract and organize the custom field values.&#x20;
 * If the custom field data cannot be parsed successfully, an error is returned.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10067"}, nil, 0, 50, "")
 if err != nil {
@@ -569,7 +706,7 @@ ParseAssetCustomFields extracts and parses jira assets customfield data from a g
 
 This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a slice of **CustomFieldAssetScheme** structs, representing the parsed assets associated with a Jira issues.
 
-{% code overflow="wrap" %}
+{% code overflow="wrap" fullWidth="true" %}
 ```go
 _, response, err := client.Issue.Search.Post(context.Background(), "project = KP", []string{"customfield_10072"}, nil, 0, 50, "")
 if err != nil {
