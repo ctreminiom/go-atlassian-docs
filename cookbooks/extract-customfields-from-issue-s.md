@@ -30,7 +30,7 @@ In this particular case, the library contains multiples helpers method will help
 
 The following methods can be used to extract the customfield information from **one** issue.
 
-### **ParseMultiSelectCustomField**&#x20;
+### **ParseMultiSelectCustomField**  <a href="#parse-multiselect-customfield" id="parse-multiselect-customfield"></a>
 
 This method parses a multi-select custom field from the given buffer data associated with the specified custom field ID and returns a slice of pointers to `CustomFieldContextOptionSchema` structs.&#x20;
 
@@ -52,7 +52,7 @@ for _, option := range options {
 ```
 {% endcode %}
 
-### ParseCascadingSelectCustomField
+### ParseCascadingSelectCustomField <a href="#parse-cascading-customfield" id="parse-cascading-customfield"></a>
 
 This method parses a cascading custom field from the given buffer data associated with the specified custom field ID and returns a **CascadingSelectScheme** struct pointer.
 
@@ -72,7 +72,7 @@ fmt.Println(cascading.Value, cascading.Child.Value)
 ```
 {% endcode %}
 
-### ParseMultiUserPickerCustomField
+### ParseMultiUserPickerCustomField <a href="#parse-multi-userpicker-customfield" id="parse-multi-userpicker-customfield"></a>
 
 This method parses a group-picker custom field from the given buffer data associated with the specified custom field ID and returns a slice of pointers to **UserDetailScheme** structs.
 
@@ -94,7 +94,7 @@ for _, user := range users {
 ```
 {% endcode %}
 
-### ParseMultiGroupPickerCustomField
+### ParseMultiGroupPickerCustomField <a href="#parse-grouppicker-customfield" id="parse-grouppicker-customfield"></a>
 
 This method parses a group-picker custom field from the given buffer data associated with the specified custom field ID and returns a slice of pointers to **GroupDetailScheme** structs.
 
@@ -116,7 +116,7 @@ for _, group := range groups {
 ```
 {% endcode %}
 
-### ParseFloatCustomField
+### ParseFloatCustomField <a href="#parse-float-customfield" id="parse-float-customfield"></a>
 
 ParseFloatCustomField parses a float custom field from the given buffer data associated with the specified custom field ID and returns string.
 
@@ -136,7 +136,7 @@ fmt.Println(number)
 ```
 {% endcode %}
 
-### ParseSprintCustomField
+### ParseSprintCustomField <a href="#parse-sprints-customfield" id="parse-sprints-customfield"></a>
 
 ParseSprintCustomField parses a sprints custom field from the given buffer data associated with the specified custom field ID and returns a slice of the **SprintDetailScheme** struct.
 
@@ -158,7 +158,7 @@ for _, sprint := range sprints {
 ```
 {% endcode %}
 
-### ParseLabelCustomField
+### ParseLabelCustomField <a href="#parse-labels-customfield" id="parse-labels-customfield"></a>
 
 ParseLabelCustomField parses a textfield slice custom field from the given buffer data associated with the specified custom field ID and returns string slice.
 
@@ -180,7 +180,7 @@ for _, label := range labels {
 ```
 {% endcode %}
 
-### ParseMultiVersionCustomField
+### ParseMultiVersionCustomField <a href="#parse-versionpicker-customfield" id="parse-versionpicker-customfield"></a>
 
 ParseMultiVersionCustomField parses a version-picker custom field from the given buffer data associated with the specified custom field ID and returns a slice of pointers to **VersionDetailScheme** structs.
 
@@ -202,7 +202,11 @@ for _, version := range versions {
 ```
 {% endcode %}
 
-### ParseAssetCustomField
+### ParseUserPickerCustomField  <a href="#parse-userpicker-customfield" id="parse-userpicker-customfield"></a>
+
+ParseUserPickerCustomField parses a user custom field from the given buffer data associated with the specified custom field ID and returns a struct of UserDetailScheme.
+
+### ParseAssetCustomField <a href="#parse-assets-customfield" id="parse-assets-customfield"></a>
 
 ParseAssetCustomField parses the Jira assets elements from the given buffer data associated with the specified custom field ID and returns a struct **CustomFieldAssetScheme** slice.
 
@@ -224,11 +228,19 @@ for _, asset := range assets {
 ```
 {% endcode %}
 
+### ParseStringCustomField  <a href="#parse-textfield-customfield" id="parse-textfield-customfield"></a>
+
+ParseStringCustomField parses a textfield custom field from the given buffer data associated with the specified custom field ID and returns string
+
+```
+// Some code
+```
+
 ## Extract from multiple issues
 
 If you want to extract the customfield values from a buffer of **issues**, you can use the following methods, it returns a map where the key is the issue key and the value is the customfield values parsed
 
-### ParseMultiSelectCustomFields
+### ParseMultiSelectCustomFields <a href="#parse-multiselect-customfields" id="parse-multiselect-customfields"></a>
 
 ParseMultiSelectCustomFields extracts and parses multi-select custom field data from a given bytes.Buffer from multiple issues.&#x20;
 
@@ -258,7 +270,7 @@ for issue, options := range multiSelectOptions {
 ```
 {% endcode %}
 
-### ParseCascadingCustomFields&#x20;
+### ParseCascadingCustomFields  <a href="#parse-cascading-customfields" id="parse-cascading-customfields"></a>
 
 ParseCascadingCustomFields extracts and parses a cascading custom field data from a given bytes.Buffer from multiple issues.
 
@@ -282,7 +294,7 @@ for issue, value := range customfields {
 ```
 {% endcode %}
 
-### ParseMultiUserPickerCustomFields&#x20;
+### ParseMultiUserPickerCustomFields  <a href="#parse-multi-userpicker-customfields" id="parse-multi-userpicker-customfields"></a>
 
 ParseMultiUserPickerCustomFields extracts and parses a user picker custom field data from a given bytes.Buffer from multiple issues.
 
@@ -313,7 +325,7 @@ for issue, users := range customfields {
 ```
 {% endcode %}
 
-### ParseMultiGroupPickerCustomFields&#x20;
+### ParseMultiGroupPickerCustomFields  <a href="#parse-grouppicker-customfields" id="parse-grouppicker-customfields"></a>
 
 ParseMultiGroupPickerCustomFields extracts and parses a group picker custom field data from a given bytes.Buffer from multiple issues.
 
@@ -343,7 +355,7 @@ for issue, groups := range customfields {
 ```
 {% endcode %}
 
-### ParseFloatCustomFields&#x20;
+### ParseFloatCustomFields  <a href="#parse-float-customfields" id="parse-float-customfields"></a>
 
 ParseFloatCustomFields extracts and parses the float customfield information from multiple issues using a bytes.Buffer.&#x20;
 
@@ -371,7 +383,35 @@ for issue, number := range customfields {
 ```
 {% endcode %}
 
-### ParseSprintCustomFields&#x20;
+### ParseStringCustomFields  <a href="#parse-textfield-customfields" id="parse-textfield-customfields"></a>
+
+ParseStringCustomFields extracts and parses the textfield customfield information from multiple issues using a bytes.Buffer.&#x20;
+
+This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a string representing the parsed textfield customfield value.
+
+* The JSON data within the buffer is expected to have a specific structure where the custom field values are organized by issue keys and options are represented within a context.&#x20;
+* The function parses this structure to extract and organize the custom field values.&#x20;
+* If the custom field data cannot be parsed successfully, an error is returned.
+
+```
+// Some code
+```
+
+### ParseUserPickerCustomFields <a href="#parse-userpicker-customfields" id="parse-userpicker-customfields"></a>
+
+ParseUserPickerCustomFields extracts and parses a user custom field data from a given bytes.Buffer from multiple issues.
+
+This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a UserDetailScheme struct pointer ,representing the parsed user custom field value.
+
+* The JSON data within the buffer is expected to have a specific structure where the custom field values are organized by issue keys and options are represented within a context.&#x20;
+* The function parses this structure to extract and organize the custom field values.&#x20;
+* If the custom field data cannot be parsed successfully, an error is returned.
+
+```
+// Some code
+```
+
+### ParseSprintCustomFields  <a href="#parse-sprints-customfields" id="parse-sprints-customfields"></a>
 
 ParseSprintCustomFields extracts and parses sprint custom field data from a given bytes.Buffer from multiple issues.
 
@@ -402,7 +442,7 @@ for issue, sprints := range customfields {
 ```
 {% endcode %}
 
-### ParseLabelCustomFields&#x20;
+### ParseLabelCustomFields  <a href="#parse-labels-customfields" id="parse-labels-customfields"></a>
 
 ParseLabelCustomFields extracts and parses the label customfield information from multiple issues using a bytes.Buffer.&#x20;
 
@@ -430,11 +470,11 @@ for issue, labels := range customfields {
 ```
 {% endcode %}
 
-### ParseMultiVersionCustomFields&#x20;
+### ParseMultiVersionCustomFields  <a href="#parse-versionpicker-customfields" id="parse-versionpicker-customfields"></a>
 
 ParseMultiVersionCustomFields extracts and parses a version picker custom field data from a given bytes.Buffer from multiple issues.
 
-This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a slice of **ParseMultiVersionCustomFields** structs, representing the parsed multi-version custom field values.
+This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a slice of **VersionDetailScheme** structs, representing the parsed multi-version custom field values.
 
 * The JSON data within the buffer is expected to have a specific structure where the custom field values are organized by issue keys and options are represented within a context.&#x20;
 * The function parses this structure to extract and organize the custom field values.&#x20;
@@ -461,7 +501,7 @@ for issue, versions := range customfields {
 ```
 {% endcode %}
 
-### ParseAssetCustomFields&#x20;
+### ParseAssetCustomFields  <a href="#parse-assets-customfields" id="parse-assets-customfields"></a>
 
 ParseAssetCustomFields extracts and parses jira assets customfield data from a given bytes.Buffer from multiple issues.
 
