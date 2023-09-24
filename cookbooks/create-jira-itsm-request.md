@@ -82,24 +82,36 @@ func main() {
 
 Define the fields you want to set:
 
-<pre class="language-go" data-full-width="true"><code class="lang-go"><strong>form := &#x26;models.CustomerRequestFields{}
-</strong>
-if err := form.Text("summary", "Summary Sample"); err != nil {
+{% code fullWidth="true" %}
+```go
+payload := &models.CreateCustomerRequestPayloadScheme{
+	Channel:             "",
+	Form:                nil,
+	IsAdfRequest:        false,
+	RaiseOnBehalfOf:     "",
+	RequestFieldValues:  nil,
+	RequestParticipants: nil,
+	RequestTypeID:       "10",
+	ServiceDeskID:       "1",
+}
+
+if err := payload.AddCustomField("summary", "Summary Sample"); err != nil {
 	log.Fatal(err)
 }
 
-if err := form.Date("duedate", time.Now()); err != nil {
+if err := payload.DateCustomField("duedate", time.Now()); err != nil {
 	log.Fatal(err)
 }
 
-if err := form.Components([]string{"Intranet"}); err != nil {
+if err := payload.Components([]string{"Intranet"}); err != nil {
 	log.Fatal(err)
 }
 
-if err := form.Labels([]string{"label-00", "label-01"}); err != nil {
+if err := payload.AddCustomField("labels", []string{"label-00", "label-01"}); err != nil {
 	log.Fatal(err)
 }
-</code></pre>
+```
+{% endcode %}
 
 {% hint style="info" %}
 A list of the fields required by a customer request type can be obtained using the `sm.RequestType.Fields` method.
@@ -109,11 +121,6 @@ A list of the fields required by a customer request type can be obtained using t
 
 {% code fullWidth="true" %}
 ```go
-payload := &models.CreateCustomerRequestPayloadScheme{
-	RequestParticipants: nil,
-	ServiceDeskID:       "1",
-	RequestTypeID:       "10",
-}
 
 ticket, response, err := atlassian.Request.Create(context.Background(), payload, form)
 if err != nil {

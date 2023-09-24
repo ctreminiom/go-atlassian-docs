@@ -4,6 +4,7 @@
 * [🛠 Cookbooks](cookbooks/README.md)
   * [⏱ Export Issue History](cookbooks/todo.md)
   * [👾 Create Jira Issue](cookbooks/create-jira-issue.md)
+  * [🧩 Extract customfields from issue(s)](cookbooks/extract-customfields-from-issue-s.md)
   * [🌄 Upload Content Attachment](cookbooks/upload-content-attachment.md)
   * [🚮 Create Jira ITSM Request](cookbooks/create-jira-itsm-request.md)
   * [🚜 Edit Jira Issue (Explicit)](cookbooks/edit-jira-issue-explicit.md)
