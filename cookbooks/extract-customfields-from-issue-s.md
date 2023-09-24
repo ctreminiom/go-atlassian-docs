@@ -52,6 +52,10 @@ for _, option := range options {
 ```
 {% endcode %}
 
+### ParseSelectCustomField  <a href="#parse-select-customfield" id="parse-select-customfield"></a>
+
+ParseSelectCustomField parses a select custom field from the given buffer data associated with the specified custom field ID and returns a **CustomFieldContextOptionScheme** struct
+
 ### ParseCascadingSelectCustomField <a href="#parse-cascading-customfield" id="parse-cascading-customfield"></a>
 
 This method parses a cascading custom field from the given buffer data associated with the specified custom field ID and returns a **CascadingSelectScheme** struct pointer.
@@ -269,6 +273,16 @@ for issue, options := range multiSelectOptions {
 }
 ```
 {% endcode %}
+
+### ParseSelectCustomFields  <a href="#parse-select-customfields" id="parse-select-customfields"></a>
+
+ParseSelectCustomFields extracts and parses select custom field data from a given bytes.Buffer from multiple issues.
+
+This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a **CustomFieldContextOptionScheme** struct, representing the parsed select custom field value.
+
+```
+// Some code
+```
 
 ### ParseCascadingCustomFields  <a href="#parse-cascading-customfields" id="parse-cascading-customfields"></a>
 
