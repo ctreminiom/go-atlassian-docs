@@ -56,6 +56,10 @@ for _, option := range options {
 
 ParseSelectCustomField parses a select custom field from the given buffer data associated with the specified custom field ID and returns a **CustomFieldContextOptionScheme** struct
 
+```
+// Some code
+```
+
 ### ParseCascadingSelectCustomField <a href="#parse-cascading-customfield" id="parse-cascading-customfield"></a>
 
 This method parses a cascading custom field from the given buffer data associated with the specified custom field ID and returns a **CascadingSelectScheme** struct pointer.
@@ -75,6 +79,22 @@ if err != nil {
 fmt.Println(cascading.Value, cascading.Child.Value)
 ```
 {% endcode %}
+
+### ParseDatePickerCustomField  <a href="#parse-datepicker-customfield" id="parse-datepicker-customfield"></a>
+
+ParseDatePickerCustomField parses the datepicker customfield from the given buffer data associated with the specified custom field ID and returns a struct time.Time value
+
+```
+// Some code
+```
+
+### ParseDateTimeCustomField  <a href="#parse-datetime-customfield" id="parse-datetime-customfield"></a>
+
+ParseDateTimeCustomField parses the datetime customfield from the given buffer data associated with the specified custom field ID and returns a struct time.Time value.
+
+```
+// Some code
+```
 
 ### ParseMultiUserPickerCustomField <a href="#parse-multi-userpicker-customfield" id="parse-multi-userpicker-customfield"></a>
 
@@ -338,6 +358,34 @@ for issue, users := range customfields {
 }
 ```
 {% endcode %}
+
+### ParseDatePickerCustomFields  <a href="#parse-datepicker-customfields" id="parse-datepicker-customfields"></a>
+
+ParseDatePickerCustomFields extracts and parses the datepicker customfield data from a given bytes.Buffer from multiple issues.
+
+This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a **time.Time** value, representing the parsed datepicker values with the Jira issues.
+
+* The JSON data within the buffer is expected to have a specific structure where the custom field values are organized by issue keys and options are represented within a context.&#x20;
+* The function parses this structure to extract and organize the custom field values.&#x20;
+* If the custom field data cannot be parsed successfully, an error is returned.
+
+```
+// Some code
+```
+
+### ParseDateTimeCustomFields  <a href="#parse-datetime-customfields" id="parse-datetime-customfields"></a>
+
+ParseDateTimeCustomFields extracts and parses the datetime customfield data from a given bytes.Buffer from multiple issues.
+
+This function takes the name of the custom field to parse and a bytes.Buffer containing JSON data representing the custom field values associated with different issues. It returns a map where the key is the issue key and the value is a **time.Time** value, representing the parsed datetime values with the Jira issues.
+
+* The JSON data within the buffer is expected to have a specific structure where the custom field values are organized by issue keys and options are represented within a context.&#x20;
+* The function parses this structure to extract and organize the custom field values.&#x20;
+* If the custom field data cannot be parsed successfully, an error is returned.
+
+```
+// Some code
+```
 
 ### ParseMultiGroupPickerCustomFields  <a href="#parse-grouppicker-customfields" id="parse-grouppicker-customfields"></a>
 
