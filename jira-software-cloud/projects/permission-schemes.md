@@ -2,6 +2,20 @@
 description: This resource represents permission schemes for a project.
 cover: ../../.gitbook/assets/mb-personalities_1120x545-@2xcompressed-1560x760.png
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🚧 Permission Schemes

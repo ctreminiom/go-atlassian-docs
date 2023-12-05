@@ -1,6 +1,20 @@
 ---
 cover: ../.gitbook/assets/f7d10368-eaf9-4640-9298-935babada43c-1560x760.jpeg
 coverY: 209
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🗃 Introduction
@@ -15,6 +29,7 @@ The module is available in two versions: `v2` and `v3`. These versions correspon
 
 The Atlassian Document Format (ADF) is a JSON-based format used by Atlassian products, including Jira, to represent rich content such as text, tables, and lists. The `jira` module in **go-atlassian** provides support for working with ADF content in both the `v3`package.
 
+{% code fullWidth="true" %}
 ```go
 commentBody := jira.CommentNodeScheme{}
 	commentBody.Version = 1
@@ -34,6 +49,7 @@ commentBody.AppendNode(&jira.CommentNodeScheme{
 	},
 })
 ```
+{% endcode %}
 
 In `v3`, the `IssueService` and related services like `CommentService` provide functions that allow you to interact with ADF content. For example, the `CreateIssue` function in `v3` includes a parameter for `Fields`, which is a struct that includes fields for specifying various attributes of the new issue, including the issue summary, description, and any custom fields. The `Fields` struct includes a field for `Description`, which can be set to a struct representing ADF content.
 
@@ -45,6 +61,7 @@ Official Documentation
 
 To search issues using a JQL query, use the **Issue.Search** service function.
 
+{% code fullWidth="true" %}
 ```go
 var (
 	jql    = "order by created DESC"
@@ -60,3 +77,4 @@ if err != nil {
 log.Println("HTTP Endpoint Used", response.Endpoint)
 log.Println(issues.Total)
 ```
+{% endcode %}

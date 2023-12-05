@@ -1,6 +1,20 @@
 ---
 cover: ../../.gitbook/assets/bb7f24ad-a935-415f-a11f-c1b2ffec7cb8-1560x760.jpeg
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 📃 Backlog

@@ -3,6 +3,20 @@ description: This resource represents the screens used to record issue details
 cover: >-
   ../../.gitbook/assets/the-keystroke-that-changed-how-i-worked-forever-compressed-1560x760.gif
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 📓 Screens

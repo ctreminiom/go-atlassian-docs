@@ -1,6 +1,20 @@
 ---
 cover: ../../.gitbook/assets/jiraautomation_bloghero.jpg
 coverY: 27
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🖨 Workflow

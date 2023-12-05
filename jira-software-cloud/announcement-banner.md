@@ -1,9 +1,23 @@
 ---
 cover: ../.gitbook/assets/emailqa_1120x545@2x-1560x760.jpg
 coverY: 243
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
-# 💹 Announcement Banner
+# 📮 Announcement Banner
 
 System Administrators can configure an announcement banner to display pertinent information on all Jira pages. The banner can be used to relate important information (e.g. scheduled server maintenance, approaching project deadlines, etc.) to all users. Further, the banner visibility level can be configured to display to all users or just logged-in users.
 

@@ -5,6 +5,20 @@ description: >-
   issues by component.
 cover: ../../.gitbook/assets/whats-your-chronotype-1560x760.jpg
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🔮 Components

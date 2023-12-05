@@ -1,6 +1,20 @@
 ---
 cover: ../../../../.gitbook/assets/atla0623_rb_vs_lb_web_2240x1080-1560x760.jpg
 coverY: 229
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🔃 Schemes

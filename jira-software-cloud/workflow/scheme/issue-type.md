@@ -1,3 +1,22 @@
+---
+cover: ../../../.gitbook/assets/csd-6414_blog-hero-1160x652@2x-1-1560x760.png
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 📯 Issue Type
 
 ## Get workflow for issue type in workflow scheme

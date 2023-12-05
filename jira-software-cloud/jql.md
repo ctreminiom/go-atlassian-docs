@@ -1,6 +1,20 @@
 ---
 cover: ../.gitbook/assets/f7d10368-eaf9-4640-9298-935babada43c-1560x760.jpeg
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🔩 JQL

@@ -2,6 +2,20 @@
 cover: >-
   ../.gitbook/assets/vanessa_lovegrove_cognitive_overload_1120x545@2x-1560x760.jpeg
 coverY: 186
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # ⚖ Myself

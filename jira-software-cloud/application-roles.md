@@ -1,6 +1,20 @@
 ---
 cover: ../.gitbook/assets/in-defense-of-meetings-2240x1090-1-1560x760.jpg
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🔐 Application Roles
@@ -17,7 +31,7 @@ Each Jira application role has a set of permissions associated with it, which de
 
 This endpoint is used to retrieve a list of all application roles that are defined in a Jira instance. This endpoint can be used to get information about the roles that are available in Jira, and to help manage user access and permissions.
 
-{% code lineNumbers="true" fullWidth="true" %}
+{% code fullWidth="true" %}
 ```go
 package main
 

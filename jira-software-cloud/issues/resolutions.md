@@ -4,6 +4,20 @@ description: >-
   all issue resolution values and the details of individual resolution values.
 cover: ../../.gitbook/assets/new-rules-of-productivity_1120x545@2x-1560x760.png
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🍀 Resolutions

@@ -2,6 +2,20 @@
 description: This resource represents issue type screen schemes.
 cover: ../../../.gitbook/assets/2240x1090-1-1560x760.jpg
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🛅 Screen Scheme

@@ -5,6 +5,20 @@ description: >-
   this resource to add and remove users from a project
 cover: ../../../.gitbook/assets/growthgauntletcoverillo.jpg
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 👨👩👧👧 Actors

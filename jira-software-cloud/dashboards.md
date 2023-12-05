@@ -1,6 +1,20 @@
 ---
 cover: ../.gitbook/assets/screenshot-2023-06-01-at-1.59.32-pm-1-1560x760.png
 coverY: 30
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 📈 Dashboards

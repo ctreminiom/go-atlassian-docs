@@ -1,6 +1,20 @@
 ---
 cover: ../../.gitbook/assets/how-to-survive-your-next-work-trip@2x-100-1-1560x760.jpg
 coverY: 448
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 📙 Request

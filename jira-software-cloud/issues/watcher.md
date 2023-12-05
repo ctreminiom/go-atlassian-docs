@@ -4,6 +4,20 @@ description: >-
   users watching an issue as well as start and stop a user watching an issue.
 cover: ../../.gitbook/assets/fy22-shareholder-letter_1120x545@2x-1560x760.png
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🎯 Watcher

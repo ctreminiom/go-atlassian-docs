@@ -5,6 +5,20 @@ description: >-
   task.
 cover: ../.gitbook/assets/team_personality_tests_1120x545@2x-1560x760.jpeg
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # ⚗ Tasks

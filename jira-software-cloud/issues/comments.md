@@ -1,3 +1,22 @@
+---
+cover: ../../.gitbook/assets/whats-your-chronotype-1560x760.jpg
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 📬 Comments
 
 A comment is a piece of text that can be added to an issue to provide additional information or to update the issue's status. Comments can be added by users who have permission to view and edit the issue, and can be used for a variety of purposes, such as:

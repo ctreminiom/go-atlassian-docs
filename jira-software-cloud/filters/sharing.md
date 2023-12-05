@@ -1,6 +1,20 @@
 ---
 cover: ../../.gitbook/assets/conways-law_1120x545@2x-1560x760 (1).jpg
 coverY: 101
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🤝 Sharing

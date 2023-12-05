@@ -4,6 +4,20 @@ description: >-
   permissions and determine whether the user has certain permissions.
 cover: ../../.gitbook/assets/change-management_1120x545@2x-1560x760.png
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🔓 Permissions
