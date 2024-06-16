@@ -105,6 +105,30 @@ err = operations.AddArrayOperation("labels", map[string]string{
 	"triaged":   "remove",
 	"triaged-2": "add",
 })
+
+
+
+// If the need to add multi-array customfields, you can the following method:
+// In this particular example, we're going to the manipulate the fixVersions field.
+operations.AddMultiRawOperation("fixVersions", []map[string]interface{}{
+	{
+		"remove": map[string]interface{}{
+			"name": "Version 00",
+		},
+	},
+	
+	{
+		"remove": map[string]interface{}{
+			"name": "Version 101",
+		},
+	},
+	
+	{
+		"add": map[string]interface{}{
+			"name": "Version 301",
+		},
+	},
+})
 ```
 {% endcode %}
 
@@ -123,7 +147,7 @@ var payload = models.IssueSchemeV2{
 
 {% code fullWidth="true" %}
 ```go
-_, err = atlassian.Issue.Update(context.Background(), "KP-2", false, &payload, nil, operations)
+_, err = client.Issue.Update(context.Background(), "KP-2", false, &payload, nil, operations)
 if err != nil {
 	log.Fatal(err)
 }

@@ -6,7 +6,7 @@ coverY: 0
 layout:
   cover:
     visible: true
-    size: hero
+    size: full
   title:
     visible: true
   description:
@@ -409,10 +409,8 @@ The basic operations are defined below (but custom fields can define their own).
 
 The general shape of an update is field, array of verb-value pairs, for example:
 
-{% code fullWidth="true" %}
-```go
-//Issue Update Operations
-var operations = &jira.UpdateOperations{}
+<pre class="language-go" data-full-width="true"><code class="lang-go">//Issue Update Operations
+var operations = &#x26;jira.UpdateOperations{}
 
 err = operations.AddArrayOperation("custom_field_id", map[string]string{
 	"value":   "verb",
@@ -424,8 +422,29 @@ err = operations.AddArrayOperation("custom_field_id", map[string]string{
 if err != nil {
 	log.Fatal(err)
 }
-```
-{% endcode %}
+
+// If the need to add multi-array customfields, you can the following method:
+// In this particular example, we're going to the manipulate the fixVersions field.
+<strong>err = operations.AddMultiRawOperation("fixVersions", []map[string]interface{}{
+</strong>	{
+		"remove": map[string]interface{}{
+			"name": "Version 00",
+		},
+	},
+	
+	{
+		"remove": map[string]interface{}{
+			"name": "Version 101",
+		},
+	},
+	
+	{
+		"add": map[string]interface{}{
+			"name": "Version 301",
+		},
+	},
+})
+</code></pre>
 
 * **SET:** Sets the value of the field. The incoming value must be the same shape as the value of the field from a GET. For example, a string for "summary", and array of strings for "labels".
 * **ADD:** Adds an element to a field that is an array. The incoming value must be the same shape as the items of the array in a GET. For example, to add a label:
