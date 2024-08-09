@@ -17,7 +17,7 @@ layout:
     visible: true
 ---
 
-# 🖨 Workflow
+# 🖨️ Workflow
 
 A Jira workflow is a set of _statuses_ and _transitions_ that an issue moves through during its lifecycle, and typically represents a process within your organization. Workflows can be associated with particular projects and, optionally, specific issue types by using a [workflow scheme](https://confluence.atlassian.com/adminjiracloud/issue-workflow-schemes-844500788.html).
 
@@ -26,6 +26,10 @@ Workflows can be customized to fit the needs of a particular team or project. Cu
 ## Create Workflow
 
 `POST /rest/api/{2-3}/workflow`
+
+{% hint style="warning" %}
+Deprecated
+{% endhint %}
 
 Create creates a workflow. You can define transition rules using the shapes detailed in the following sections. If no transitional rules are specified the default system transition rules are used.
 
@@ -697,7 +701,7 @@ func main() {
 Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#pagination) list of published classic workflows. When workflow names are specified, details of those workflows are returned. Otherwise, all published classic workflows are returned.
 
 {% hint style="warning" %}
-This operation does not return next-gen workflows
+This operation does not return next-gen workflows, Deprecated
 {% endhint %}
 
 {% code fullWidth="true" %}
@@ -804,3 +808,15 @@ func main() {
 }
 ```
 {% endcode %}
+
+## Bulk Get Workflows
+
+## Get Workflow Capabilities
+
+## Bulk Create Workflows
+
+## Validate Create Workflows
+
+## Bulk Upgrade Workflows
+
+## Validate Update Workflows
