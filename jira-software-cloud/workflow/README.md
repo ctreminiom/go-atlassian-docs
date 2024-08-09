@@ -817,6 +817,6 @@ func main() {
 
 ## Validate Create Workflows
 
-## Bulk Upgrade Workflows
+## Bulk Update Workflows
 
 ## Validate Update Workflows
