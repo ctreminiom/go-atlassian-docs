@@ -811,12 +811,698 @@ func main() {
 
 ## Bulk Get Workflows
 
+`POST /rest/api/{2-3}/workflows`
+
+Returns a list of workflows and related statuses by providing workflow names, workflow IDs, or project and issue types.
+
+[**Permissions**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#permissions) **required:**
+
+* _Administer Jira_ global permission to access all, including project-scoped, workflows
+* At least one of the _Administer projects_ and _View (read-only) workflow_ project permissions to access project-scoped workflows
+
+{% code fullWidth="true" %}
+```go
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("SITE")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	options := &models.WorkflowSearchCriteria{
+		WorkflowIDs:   nil,                                         // The list of workflow IDs to query.
+		WorkflowNames: []string{"PV: Project Management Workflow"}, // The list of workflow names to query.
+	}
+
+	expand := []string{"workflows.usages", "statuses.usages"}
+
+	workflows, response, err := atlassian.Workflow.Search(context.Background(), options, expand, true)
+	if err != nil {
+		log.Println("Unable to search for workflows: ", err)
+		log.Println(response.Bytes.String())
+		log.Println(response.StatusCode)
+		log.Fatal(err)
+	}
+
+	for _, workflow := range workflows.Workflows {
+		workflowBuffer, _ := json.MarshalIndent(workflow, "", "\t")
+		fmt.Println(string(workflowBuffer))
+	}
+
+	for _, status := range workflows.Statuses {
+		statusBuffer, _ := json.MarshalIndent(status, "", "\t")
+		fmt.Println(string(statusBuffer))
+	}
+}
+```
+{% endcode %}
+
 ## Get Workflow Capabilities
+
+`GET /rest/api/{2-3}/workflows/capabilities`
+
+Get the list of workflow capabilities for a specific workflow using either the workflow ID, or the project and issue type ID pair.&#x20;
+
+The response includes the scope of the workflow, defined as **global/project-based**, and a list of project types that the workflow is scoped to. It also includes all rules organised into their broad categories `(conditions, validators, actions, triggers, screens)` as well as the source location (Atlassian-provided, Connect, Forge).
+
+### **Validators**
+
+A validator rule that checks if a user has the required permissions to execute the transition in the workflow.
+
+{% tabs %}
+{% tab title="Permission validator" %}
+A validator rule that checks if a user has the required permissions to execute the transition in the workflow.
+
+```json
+{
+   "ruleKey": "system:check-permission-validator",
+   "parameters": {
+     "permissionKey": "ADMINISTER_PROJECTS"
+   }
+ }
+```
+
+**Parameters**:
+
+* `permissionKey` The permission required to perform the transition. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
+{% endtab %}
+
+{% tab title="Parent or child blocking validator" %}
+A validator to block the child issue\u2019s transition depending on the parent issue\u2019s status.
+
+```json
+{
+   "ruleKey" : "system:parent-or-child-blocking-validator"
+   "parameters" : {
+     "blocker" : "PARENT"
+     "statusIds" : "1,2,3"
+   }
+}
+```
+{% endtab %}
+
+{% tab title="Previous status validator" %}
+A validator that checks if an issue has transitioned through specified previous status(es) before allowing the current transition to occur.
+
+```json
+{
+   "ruleKey": "system:previous-status-validator",
+   "parameters": {
+     "previousStatusIds": "10014",
+     "mostRecentStatusOnly": "true"
+   }
+ }
+```
+
+**Parameters**:
+
+* `previousStatusIds` a comma-separated list of status IDs, currently only support one ID.
+* `mostRecentStatusOnly` when `true` only considers the most recent status for the condition evaluation. Allowed values: `true`, `false`.
+{% endtab %}
+
+{% tab title="Validate a field value" %}
+A validation that ensures a specific field's value meets the defined criteria before allowing an issue to transition in the workflow.
+
+Depending on the rule type, the result will vary:
+
+**Field required**
+
+```json
+
+{
+   "ruleKey": "system:validate-field-value",
+   "parameters": {
+     "ruleType": "fieldRequired",
+     "fieldsRequired": "assignee",
+     "ignoreContext": "true",
+     "errorMessage": "An assignee must be set!"
+   }
+ }
+```
+
+**Parameters**:
+
+* `fieldsRequired` the ID of the field that is required. For a custom field, it would look like `customfield_123`.
+* `ignoreContext` controls the impact of context settings on field validation. When set to `true`, the validator doesn't check a required field if its context isn't configured for the current issue. When set to `false`, the validator requires a field even if its context is invalid. Allowed values: `true`, `false`.
+* `errorMessage` is the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
+{% endtab %}
+{% endtabs %}
+
+{% code fullWidth="true" %}
+```go
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("SITE")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	capabilities, response, err := atlassian.Workflow.Capabilities(context.Background(), "workflow-id", "project-id", "issuetype-id")
+	if err != nil {
+		log.Println(response.Bytes.String())
+		log.Println(response.StatusCode)
+		log.Fatal(err)
+	}
+
+	capabilitiesBuffer, _ := json.MarshalIndent(capabilities, "", "\t")
+	fmt.Println(string(capabilitiesBuffer))
+}
+```
+{% endcode %}
 
 ## Bulk Create Workflows
 
+`POST /rest/api/{2-3}/workflows/create`
+
+Create workflows and related statuses. This method allows you to create a workflow by defining transition rules using the shapes detailed in the Atlassian **REST API** documentation. If no transition rules are specified, the default system transition rules will be used.
+
+[**Permissions**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#permissions) **required:**
+
+* _Administer Jira_ project permission to create all, including global-scoped, workflows
+* _Administer projects_ project permissions to create project-scoped workflows
+
+### Key Helper Methods
+
+#### AddStatus() <a href="#add-status" id="add-status"></a>
+
+The `AddStatus()` method is used to add a status to the `WorkflowCreatesPayload`. This method ensures that any status used in the workflow is explicitly included in the payload under the `statuses` tag.
+
+```go
+payload.AddStatus(&models.WorkflowStatusUpdateScheme{
+    ID:              "10012",
+    Name:            "To Do",
+    StatusCategory:  "TODO",
+    StatusReference: "f0b24de5-25e7-4fab-ab94-63d81db6c0c0",
+})
+```
+
+In this example, the status **"To Do"** with ID "10012" is added to the workflow payload. The `StatusReference` is a unique identifier used later when associating statuses with workflow steps.
+
+#### AddTransition()
+
+The `AddTransition()` method is used to add a transition between statuses in a workflow. Transitions define the movement between statuses in a workflow, such as moving from "To Do" to "In Progress".
+
+```go
+// Adding a transition to the workflow
+err := epicWorkflow.AddTransition(&models.TransitionUpdateDTOScheme{
+    ID:   "1",
+    Type: "INITIAL",
+    Name: "Create",
+    To: &models.StatusReferenceAndPortScheme{
+        StatusReference: "f0b24de5-25e7-4fab-ab94-63d81db6c0c0",
+    },
+})
+```
+
+This example adds an "INITIAL" transition called "Create" that moves the issue to the "To Do" status. The `StatusReference` is used to link the transition to the appropriate status.
+
+#### AddWorkflow()
+
+The `AddWorkflow()` method is used to add a workflow to the `WorkflowCreatesPayload`. This method is crucial for building the final payload that will be sent to the JIRA API.
+
+```go
+// Adding the workflow to the payload
+err := payload.AddWorkflow(epicWorkflow)
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+In this example, the `epicWorkflow` (previously populated with statuses and transitions) is added to the payload. This payload can include multiple workflows, making it possible to create several workflows in a single API request.
+
+### Considerations
+
+* Any status used within a workflow (through transitions or initial states) **must** be included in the `statuses` tag under the `WorkflowCreatesPayload` struct.&#x20;
+  * This ensures that JIRA recognizes and correctly maps the statuses during workflow creation. Failure to include a status may result in errors or incomplete workflow creation.
+
+{% code fullWidth="true" %}
+```go
+
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("SITE")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	// Create the workflow creation payload
+	payload := &models.WorkflowCreatesPayload{
+		Scope: &models.WorkflowScopeScheme{Type: "GLOBAL"},
+	}
+
+	// Add the status references on the payload
+	statuses := []struct {
+		ID, Name, StatusCategory, StatusReference string
+	}{
+		{"10012", "To Do", "TODO", "f0b24de5-25e7-4fab-ab94-63d81db6c0c0"},
+		{"3", "In Progress", "IN_PROGRESS", "c7a35bf0-c127-4aa6-869f-4033730c61d8"},
+		{"10002", "Done", "DONE", "6b3fc04d-3316-46c5-a257-65751aeb8849"},
+	}
+
+	for _, status := range statuses {
+		payload.AddStatus(&models.WorkflowStatusUpdateScheme{
+			ID:              status.ID,
+			Name:            status.Name,
+			StatusCategory:  status.StatusCategory,
+			StatusReference: status.StatusReference,
+		})
+	}
+
+	epicWorkflow := &models.WorkflowCreateScheme{
+		Description: "This workflow represents the process of software development related to epics.",
+		Name:        "Epic Software Development Workflow V4",
+	}
+
+	// Add the statuses to the workflow using the referenceID and the layout
+	layouts := []struct {
+		X, Y            float64
+		StatusReference string
+	}{
+		{114.99993896484375, -16, "f0b24de5-25e7-4fab-ab94-63d81db6c0c0"},
+		{317.0000915527344, -16, "c7a35bf0-c127-4aa6-869f-4033730c61d8"},
+		{508.000244140625, -16, "6b3fc04d-3316-46c5-a257-65751aeb8849"},
+	}
+
+	for _, layout := range layouts {
+		epicWorkflow.AddStatus(&models.StatusLayoutUpdateScheme{
+			Layout:          &models.WorkflowLayoutScheme{X: layout.X, Y: layout.Y},
+			StatusReference: layout.StatusReference,
+		})
+	}
+
+	// Add the transitions to the workflow
+	transitions := []struct {
+		ID, Type, Name, StatusReference string
+	}{
+		{"1", "INITIAL", "Create", "f0b24de5-25e7-4fab-ab94-63d81db6c0c0"},
+		{"21", "GLOBAL", "In Progress", "c7a35bf0-c127-4aa6-869f-4033730c61d8"},
+		{"31", "GLOBAL", "Done", "6b3fc04d-3316-46c5-a257-65751aeb8849"},
+	}
+
+	for _, transition := range transitions {
+		err = epicWorkflow.AddTransition(&models.TransitionUpdateDTOScheme{
+			ID:   transition.ID,
+			Type: transition.Type,
+			Name: transition.Name,
+			To: &models.StatusReferenceAndPortScheme{
+				StatusReference: transition.StatusReference,
+			},
+		})
+
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	// You can multiple workflows on the same payload
+	if err := payload.AddWorkflow(epicWorkflow); err != nil {
+		log.Fatal(err)
+	}
+
+	workflowsCreated, response, err := atlassian.Workflow.Creates(context.Background(), payload)
+	if err != nil {
+		log.Println("Unable to create workflows: ", err)
+		log.Println(response.Bytes.String())
+		log.Fatal(err)
+	}
+
+	workflowBuffer, _ := json.MarshalIndent(workflowsCreated, "", "\t")
+	fmt.Println(string(workflowBuffer))
+}
+```
+{% endcode %}
+
 ## Validate Create Workflows
+
+`POST /rest/api/{2-3}/workflows/create/validation`
+
+Validates workflows before creating them. This method allows you to validate the configuration of one or more workflows before they are created in Jira.&#x20;
+
+It helps ensure that the workflows adhere to the defined rules and constraints. The validation checks will include all aspects of the workflows, such as transitions, statuses, and any related conditions or validators.
+
+[**Permissions**](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#permissions) **required:**
+
+* _Administer Jira_ project permission to create all, including global-scoped, workflows
+* _Administer projects_ project permissions to create project-scoped workflows
+
+{% code fullWidth="true" %}
+```go
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("SITE")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	// Create the workflow creation payload
+	payload := &models.WorkflowCreatesPayload{
+		Scope: &models.WorkflowScopeScheme{Type: "GLOBAL"},
+	}
+
+	// Add the status references on the payload
+	statuses := []struct {
+		ID, Name, StatusCategory, StatusReference string
+	}{
+		{"10012", "To Do", "TODO", "f0b24de5-25e7-4fab-ab94-63d81db6c0c0"},
+		{"3", "In Progress", "IN_PROGRESS", "c7a35bf0-c127-4aa6-869f-4033730c61d8"},
+		{"10002", "Done", "DONE", "6b3fc04d-3316-46c5-a257-65751aeb8849"},
+	}
+
+	for _, status := range statuses {
+		payload.AddStatus(&models.WorkflowStatusUpdateScheme{
+			ID:              status.ID,
+			Name:            status.Name,
+			StatusCategory:  status.StatusCategory,
+			StatusReference: status.StatusReference,
+		})
+	}
+
+	epicWorkflow := &models.WorkflowCreateScheme{
+		Description: "This workflow represents the process of software development related to epics.",
+		Name:        "Epic Software Development Workflow V4",
+	}
+
+	// Add the statuses to the workflow using the referenceID and the layout
+	layouts := []struct {
+		X, Y            float64
+		StatusReference string
+	}{
+		{114.99993896484375, -16, "f0b24de5-25e7-4fab-ab94-63d81db6c0c0"},
+		{317.0000915527344, -16, "c7a35bf0-c127-4aa6-869f-4033730c61d8"},
+		{508.000244140625, -16, "6b3fc04d-3316-46c5-a257-65751aeb8849"},
+	}
+
+	for _, layout := range layouts {
+		epicWorkflow.AddStatus(&models.StatusLayoutUpdateScheme{
+			Layout:          &models.WorkflowLayoutScheme{X: layout.X, Y: layout.Y},
+			StatusReference: layout.StatusReference,
+		})
+	}
+
+	// Add the transitions to the workflow
+	transitions := []struct {
+		ID, Type, Name, StatusReference string
+	}{
+		{"1", "INITIAL", "Create", "f0b24de5-25e7-4fab-ab94-63d81db6c0c0"},
+		{"21", "GLOBAL", "In Progress", "c7a35bf0-c127-4aa6-869f-4033730c61d8"},
+		{"31", "GLOBAL", "Done", "6b3fc04d-3316-46c5-a257-65751aeb8849"},
+	}
+
+	for _, transition := range transitions {
+		err = epicWorkflow.AddTransition(&models.TransitionUpdateDTOScheme{
+			ID:   transition.ID,
+			Type: transition.Type,
+			Name: transition.Name,
+			To: &models.StatusReferenceAndPortScheme{
+				StatusReference: transition.StatusReference,
+			},
+		})
+
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	// You can multiple workflows on the same payload
+	if err := payload.AddWorkflow(epicWorkflow); err != nil {
+		log.Fatal(err)
+	}
+
+	validationOptions := &models.ValidationOptionsForCreateScheme{
+		Payload: payload,
+		Options: &models.ValidationOptionsLevelScheme{
+			Levels: []string{"ERROR", "WARNING"},
+		},
+	}
+
+	validationErrors, response, err := atlassian.Workflow.ValidateCreateWorkflows(context.Background(), validationOptions)
+	if err != nil {
+		log.Println("Unable to create workflows: ", err)
+		log.Println(response.Bytes.String())
+		log.Fatal(err)
+	}
+
+	for _, validationError := range validationErrors.Errors {
+		buffer, _ := json.MarshalIndent(validationError, "", "\t")
+		fmt.Println(string(buffer))
+	}
+}
+```
+{% endcode %}
 
 ## Bulk Update Workflows
 
+`POST /rest/api/{2-3}/workflows/update`
+
+Updates workflows. This method allows you to update workflows by providing a payload containing the details of the updates. You can expand specific fields using the 'expand' parameter.
+
+{% code fullWidth="true" %}
+```go
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("SITE")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	payload := &models.WorkflowUpdatesPayloadScheme{
+		Statuses: []*models.WorkflowStatusUpdateScheme{
+			{
+				ID:              "10012",
+				Name:            "To Do",
+				StatusCategory:  "TODO",
+				StatusReference: "f0b24de5-25e7-4fab-ab94-63d81db6c0c0",
+			},
+			{
+				ID:              "3",
+				Name:            "In Progress",
+				StatusCategory:  "IN_PROGRESS",
+				StatusReference: "c7a35bf0-c127-4aa6-869f-4033730c61d8",
+			},
+			{
+				ID:              "10002",
+				Name:            "Done",
+				StatusCategory:  "DONE",
+				StatusReference: "6b3fc04d-3316-46c5-a257-65751aeb8849",
+			},
+		},
+		Workflows: []*models.WorkflowUpdateScheme{
+			{
+				DefaultStatusMappings: nil,
+				ID:                    "6c91af3d-2ae1-46c1-9009-eb93a10a54d1",
+				StartPointLayout:      nil,
+				Version: &models.WorkflowDocumentVersionScheme{
+					ID:            "c44b423d-89c9-458d-abb7-89ac4fefebd4",
+					VersionNumber: 0,
+				},
+			},
+		},
+	}
+
+	expand := []string{"workflows.usages", "statuses.usages"}
+	workflowsUpdated, response, err := atlassian.Workflow.Updates(context.Background(), payload, expand)
+	if err != nil {
+		log.Println("Unable to update the workflows(s): ", err)
+		log.Println(response.Bytes.String())
+		log.Fatal(err)
+	}
+
+	workflowBuffer, _ := json.MarshalIndent(workflowsUpdated, "", "\t")
+	fmt.Println(string(workflowBuffer))
+}
+```
+{% endcode %}
+
 ## Validate Update Workflows
+
+`POST /rest/api/{2-3}/workflows/update/validation`
+
+Validates the update of one or more workflows. This method allows you to validate changes to workflows before they are applied.&#x20;
+
+The validation checks for potential issues that could prevent the workflows from being updated successfully. The validation process will check for conditions such as:&#x20;
+
+* Whether the transitions are valid.&#x20;
+* Whether the status and transition names are unique within the workflow.&#x20;
+* If the validation fails, a list of validation errors is returned, which should be resolved before applying the changes.
+
+{% code fullWidth="true" %}
+```go
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
+	"log"
+	"os"
+)
+
+func main() {
+
+	var (
+		host  = os.Getenv("SITE")
+		mail  = os.Getenv("MAIL")
+		token = os.Getenv("TOKEN")
+	)
+
+	atlassian, err := v2.New(nil, host)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	atlassian.Auth.SetBasicAuth(mail, token)
+
+	payload := &models.WorkflowUpdatesPayloadScheme{
+		Statuses: []*models.WorkflowStatusUpdateScheme{
+			{
+				ID:              "10012",
+				Name:            "To Do",
+				StatusCategory:  "TODO",
+				StatusReference: "f0b24de5-25e7-4fab-ab94-63d81db6c0c0",
+			},
+			{
+				ID:              "3",
+				Name:            "In Progress",
+				StatusCategory:  "IN_PROGRESS",
+				StatusReference: "c7a35bf0-c127-4aa6-869f-4033730c61d8",
+			},
+			{
+				ID:              "10002",
+				Name:            "Done",
+				StatusCategory:  "DONE",
+				StatusReference: "6b3fc04d-3316-46c5-a257-65751aeb8849",
+			},
+		},
+		Workflows: []*models.WorkflowUpdateScheme{
+			{
+				DefaultStatusMappings: nil,
+				ID:                    "6c91af3d-2ae1-46c1-9009-eb93a10a54d1",
+				StartPointLayout:      nil,
+				Version: &models.WorkflowDocumentVersionScheme{
+					ID:            "c44b423d-89c9-458d-abb7-89ac4fefebd4",
+					VersionNumber: 0,
+				},
+			},
+		},
+	}
+
+	payload2 := &models.ValidationOptionsForUpdateScheme{
+		Payload: payload,
+		Options: &models.ValidationOptionsLevelScheme{
+			Levels: []string{"ERROR", "WARNING"},
+		},
+	}
+
+	messages, response, err := atlassian.Workflow.ValidateUpdateWorkflows(context.Background(), payload2)
+	if err != nil {
+		log.Println("Unable to update the workflows(s): ", err)
+		log.Println(response.Bytes.String())
+		log.Fatal(err)
+	}
+
+	workflowBuffer, _ := json.MarshalIndent(messages, "", "\t")
+	fmt.Println(string(workflowBuffer))
+}
+```
+{% endcode %}
