@@ -738,6 +738,12 @@ func main() {
 
 Performs an issue transition.
 
+Performs an issue transition and, if a transition screen is associated, updates the relevant fields from that screen.
+
+To update fields on the transition screen, include the desired field values in the fields or update parameters within the request body. You can retrieve details about these fields by using the Get transitions endpoint with the transitions.fields expand option.
+
+This operation supports anonymous access.
+
 {% code fullWidth="true" %}
 ```go
 package main
@@ -768,6 +774,9 @@ func main() {
 	var payload = &models.IssueSchemeV2{
 		Fields: &models.IssueFieldsSchemeV2{
 			Summary: "New summary test test",
+			Resolution: &models.ResolutionScheme{
+				Name: "Done",
+			},
 		},
 	}
 
