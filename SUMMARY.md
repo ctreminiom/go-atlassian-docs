@@ -149,6 +149,7 @@
 * [🔰 Label](confluence-cloud/label.md)
 * [🔎 Search](confluence-cloud/search.md)
 * [🖼️ Long Task](confluence-cloud/long-task.md)
+* [🗃️ Template](confluence-cloud/template.md)
 * [🌊 V2](confluence-cloud/v2/README.md)
   * [🏔️ Introduction](confluence-cloud/v2/introduction.md)
   * [🧺 Attachments](confluence-cloud/v2/attachments/README.md)
