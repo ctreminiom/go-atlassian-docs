@@ -233,18 +233,12 @@ func main() {
 
 ## Get content templates
 
-{% synced-block url="https://app.gitbook.com/o/-MWwHNnYKpjtw7-EMhwM/blocks/syb_U27oB" %}
-[NoteThis feature is current...](https://app.gitbook.com/o/-MWwHNnYKpjtw7-EMhwM/blocks/syb\_U27oB)
-{% endsynced-block %}
+{% include "../.gitbook/includes/notethis-feature-is-current....md" %}
 
 ## Get blueprints content
 
-{% synced-block url="https://app.gitbook.com/o/-MWwHNnYKpjtw7-EMhwM/blocks/syb_U27oB" %}
-[NoteThis feature is current...](https://app.gitbook.com/o/-MWwHNnYKpjtw7-EMhwM/blocks/syb\_U27oB)
-{% endsynced-block %}
+{% include "../.gitbook/includes/notethis-feature-is-current....md" %}
 
 ## Remove template
 
-{% synced-block url="https://app.gitbook.com/o/-MWwHNnYKpjtw7-EMhwM/blocks/syb_U27oB" %}
-[NoteThis feature is current...](https://app.gitbook.com/o/-MWwHNnYKpjtw7-EMhwM/blocks/syb\_U27oB)
-{% endsynced-block %}
+{% include "../.gitbook/includes/notethis-feature-is-current....md" %}
