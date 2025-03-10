@@ -33,8 +33,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )
@@ -88,8 +88,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -134,8 +134,4 @@ func main() {
 ```
 {% endcode %}
 
-<div data-full-width="true">
-
-<figure><img src="../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
-
-</div>
+<div data-full-width="true"><figure><img src="../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure></div>

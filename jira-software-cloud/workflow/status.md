@@ -17,11 +17,9 @@ layout:
     visible: true
 ---
 
-# 🗺 Status
+# 🗺️ Status
 
-{% embed url="https://github.com/ctreminiom/go-atlassian/issues/140" %}
-Tracking Issue
-{% endembed %}
+{% @github-files/github-code-block url="https://github.com/ctreminiom/go-atlassian/issues/140" %}
 
 ## Search Workflow Statuses
 
@@ -36,7 +34,7 @@ package main
 import (
 	"context"
 	"fmt"
-	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
+	v2 "github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -118,7 +116,7 @@ package main
 import (
 	"context"
 	"fmt"
-	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
+	v2 "github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -178,7 +176,7 @@ package main
 import (
 	"context"
 	"fmt"
-	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
+	v2 "github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -250,7 +248,7 @@ package main
 
 import (
 	"context"
-	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
+	v2 "github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -311,7 +309,7 @@ package main
 
 import (
 	"context"
-	v2 "github.com/ctreminiom/go-atlassian/jira/v2"
+	v2 "github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -355,7 +353,7 @@ package main
 import (
 	"context"
 	"fmt"
-	v3 "github.com/ctreminiom/go-atlassian/jira/v3"
+	v3 "github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )
@@ -409,7 +407,7 @@ package main
 import (
 	"context"
 	"fmt"
-	v3 "github.com/ctreminiom/go-atlassian/jira/v3"
+	v3 "github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )

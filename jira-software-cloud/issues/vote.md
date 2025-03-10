@@ -35,7 +35,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -90,7 +90,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -141,7 +141,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )

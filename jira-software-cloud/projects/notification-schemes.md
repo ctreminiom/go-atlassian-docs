@@ -30,8 +30,8 @@ Search returns a [paginated](https://developer.atlassian.com/cloud/jira/platform
 import (
 	"context"
 	"fmt"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -88,8 +88,8 @@ package main
 import (
 	"context"
 	"fmt"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -157,8 +157,8 @@ package main
 import (
 	"context"
 	"fmt"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )
@@ -206,8 +206,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -257,8 +257,8 @@ Update updates a notification scheme.
 import (
 	"context"
 	"fmt"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )
@@ -308,8 +308,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )
@@ -354,8 +354,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -416,8 +416,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )

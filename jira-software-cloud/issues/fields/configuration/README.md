@@ -20,7 +20,7 @@ layout:
     visible: true
 ---
 
-# 🖼 Configuration
+# 🖼️ Configuration
 
 The Jira Issue Field Configurations define the behavior of fields within Jira issues. A field configuration is a set of rules that determines which fields are available for a particular issue type or project, and whether those fields are required, read-only, or hidden. Field configurations can be customized to meet the specific needs of your organization.
 
@@ -48,8 +48,8 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )
@@ -112,8 +112,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )
@@ -167,7 +167,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -213,7 +213,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )

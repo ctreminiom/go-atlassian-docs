@@ -33,8 +33,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -95,8 +95,8 @@ Returns a [paginated](https://developer.atlassian.com/cloud/jira/platform/rest/v
 package main
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -149,8 +149,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -200,8 +200,8 @@ Adds a field to the default tab of the default screen.
 <pre class="language-go" data-full-width="true"><code class="lang-go"><strong>package main
 </strong>import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -246,8 +246,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -300,8 +300,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -353,8 +353,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )

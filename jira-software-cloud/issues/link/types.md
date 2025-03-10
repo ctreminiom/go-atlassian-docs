@@ -17,7 +17,7 @@ layout:
     visible: true
 ---
 
-# 🖇 Types
+# 🖇️ Types
 
 This resource represents issue link types. Use it to get, create, update, and delete link issue types as well as get lists of all link issue types.
 
@@ -33,7 +33,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -82,7 +82,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -132,7 +132,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -175,7 +175,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -225,7 +225,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )

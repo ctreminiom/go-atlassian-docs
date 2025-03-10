@@ -29,8 +29,8 @@ Returns the list of tabs for a screen.
 <strong>
 </strong>import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -91,8 +91,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -151,8 +151,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -212,8 +212,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -270,8 +270,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )

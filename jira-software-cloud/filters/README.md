@@ -18,7 +18,7 @@ layout:
     visible: true
 ---
 
-# 🗄 Filters
+# 🗄️ Filters
 
 In Jira, a filter is a saved search query that you can use to retrieve a specific set of issues from your Jira instance. A filter can be based on various criteria such as issue type, priority, status, assignee, labels, and more.
 
@@ -40,7 +40,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"github.com/google/uuid"
 	"log"
@@ -94,11 +94,7 @@ func main() {
 ```
 {% endcode %}
 
-<div data-full-width="true">
-
-<img src="../../.gitbook/assets/image (5) (1).png" alt="Filter permissions on the UI interface">
-
-</div>
+<div data-full-width="true"><img src="../../.gitbook/assets/image (5) (1).png" alt="Filter permissions on the UI interface"></div>
 
 ## Get Favorites
 
@@ -112,7 +108,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -158,7 +154,7 @@ package main
 
 import (
 	"context"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -225,8 +221,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -283,8 +279,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -327,8 +323,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"
@@ -374,8 +370,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -421,8 +417,8 @@ package main
 
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )

@@ -60,6 +60,7 @@
   * [🎯 Watcher](jira-software-cloud/issues/watcher.md)
   * [🕰️ Worklogs](jira-software-cloud/issues/worklogs.md)
   * [📤 Properties](jira-software-cloud/issues/properties.md)
+  * [📭 Archiving](jira-software-cloud/issues/archiving.md)
 * [🔓 Permissions](jira-software-cloud/permissions/README.md)
   * [📜 Scheme](jira-software-cloud/permissions/scheme/README.md)
     * [🔑 Grant](jira-software-cloud/permissions/scheme/grant.md)

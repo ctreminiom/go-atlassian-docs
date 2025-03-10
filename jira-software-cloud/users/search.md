@@ -30,8 +30,8 @@ Returns a list of users who can be assigned issues in one or more projects. The 
 package main
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -84,8 +84,8 @@ Returns a list of users that match the search string and property.
 package main
 import (
 	"context"
-	_ "github.com/ctreminiom/go-atlassian/jira/v3"
-	"github.com/ctreminiom/go-atlassian/jira/v2"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v3"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v2"
 	"log"
 	"os"
 )
@@ -142,8 +142,8 @@ package main
 import (
 	"context"
 	"fmt"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"github.com/ctreminiom/go-atlassian/pkg/infra/models"
 	"log"
 	"os"

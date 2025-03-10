@@ -37,8 +37,8 @@ package main
 import (
 	"context"
 	"fmt"
-	_ "github.com/ctreminiom/go-atlassian/jira/v2"
-	"github.com/ctreminiom/go-atlassian/jira/v3"
+	_ "github.com/ctreminiom/go-atlassian/v2/jira/v2"
+	"github.com/ctreminiom/go-atlassian/v2/jira/v3"
 	"log"
 	"os"
 )
